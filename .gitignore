@@ -21,3 +21,7 @@ src/.idea/workspace.xml
 .idea/caches/gradle_models.ser
 .idea/codeStyles/Project.xml
 .idea/misc.xml
+.idea/vcs.xml
+.idea/runConfigurations.xml
+.idea/modules.xml
+.idea/gradle.xml
