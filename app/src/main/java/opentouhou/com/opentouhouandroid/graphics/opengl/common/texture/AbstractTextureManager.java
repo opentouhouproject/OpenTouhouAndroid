@@ -2,7 +2,9 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.common.texture;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Hashtable;
 
@@ -15,12 +17,16 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 public abstract class AbstractTextureManager
 {
     // Hash table that maps resource ids to texture objects.
-    protected Hashtable<Integer, AbstractTexture> bitmapTable;
+    private Hashtable<Integer, AbstractTexture> bitmapTable;
+
+    // Hash table that maps asset paths to texture objects.
+    private Hashtable<String, AbstractTexture> assetMap;
 
     // Constructor
     public AbstractTextureManager()
     {
         bitmapTable = new Hashtable<>();
+        assetMap = new Hashtable<>();
     }
 
     // Retrieve the texture object.
@@ -28,46 +34,86 @@ public abstract class AbstractTextureManager
     {
         return bitmapTable.get(resourceId);
     }
+    public AbstractTexture getTexture(String path)
+    {
+        return assetMap.get(path);
+    }
 
     // Retrieve the texture handle.
     public int getTextureHandle(int resourceId) { return bitmapTable.get(resourceId).getTextureHandle(); }
+    public int getTextureHandle(String path) { return assetMap.get(path).getTextureHandle(); }
 
-    // Loads multiple resource.
-    public void loadBitmaps(int[] resourceIds, Renderer renderer)
+    // Loads multiple resources.
+    public void loadResourceBitmaps(int[] resourceIds, Renderer renderer)
     {
-        // Create textures.
         for (int id : resourceIds)
         {
-            loadBitmap(id, renderer);
+            loadResourceBitmap(id, renderer);
         }
     }
 
-    // Loads a resource as a texture.
-    public void loadBitmap(int resourceId, Renderer renderer)
+    // Loads multiple assets.
+    public void loadAssetBitmaps(String[] assetPaths, Renderer renderer)
     {
-        // Decode the resource.
+        for (String path : assetPaths)
+        {
+            loadAssetBitmap(path, renderer);
+        }
+    }
+
+    // Loads an image from the drawable resources.
+    public void loadResourceBitmap(int resourceId, Renderer renderer)
+    {
+        // Open a stream.
         InputStream in = renderer.getContext().getResources().openRawResource(resourceId);
-        Bitmap bitmap = decodeBitmap(in);
 
-        // Create TextureGL class.
-        AbstractTexture tex = createTexture(bitmap);
-
-        // Recycle the bitmap.
-        bitmap.recycle();
+        // Create the texture.
+        AbstractTexture texture = decodeBitmap(in);
 
         // Save the association.
-        bitmapTable.put(resourceId, tex);
+        bitmapTable.put(resourceId, texture);
+    }
+
+    // Loads an image from the assets.
+    public void loadAssetBitmap(String path, Renderer renderer)
+    {
+        InputStream in;
+
+        try
+        {
+            // Open a stream.
+            in = renderer.getContext().getAssets().open(path);
+
+            // Create the texture.
+            AbstractTexture texture = decodeBitmap(in);
+
+            // Save the association.
+            assetMap.put(path, texture);
+        }
+        catch (IOException e)
+        {
+            Log.d("Game Debug", "Failed to open bitmap from assets. (" + path + ")");
+        }
     }
 
     // Decodes the bitmap given by the resource id.
-    private Bitmap decodeBitmap(InputStream stream)
+    private AbstractTexture decodeBitmap(InputStream stream)
     {
         // Set the decoding options.
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false; // No pre-scaling
 
-        return BitmapFactory.decodeStream(stream, null, options);
+        // Decode the bitmap.
+        Bitmap bitmap = BitmapFactory.decodeStream(stream, null, options);
+
+        // Create the texture.
+        AbstractTexture texture = createTexture(bitmap, options);
+
+        // Recycle the bitmap.
+        bitmap.recycle();
+
+        return texture;
     }
 
-    abstract protected AbstractTexture createTexture(Bitmap bitmap);
+    abstract protected AbstractTexture createTexture(Bitmap bitmap, BitmapFactory.Options options);
 }

@@ -1,6 +1,7 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.texture;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 
@@ -14,10 +15,10 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractT
 public class TextureManager extends AbstractTextureManager
 {
     @Override
-    protected AbstractTexture createTexture(Bitmap bitmap)
+    protected AbstractTexture createTexture(Bitmap bitmap, BitmapFactory.Options options)
     {
         // Create TextureGL class.
-        AbstractTexture tex = new Texture();
+        AbstractTexture tex = new Texture(options);
 
         // Bind to the texture in OpenGL.
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, tex.getTextureHandle());

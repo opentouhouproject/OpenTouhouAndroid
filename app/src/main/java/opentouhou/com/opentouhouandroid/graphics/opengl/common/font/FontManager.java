@@ -14,7 +14,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 public class FontManager
 {
     private HashMap<String, Font> fonts;
-    private HashMap<String, Integer> textures;
+    private HashMap<String, String> textures;
 
     // Constructor
     public FontManager()
@@ -35,9 +35,9 @@ public class FontManager
     }
 
     // Setters
-    public void setTextureId(String id, int imageId)
+    public void setTextureId(String id, String assetPath)
     {
-        textures.put(id, imageId);
+        textures.put(id, assetPath);
     }
 
     // Load fonts.
@@ -62,15 +62,15 @@ public class FontManager
 
 
             // Create textures.
-            String fileName = getImageFile(id);
+            String assetPath = "fonts/images/" + getImageFile(id);
 
-            String resourceName = fileName.substring(0, fileName.lastIndexOf('.'));
-            String type = "drawable";
-            String packageName = "teamdroid.com.speedtestarena";
-            int imageId = renderer.getContext().getResources().getIdentifier(resourceName, type, packageName);
+            //String resourceName = fileName.substring(0, fileName.lastIndexOf('.'));
+            //String type = "drawable";
+            //String packageName = "teamdroid.com.speedtestarena";
+            //int imageId = renderer.getContext().getResources().getIdentifier(resourceName, type, packageName);
 
-            renderer.getTextureManager().loadBitmap(imageId, renderer);
-            setTextureId(id, imageId);
+            renderer.getTextureManager().loadAssetBitmap(assetPath, renderer);
+            setTextureId(id, assetPath);
 
             // Generate
             fonts.get(id).generate(renderer);

@@ -49,7 +49,7 @@ public class Glyph
     public int getHeight() { return height; }
 
     // Draw
-    public void generate(int texWidth, int texHeight, Renderer renderer)
+    public void generate(int texWidth, int texHeight, String assetPath, Renderer renderer)
     {
         float left = (float)x / (float)texWidth;
         float right = (float)(x + width) / (float)texWidth;
@@ -78,7 +78,7 @@ public class Glyph
 
         drawable = new GraphicsObject30();
         drawable.setMesh(new Quad30(data, renderer.getShaderManager().getShaderProgramHandle("TextureShader")));
-        drawable.setTexture(renderer.getTextureManager().getTexture(R.drawable.popstar16_0));
+        drawable.setTexture(renderer.getTextureManager().getTexture(assetPath));
         drawable.setShader(renderer.getShaderManager().getShaderProgram("TextureShader"));
         drawable.setModelMatrix(Matrix4f.scaleMatrix(4, 4, 1));
     }

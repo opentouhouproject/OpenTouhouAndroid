@@ -125,7 +125,7 @@ public class Font
     {
         for (Glyph g : glyphs.values())
         {
-            g.generate(width, height, renderer);
+            g.generate(width, height, "fonts/images/" + imageFile, renderer);
         }
     }
 

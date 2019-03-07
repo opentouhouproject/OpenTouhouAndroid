@@ -66,7 +66,7 @@ public class OpenGLES30Test extends Scene
 
         fontImage = new GraphicsObject30();
         fontImage.setMesh(new Quad30(data, renderer.getShaderManager().getShaderProgramHandle("TextureShader")));
-        fontImage.setTexture(renderer.getTextureManager().getTexture(R.drawable.popstar16_0));
+        fontImage.setTexture(renderer.getTextureManager().getTexture("fonts/images/popstar16_0.png"));
         fontImage.setShader(renderer.getShaderManager().getShaderProgram("TextureShader"));
         Matrix4f model = Matrix4f.scaleMatrix(5, 5, 1);
         model.translate(2, 2, 2);
@@ -111,7 +111,7 @@ public class OpenGLES30Test extends Scene
         AbstractTextureManager manager = renderer.getTextureManager();
 
         // Load the textures.
-        manager.loadBitmaps(textureList, renderer);
+        manager.loadResourceBitmaps(textureList, renderer);
     }
 
     private void loadFonts(Renderer renderer)
