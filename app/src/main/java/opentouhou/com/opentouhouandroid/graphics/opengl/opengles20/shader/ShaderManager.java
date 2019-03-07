@@ -18,16 +18,16 @@ public class ShaderManager extends AbstractShaderManager
     public void load()
     {
         // Create vertex shaders.
-        createVertexShader("Triangle", "Triangle.vert");
-        createVertexShader("Triangle2", "Triangle2.vert");
-        createVertexShader("PerFragmentLighting", "PerFragmentLighting.vert");
-        createVertexShader("TextureShader", "TextureShader.vert");
+        createVertexShader("Triangle", "shaders/opengles30/Triangle.vert");
+        createVertexShader("Triangle2", "shaders/opengles30/Triangle2.vert");
+        createVertexShader("PerFragmentLighting", "shaders/opengles30/PerFragmentLighting.vert");
+        createVertexShader("TextureShader", "shaders/opengles30/TextureShader.vert");
 
         // Create fragment shaders.
-        createFragmentShader("Triangle", "Triangle.frag");
-        createFragmentShader("Triangle2", "Triangle2.frag");
-        createFragmentShader("PerFragmentLighting", "PerFragmentLighting.frag");
-        createFragmentShader("TextureShader", "TextureShader.frag");
+        createFragmentShader("Triangle", "shaders/opengles30/Triangle.frag");
+        createFragmentShader("Triangle2", "shaders/opengles30/Triangle2.frag");
+        createFragmentShader("PerFragmentLighting", "shaders/opengles30/PerFragmentLighting.frag");
+        createFragmentShader("TextureShader", "shaders/opengles30/TextureShader.frag");
 
         // Create shader programs.
         createShaderProgram("Triangle", "Triangle", "Triangle");

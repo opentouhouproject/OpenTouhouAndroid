@@ -10,6 +10,7 @@ import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
 
 /**
+ * Deprecated.
  * Testing.
  */
 
@@ -40,10 +41,7 @@ public class SceneExample1 extends Scene
         mTriangle = new Triangle(renderer.getShaderManager().getShaderProgramHandle("Triangle"), vertices2, colors2);
     }
 
-    public void loadTextures(AbstractTextureManager textures)
-    {
-        return;
-    }
+    public void loadTextures(AbstractTextureManager textures) { }
 
     public void draw() {
         long time = SystemClock.uptimeMillis() % 10000L;

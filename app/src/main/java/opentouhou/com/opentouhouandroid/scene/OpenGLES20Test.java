@@ -73,16 +73,16 @@ public class OpenGLES20Test extends Scene
         AbstractShaderManager manager = renderer.getShaderManager();
 
         // Create vertex shaders.
-        manager.createVertexShader("Triangle", "Triangle.vert");
-        manager.createVertexShader("Triangle2", "Triangle2.vert");
-        manager.createVertexShader("PerFragmentLighting", "PerFragmentLighting.vert");
-        manager.createVertexShader("TextureShader", "TextureShader.vert");
+        manager.createVertexShader("Triangle", "shaders/opengles30/Triangle.vert");
+        manager.createVertexShader("Triangle2", "shaders/opengles30/Triangle2.vert");
+        manager.createVertexShader("PerFragmentLighting", "shaders/opengles30/PerFragmentLighting.vert");
+        manager.createVertexShader("TextureShader", "shaders/opengles30/TextureShader.vert");
 
         // Create fragment shaders.
-        manager.createFragmentShader("Triangle", "Triangle.frag");
-        manager.createFragmentShader("Triangle2", "Triangle2.frag");
-        manager.createFragmentShader("PerFragmentLighting", "PerFragmentLighting.frag");
-        manager.createFragmentShader("TextureShader", "TextureShader.frag");
+        manager.createFragmentShader("Triangle", "shaders/opengles30/Triangle.frag");
+        manager.createFragmentShader("Triangle2", "shaders/opengles30/Triangle2.frag");
+        manager.createFragmentShader("PerFragmentLighting", "shaders/opengles30/PerFragmentLighting.frag");
+        manager.createFragmentShader("TextureShader", "shaders/opengles30/TextureShader.frag");
 
         // Create shader programs.
         manager.createShaderProgram("Triangle", "Triangle", "Triangle");
@@ -91,7 +91,7 @@ public class OpenGLES20Test extends Scene
         manager.createShaderProgram("TextureShader", "TextureShader", "TextureShader");
     }
 
-    public void loadTextures(Renderer renderer)
+    private void loadTextures(Renderer renderer)
     {
         int[] textureList = {R.drawable.test_touhou_bg};
 
@@ -102,9 +102,9 @@ public class OpenGLES20Test extends Scene
         manager.loadBitmaps(textureList, renderer);
     }
 
-    public void loadFonts(Renderer renderer)
+    private void loadFonts(Renderer renderer)
     {
-        String[] fontList = {"popstar16.xml"};
+        String[] fontList = {"fonts/popstar/popstar16.xml"};
 
         // Get the font manager.
         FontManager manager = renderer.getFontManager();

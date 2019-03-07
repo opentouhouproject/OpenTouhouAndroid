@@ -11,6 +11,7 @@ import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 
 /**
+ * Deprecated.
  * Testing.
  */
 
@@ -180,10 +181,7 @@ public class SceneExample2 extends Scene
         mCube = new Cube(cubePositionData, cubeColorData, cubeNormalData, renderer.getShaderManager().getShaderProgramHandle("PerFragmentLighting"));
     }
 
-    public void loadTextures(AbstractTextureManager textures)
-    {
-        return;
-    }
+    public void loadTextures(AbstractTextureManager textures) { }
 
     public void draw() {
         // Do a complete rotation every 10 seconds.
