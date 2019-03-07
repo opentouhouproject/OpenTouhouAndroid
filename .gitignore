@@ -7,3 +7,13 @@
 /build
 /captures
 .externalNativeBuild
+src/local.properties
+src/.idea/gradle.xml
+src/.idea/codeStyles/Project.xml
+src/.idea/caches/gradle_models.ser
+src/.idea/caches/build_file_checksums.ser
+src/.idea/misc.xml
+src/.idea/modules.xml
+src/.idea/runConfigurations.xml
+src/.idea/vcs.xml
+src/.idea/workspace.xml
