@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Open Touhou</string>
+    <string name="title_activity_play">PlayActivity</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_show_score">Show Score</string>
+    <string name="tip">Please input the sentence above!</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_submit">Submit</string>
+    <string name="button_quit">Quit</string>
+    <string name="button_score">Score</string>
+    <string name="button_level">Level</string>
+    <string name="setting_easy">Easy</string>
+    <string name="setting_medium">Medium</string>
+    <string name="setting_hard">Hard</string>
+</resources>
