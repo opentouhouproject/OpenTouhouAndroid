@@ -17,3 +17,5 @@ src/.idea/modules.xml
 src/.idea/runConfigurations.xml
 src/.idea/vcs.xml
 src/.idea/workspace.xml
+.idea/caches/build_file_checksums.ser
+.idea/caches/gradle_models.ser
