@@ -22,7 +22,7 @@ import opentouhou.com.opentouhouandroid.scene.Scene;
 public class Renderer20 extends Renderer
 {
     // Scene(s)
-    private Scene testScene;
+    private Scene scene;
 
     public Renderer20(Context context)
     {
@@ -52,8 +52,8 @@ public class Renderer20 extends Renderer
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA );
 
         // load scene
-        testScene = new OpenGLES20Test("ES20Test");
-        testScene.setup(this);
+        scene = new OpenGLES20Test("ES20Test");
+        scene.setup(this);
     }
 
     public void onDrawFrame(GL10 unused)
@@ -62,7 +62,7 @@ public class Renderer20 extends Renderer
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         // Draw the scene.
-        testScene.draw();
+        scene.draw();
 
         // Error handling.
         int errorCode;
@@ -93,6 +93,7 @@ public class Renderer20 extends Renderer
 
         // Update the projection matrix.
         // This projection matrix is applied to object coordinates in the onDrawFrame() method.
-        testScene.getCamera().setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
+        scene.getCamera().setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
+        //scene.getCamera().setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
     }
 }

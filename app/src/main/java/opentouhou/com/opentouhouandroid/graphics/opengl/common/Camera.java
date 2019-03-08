@@ -197,6 +197,8 @@ public class Camera
     }
 
     // Projection Matrix
+
+    // Retrieves the current projection matrix.
     public Matrix4f getProjectionMatrix()
     {
         return projectionMatrix;
@@ -240,5 +242,25 @@ public class Camera
 
         // column 3
         projectionMatrix.setValue(2 * far * near / (near - far), 2, 3);
+    }
+
+    public void setOrthographicProjection(float left, float right, float bottom, float top, float near, float far)
+    {
+        projectionMatrix.reset(0);
+
+        // column 0
+        projectionMatrix.setValue(2 / (right - left), 0, 0);
+
+        // column 1
+        projectionMatrix.setValue(2 / (top - bottom), 1, 1);
+
+        // column 2
+        projectionMatrix.setValue(-2 / (far - near), 2, 2);
+
+        // column 3
+        projectionMatrix.setValue(-(right + left) / (right - left), 0, 3);
+        projectionMatrix.setValue(-(top + bottom) / (top - bottom), 1, 3);
+        projectionMatrix.setValue(-(far + near) / (far - near), 2, 3);
+        projectionMatrix.setValue(1, 3, 3);
     }
 }

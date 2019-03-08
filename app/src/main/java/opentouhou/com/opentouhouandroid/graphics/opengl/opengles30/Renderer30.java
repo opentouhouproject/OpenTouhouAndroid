@@ -22,7 +22,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class Renderer30 extends Renderer
 {
     // Scene(s)
-    private Scene ex3;
+    private Scene scene;
 
     public Renderer30(Context context)
     {
@@ -53,8 +53,8 @@ public class Renderer30 extends Renderer
         GLES30.glBlendFunc(GLES30.GL_SRC_ALPHA, GLES30.GL_ONE_MINUS_SRC_ALPHA );
 
         // load the scene.
-        ex3 = new OpenGLES30Test("example3");
-        ex3.setup(this);
+        scene = new OpenGLES30Test("example3");
+        scene.setup(this);
     }
 
     public void onDrawFrame(GL10 unused)
@@ -63,7 +63,7 @@ public class Renderer30 extends Renderer
         GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT | GLES30.GL_DEPTH_BUFFER_BIT);
 
         // Draw the scene.
-        ex3.draw();
+        scene.draw();
 
         // Error handling.
         int errorCode = GLES30.glGetError();
@@ -82,6 +82,7 @@ public class Renderer30 extends Renderer
         float ratio = (float) width / height;
 
         // Update the projection matrix.
-        ex3.getCamera().setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
+        scene.getCamera().setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
+        //scene.getCamera().setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
     }
 }
