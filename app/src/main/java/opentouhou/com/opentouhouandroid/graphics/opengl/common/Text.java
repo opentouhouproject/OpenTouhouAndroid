@@ -17,20 +17,15 @@ public class Text extends AbstractText
         this.font = font;
     }
 
-    public void render(String s, Vector3f position, Scene scene)
+    public void render(String s, Vector3f position, float scale, Scene scene)
     {
         float offsetX = 0;
 
         for (char c : s.toCharArray())
         {
             position.x += offsetX;
-            draw(c, position, scene);
-            offsetX = font.getGlyph(c).getWidth()/40f;
+            font.draw(c, position, scale, scene);
+            offsetX = font.getGlyph(c).getWidth() / scale;
         }
-    }
-
-    private void draw(char c, Vector3f position, Scene scene)
-    {
-        font.draw(c, position, scene);
     }
 }

@@ -1,8 +1,8 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common.font;
 
-import opentouhou.com.opentouhouandroid.R;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.FontDrawable30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.GraphicsObject30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Quad30;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
@@ -76,16 +76,16 @@ public class Glyph
                 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, right, 0.0f
         };*/
 
-        drawable = new GraphicsObject30();
+        drawable = new FontDrawable30();
         drawable.setMesh(new Quad30(data, renderer.getShaderManager().getShaderProgramHandle("TextureShader")));
         drawable.setTexture(renderer.getTextureManager().getTexture(assetPath));
-        drawable.setShader(renderer.getShaderManager().getShaderProgram("TextureShader"));
+        drawable.setShader(renderer.getShaderManager().getShaderProgram("Font"));
         drawable.setModelMatrix(Matrix4f.scaleMatrix(4, 4, 1));
     }
 
-    public void draw(Vector3f point, Scene scene)
+    public void draw(Vector3f point, float scale, Scene scene)
     {
-        Matrix4f mat = Matrix4f.scaleMatrix(width/40f, height/40f, 1);
+        Matrix4f mat = Matrix4f.scaleMatrix(width / scale, height / scale, 1);
         mat.translate(point.x, point.y, point.z);
         drawable.setModelMatrix(mat);
         drawable.draw(scene);

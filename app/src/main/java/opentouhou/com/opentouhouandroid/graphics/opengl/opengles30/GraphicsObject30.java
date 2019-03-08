@@ -42,7 +42,7 @@ public class GraphicsObject30 extends GraphicsObject
         GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, 6);
     }
 
-    private void setTransformationMatrices(int handle, Scene scene)
+    protected void setTransformationMatrices(int handle, Scene scene)
     {
         // Get the handles.
         int modelViewMatrixHandle = GLES30.glGetUniformLocation(handle, "uMVMatrix");
@@ -61,7 +61,7 @@ public class GraphicsObject30 extends GraphicsObject
         GLES30.glUniformMatrix4fv(modelViewProjectionMatrixHandle, 1, false, mvpMatrix.getArray(), 0);
     }
 
-    private void setLightPosition(int handle, Scene scene)
+    protected void setLightPosition(int handle, Scene scene)
     {
         // Get the handle.
         int lightPositionHandle = GLES30.glGetUniformLocation(handle, "uLightSource");
@@ -73,7 +73,7 @@ public class GraphicsObject30 extends GraphicsObject
         GLES30.glUniform3f(lightPositionHandle, lightPosition.x, lightPosition.y, lightPosition.z);
     }
 
-    private void setTexture(int handle)
+    protected void setTexture(int handle)
     {
         // Get the handle.
         int textureHandle = GLES30.glGetUniformLocation(handle, "uTexture");
@@ -87,7 +87,7 @@ public class GraphicsObject30 extends GraphicsObject
         GLES30.glUniform1i(textureHandle, 0);
     }
 
-    private void setMesh()
+    protected void setMesh()
     {
         // Bind Vertex Array Object.
         GLES30.glBindVertexArray(mesh.getVAO().getHandle());

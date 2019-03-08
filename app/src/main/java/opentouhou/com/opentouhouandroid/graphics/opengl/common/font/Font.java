@@ -130,8 +130,8 @@ public class Font
     }
 
     // Draw
-    public void draw(char c, Vector3f point, Scene scene)
+    public void draw(char c, Vector3f point, float scale, Scene scene)
     {
-        glyphs.get(c).draw(point, scene);
+        glyphs.get(c).draw(point, scale, scene);
     }
 }

@@ -19,7 +19,7 @@ import opentouhou.com.opentouhouandroid.sound.opensl.TestJNI;
 public class OpenGLES30Test extends Scene
 {
     private GraphicsObject background, fontImage;
-    private Text text;
+    private Text text, testTitle;
 
     private AudioPlayer aud;
 
@@ -73,6 +73,7 @@ public class OpenGLES30Test extends Scene
         fontImage.setModelMatrix(model);
 
         text = new Text("Hello World!", renderer.getFontManager().getFont("fonts/popstar/popstar16.xml"));
+        testTitle = new Text("Scarlet", renderer.getFontManager().getFont("fonts/yozakura/yozakura256.xml"));
 
         // AUDIO
         aud = new AudioPlayer(renderer.getContext());
@@ -89,18 +90,21 @@ public class OpenGLES30Test extends Scene
         manager.createVertexShader("Triangle2", "shaders/opengles30/Triangle2.vert");
         manager.createVertexShader("PerFragmentLighting", "shaders/opengles30/PerFragmentLighting.vert");
         manager.createVertexShader("TextureShader", "shaders/opengles30/TextureShader.vert");
+        manager.createVertexShader("Font", "shaders/opengles30/Font.vert");
 
         // Create fragment shaders.
         manager.createFragmentShader("Triangle", "shaders/opengles30/Triangle.frag");
         manager.createFragmentShader("Triangle2", "shaders/opengles30/Triangle2.frag");
         manager.createFragmentShader("PerFragmentLighting", "shaders/opengles30/PerFragmentLighting.frag");
         manager.createFragmentShader("TextureShader", "shaders/opengles30/TextureShader.frag");
+        manager.createFragmentShader("Font", "shaders/opengles30/Font.frag");
 
         // Create shader programs.
         manager.createShaderProgram("Triangle", "Triangle", "Triangle");
         manager.createShaderProgram("Triangle2", "Triangle2", "Triangle2");
         manager.createShaderProgram("PerFragmentLighting", "PerFragmentLighting", "PerFragmentLighting");
         manager.createShaderProgram("TextureShader", "TextureShader", "TextureShader");
+        manager.createShaderProgram("Font", "Font", "Font");
     }
 
     private void loadTextures(Renderer renderer)
@@ -116,7 +120,14 @@ public class OpenGLES30Test extends Scene
 
     private void loadFonts(Renderer renderer)
     {
-        String[] fontList = {"fonts/popstar/popstar16.xml"};
+        String[] fontList = {
+                "fonts/popstar/popstar16.xml",
+                //"fonts/yozakura/yozakura32.xml",
+                //"fonts/yozakura/yozakura64.xml",
+                //"fonts/yozakura/yozakura128.xml",
+                //"fonts/yozakura/yozakura128_g.xml",
+                "fonts/yozakura/yozakura256.xml"
+        };
 
         // Get the font manager.
         FontManager manager = renderer.getFontManager();
@@ -128,10 +139,12 @@ public class OpenGLES30Test extends Scene
     public void draw()
     {
         background.draw(this);
-        fontImage.draw(this);
+        //fontImage.draw(this);
 
-        TestJNI test = new TestJNI();
-        String s = String.valueOf(test.getMagicNumber());
-        text.render("Hello World!" + s, new Vector3f(2, 1, 3), this);
+        //TestJNI test = new TestJNI();
+        //String s = String.valueOf(test.getMagicNumber());
+        //text.render("Hello World!" + s, new Vector3f(2, 1, 3), 40f, this);
+
+        testTitle.render("Scarlet", new Vector3f(2, 4, 3), 94f,this);
     }
 }

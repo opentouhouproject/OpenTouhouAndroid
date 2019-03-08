@@ -5,5 +5,5 @@ import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public abstract class AbstractText
 {
-    public abstract void render(String s, Vector3f position, Scene scene);
+    public abstract void render(String s, Vector3f position, float scale, Scene scene);
 }
