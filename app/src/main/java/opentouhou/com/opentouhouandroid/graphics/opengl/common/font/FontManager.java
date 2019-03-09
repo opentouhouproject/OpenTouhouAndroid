@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTextureManager;
 
 /**
  * Reads .fnt files and loads the font.
@@ -69,7 +70,7 @@ public class FontManager
             //String packageName = "teamdroid.com.speedtestarena";
             //int imageId = renderer.getContext().getResources().getIdentifier(resourceName, type, packageName);
 
-            renderer.getTextureManager().loadAssetBitmap(assetPath, renderer);
+            renderer.getTextureManager().loadAssetBitmap(assetPath, AbstractTextureManager.Options.NONE, renderer);
             setTextureId(id, assetPath);
 
             // Generate
