@@ -5,10 +5,13 @@ import android.opengl.GLES30;
 import android.opengl.GLU;
 import android.util.Log;
 
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader.ShaderManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.texture.TextureManager;
+import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.OpenGLES30Test;
 
@@ -23,6 +26,7 @@ public class Renderer30 extends Renderer
 {
     // Scene(s)
     private Scene scene;
+    private Text fpsCounter;
 
     public Renderer30(Context context)
     {
@@ -55,6 +59,8 @@ public class Renderer30 extends Renderer
         // load the scene.
         scene = new OpenGLES30Test("example3");
         scene.setup(this);
+
+        fpsCounter = new Text("", this.getFontManager().getFont("fonts/popstar/popstar16.xml"));
     }
 
     public void onDrawFrame(GL10 unused)
@@ -64,6 +70,19 @@ public class Renderer30 extends Renderer
 
         // Draw the scene.
         scene.draw();
+
+        // Measure fps.
+        long currentTime = System.currentTimeMillis();
+        numberOfFrames++;
+        if (currentTime - lastTime >= 1000 )
+        {
+            lastFPS = numberOfFrames;
+            numberOfFrames = 0;
+            lastTime = System.currentTimeMillis();
+        }
+
+        // Draw fps counter.
+        fpsCounter.render(String.valueOf(lastFPS), new Vector3f(3, 7.0f, 4), 40f, scene);
 
         // Error handling.
         int errorCode = GLES30.glGetError();
@@ -82,7 +101,8 @@ public class Renderer30 extends Renderer
         float ratio = (float) width / height;
 
         // Update the projection matrix.
-        scene.getCamera().setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
+        Camera camera = scene.getCamera();
+        if (camera != null) camera.setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
         //scene.getCamera().setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
     }
 }

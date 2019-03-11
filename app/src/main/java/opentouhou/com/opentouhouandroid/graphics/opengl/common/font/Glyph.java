@@ -2,9 +2,9 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.common.font;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.FontDrawable30;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.GraphicsObject30;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Quad30;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
@@ -77,7 +77,7 @@ public class Glyph
         };*/
 
         drawable = new FontDrawable30();
-        drawable.setMesh(new Quad30(data, renderer.getShaderManager().getShaderProgramHandle("TextureShader")));
+        drawable.setMesh(new Mesh30(data, renderer.getShaderManager().getShaderProgramHandle("TextureShader"), MeshLayout.Layout.PCNT));
         drawable.setTexture(renderer.getTextureManager().getTexture(assetPath));
         drawable.setShader(renderer.getShaderManager().getShaderProgram("Font"));
         drawable.setModelMatrix(Matrix4f.scaleMatrix(4, 4, 1));

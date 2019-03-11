@@ -8,7 +8,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.AbstractShaderManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTextureManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.GraphicsObject20;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.mesh.Quad20;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.mesh.Mesh20;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 
@@ -53,13 +53,13 @@ public class OpenGLES20Test extends Scene
 
 
         background = new GraphicsObject20();
-        background.setMesh(new Quad20(data));
+        background.setMesh(new Mesh20(data));
         background.setTexture(renderer.getTextureManager().getTexture(R.drawable.test_touhou_bg));
         background.setShader(renderer.getShaderManager().getShaderProgram("TextureShader"));
         background.setModelMatrix(Matrix4f.scaleMatrix(11, 11, 1));
 
         fontImage = new GraphicsObject20();
-        fontImage.setMesh(new Quad20(data));
+        fontImage.setMesh(new Mesh20(data));
         fontImage.setTexture(renderer.getTextureManager().getTexture("fonts/images/popstar16_0.png"));
         fontImage.setShader(renderer.getShaderManager().getShaderProgram("TextureShader"));
         Matrix4f model = Matrix4f.scaleMatrix(5, 5, 1);

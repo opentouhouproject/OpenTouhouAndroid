@@ -8,21 +8,19 @@ import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public abstract class GraphicsObject
 {
+    protected GraphicsOptions option;
+
     protected Mesh mesh;
-
     protected AbstractTexture texture;
-
     protected AbstractShaderProgram shaderProgram;
-
     protected Matrix4f modelMatrix;
 
-    // Constructor
-    public GraphicsObject()
-    {
+    // Constructor(s)
+    public GraphicsObject() { this.option = new GraphicsOptions(true, true); }
 
-    }
+    public GraphicsObject(GraphicsOptions option) { this.option = option; }
 
-    // Setters
+    // Setter(s)
     public void setMesh(Mesh mesh) { this.mesh = mesh; }
 
     public void setTexture(AbstractTexture texture) { this.texture = texture; }

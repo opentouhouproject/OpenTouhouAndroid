@@ -3,6 +3,7 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20;
 import android.opengl.GLES20;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
@@ -47,16 +48,16 @@ public class GraphicsObject20 extends GraphicsObject
         GLES20.glEnableVertexAttribArray(textureCoordinateHandle);
 
         // Pass in the vertex information.
-        GLES20.glVertexAttribPointer(positionHandle, mesh.VERTEX_DATA_SIZE, GLES20.GL_FLOAT, false, mesh.stride, 0);
+        GLES20.glVertexAttribPointer(positionHandle, MeshLayout.POSITION_DATA_SIZE, GLES20.GL_FLOAT, false, MeshLayout.PCNT_Stride, MeshLayout.PCNT_POSITION_OFFSET);
 
         // Pass in the color information.
-        GLES20.glVertexAttribPointer(colorHandle, mesh.COLOR_DATA_SIZE, GLES20.GL_FLOAT, false, mesh.stride, mesh.VERTEX_DATA_SIZE * mesh.BYTES_PER_FLOAT);
+        GLES20.glVertexAttribPointer(colorHandle, MeshLayout.COLOR_DATA_SIZE, GLES20.GL_FLOAT, false, MeshLayout.PCNT_Stride, MeshLayout.PCNT_COLOR_OFFSET);
 
         // Pass in the normal information.
-        GLES20.glVertexAttribPointer(normalHandle, mesh.NORMAL_DATA_SIZE, GLES20.GL_FLOAT, false, mesh.stride, (mesh.VERTEX_DATA_SIZE + mesh.COLOR_DATA_SIZE) * mesh.BYTES_PER_FLOAT);
+        GLES20.glVertexAttribPointer(normalHandle, MeshLayout.NORMAL_DATA_SIZE, GLES20.GL_FLOAT, false, MeshLayout.PCNT_Stride, MeshLayout.PCNT_NORMAL_OFFSET);
 
         // Pass in the texture coordinate information.
-        GLES20.glVertexAttribPointer(textureCoordinateHandle, mesh.TEXTURE_COORDINATE_DATA_SIZE, GLES20.GL_FLOAT, false, mesh.stride, (mesh.VERTEX_DATA_SIZE + mesh.COLOR_DATA_SIZE + mesh.NORMAL_DATA_SIZE) * mesh.BYTES_PER_FLOAT);
+        GLES20.glVertexAttribPointer(textureCoordinateHandle, MeshLayout.TEXTURE_COORDINATE_DATA_SIZE, GLES20.GL_FLOAT, false, MeshLayout.PCNT_Stride, MeshLayout.PCNT_TEXTURE_COORDINATE_OFFSET);
 
         // Draw the object.
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 6);

@@ -1,12 +1,11 @@
 package opentouhou.com.opentouhouandroid.graphics.common;
 
-import opentouhou.com.opentouhouandroid.R;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTexture;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.GraphicsObject30;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Quad30;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.texture.BackgroundDrawable30;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.BackgroundDrawable30;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
@@ -29,7 +28,7 @@ public class Background
                 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0
         };
 
-        drawable.setMesh(new Quad30(data, renderer.getShaderManager().getShaderProgramHandle("Background")));
+        drawable.setMesh(new Mesh30(data, renderer.getShaderManager().getShaderProgramHandle("Background"), MeshLayout.Layout.PCNT));
 
         // Set the texture.
         drawable.setTexture(renderer.getTextureManager().getTexture("art/loading_bg1.png"));
@@ -43,7 +42,7 @@ public class Background
         int height = texture.getHeight();
         float scale = 11.5f;
         Matrix4f mat = Matrix4f.scaleMatrix(scale, scale * ((float)height / (float)width), 1);
-        mat.translate(0, -4.4f, 0);
+        mat.translate(-5.5f, -10.0f, 0);
         drawable.setModelMatrix(mat);
     }
 

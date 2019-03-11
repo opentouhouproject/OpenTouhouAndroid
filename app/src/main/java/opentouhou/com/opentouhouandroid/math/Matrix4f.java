@@ -4,7 +4,8 @@ package opentouhou.com.opentouhouandroid.math;
  * 4x4 matrix of floats.
  */
 
-public class Matrix4f {
+public class Matrix4f
+{
     private static final int m11 = 0;
     private static final int m21 = 1;
     private static final int m31 = 2;
@@ -267,10 +268,9 @@ public class Matrix4f {
     }
 
 
-    /*
-        Matrix Operation Methods
-
-        All methods return a new matrix.
+    /**
+     * Matrix Operation Methods
+     * All methods return a new matrix.
      */
     // Return the transpose of the given matrix.
     public static Matrix4f transpose(Matrix4f matrix) {

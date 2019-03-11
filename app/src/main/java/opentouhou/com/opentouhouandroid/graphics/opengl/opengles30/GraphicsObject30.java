@@ -3,6 +3,7 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30;
 import android.opengl.GLES30;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
@@ -13,13 +14,12 @@ import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public class GraphicsObject30 extends GraphicsObject
 {
-    // Constructor
-    public GraphicsObject30()
-    {
+    // Constructor(s)
+    public GraphicsObject30() { }
 
-    }
+    public GraphicsObject30(GraphicsOptions option) { super(option); }
 
-    // Draw
+    // Draw method
     public void draw(Scene scene)
     {
         // Set the shader program to use.
@@ -30,16 +30,16 @@ public class GraphicsObject30 extends GraphicsObject
         setTransformationMatrices(shaderHandle, scene);
 
         // Set the light source(s).
-        setLightPosition(shaderHandle, scene);
+        if (option.lightingSetting()) setLightPosition(shaderHandle, scene);
 
         // Set the texture.
-        setTexture(shaderHandle);
+        if (option.textureSetting()) setTexture(shaderHandle);
 
         // Set the mesh.
         setMesh();
 
         // Draw the object.
-        GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, 6);
+        GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, mesh.getVertexCount());
     }
 
     protected void setTransformationMatrices(int handle, Scene scene)
