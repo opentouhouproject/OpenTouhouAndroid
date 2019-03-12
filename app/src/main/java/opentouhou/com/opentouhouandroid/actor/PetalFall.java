@@ -88,8 +88,13 @@ public class PetalFall
     private float[] generateMesh()
     {
         // Setup the Bezier curves.
-        Vector3f[] left = {new Vector3f(0, -1, 2), new Vector3f(-0.5f, -0.5f, 2), new Vector3f(-0.5f, 0.5f, 2), new Vector3f(0, 1, 2)};
-        Vector3f[] right = {new Vector3f(0, -1, 2), new Vector3f(0.5f, -0.5f, 2), new Vector3f(0.5f, 0.5f, 2), new Vector3f(0, 1, 2)};
+        //Vector3f[] left = {new Vector3f(0, -1, 2), new Vector3f(-0.5f, -0.5f, 2), new Vector3f(-0.5f, 0.5f, 2), new Vector3f(0, 1, 2)};
+        //Vector3f[] right = {new Vector3f(0, -1, 2), new Vector3f(0.5f, -0.5f, 2), new Vector3f(0.5f, 0.5f, 2), new Vector3f(0, 1, 2)};
+
+        Vector3f[] left = {new Vector3f(0, -1, 2), new Vector3f(-1.3f, -0.03f, 2),
+                           new Vector3f(-0.2f, 0.20f, 2), new Vector3f(0, 1, 2)};
+        Vector3f[] right = {new Vector3f(0, -1, 2), new Vector3f(1.3f, -0.03f, 2),
+                            new Vector3f(0.2f, 0.20f, 2), new Vector3f(0, 1, 2)};
 
         CubicBezierCurve leftCurve = new CubicBezierCurve(left);
         CubicBezierCurve rightCurve = new CubicBezierCurve(right);

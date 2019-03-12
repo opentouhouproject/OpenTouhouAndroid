@@ -33,45 +33,19 @@ public class Petal
 
     // degrees
     private static float SWAY_0_INIT = -5;
-    private static float SWAY_0_FIRST = 49;
-    private static float SWAY_0_FINAL = 90;
-
     private static float SWAY_1_INIT = 10;
-    private static float SWAY_1_FIRST = 67;
-    private static float SWAY_1_FINAL = 130;
-
     private static float SWAY_2_INIT = 15;
-    private static float SWAY_2_FIRST = 89;
-    private static float SWAY_2_FINAL = 160;
-
     private static float SWAY_3_INIT = 25;
-    private static float SWAY_3_FIRST = 90;
-    private static float SWAY_3_FINAL = 145;
-
     private static float SWAY_4_INIT = 40;
-    private static float SWAY_4_FIRST = 123;
-    private static float SWAY_4_FINAL = 167;
-
     private static float SWAY_5_INIT = 50;
-    private static float SWAY_5_FIRST = 134;
-    private static float SWAY_5_FINAL = 166;
-
     private static float SWAY_6_INIT = 65;
-    private static float SWAY_6_FIRST = 150;
-    private static float SWAY_6_FINAL = 290;
-
     private static float SWAY_7_INIT = 72;
-    private static float SWAY_7_FIRST = 190;
-    private static float SWAY_7_FINAL = 199;
-
     private static float SWAY_8_INIT = 94;
-    private static float SWAY_8_FIRST = 201;
-    private static float SWAY_8_FINAL = 276;
 
     // STATES
     private enum State
     {
-        ALIVE, ANIMATED, DEAD, R1, R2
+        ALIVE, ANIMATED, DEAD
     }
 
     // RNGJESUS
@@ -82,13 +56,11 @@ public class Petal
     private float windRate;
 
     private Flutter flutter;
-    private float initAngle, firstAngle, finalAngle;
+    private float initAngle;
+    private float curAngle;
+    private float flutterRate;
 
     private State state;
-    private State flutterState;
-    private float curAngle;
-    private long flutterCycle;
-    private long flutterLength;
 
     // MODEL TRANSFORMATION
     private Matrix4f model;
@@ -176,71 +148,59 @@ public class Petal
             case 0:
                 flutter = Flutter.SWAY_0;
                 initAngle = SWAY_0_INIT;
-                firstAngle = SWAY_0_FIRST;
-                finalAngle = SWAY_0_FINAL;
+                flutterRate = 4;
                 break;
 
             case 1:
                 flutter = Flutter.SWAY_1;
                 initAngle = SWAY_1_INIT;
-                firstAngle = SWAY_1_FIRST;
-                finalAngle = SWAY_1_FINAL;
+                flutterRate = -4;
                 break;
 
             case 2:
                 flutter = Flutter.SWAY_2;
                 initAngle = SWAY_2_INIT;
-                firstAngle = SWAY_2_FIRST;
-                finalAngle = SWAY_2_FINAL;
+                flutterRate = 12;
                 break;
 
             case 3:
                 flutter = Flutter.SWAY_3;
                 initAngle = SWAY_3_INIT;
-                firstAngle = SWAY_3_FIRST;
-                finalAngle = SWAY_3_FINAL;
+                flutterRate = -12;
                 break;
 
             case 4:
                 flutter = Flutter.SWAY_4;
                 initAngle = SWAY_4_INIT;
-                firstAngle = SWAY_4_FIRST;
-                finalAngle = SWAY_4_FINAL;
+                flutterRate = 20;
                 break;
 
             case 5:
                 flutter = Flutter.SWAY_5;
                 initAngle = SWAY_5_INIT;
-                firstAngle = SWAY_5_FIRST;
-                finalAngle = SWAY_5_FINAL;
+                flutterRate = -20;
                 break;
 
             case 6:
                 flutter = Flutter.SWAY_6;
                 initAngle = SWAY_6_INIT;
-                firstAngle = SWAY_6_FIRST;
-                finalAngle = SWAY_6_FINAL;
+                flutterRate = 28;
                 break;
 
             case 7:
                 flutter = Flutter.SWAY_7;
                 initAngle = SWAY_7_INIT;
-                firstAngle = SWAY_7_FIRST;
-                finalAngle = SWAY_7_FINAL;
+                flutterRate = -28;
                 break;
 
             case 8:
                 flutter = Flutter.SWAY_8;
                 initAngle = SWAY_8_INIT;
-                firstAngle = SWAY_8_FIRST;
-                finalAngle = SWAY_8_FINAL;
+                flutterRate = 30;
                 break;
         }
 
         curAngle = initAngle;
-        flutterCycle = 0;
-        flutterLength = 4000 + (long) (r.nextFloat() * 8000);
-        flutterState = State.R1;
     }
 
 
@@ -249,64 +209,8 @@ public class Petal
     {
         long delta = curTime - lastTime;
 
-        float progress = 0;
         float deltaAngle = 0;
-        //flutterCycle += delta;
-        /*
-        if (flutterCycle > flutterLength)
-        {
-            flutterCycle = flutterLength;
-        }*/
-
-        if (flutterState == State.R1)
-        {
-            progress = (float)(curTime - startTime) / (0.5f * (float) (endTime - startTime));
-            deltaAngle = ((firstAngle - initAngle) * progress + initAngle) - curAngle;
-            if (curAngle > firstAngle)
-            {
-                flutterState = State.R2;
-            }
-
-            //progress = (float)flutterCycle / (float)flutterLength;
-            /*
-            if (flutterCycle >= flutterLength)
-            {
-                flutterState = State.R2;
-                flutterCycle = 0;
-                flutterLength = 4000 + (long) (r.nextFloat() * 8000);
-                curAngle = firstAngle;
-            }
-            else
-            {
-                deltaAngle = ((firstAngle - initAngle) * progress + initAngle) - curAngle;
-                curAngle += deltaAngle;curAngle += deltaAngle;
-            }*/
-        }
-        else if(flutterState == State.R2)
-        {
-            if (curAngle <= finalAngle) {
-                progress = (float)(curTime - (startTime + 0.5f * (float) (endTime - startTime))) / (0.5f * (float) (endTime - startTime));
-                deltaAngle = ((finalAngle - firstAngle) * progress + firstAngle) - curAngle;
-            }
-
-            //progress = (float)(curTime - (startTime + 0.5f * (float) (endTime - startTime))) / (0.5f * (float) (endTime - startTime));
-            //deltaAngle = ((finalAngle - firstAngle) * progress + firstAngle) - curAngle;
-            //progress = (float)flutterCycle / (float)flutterLength;
-
-            /*
-            if (flutterCycle >= flutterLength)
-            {
-                flutterState = State.R1;
-                flutterCycle = 0;
-                curAngle = finalAngle;
-            }
-            else
-            {
-                deltaAngle = ((finalAngle - firstAngle) * progress + firstAngle) - curAngle;
-                curAngle += deltaAngle;
-            }*/
-        }
-
+        deltaAngle = flutterRate * ((float)delta / 1000f);
         curAngle += deltaAngle;
 
         position.x += windRate * ((float)delta / 1000f);
