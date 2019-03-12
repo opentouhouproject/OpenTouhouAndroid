@@ -121,7 +121,7 @@ public abstract class AbstractTextureManager
                 break;
 
             case GREYSCALE:
-                bitmap = BitmapEditor.greyscale(bitmap, 0);
+                bitmap = BitmapEditor.greyscale(bitmap, 0.5f);
                 break;
 
             case LIGHTGREYSCALE:

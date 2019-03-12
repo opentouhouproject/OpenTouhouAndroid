@@ -16,6 +16,7 @@ public class FontDrawable30 extends GraphicsObject30
         // Set color
         int uniformColorHandle = GLES30.glGetUniformLocation(shaderHandle, "uColor");
         GLES30.glUniform4f(uniformColorHandle, 1f, 0.1412f, 0f, 1f);
+        //GLES30.glUniform4f(uniformColorHandle, 0.65f, 0.062f, 0.11f, 1f);
 
         // Set the transformation matrices.
         setTransformationMatrices(shaderHandle, scene);

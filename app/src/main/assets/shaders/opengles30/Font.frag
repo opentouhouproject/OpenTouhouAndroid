@@ -30,12 +30,13 @@ void main()
     // To get the final output color, multiply the color by:
     // (1) the diffuse illumination level
     // (2) the texture value
-    /*
+
     vec4 newColor = vec4(1.0, 1.0, 1.0, 0.0);
     if (texture2D(uTexture, vTexCoordinate).w > 0.0)
     {
         newColor = vec4(1.0, 1.0, 1.0, 1.0);
-    }*/
+    }
 
-    gl_FragColor = diffuse * vColor * (uColor * texture2D(uTexture, vTexCoordinate).w);
+    //gl_FragColor = diffuse * vColor * (uColor * texture2D(uTexture, vTexCoordinate).w);
+    gl_FragColor = diffuse * vColor * (uColor * newColor.w);
 }

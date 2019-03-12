@@ -35,9 +35,9 @@ public class Camera
 
         upDirection = new Vector4f(0, 1, 0, 0); // y coordinate is up
 
-        viewMatrix = Matrix4f.identity();
+        viewMatrix = Matrix4f.getIdentity();
         updateViewMatrix(cameraPosition, lookAtPosition, upDirection);
-        projectionMatrix = Matrix4f.identity();
+        projectionMatrix = Matrix4f.getIdentity();
     }
 
     public Camera(float p_x, float p_y, float p_z, float l_x, float l_y, float l_z, float up_x, float up_y, float up_z)
@@ -51,9 +51,9 @@ public class Camera
 
         upDirection = new Vector4f(up_x, up_y, up_z, 0);
 
-        viewMatrix = Matrix4f.identity();
+        viewMatrix = Matrix4f.getIdentity();
         updateViewMatrix(cameraPosition, lookAtPosition, upDirection);
-        projectionMatrix = Matrix4f.identity();
+        projectionMatrix = Matrix4f.getIdentity();
     }
 
     // Getters
@@ -112,12 +112,12 @@ public class Camera
 
     public void rotateCamZ(float angle)
     {
-        lookDirection = Matrix4f.multiply(Matrix4f.rotateZ(angle, true), lookDirection);
+        lookDirection = Matrix4f.multiply(Matrix4f.getZAxisRotation(angle, true), lookDirection);
         lookDirection.selfNormalize();
 
         lookAtPosition.set(cameraPosition.x + lookDirection.x,cameraPosition.y + lookDirection.y, cameraPosition.z + lookDirection.z, 0);
 
-        Vector4f up = Matrix4f.multiply(Matrix4f.rotateZ(angle, true), upDirection);
+        Vector4f up = Matrix4f.multiply(Matrix4f.getZAxisRotation(angle, true), upDirection);
         up.selfNormalize();
 
         upDirection.set(up.x, up.y, up.z, 0);
@@ -127,7 +127,7 @@ public class Camera
 
     public void rotateCamX(float angle)
     {
-        lookDirection = Matrix4f.multiply(Matrix4f.rotateX(angle, true), lookDirection);
+        lookDirection = Matrix4f.multiply(Matrix4f.getXAxisRotation(angle, true), lookDirection);
         lookDirection.selfNormalize();
 
         lookAtPosition.set(cameraPosition.x + lookDirection.x,cameraPosition.y + lookDirection.y, cameraPosition.z + lookDirection.z, 0);
@@ -137,7 +137,7 @@ public class Camera
 
     public void rotateCamY(float angle)
     {
-        lookDirection = Matrix4f.multiply(Matrix4f.rotateY(angle, true), lookDirection);
+        lookDirection = Matrix4f.multiply(Matrix4f.getYAxisRotation(angle, true), lookDirection);
         lookDirection.selfNormalize();
 
         lookAtPosition.set(cameraPosition.x + lookDirection.x, cameraPosition.y + lookDirection.y, cameraPosition.z + lookDirection.z, 0);

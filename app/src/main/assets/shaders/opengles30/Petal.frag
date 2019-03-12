@@ -1,6 +1,7 @@
 precision mediump float;
 
 uniform vec3 uLightPos;
+uniform float uProgress;
 
 varying vec3 vVertex;
 varying vec4 vColor;
@@ -24,5 +25,7 @@ void main() {
     diffuse = diffuse + 1.0;
 
     // To get the final output color, multiply the color by the diffuse lighting value.
-    gl_FragColor = vColor;
+    vec4 outColor = vColor;
+    outColor.w *= (1.0f - uProgress);
+    gl_FragColor = outColor;
 }

@@ -1,5 +1,6 @@
 uniform mat4 uMVPMatrix;
 uniform mat4 uMVMatrix;
+uniform float uProgress;
 
 attribute vec4 aVertex;
 attribute vec4 aColor;

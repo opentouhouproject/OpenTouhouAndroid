@@ -194,7 +194,7 @@ public class SceneExample2 extends Scene
         //Log.d("camera view", Arrays.toString(viewMat.getArray()));
 
         // Calculate position of the light. Rotate and then push into the distance.
-        Matrix4f lightModel = Matrix4f.identity();
+        Matrix4f lightModel = Matrix4f.getIdentity();
         //lightModel.translate(0.0f, 0.0f, -1.0f);
         //lightModel.rotate(new Vector3f(0.0f, 1.0f, 0.0f), angleInDegrees, true);
         //lightModel.translate(0.0f, 0.0f, 2.0f);
@@ -203,7 +203,7 @@ public class SceneExample2 extends Scene
         Vector4f lightPosWorld = Matrix4f.multiply(lightModel, new Vector4f(1, 1, 1, 0));
         Vector4f lightPosEye = Matrix4f.multiply(viewMat, lightPosWorld);
 
-        Matrix4f cubeModel = Matrix4f.identity();
+        Matrix4f cubeModel = Matrix4f.getIdentity();
         cubeModel.translate(0.0f, 0.0f, -2.0f);
         cubeModel.rotate(new Vector3f(1.0f, 0.0f, 1.0f), angleInDegrees, true);
         //Log.d("cube model", Arrays.toString(cubeModel.getArray()));

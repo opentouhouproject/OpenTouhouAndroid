@@ -34,7 +34,7 @@ public class LoadingScreen extends Scene
 
         petalFall.draw(this);
 
-        testTitle.render("Scarlet", new Vector3f(-3.5f, -1.4f, 3), 94f,this);
+        testTitle.render("Scarlet", new Vector3f(-3.5f, -1.0f, 3), 94f,this);
     }
 
     // Loads resources for drawing the scene.
@@ -61,7 +61,7 @@ public class LoadingScreen extends Scene
 
         // Load Audio
         aud = new AudioPlayer(renderer.getContext());
-        aud.play("audio/music/bgm3.mp3");
+        aud.play("audio/music/loadingMusic.mp3");
 
         ready = true;
     }

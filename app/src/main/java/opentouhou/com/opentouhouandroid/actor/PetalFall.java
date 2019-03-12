@@ -24,9 +24,11 @@ public class PetalFall
     Vector4f leafColor = new Vector4f(255f / 255f, 197f / 255f, 208f / 255f, 0.9f);
     Vector3f normal = new Vector3f(0, 0, 1);
 
-    private GraphicsObject drawable;
+    private PetalDrawable30 drawable, drawable2;
 
     private Petal[] petalList;
+
+    private int numberOfPetals = 50;
 
     public PetalFall(Renderer renderer)
     {
@@ -34,9 +36,9 @@ public class PetalFall
         drawable = createDrawable(renderer);
 
         // Generate new petals.
-        petalList = new Petal[3];
+        petalList = new Petal[numberOfPetals];
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < numberOfPetals; i++)
         {
             petalList[i] = new Petal();
         }
@@ -44,25 +46,23 @@ public class PetalFall
 
     public void draw(Scene scene)
     {
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < numberOfPetals; i++)
         {
             Petal petal = petalList[i];
 
-            if (petal.curLife < petal.lifeTime)
+            if (petal.isAnimated())
             {
                 drawable.setModelMatrix(petal.getModel());
-                drawable.draw(scene);
+                drawable.draw(scene, petal);
 
                 petal.update();
             }
-            else
-            {
-                petal.set();
-            }
+
+            petal.updateState();
         }
     }
 
-    private GraphicsObject createDrawable(Renderer renderer)
+    private PetalDrawable30 createDrawable(Renderer renderer)
     {
         // Generate the mesh.
         float[] meshPointsTEMP = generateMesh();
@@ -79,9 +79,7 @@ public class PetalFall
         drawable.setShader(renderer.getShaderManager().getShaderProgram("Petal"));
 
         // Set the model matrix.
-        //Matrix4f model = Matrix4f.scaleMatrix(2, 2, 1);
-        Matrix4f model = Matrix4f.identity();
-        model.translate(2, 0, 0);
+        Matrix4f model = Matrix4f.getIdentity();
         drawable.setModelMatrix(model);
 
         return drawable;
@@ -90,8 +88,8 @@ public class PetalFall
     private float[] generateMesh()
     {
         // Setup the Bezier curves.
-        Vector3f[] left = {new Vector3f(1, 1, 2), new Vector3f(0.5f, 1.5f, 2), new Vector3f(0.5f, 2.5f, 2), new Vector3f(1, 3, 2)};
-        Vector3f[] right = {new Vector3f(1, 1, 2), new Vector3f(1.5f, 1.5f, 2), new Vector3f(1.5f, 2.5f, 2), new Vector3f(1, 3, 2)};
+        Vector3f[] left = {new Vector3f(0, -1, 2), new Vector3f(-0.5f, -0.5f, 2), new Vector3f(-0.5f, 0.5f, 2), new Vector3f(0, 1, 2)};
+        Vector3f[] right = {new Vector3f(0, -1, 2), new Vector3f(0.5f, -0.5f, 2), new Vector3f(0.5f, 0.5f, 2), new Vector3f(0, 1, 2)};
 
         CubicBezierCurve leftCurve = new CubicBezierCurve(left);
         CubicBezierCurve rightCurve = new CubicBezierCurve(right);
@@ -163,7 +161,7 @@ public class PetalFall
         // Compute the stem points.
         for (int i = 0; i <= 10; i++)
         {
-            stemPoints[i] = new Vector3f(1, points[i].y, points[i].z);
+            stemPoints[i] = new Vector3f(0, points[i].y, points[i].z);
         }
 
         return stemPoints;

@@ -2,6 +2,7 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30;
 
 import android.opengl.GLES30;
 
+import opentouhou.com.opentouhouandroid.actor.Petal;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
@@ -13,7 +14,7 @@ public class PetalDrawable30 extends GraphicsObject30
     }
 
     // Draw
-    public void draw(Scene scene)
+    public void draw(Scene scene, Petal petal)
     {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();
@@ -27,6 +28,10 @@ public class PetalDrawable30 extends GraphicsObject30
 
         // Set the texture.
         if (option.textureSetting()) setTexture(shaderHandle);
+
+        // Set the lifetime.
+        int progressHandle = GLES30.glGetUniformLocation(shaderHandle, "uProgress");
+        GLES30.glUniform1f(progressHandle, petal.progress());
 
         // Set the mesh.
         setMesh();
