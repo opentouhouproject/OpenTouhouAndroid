@@ -2,11 +2,11 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.common.shader;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.Compilable;
 
-public abstract class AbstractVertexShader extends AbstractShader implements Compilable
+public abstract class VertexShader extends Shader implements Compilable
 {
     protected int handle;
 
-    public AbstractVertexShader(String name)
+    public VertexShader(String name)
     {
         super(name);
 

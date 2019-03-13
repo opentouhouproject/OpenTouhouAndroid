@@ -2,15 +2,15 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader;
 
 import android.content.res.AssetManager;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.AbstractShaderManager;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
 
 /**
  * Shader Manager implementation for OpenGL ES 2.0
  */
 
-public class ShaderManager extends AbstractShaderManager
+public class ShaderManager20 extends ShaderManager
 {
-    public ShaderManager(AssetManager assetManager)
+    public ShaderManager20(AssetManager assetManager)
     {
         super(assetManager);
     }
@@ -39,25 +39,25 @@ public class ShaderManager extends AbstractShaderManager
     // Create shaders.
     public void createVertexShader(String name, String filePath)
     {
-        VertexShader vertexShader = new VertexShader(name);
-        vertexShader.compile(readFile(filePath));
+        VertexShader20 vertexShader20 = new VertexShader20(name);
+        vertexShader20.compile(readFile(filePath));
 
-        vertexShaders.put(name, vertexShader);
+        vertexShaders.put(name, vertexShader20);
     }
 
     public void createFragmentShader(String name, String filePath)
     {
-        FragmentShader fragmentShader = new FragmentShader(name);
-        fragmentShader.compile(readFile(filePath));
+        FragmentShader20 fragmentShader20 = new FragmentShader20(name);
+        fragmentShader20.compile(readFile(filePath));
 
-        fragmentShaders.put(name, fragmentShader);
+        fragmentShaders.put(name, fragmentShader20);
     }
 
     public void createShaderProgram(String name, String vertexShader, String fragmentShader)
     {
-        ShaderProgram shaderProgram = new ShaderProgram(name);
-        shaderProgram.link(vertexShaders.get(vertexShader), fragmentShaders.get(fragmentShader));
+        ShaderProgram20 shaderProgram20 = new ShaderProgram20(name);
+        shaderProgram20.link(vertexShaders.get(vertexShader), fragmentShaders.get(fragmentShader));
 
-        shaderPrograms.put(name, shaderProgram);
+        shaderPrograms.put(name, shaderProgram20);
     }
 }

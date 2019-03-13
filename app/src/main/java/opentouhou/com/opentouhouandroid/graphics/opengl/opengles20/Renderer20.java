@@ -10,8 +10,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader.ShaderManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.texture.TextureManager;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader.ShaderManager20;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.texture.TextureManager20;
 import opentouhou.com.opentouhouandroid.scene.OpenGLES20Test;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
@@ -28,8 +28,8 @@ public class Renderer20 extends Renderer
     {
         super(context);
 
-        shaderManager = new ShaderManager(context.getAssets());
-        textureManager = new TextureManager();
+        shaderManager = new ShaderManager20(context.getAssets());
+        textureManager = new TextureManager20();
         fontManager = new FontManager();
     }
 
@@ -52,7 +52,7 @@ public class Renderer20 extends Renderer
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA );
 
         // load scene
-        scene = new OpenGLES20Test("ES20Test");
+        scene = new OpenGLES20Test("ES20Test", this);
         scene.setup(this);
     }
 

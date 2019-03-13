@@ -4,13 +4,13 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.AbstractVertexArrayObject;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.VertexArrayObject;
 
 public abstract class Mesh
 {
     protected int attributeBuffer;
 
-    protected AbstractVertexArrayObject vao;
+    protected VertexArrayObject vao;
 
     protected int vertexCount;
 
@@ -25,7 +25,7 @@ public abstract class Mesh
     // Getter(s)
     public int getBuffer() { return attributeBuffer; }
 
-    public AbstractVertexArrayObject getVAO() { return vao; }
+    public VertexArrayObject getVAO() { return vao; }
 
     public int getVertexCount() { return vertexCount; };
 

@@ -5,9 +5,9 @@ import android.opengl.GLES30;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTexture;
 
-public class Texture extends AbstractTexture
+public class Texture30 extends AbstractTexture
 {
-    public Texture(BitmapFactory.Options options)
+    public Texture30(BitmapFactory.Options options)
     {
         super(options);
 

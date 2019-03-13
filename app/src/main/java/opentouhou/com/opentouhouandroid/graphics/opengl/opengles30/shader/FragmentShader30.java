@@ -2,16 +2,16 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader;
 
 import android.opengl.GLES30;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.AbstractVertexShader;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.FragmentShader;
 
-public class VertexShader extends AbstractVertexShader
+public class FragmentShader30 extends FragmentShader
 {
-    public VertexShader(String name)
+    public FragmentShader30(String name)
     {
         super(name);
 
         // Create a shader.
-        handle = GLES30.glCreateShader(GLES30.GL_VERTEX_SHADER);
+        handle = GLES30.glCreateShader(GLES30.GL_FRAGMENT_SHADER);
 
         if (handle == 0)
         {

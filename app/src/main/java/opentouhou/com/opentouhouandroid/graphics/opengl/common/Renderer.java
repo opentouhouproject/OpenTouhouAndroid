@@ -3,11 +3,8 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.common;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.AbstractShaderManager;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTextureManager;
 
 /**
@@ -21,7 +18,7 @@ public abstract class Renderer implements GLSurfaceView.Renderer
     protected Context context;
 
     // Shader manager.
-    protected AbstractShaderManager shaderManager;
+    protected ShaderManager shaderManager;
 
     // Texture manager.
     protected AbstractTextureManager textureManager;
@@ -51,7 +48,7 @@ public abstract class Renderer implements GLSurfaceView.Renderer
     // Getters
     public Context getContext() { return context; }
 
-    public AbstractShaderManager getShaderManager() { return shaderManager; }
+    public ShaderManager getShaderManager() { return shaderManager; }
 
     public AbstractTextureManager getTextureManager() { return textureManager; }
 

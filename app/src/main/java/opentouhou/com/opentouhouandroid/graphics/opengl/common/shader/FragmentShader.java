@@ -2,11 +2,11 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.common.shader;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.Compilable;
 
-public abstract class AbstractFragmentShader extends AbstractShader implements Compilable
+public abstract class FragmentShader extends Shader implements Compilable
 {
     protected int handle;
 
-    public AbstractFragmentShader(String name)
+    public FragmentShader(String name)
     {
         super(name);
 

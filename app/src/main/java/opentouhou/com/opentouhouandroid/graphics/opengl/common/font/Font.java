@@ -11,12 +11,12 @@ import java.util.HashMap;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
+import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 /**
- * Represents a bitmap font from a .fnt file.
+ * Represents a bitmap font with a corresponding xml metadata file.
  */
-
 public class Font
 {
     // Font info
@@ -27,6 +27,7 @@ public class Font
     // Glyphs
     private HashMap<Character, Glyph> glyphs;
 
+    // Constructor(s)
     public Font(InputStreamReader reader)
     {
         glyphs = new HashMap<>();
@@ -54,7 +55,6 @@ public class Font
     {
         try
         {
-
             XmlPullParser parser = Xml.newPullParser();
             parser.setInput(reader);
 
@@ -121,17 +121,20 @@ public class Font
         }
     }
 
+    // Generates binding between glyphs and textures.
     public void generate(Renderer renderer)
     {
         for (Glyph g : glyphs.values())
         {
-            g.generate(width, height, "fonts/images/" + imageFile, renderer);
+            String assetPath = "fonts/images/" + imageFile;
+
+            g.generate(width, height, assetPath, renderer);
         }
     }
 
-    // Draw
-    public void draw(char c, Vector3f point, float scale, Scene scene)
+    // Handles rendering of a single UNICODE character.
+    public void render(char c, Vector3f position, float scaling, Vector4f color, String shaderProgram, Scene scene)
     {
-        glyphs.get(c).draw(point, scale, scene);
+        glyphs.get(c).draw(position, scaling, color, shaderProgram, scene);
     }
 }

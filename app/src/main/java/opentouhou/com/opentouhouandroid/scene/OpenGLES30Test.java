@@ -9,15 +9,15 @@ public class OpenGLES30Test extends Scene
     private LoadingScreen loadingScreen;
 
     // Constructor
-    public OpenGLES30Test(String name)
+    public OpenGLES30Test(String name, Renderer renderer)
     {
-        super(name);
+        super(name, renderer);
     }
 
     public void setup(Renderer renderer)
     {
         // Load the scenes.
-        loadingScreen = new LoadingScreen("TEST");
+        loadingScreen = new LoadingScreen("TEST", renderer);
         loadingScreen.setup(renderer);
 
         // Set the current scene and ready flag.

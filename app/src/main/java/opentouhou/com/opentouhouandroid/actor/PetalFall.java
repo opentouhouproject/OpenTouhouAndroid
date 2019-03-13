@@ -3,11 +3,10 @@ package opentouhou.com.opentouhouandroid.actor;
 import android.util.Log;
 
 import opentouhou.com.opentouhouandroid.graphics.common.CubicBezierCurve;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.PetalDrawable30;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.PetalDrawable30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
@@ -106,7 +105,7 @@ public class PetalFall
         // Generate the stem points.
         Vector3f[] stemPoints = generateStem(leftPoints);
 
-        // Compute the number of points to draw.
+        // Compute the number of points to render.
         int numPoints = 2 * ((2 * 3) + (8 * 6));
         float[] mesh = new float[numPoints * 10];
 

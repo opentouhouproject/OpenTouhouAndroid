@@ -25,7 +25,7 @@ public class PlayActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Create array adapter
-        String[] mylist = {"OpenGL ES Test 1"};
+        String[] mylist = {"OpenGL ES 2.0 Test", "OpenGL ES 3.0 Test"};
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.textview_play_menu, mylist);
 
@@ -39,7 +39,7 @@ public class PlayActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object listItem = gameSelection.getItemAtPosition(position);
 
-                if ((String) listItem == "OpenGL ES Test 1") {
+                if ((String) listItem == "OpenGL ES 3.0 Test") {
                     startActivity(new Intent(PlayActivity.this, OpenGLESTestActivity.class));
                 }
             }

@@ -2,13 +2,13 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader;
 
 import android.opengl.GLES30;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.AbstractFragmentShader;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.AbstractShaderProgram;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.AbstractVertexShader;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.FragmentShader;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.VertexShader;
 
-public class ShaderProgram extends AbstractShaderProgram
+public class ShaderProgram30 extends ShaderProgram
 {
-    public ShaderProgram(String name)
+    public ShaderProgram30(String name)
     {
         super(name);
 
@@ -49,7 +49,7 @@ public class ShaderProgram extends AbstractShaderProgram
         link();
     }
 
-    public void link(AbstractVertexShader vertexShader, AbstractFragmentShader fragmentShader)
+    public void link(VertexShader vertexShader, FragmentShader fragmentShader)
     {
         link(vertexShader.getHandle(), fragmentShader.getHandle());
     }

@@ -5,7 +5,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.AbstractShaderManager;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTextureManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.GraphicsObject20;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.mesh.Mesh20;
@@ -17,9 +17,9 @@ public class OpenGLES20Test extends Scene
     private GraphicsObject background, fontImage;
 
     // Constructor
-    public OpenGLES20Test(String name)
+    public OpenGLES20Test(String name, Renderer renderer)
     {
-        super(name);
+        super(name, renderer);
     }
 
     public void setup(Renderer renderer)
@@ -70,7 +70,7 @@ public class OpenGLES20Test extends Scene
     private void loadShaders(Renderer renderer)
     {
         // Get the shader manager.
-        AbstractShaderManager manager = renderer.getShaderManager();
+        ShaderManager manager = renderer.getShaderManager();
 
         // Create vertex shaders.
         manager.createVertexShader("Triangle", "shaders/opengles30/Triangle.vert");

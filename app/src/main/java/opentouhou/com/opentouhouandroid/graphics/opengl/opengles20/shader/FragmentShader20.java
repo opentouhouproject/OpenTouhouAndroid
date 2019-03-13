@@ -1,17 +1,17 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader;
+package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader;
 
-import android.opengl.GLES30;
+import android.opengl.GLES20;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.AbstractFragmentShader;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.FragmentShader;
 
-public class FragmentShader extends AbstractFragmentShader
+public class FragmentShader20 extends FragmentShader
 {
-    public FragmentShader(String name)
+    public FragmentShader20(String name)
     {
         super(name);
 
         // Create a shader.
-        handle = GLES30.glCreateShader(GLES30.GL_FRAGMENT_SHADER);
+        handle = GLES20.glCreateShader(GLES20.GL_FRAGMENT_SHADER);
 
         if (handle == 0)
         {
@@ -23,16 +23,16 @@ public class FragmentShader extends AbstractFragmentShader
     public void compile()
     {
         // Compile the shader.
-        GLES30.glCompileShader(handle);
+        GLES20.glCompileShader(handle);
 
         // Get the compilation status.
         final int[] compileStatus = new int[1];
-        GLES30.glGetShaderiv(handle, GLES30.GL_COMPILE_STATUS, compileStatus, 0);
+        GLES20.glGetShaderiv(handle, GLES20.GL_COMPILE_STATUS, compileStatus, 0);
 
         // Check if the compilation failed.
         if (compileStatus[0] == 0)
         {
-            String err = GLES30.glGetShaderInfoLog(handle);
+            String err = GLES20.glGetShaderInfoLog(handle);
             throw new RuntimeException("Error compiling shader. " + err);
         }
     }
@@ -40,7 +40,7 @@ public class FragmentShader extends AbstractFragmentShader
     public void compile(String code)
     {
         // Pass in the code.
-        GLES30.glShaderSource(handle, code);
+        GLES20.glShaderSource(handle, code);
 
         if (handle == 0)
         {
@@ -58,6 +58,6 @@ public class FragmentShader extends AbstractFragmentShader
     // Implement AutoCloseable
     public void close()
     {
-        GLES30.glDeleteShader(handle);
+        GLES20.glDeleteShader(handle);
     }
 }

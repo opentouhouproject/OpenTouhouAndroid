@@ -22,7 +22,7 @@ public class Square extends GraphicsObject
             0.5f, -0.5f, 0.0f,   // bottom right
             0.5f,  0.5f, 0.0f }; // top right
 
-    private short drawOrder[] = { 0, 1, 2, 0, 2, 3 }; // order to draw vertices
+    private short drawOrder[] = { 0, 1, 2, 0, 2, 3 }; // order to render vertices
 
     public Square() {
         // initialize vertex byte buffer for shape coordinates
@@ -34,7 +34,7 @@ public class Square extends GraphicsObject
         vertexBuffer.put(squareCoords);
         vertexBuffer.position(0);
 
-        // initialize byte buffer for the draw list
+        // initialize byte buffer for the render list
         ByteBuffer dlb = ByteBuffer.allocateDirect(
                 // (# of coordinate values * 2 bytes per short)
                 drawOrder.length * 2);

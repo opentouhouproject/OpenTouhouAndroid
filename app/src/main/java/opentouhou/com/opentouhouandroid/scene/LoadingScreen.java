@@ -2,12 +2,13 @@ package opentouhou.com.opentouhouandroid.scene;
 
 import opentouhou.com.opentouhouandroid.actor.MeilinSprite;
 import opentouhou.com.opentouhouandroid.actor.PetalFall;
+import opentouhou.com.opentouhouandroid.actor.TextAnimation;
 import opentouhou.com.opentouhouandroid.graphics.common.Background;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.AbstractShaderManager;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTextureManager;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
@@ -18,15 +19,14 @@ public class LoadingScreen extends Scene
     public Text testTitle, testMessage;
     public Background background;
     public PetalFall petalFall;
-
     public MeilinSprite sprite;
 
     private AudioPlayer aud;
 
     // Constructor(s)
-    public LoadingScreen(String name)
+    public LoadingScreen(String name, Renderer renderer)
     {
-        super(name);
+        super(name, renderer);
 
         currentScene = this;
     }
@@ -37,9 +37,9 @@ public class LoadingScreen extends Scene
 
         petalFall.draw(this);
 
-        testTitle.render("Scarlet", new Vector3f(-3.5f, -1.0f, 3), 94f,this);
+        testTitle.draw(this);
 
-        testMessage.render("Loading...", new Vector3f(0.7f, -2.43f, 3), 40f,this);
+        testMessage.draw(this);
 
         sprite.draw(this);
     }
@@ -61,24 +61,48 @@ public class LoadingScreen extends Scene
         // Create light source(s).
         light = new Vector4f(0.0f, 0.0f, 2f, 0f);
 
-        // Load Objects
+        // Create background.
         background = new Background(renderer);
-        testTitle = new Text("Scarlet", renderer.getFontManager().getFont("fonts/yozakura/yozakura256.xml"));
-        testMessage = new Text("Loading...", renderer.getFontManager().getFont("fonts/popstar/popstar16.xml"));
+
+        // Create text.
+        FontManager fontManager = renderer.getFontManager();
+
+        testTitle = new Text(fontManager.getFont("fonts/yozakura/yozakura256.xml"));
+        testTitle.setText("Scarlet")
+                 .setPosition(new Vector3f(-3.5f, -1.0f, 3))
+                 .setScaling(94f)
+                 .setColor(new Vector4f(1.0f, 0.1412f, 0.0f, 1.0f))
+                 .setShader("Font");
+
+        TextAnimation msgAnim = new TextAnimation("loading");
+        msgAnim.addSequence(new String[]{"Loading", "Loading.", "Loading..", "Loading..."});
+
+        testMessage = new Text(fontManager.getFont("fonts/popstar/popstar16.xml"));
+        testMessage.setText("Loading...")
+                   .setPosition(new Vector3f(0.7f, -2.43f, 3))
+                   .setScaling(40f)
+                   .setColor(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f))
+                   .setShader("Font2")
+                   .setAnimation(msgAnim);
+
+        // Create petal animation.
         petalFall = new PetalFall(renderer);
+
+        // Create sprite.
         sprite = new MeilinSprite("meilin", renderer);
 
         // Load Audio
         aud = new AudioPlayer(renderer.getContext());
         aud.play("audio/music/loadingMusic.mp3");
 
+        // Done loading.
         ready = true;
     }
 
     private void loadShaders(Renderer renderer)
     {
         // Get the shader manager.
-        AbstractShaderManager manager = renderer.getShaderManager();
+        ShaderManager manager = renderer.getShaderManager();
 
         // Create vertex shaders.
         manager.createVertexShader("TextureShader", "shaders/opengles30/TextureShader.vert");
@@ -89,12 +113,14 @@ public class LoadingScreen extends Scene
         // Create fragment shaders.
         manager.createFragmentShader("TextureShader", "shaders/opengles30/TextureShader.frag");
         manager.createFragmentShader("Font", "shaders/opengles30/Font.frag");
+        manager.createFragmentShader("Font2", "shaders/opengles30/Font2.frag");
         manager.createFragmentShader("Background", "shaders/opengles30/Background.frag");
         manager.createFragmentShader("Petal", "shaders/opengles30/Petal.frag");
 
         // Create shader programs.
         manager.createShaderProgram("TextureShader", "TextureShader", "TextureShader");
         manager.createShaderProgram("Font", "Font", "Font");
+        manager.createShaderProgram("Font2", "Font", "Font2");
         manager.createShaderProgram("Background", "Background", "Background");
         manager.createShaderProgram("Petal", "Petal", "Petal");
     }

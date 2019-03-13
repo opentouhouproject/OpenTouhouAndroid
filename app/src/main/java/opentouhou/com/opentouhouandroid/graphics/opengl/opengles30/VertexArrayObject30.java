@@ -4,12 +4,12 @@ import android.opengl.GLES30;
 
 import java.nio.IntBuffer;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.AbstractVertexArrayObject;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.VertexArrayObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 
-public class VertexArrayObject extends AbstractVertexArrayObject
+public class VertexArrayObject30 extends VertexArrayObject
 {
-    public VertexArrayObject(int buffer, int shader, MeshLayout.Layout layout)
+    public VertexArrayObject30(int buffer, int shader, MeshLayout.Layout layout)
     {
         // Bind the vertex buffer object
         GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, buffer);

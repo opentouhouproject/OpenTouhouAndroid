@@ -2,11 +2,11 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader;
 
 import android.opengl.GLES20;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.AbstractVertexShader;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.VertexShader;
 
-public class VertexShader extends AbstractVertexShader
+public class VertexShader20 extends VertexShader
 {
-    public VertexShader(String name)
+    public VertexShader20(String name)
     {
         super(name);
 

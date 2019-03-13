@@ -9,8 +9,8 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader.ShaderManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.texture.TextureManager;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader.ShaderManager30;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.texture.TextureManager30;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.OpenGLES30Test;
@@ -32,8 +32,8 @@ public class Renderer30 extends Renderer
     {
         super(context);
 
-        shaderManager = new ShaderManager(context.getAssets());
-        textureManager = new TextureManager();
+        shaderManager = new ShaderManager30(context.getAssets());
+        textureManager = new TextureManager30();
         fontManager = new FontManager();
     }
 
@@ -57,10 +57,10 @@ public class Renderer30 extends Renderer
         GLES30.glBlendFunc(GLES30.GL_SRC_ALPHA, GLES30.GL_ONE_MINUS_SRC_ALPHA );
 
         // load the scene.
-        scene = new OpenGLES30Test("example3");
+        scene = new OpenGLES30Test("example3", this);
         scene.setup(this);
 
-        fpsCounter = new Text("", this.getFontManager().getFont("fonts/popstar/popstar16.xml"));
+        fpsCounter = new Text(this.getFontManager().getFont("fonts/popstar/popstar16.xml"));
     }
 
     public void onDrawFrame(GL10 unused)
@@ -82,7 +82,7 @@ public class Renderer30 extends Renderer
         }
 
         // Draw fps counter.
-        fpsCounter.render(String.valueOf(lastFPS), new Vector3f(3, 7.0f, 4), 40f, scene);
+        fpsCounter.render(String.valueOf(lastFPS), new Vector3f(2.4f, 5.4f, 4), 40f, "Font2", scene.getCurrentScene());
 
         // Error handling.
         int errorCode = GLES30.glGetError();

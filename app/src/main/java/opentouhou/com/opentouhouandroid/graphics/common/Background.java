@@ -5,7 +5,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTexture;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.BackgroundDrawable30;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.BackgroundDrawable30;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 

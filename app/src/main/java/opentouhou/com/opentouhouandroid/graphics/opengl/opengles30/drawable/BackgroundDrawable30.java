@@ -1,10 +1,11 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30;
+package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable;
 
 import android.opengl.GLES30;
 
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.GraphicsObject30;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
-public class FontDrawable30 extends GraphicsObject30
+public class BackgroundDrawable30 extends GraphicsObject30
 {
     // Draw
     public void draw(Scene scene)
@@ -15,8 +16,7 @@ public class FontDrawable30 extends GraphicsObject30
 
         // Set color
         int uniformColorHandle = GLES30.glGetUniformLocation(shaderHandle, "uColor");
-        GLES30.glUniform4f(uniformColorHandle, 1f, 0.1412f, 0f, 1f);
-        //GLES30.glUniform4f(uniformColorHandle, 0.65f, 0.062f, 0.11f, 1f);
+        GLES30.glUniform4f(uniformColorHandle, 0.9f, 0.6f, 0.3f, 1f);
 
         // Set the transformation matrices.
         setTransformationMatrices(shaderHandle, scene);

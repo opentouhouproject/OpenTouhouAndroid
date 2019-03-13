@@ -2,12 +2,12 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.common.shader;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.Linkable;
 
-public abstract class AbstractShaderProgram implements AutoCloseable, Linkable
+public abstract class ShaderProgram implements AutoCloseable, Linkable
 {
     protected String name;
     protected int handle;
 
-    public AbstractShaderProgram(String name)
+    public ShaderProgram(String name)
     {
         this.name = name;
         handle = -1;

@@ -20,17 +20,26 @@ public abstract class Scene
 
     protected Vector4f light;
 
+    public Renderer renderer;
+
     // Constructor
-    public Scene(String name)
+    public Scene(String name, Renderer renderer)
     {
         this.name = name;
 
         ready = false;
 
         currentScene = null;
+
+        this.renderer = renderer;
     }
 
-    // Getters
+    // Getter(s)
+    public Scene getCurrentScene()
+    {
+        return currentScene;
+    }
+
     public Camera getCamera()
     {
         if (currentScene != null)

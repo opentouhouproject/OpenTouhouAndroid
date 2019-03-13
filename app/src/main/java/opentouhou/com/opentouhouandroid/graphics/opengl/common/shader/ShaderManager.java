@@ -12,17 +12,17 @@ import java.util.HashMap;
  * Manages all shaders.
  */
 
-public abstract class AbstractShaderManager
+public abstract class ShaderManager
 {
     private AssetManager assetManager;
 
-    protected HashMap<String, AbstractShaderProgram> shaderPrograms;
+    protected HashMap<String, ShaderProgram> shaderPrograms;
 
-    protected HashMap<String, AbstractVertexShader> vertexShaders;
+    protected HashMap<String, VertexShader> vertexShaders;
 
-    protected HashMap<String, AbstractFragmentShader> fragmentShaders;
+    protected HashMap<String, FragmentShader> fragmentShaders;
 
-    public AbstractShaderManager(AssetManager assetManager)
+    public ShaderManager(AssetManager assetManager)
     {
         this.assetManager = assetManager;
 
@@ -34,7 +34,7 @@ public abstract class AbstractShaderManager
     }
 
     // Retrieve shader program.
-    public AbstractShaderProgram getShaderProgram(String name)
+    public ShaderProgram getShaderProgram(String name)
     {
         return shaderPrograms.get(name);
     }

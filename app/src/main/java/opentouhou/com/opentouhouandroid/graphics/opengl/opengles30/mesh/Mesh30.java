@@ -6,7 +6,7 @@ import java.nio.FloatBuffer;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.Mesh;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.VertexArrayObject;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.VertexArrayObject30;
 
 public class Mesh30 extends Mesh
 {
@@ -24,7 +24,7 @@ public class Mesh30 extends Mesh
         allocateGPUMemory(attributes);
 
         // Setup the VAO.
-        vao = new VertexArrayObject(attributeBuffer, shader, layout);
+        vao = new VertexArrayObject30(attributeBuffer, shader, layout);
     }
 
     private void allocateGPUMemory(float[] attributes)

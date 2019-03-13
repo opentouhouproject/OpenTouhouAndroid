@@ -1,9 +1,10 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30;
+package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable;
 
 import android.opengl.GLES30;
 
 import opentouhou.com.opentouhouandroid.actor.Petal;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.GraphicsObject30;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public class PetalDrawable30 extends GraphicsObject30

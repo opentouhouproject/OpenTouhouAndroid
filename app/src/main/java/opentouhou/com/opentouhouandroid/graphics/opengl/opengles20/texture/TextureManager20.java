@@ -12,13 +12,13 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractT
  * Loads bitmap into GPU memory using OpenGL ES 2.0.
  */
 
-public class TextureManager extends AbstractTextureManager
+public class TextureManager20 extends AbstractTextureManager
 {
     @Override
     protected AbstractTexture createTexture(Bitmap bitmap, BitmapFactory.Options options)
     {
         // Create TextureGL class.
-        AbstractTexture tex = new Texture(options);
+        AbstractTexture tex = new Texture20(options);
 
         // Bind to the texture in OpenGL.
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, tex.getTextureHandle());
