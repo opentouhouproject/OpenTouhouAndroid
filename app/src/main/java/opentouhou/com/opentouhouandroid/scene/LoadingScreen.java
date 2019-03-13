@@ -1,5 +1,6 @@
 package opentouhou.com.opentouhouandroid.scene;
 
+import opentouhou.com.opentouhouandroid.actor.MeilinSprite;
 import opentouhou.com.opentouhouandroid.actor.PetalFall;
 import opentouhou.com.opentouhouandroid.graphics.common.Background;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
@@ -14,9 +15,11 @@ import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 public class LoadingScreen extends Scene
 {
-    public Text testTitle;
+    public Text testTitle, testMessage;
     public Background background;
     public PetalFall petalFall;
+
+    public MeilinSprite sprite;
 
     private AudioPlayer aud;
 
@@ -35,6 +38,10 @@ public class LoadingScreen extends Scene
         petalFall.draw(this);
 
         testTitle.render("Scarlet", new Vector3f(-3.5f, -1.0f, 3), 94f,this);
+
+        testMessage.render("Loading...", new Vector3f(0.7f, -2.43f, 3), 40f,this);
+
+        sprite.draw(this);
     }
 
     // Loads resources for drawing the scene.
@@ -57,7 +64,9 @@ public class LoadingScreen extends Scene
         // Load Objects
         background = new Background(renderer);
         testTitle = new Text("Scarlet", renderer.getFontManager().getFont("fonts/yozakura/yozakura256.xml"));
+        testMessage = new Text("Loading...", renderer.getFontManager().getFont("fonts/popstar/popstar16.xml"));
         petalFall = new PetalFall(renderer);
+        sprite = new MeilinSprite("meilin", renderer);
 
         // Load Audio
         aud = new AudioPlayer(renderer.getContext());
@@ -92,13 +101,38 @@ public class LoadingScreen extends Scene
 
     private void loadTextures(Renderer renderer)
     {
-        String[] assets = { "art/loading_bg1.png" };
+        String[] assets = {
+                "sprites/meirin/walkfront/walkFront000.png",
+                "sprites/meirin/walkfront/walkFront001.png",
+                "sprites/meirin/walkfront/walkFront002.png",
+                "sprites/meirin/walkfront/walkFront003.png",
+                "sprites/meirin/walkfront/walkFront004.png",
+                "sprites/meirin/walkfront/walkFront005.png",
+
+                "sprites/meirin/spellHa/spellHa000.png",
+                "sprites/meirin/spellHa/spellHa001.png",
+                "sprites/meirin/spellHa/spellHa002.png",
+                "sprites/meirin/spellHa/spellHa003.png",
+                "sprites/meirin/spellHa/spellHa004.png",
+                "sprites/meirin/spellHa/spellHa005.png",
+                "sprites/meirin/spellHa/spellHa006.png",
+                "sprites/meirin/spellHa/spellHa007.png",
+                "sprites/meirin/spellHa/spellHa008.png",
+                "sprites/meirin/spellHa/spellHa009.png",
+                "sprites/meirin/spellHa/spellHa010.png",
+                "sprites/meirin/spellHa/spellHa011.png",
+                "sprites/meirin/spellHa/spellHa012.png",
+                "sprites/meirin/spellHa/spellHa013.png",
+                "sprites/meirin/spellHa/spellHa014.png"
+        };
 
         // Get the texture manager.
         AbstractTextureManager manager = renderer.getTextureManager();
 
         // Load the textures.
         manager.loadAssetBitmap("art/loading_bg1.png", AbstractTextureManager.Options.GREYSCALE, renderer);
+
+        manager.loadAssetBitmaps(assets, renderer);
     }
 
     private void loadFonts(Renderer renderer)

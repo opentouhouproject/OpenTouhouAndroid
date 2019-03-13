@@ -40,6 +40,7 @@ public abstract class AbstractTextureManager
     {
         return bitmapTable.get(resourceId);
     }
+
     public AbstractTexture getTexture(String path)
     {
         return assetMap.get(path);

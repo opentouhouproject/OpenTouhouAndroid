@@ -1,6 +1,8 @@
 package opentouhou.com.opentouhouandroid.scene;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.scene.LoadingScreen;
+import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public class OpenGLES30Test extends Scene
 {

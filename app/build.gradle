@@ -6,7 +6,7 @@ android
 
     defaultConfig
     {
-        applicationId "teamdroid.com.speedtestarena"
+        applicationId "opentouhou.com.opentouhouandroid"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
