@@ -95,7 +95,7 @@ public class Glyph
         drawable.setColor(color);
 
         // Set the shader.
-        ShaderProgram p = scene.renderer.getShaderManager().getShaderProgram(shaderProgram);
+        ShaderProgram p = scene.getRenderer().getShaderManager().getShaderProgram(shaderProgram);
         drawable.setShader(p);
 
         // Draw the glyph.

@@ -5,67 +5,48 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 
 /**
- * Manages all graphical objects.
+ * Manages a logical set of game objects.
  */
 
 public abstract class Scene
 {
     private final String name;
 
-    protected boolean ready;
+    protected Stage stage;
 
-    protected Scene currentScene;
+    protected boolean ready;
 
     protected Camera camera;
 
     protected Vector4f light;
 
-    public Renderer renderer;
-
-    // Constructor
-    public Scene(String name, Renderer renderer)
+    // Constructor(s)
+    public Scene(String name, Stage stage)
     {
         this.name = name;
+        this.stage = stage;
 
+        // Set initial values.
         ready = false;
-
-        currentScene = null;
-
-        this.renderer = renderer;
+        camera = new Camera(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        light = new Vector4f();
     }
 
     // Getter(s)
-    public Scene getCurrentScene()
-    {
-        return currentScene;
-    }
-
-    public Camera getCamera()
-    {
-        if (currentScene != null)
-        {
-            return currentScene.camera;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    public Vector4f getLight()
-    {
-        if (currentScene != null)
-        {
-            return currentScene.light;
-        }
-        else
-        {
-            return null;
-        }
-    }
+    public Renderer getRenderer() { return stage.getRenderer(); }
 
     public boolean isReady() { return ready; }
 
-    abstract public void setup(Renderer renderer);
+    public Camera getCamera() { return camera; }
+
+    public Vector4f getLight() { return light; }
+
+    abstract public void setup();
     abstract public void draw();
+
+    @Override
+    public String toString()
+    {
+        return "Scene: " + name;
+    }
 }

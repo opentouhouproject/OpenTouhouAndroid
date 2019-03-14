@@ -12,8 +12,8 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader.ShaderManager30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.texture.TextureManager30;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
-import opentouhou.com.opentouhouandroid.scene.Scene;
-import opentouhou.com.opentouhouandroid.scene.OpenGLES30Test;
+import opentouhou.com.opentouhouandroid.scene.stages.OpenGLES30Test;
+import opentouhou.com.opentouhouandroid.scene.Stage;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -25,7 +25,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class Renderer30 extends Renderer
 {
     // Scene(s)
-    private Scene scene;
+    private Stage stage;
     private Text fpsCounter;
 
     public Renderer30(Context context)
@@ -57,8 +57,8 @@ public class Renderer30 extends Renderer
         GLES30.glBlendFunc(GLES30.GL_SRC_ALPHA, GLES30.GL_ONE_MINUS_SRC_ALPHA );
 
         // load the scene.
-        scene = new OpenGLES30Test("example3", this);
-        scene.setup(this);
+        stage = new OpenGLES30Test("example3", this);
+        stage.setup();
 
         fpsCounter = new Text(this.getFontManager().getFont("fonts/popstar/popstar16.xml"));
     }
@@ -69,7 +69,7 @@ public class Renderer30 extends Renderer
         GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT | GLES30.GL_DEPTH_BUFFER_BIT);
 
         // Draw the scene.
-        scene.draw();
+        stage.draw();
 
         // Measure fps.
         long currentTime = System.currentTimeMillis();
@@ -82,7 +82,7 @@ public class Renderer30 extends Renderer
         }
 
         // Draw fps counter.
-        fpsCounter.render(String.valueOf(lastFPS), new Vector3f(2.4f, 5.4f, 4), 40f, "Font2", scene.getCurrentScene());
+        fpsCounter.render(String.valueOf(lastFPS), new Vector3f(2.4f, 5.4f, 4), 40f, "Font2", stage.getCurrentScene());
 
         // Error handling.
         int errorCode = GLES30.glGetError();
@@ -101,7 +101,7 @@ public class Renderer30 extends Renderer
         float ratio = (float) width / height;
 
         // Update the projection matrix.
-        Camera camera = scene.getCamera();
+        Camera camera = stage.getCurrentScene().getCamera();
         if (camera != null) camera.setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
         //scene.getCamera().setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
     }

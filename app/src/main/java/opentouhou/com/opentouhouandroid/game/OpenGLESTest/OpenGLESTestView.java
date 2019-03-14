@@ -8,6 +8,7 @@ import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLDisplay;
 
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.Renderer20;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
 
 /**

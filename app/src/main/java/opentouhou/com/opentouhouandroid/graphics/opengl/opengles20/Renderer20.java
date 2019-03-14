@@ -12,8 +12,8 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader.ShaderManager20;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.texture.TextureManager20;
-import opentouhou.com.opentouhouandroid.scene.OpenGLES20Test;
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import opentouhou.com.opentouhouandroid.scene.Stage;
+import opentouhou.com.opentouhouandroid.scene.stages.OpenGLES20Test;
 
 /**
  * Renderer implemented with OpenGL ES 2.0.
@@ -22,7 +22,7 @@ import opentouhou.com.opentouhouandroid.scene.Scene;
 public class Renderer20 extends Renderer
 {
     // Scene(s)
-    private Scene scene;
+    private Stage stage;
 
     public Renderer20(Context context)
     {
@@ -52,8 +52,8 @@ public class Renderer20 extends Renderer
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA );
 
         // load scene
-        scene = new OpenGLES20Test("ES20Test", this);
-        scene.setup(this);
+        stage = new OpenGLES20Test("ES20Test", this);
+        stage.setup();
     }
 
     public void onDrawFrame(GL10 unused)
@@ -62,7 +62,7 @@ public class Renderer20 extends Renderer
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         // Draw the scene.
-        scene.draw();
+        stage.draw();
 
         // Error handling.
         int errorCode;
@@ -93,7 +93,7 @@ public class Renderer20 extends Renderer
 
         // Update the projection matrix.
         // This projection matrix is applied to object coordinates in the onDrawFrame() method.
-        scene.getCamera().setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
+        stage.getCurrentScene().getCamera().setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
         //scene.getCamera().setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
     }
 }

@@ -7,7 +7,8 @@ import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public class BackgroundDrawable30 extends GraphicsObject30
 {
-    // Draw
+    // Override the parent draw method.
+    @Override
     public void draw(Scene scene)
     {
         // Set the shader program to use.

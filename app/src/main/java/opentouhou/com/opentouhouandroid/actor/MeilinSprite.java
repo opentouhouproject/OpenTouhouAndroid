@@ -64,7 +64,7 @@ public class MeilinSprite extends Sprite
 
         Matrix4f model = Matrix4f.getIdentity();
         model.scale(1.2f*currentAnimation.currentStretch() * 1, 1.2f*currentAnimation.currentStretch() * ((float)h / (float)w), 1);
-        model.translate(-0.6f, -2.2f, 3.5f);
+        model.translate(-3.2f, -6.2f, 3.5f);
 
         drawable.setTexture(currentAnimation.currentFrame());
         drawable.setModelMatrix(model);

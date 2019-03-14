@@ -17,7 +17,7 @@ public class GraphicsObject30 extends GraphicsObject
     // Constructor(s)
     public GraphicsObject30() { }
 
-    public GraphicsObject30(GraphicsOptions option) { super(option); }
+    public GraphicsObject30(GraphicsOptions option) { super(option, Version.OPENGL_ES_30); }
 
     // Draw method
     public void draw(Scene scene)

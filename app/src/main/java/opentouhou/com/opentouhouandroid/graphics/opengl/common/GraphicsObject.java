@@ -8,17 +8,35 @@ import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public abstract class GraphicsObject
 {
-    protected GraphicsOptions option;
+    // Options
+    public enum Version
+    {
+        OPENGL_ES_20, OPENGL_ES_30
+    }
 
+    protected GraphicsOptions option;
+    protected Version version;
+
+    // Properties
     protected Mesh mesh;
     protected AbstractTexture texture;
     protected ShaderProgram shaderProgram;
     protected Matrix4f modelMatrix;
 
     // Constructor(s)
-    public GraphicsObject() { this.option = new GraphicsOptions(true, true); }
+    public GraphicsObject()
+    {
+        // Set the options.
+        option = new GraphicsOptions(true, true);
+        version = Version.OPENGL_ES_30;
+    }
 
-    public GraphicsObject(GraphicsOptions option) { this.option = option; }
+    public GraphicsObject(GraphicsOptions option, Version version)
+    {
+        // Set the options.
+        this.option = option;
+        this.version = version;
+    }
 
     // Setter(s)
     public void setMesh(Mesh mesh) { this.mesh = mesh; }

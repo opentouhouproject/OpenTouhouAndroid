@@ -1,19 +1,42 @@
 package opentouhou.com.opentouhouandroid.scene;
 
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+
 /**
  * Manages a set of scenes.
+ * Manages objects that persist between scenes. ex. the audio engine
  */
 
 public abstract class Stage
 {
     private String name;
 
-    private int currentScene = -1;
-    private Scene[] scenes;
+    private Renderer renderer;
 
-    public Stage(String name)
+    private Scene currentScene;
+
+    // Constructor(s)
+    public Stage(String name, Renderer renderer)
     {
         this.name = name;
+        this.renderer = renderer;
+    }
+
+    // Getter(s)
+    public Renderer getRenderer()
+    {
+        return renderer;
+    }
+
+    public Scene getCurrentScene()
+    {
+        return currentScene;
+    }
+
+    // Setter(s)
+    public void setCurrentScene(Scene scene)
+    {
+        currentScene = scene;
     }
 
     public abstract void setup();
