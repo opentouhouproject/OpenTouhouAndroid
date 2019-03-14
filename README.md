@@ -10,6 +10,8 @@ Roadmap
 
 Version 0.1.
 
+Active branch: 0.1-a2
+
 Major Goal: Create basic menu and loading screen.
 
 ![Loading Screen](images/LoadingScreen.png)
