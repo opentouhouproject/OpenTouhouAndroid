@@ -12,4 +12,6 @@ Version 0.1.
 
 Major Goal: Create basic menu and loading screen.
 
+![Loading Screen](images/LoadingScreen.png)
+
 https://youtu.be/zMbH5SXehFA
