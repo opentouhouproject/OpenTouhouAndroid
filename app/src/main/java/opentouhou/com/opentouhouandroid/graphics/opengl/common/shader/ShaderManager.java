@@ -1,49 +1,38 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common.shader;
 
-import android.content.res.AssetManager;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import opentouhou.com.opentouhouandroid.io.FileManager;
 
-/**
+/*
  * Manages all shaders.
  */
 
-public abstract class ShaderManager
-{
-    //private AssetManager assetManager;
+public abstract class ShaderManager {
+    private static int INITIAL_CAPACITY = 16;
 
     protected HashMap<String, ShaderProgram> shaderPrograms;
-
     protected HashMap<String, VertexShader> vertexShaders;
-
     protected HashMap<String, FragmentShader> fragmentShaders;
 
-    public ShaderManager()
-    {
-        //this.assetManager = assetManager;
-
-        shaderPrograms = new HashMap<>(8);
-
-        vertexShaders = new HashMap<>(8);
-
-        fragmentShaders = new HashMap<>(8);
+    /*
+     * Constructor(s).
+     */
+    public ShaderManager() {
+        shaderPrograms = new HashMap<>(INITIAL_CAPACITY);
+        vertexShaders = new HashMap<>(INITIAL_CAPACITY);
+        fragmentShaders = new HashMap<>(INITIAL_CAPACITY);
     }
 
-    // Retrieve shader program.
-    public ShaderProgram getShaderProgram(String name)
-    {
-        return shaderPrograms.get(name);
+    /*
+     * Getter(s).
+     */
+    public ShaderProgram getShaderProgram(String programName) {
+        return shaderPrograms.get(programName);
     }
 
-    public int getShaderProgramHandle(String name)
-    {
-        return shaderPrograms.get(name).getHandle();
+    public int getShaderProgramHandle(String programName) {
+        return shaderPrograms.get(programName).getHandle();
     }
 
     // Reads the shader code from file.

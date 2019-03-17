@@ -3,28 +3,32 @@ package opentouhou.com.opentouhouandroid.scene.stages;
 import android.content.Context;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
+import opentouhou.com.opentouhouandroid.io.FileManager;
 import opentouhou.com.opentouhouandroid.scene.Stage;
 import opentouhou.com.opentouhouandroid.scene.scenes.LoadingScreen;
+import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 /*
  * Testing OpenGL ES 3.0 implementations.
  */
 
-public class OpenGLES30Test extends Stage
-{
+public class OpenGLES30Test extends Stage {
     // Scenes
     private LoadingScreen loadingScreen;
 
-    // Constructor
-    public OpenGLES30Test(String name, Context context)
-    {
-        super(name, context);
+    /*
+     * Constructor(s).
+     */
+    public OpenGLES30Test(String name, Context context) {
+        super(name);
 
         renderer = new Renderer30(this);
+        audioPlayer = new AudioPlayer(context);
+        fileManager = new FileManager(context);
     }
 
-    public void setup()
-    {
+    // Implement Stage.
+    public void setup() {
         // Load the scenes.
         loadingScreen = new LoadingScreen("TEST", this);
         loadingScreen.setup();
@@ -36,8 +40,7 @@ public class OpenGLES30Test extends Stage
         getAudioPlayer().play("audio/music/loadingMusic.mp3");
     }
 
-    public void draw()
-    {
+    public void draw() {
         getCurrentScene().draw();
     }
 }

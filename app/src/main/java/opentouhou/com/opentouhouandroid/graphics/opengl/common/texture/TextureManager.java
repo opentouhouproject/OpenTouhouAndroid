@@ -16,10 +16,8 @@ import opentouhou.com.opentouhouandroid.io.FileManager;
  * Manages all textures.
  */
 
-public abstract class TextureManager
-{
-    public enum Options
-    {
+public abstract class TextureManager {
+    public enum Options {
         NONE, DESATURATE, GREYSCALE, LIGHTGREYSCALE
     }
 
@@ -30,8 +28,7 @@ public abstract class TextureManager
     private Hashtable<String, Texture> assetMap;
 
     // Constructor
-    public TextureManager()
-    {
+    public TextureManager() {
         bitmapTable = new Hashtable<>();
         assetMap = new Hashtable<>();
     }
@@ -52,25 +49,25 @@ public abstract class TextureManager
     public int getTextureHandle(String path) { return assetMap.get(path).getTextureHandle(); }
 
     // Loads multiple resources.
-    public void loadResourceBitmaps(int[] resourceIds, FileManager fileManager)
-    {
-        for (int id : resourceIds)
-        {
+    public void loadResourceBitmaps(int[] resourceIds, FileManager fileManager) {
+        for (int id : resourceIds) {
             loadResourceBitmap(id, Options.NONE, fileManager);
         }
     }
 
     // Loads multiple assets.
-    public void loadAssetBitmaps(String[] assetPaths, FileManager fileManager)
-    {
-        for (String path : assetPaths)
-        {
+    public void loadAssetBitmaps(String[] assetPaths, FileManager fileManager) {
+        for (String path : assetPaths) {
             loadAssetBitmap(path, Options.NONE, fileManager);
         }
     }
 
     // Loads an image from the drawable resources.
     public void loadResourceBitmap(int resourceId, Options option, FileManager fileManager) {
+        if (bitmapTable.containsKey(resourceId)) {
+            return;
+        }
+
         // Set the decoding options.
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false; // No pre-scaling
@@ -94,6 +91,10 @@ public abstract class TextureManager
 
     // Loads an image from the assets.
     public void loadAssetBitmap(String path, Options option, FileManager fileManager) {
+        if (assetMap.containsKey(path)) {
+            return;
+        }
+
         // Set the decoding options.
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false; // No pre-scaling

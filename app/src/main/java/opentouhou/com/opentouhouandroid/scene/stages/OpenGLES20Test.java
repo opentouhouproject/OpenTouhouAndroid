@@ -2,26 +2,29 @@ package opentouhou.com.opentouhouandroid.scene.stages;
 
 import android.content.Context;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.Renderer20;
+import opentouhou.com.opentouhouandroid.io.FileManager;
 import opentouhou.com.opentouhouandroid.scene.Stage;
 import opentouhou.com.opentouhouandroid.scene.scenes.LoadingScreen20;
+import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
-public class OpenGLES20Test extends Stage
-{
+public class OpenGLES20Test extends Stage {
     // Scenes
     private LoadingScreen20 loadingScreen;
 
-    // Constructor(s)
-    public OpenGLES20Test(String name, Context context)
-    {
-        super(name, context);
+    /*
+     * Constructor(s).
+     */
+    public OpenGLES20Test(String name, Context context) {
+        super(name);
 
         renderer = new Renderer20(this);
+        audioPlayer = new AudioPlayer(context);
+        fileManager = new FileManager(context);
     }
 
-    public void setup()
-    {
+    // Implement Stage.
+    public void setup() {
         // Load the scenes.
         loadingScreen = new LoadingScreen20("TEST", this);
         loadingScreen.setup();
@@ -33,8 +36,7 @@ public class OpenGLES20Test extends Stage
         getAudioPlayer().play("audio/music/loadingMusic.mp3");
     }
 
-    public void draw()
-    {
+    public void draw() {
         getCurrentScene().draw();
     }
 }

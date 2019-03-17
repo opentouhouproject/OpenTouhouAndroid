@@ -1,34 +1,32 @@
 package opentouhou.com.opentouhouandroid.scene;
 
-import android.content.Context;
-
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.io.FileManager;
 import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 /*
  * Manages a set of scenes.
- * Manages objects that persist between scenes. ex. the audio engine
+ * Manages objects and components that persist between scenes.
  */
 
 public abstract class Stage {
     private String name;
+    private Scene currentScene;
 
     protected Renderer renderer;
-
-    private AudioPlayer audioPlayer;
-
-    private FileManager fileManager;
-
-    private Scene currentScene;
+    protected AudioPlayer audioPlayer;
+    protected FileManager fileManager;
 
     /*
      * Constructor(s).
      */
-    public Stage(String name, Context context) {
+    public Stage(String name) {
         this.name = name;
-        audioPlayer = new AudioPlayer(context);
-        fileManager = new FileManager(context);
+        currentScene = null;
+
+        renderer = null;
+        audioPlayer = null;
+        fileManager = null;
     }
 
     /*
@@ -36,6 +34,10 @@ public abstract class Stage {
      */
     public String getName() {
         return name;
+    }
+
+    public Scene getCurrentScene() {
+        return currentScene;
     }
 
     public Renderer getRenderer() {
@@ -50,10 +52,6 @@ public abstract class Stage {
         return fileManager;
     }
 
-    public Scene getCurrentScene() {
-        return currentScene;
-    }
-
     /*
      * Setter(s).
      */
@@ -61,6 +59,9 @@ public abstract class Stage {
         currentScene = scene;
     }
 
+    /*
+     * OpenGL ES version dependant.
+     */
     public abstract void setup();
     public abstract void draw();
 
