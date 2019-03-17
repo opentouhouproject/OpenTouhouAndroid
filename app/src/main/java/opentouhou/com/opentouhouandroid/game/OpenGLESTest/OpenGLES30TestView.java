@@ -9,6 +9,8 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLDisplay;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
+import opentouhou.com.opentouhouandroid.scene.Stage;
+import opentouhou.com.opentouhouandroid.scene.stages.OpenGLES30Test;
 
 /*
  * For testing/prototyping.
@@ -22,6 +24,8 @@ public class OpenGLES30TestView extends GLSurfaceView {
     private float mPreviousY;
 
     public Renderer renderer;
+
+    private Stage stage;
 
     public OpenGLES30TestView(Context context) {
         super(context);

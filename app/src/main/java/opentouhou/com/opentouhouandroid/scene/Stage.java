@@ -1,6 +1,7 @@
 package opentouhou.com.opentouhouandroid.scene;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 /**
  * Manages a set of scenes.
@@ -13,6 +14,8 @@ public abstract class Stage
 
     private Renderer renderer;
 
+    private AudioPlayer audioPlayer;
+
     private Scene currentScene;
 
     // Constructor(s)
@@ -20,12 +23,18 @@ public abstract class Stage
     {
         this.name = name;
         this.renderer = renderer;
+        this.audioPlayer = new AudioPlayer(renderer.getContext());
     }
 
     // Getter(s)
     public Renderer getRenderer()
     {
         return renderer;
+    }
+
+    public AudioPlayer getAudioPlayer()
+    {
+        return audioPlayer;
     }
 
     public Scene getCurrentScene()
