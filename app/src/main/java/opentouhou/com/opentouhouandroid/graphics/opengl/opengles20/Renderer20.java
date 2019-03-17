@@ -1,6 +1,5 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20;
 
-import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLU;
 import android.util.Log;
@@ -13,9 +12,8 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader.ShaderManager20;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.texture.TextureManager20;
 import opentouhou.com.opentouhouandroid.scene.Stage;
-import opentouhou.com.opentouhouandroid.scene.stages.OpenGLES20Test;
 
-/**
+/*
  * Renderer implemented with OpenGL ES 2.0.
  */
 
@@ -24,15 +22,14 @@ public class Renderer20 extends Renderer
     // Scene(s)
     private Stage stage;
 
-    public Renderer20(Context context)
-    {
-        super(context);
+    public Renderer20(Stage stage) {
+        super();
 
         shaderManager = new ShaderManager20();
         textureManager = new TextureManager20();
         fontManager = new FontManager();
 
-        stage = new OpenGLES20Test("ES20Test", this, context);
+        this.stage = stage;
     }
 
     // Implement GLSurfaceView.Renderer interface.

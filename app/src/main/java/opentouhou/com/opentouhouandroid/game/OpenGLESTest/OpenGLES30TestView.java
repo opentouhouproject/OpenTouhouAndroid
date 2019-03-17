@@ -23,8 +23,6 @@ public class OpenGLES30TestView extends GLSurfaceView {
     private float mPreviousX;
     private float mPreviousY;
 
-    public Renderer renderer;
-
     private Stage stage;
 
     public OpenGLES30TestView(Context context) {
@@ -43,12 +41,12 @@ public class OpenGLES30TestView extends GLSurfaceView {
         /*
          * Create the new renderer.
          */
-        renderer = new Renderer30(context);
+        stage = new OpenGLES30Test("OpenGLES30Test", context);
 
         /*
          * Set the renderer.
          */
-        setRenderer(renderer);
+        setRenderer(stage.getRenderer());
 
         /*
          * Set the render mode.

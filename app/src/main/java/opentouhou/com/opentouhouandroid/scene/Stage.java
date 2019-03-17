@@ -14,7 +14,7 @@ import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 public abstract class Stage {
     private String name;
 
-    private Renderer renderer;
+    protected Renderer renderer;
 
     private AudioPlayer audioPlayer;
 
@@ -25,9 +25,8 @@ public abstract class Stage {
     /*
      * Constructor(s).
      */
-    public Stage(String name, Renderer renderer, Context context) {
+    public Stage(String name, Context context) {
         this.name = name;
-        this.renderer = renderer;
         audioPlayer = new AudioPlayer(context);
         fileManager = new FileManager(context);
     }

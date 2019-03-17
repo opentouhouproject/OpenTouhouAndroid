@@ -3,6 +3,7 @@ package opentouhou.com.opentouhouandroid.scene.stages;
 import android.content.Context;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.Renderer20;
 import opentouhou.com.opentouhouandroid.scene.Stage;
 import opentouhou.com.opentouhouandroid.scene.scenes.LoadingScreen20;
 
@@ -12,9 +13,11 @@ public class OpenGLES20Test extends Stage
     private LoadingScreen20 loadingScreen;
 
     // Constructor(s)
-    public OpenGLES20Test(String name, Renderer renderer, Context context)
+    public OpenGLES20Test(String name, Context context)
     {
-        super(name, renderer, context);
+        super(name, context);
+
+        renderer = new Renderer20(this);
     }
 
     public void setup()

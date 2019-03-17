@@ -8,10 +8,11 @@ import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLDisplay;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.Renderer20;
+import opentouhou.com.opentouhouandroid.scene.Stage;
+import opentouhou.com.opentouhouandroid.scene.stages.OpenGLES20Test;
 
 public class OpenGLES20TestView extends GLSurfaceView {
-    public Renderer renderer;
+    private Stage stage;
 
     /*
      * Constructor(s)
@@ -30,14 +31,14 @@ public class OpenGLES20TestView extends GLSurfaceView {
         setEGLConfigChooser(new OpenGLES20TestView.MyConfigChooser());
 
         /*
-         * Create the new renderer.
+         * Create the stage.
          */
-        renderer = new Renderer20(context);
+        stage = new OpenGLES20Test("OpenGLES20Test", context);
 
         /*
          * Set the renderer.
          */
-        setRenderer(renderer);
+        setRenderer(stage.getRenderer());
 
         /*
          * Set the render mode.

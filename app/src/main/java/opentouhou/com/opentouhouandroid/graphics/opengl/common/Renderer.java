@@ -1,15 +1,13 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common;
 
-import android.content.Context;
 import android.opengl.GLSurfaceView;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
 
-/**
+/*
  * Represents a renderer.
- *
  */
 
 public abstract class Renderer implements GLSurfaceView.Renderer {
@@ -28,7 +26,7 @@ public abstract class Renderer implements GLSurfaceView.Renderer {
     protected int lastFPS;
 
     // Constructor
-    public Renderer(Context context) {
+    public Renderer() {
         shaderManager = null;
         textureManager = null;
         fontManager = null;

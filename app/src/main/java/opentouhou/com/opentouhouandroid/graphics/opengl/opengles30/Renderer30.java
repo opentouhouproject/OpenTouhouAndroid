@@ -1,6 +1,5 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30;
 
-import android.content.Context;
 import android.opengl.GLES30;
 import android.opengl.GLU;
 import android.util.Log;
@@ -12,7 +11,6 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader.ShaderManager30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.texture.TextureManager30;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
-import opentouhou.com.opentouhouandroid.scene.stages.OpenGLES30Test;
 import opentouhou.com.opentouhouandroid.scene.Stage;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -28,15 +26,14 @@ public class Renderer30 extends Renderer
     private Stage stage;
     private Text fpsCounter;
 
-    public Renderer30(Context context)
-    {
-        super(context);
+    public Renderer30(Stage stage) {
+        super();
 
         shaderManager = new ShaderManager30();
         textureManager = new TextureManager30();
         fontManager = new FontManager();
 
-        stage = new OpenGLES30Test("example3", this, context);
+        this.stage = stage;
     }
 
     // Implement GLSurfaceView.Renderer interface.
