@@ -5,6 +5,8 @@ import java.util.Hashtable;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.Animation;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.SpriteAnimation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.GraphicsObject30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
@@ -18,9 +20,9 @@ public class Sprite
 {
     private String name;
 
-    protected Hashtable<String, Animation> animations;
+    protected Hashtable<String, SpriteAnimation> animations;
 
-    protected Animation currentAnimation;
+    protected SpriteAnimation currentAnimation;
 
     protected GraphicsObject drawable;
 
@@ -36,7 +38,7 @@ public class Sprite
         return name;
     }
 
-    public void addAnimation(Animation animation)
+    public void addAnimation(SpriteAnimation animation)
     {
         animations.put(animation.getName(), animation);
     }

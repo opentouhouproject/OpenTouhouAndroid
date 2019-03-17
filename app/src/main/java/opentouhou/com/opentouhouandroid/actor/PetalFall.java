@@ -13,12 +13,11 @@ import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
-/**
+/*
  * Simulates falling petals.
  */
 
-public class PetalFall
-{
+public class PetalFall extends GameObject {
     Vector4f stemColor = new Vector4f(255f / 255f, 183f / 255f, 197f / 255f, 0.9f);
     Vector4f leafColor = new Vector4f(255f / 255f, 197f / 255f, 208f / 255f, 0.9f);
     Vector3f normal = new Vector3f(0, 0, 1);
@@ -29,31 +28,29 @@ public class PetalFall
 
     private int numberOfPetals = 50;
 
-    public PetalFall(Renderer renderer)
-    {
+    /*
+     * Constructor(s).
+     */
+    public PetalFall(Renderer renderer) {
         // Generate a drawable petal.
         drawable = createDrawable(renderer);
 
         // Generate new petals.
         petalList = new Petal[numberOfPetals];
 
-        for (int i = 0; i < numberOfPetals; i++)
-        {
+        for (int i = 0; i < numberOfPetals; i++) {
             petalList[i] = new Petal();
         }
     }
 
-    public void draw(Scene scene)
-    {
-        for (int i = 0; i < numberOfPetals; i++)
-        {
+    /*
+     * Implement update method.
+     */
+    public void update() {
+        for (int i = 0; i < numberOfPetals; i++) {
             Petal petal = petalList[i];
 
-            if (petal.isAnimated())
-            {
-                drawable.setModelMatrix(petal.getModel());
-                drawable.draw(scene, petal);
-
+            if (petal.isAnimated()) {
                 petal.update();
             }
 
@@ -61,8 +58,21 @@ public class PetalFall
         }
     }
 
-    private PetalDrawable30 createDrawable(Renderer renderer)
-    {
+    /*
+     * Implement draw method.
+     */
+    public void draw(Scene scene) {
+        for (int i = 0; i < numberOfPetals; i++) {
+            Petal petal = petalList[i];
+
+            if (petal.isAnimated()) {
+                drawable.setModelMatrix(petal.getModel());
+                drawable.draw(scene, petal);
+            }
+        }
+    }
+
+    private PetalDrawable30 createDrawable(Renderer renderer) {
         // Generate the mesh.
         float[] meshPointsTEMP = generateMesh();
         Mesh30 mesh = new Mesh30(meshPointsTEMP, renderer.getShaderManager().getShaderProgramHandle("Petal"), MeshLayout.Layout.PCN);
@@ -84,12 +94,8 @@ public class PetalFall
         return drawable;
     }
 
-    private float[] generateMesh()
-    {
+    private float[] generateMesh() {
         // Setup the Bezier curves.
-        //Vector3f[] left = {new Vector3f(0, -1, 2), new Vector3f(-0.5f, -0.5f, 2), new Vector3f(-0.5f, 0.5f, 2), new Vector3f(0, 1, 2)};
-        //Vector3f[] right = {new Vector3f(0, -1, 2), new Vector3f(0.5f, -0.5f, 2), new Vector3f(0.5f, 0.5f, 2), new Vector3f(0, 1, 2)};
-
         Vector3f[] left = {new Vector3f(0, -1, 2), new Vector3f(-1.3f, -0.03f, 2),
                            new Vector3f(-0.2f, 0.20f, 2), new Vector3f(0, 1, 2)};
         Vector3f[] right = {new Vector3f(0, -1, 2), new Vector3f(1.3f, -0.03f, 2),

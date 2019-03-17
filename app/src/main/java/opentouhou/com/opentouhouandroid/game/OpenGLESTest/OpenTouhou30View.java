@@ -8,24 +8,16 @@ import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLDisplay;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
 import opentouhou.com.opentouhouandroid.scene.Stage;
 import opentouhou.com.opentouhouandroid.scene.stages.OpenGLES30Test;
 
-/*
- * For testing/prototyping.
- */
+public class OpenTouhou30View extends GLSurfaceView {
+    private volatile boolean isPlaying;
 
-public class OpenGLES30TestView extends GLSurfaceView {
-    public volatile boolean ready = false;
-
-    private final float TOUCH_SCALE_FACTOR = 180.0f / 600;
-    private float mPreviousX;
-    private float mPreviousY;
-
-    private Stage stage;
-
-    public OpenGLES30TestView(Context context) {
+    /*
+     * Constructor(s).
+     */
+    public OpenTouhou30View(Context context, Stage stage) {
         super(context);
 
         /*
@@ -37,11 +29,6 @@ public class OpenGLES30TestView extends GLSurfaceView {
          * Set a custom EGLConfigChooser.
          */
         setEGLConfigChooser(new MyConfigChooser());
-
-        /*
-         * Create the new renderer.
-         */
-        stage = new OpenGLES30Test("OpenGLES30Test", context);
 
         /*
          * Set the renderer.
@@ -59,47 +46,17 @@ public class OpenGLES30TestView extends GLSurfaceView {
     }
 
     @Override
+    public void onPause() {
+        isPlaying = false;
+    }
+
+    @Override
+    public void onResume() {
+        isPlaying = true;
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent e) {
-        // MotionEvent reports input details from the touch screen
-        // and other input controls. In this case, you are only
-        // interested in events where the touch position changed.
-
-        /*
-        float x = e.getX();
-        float y = e.getY();
-
-        switch (e.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                if (e.getY() > getHeight() - 50) {
-                    //gameThread.setRunning(false);
-                    ((Activity) getContext()).finish();
-                }
-                break;
-
-            case MotionEvent.ACTION_MOVE:
-                float dx = x - mPreviousX;
-                float dy = y - mPreviousY;
-
-                // reverse direction of rotation below the mid-line
-                if (y < getHeight() / 2) {
-                    dx = dx * -1 ;
-                }
-
-                // reverse direction of rotation to right of the mid-line
-                if (x > getWidth() / 2) {
-                    dy = dy * -1 ;
-                }
-
-                render.setAngle(
-                        render.getAngle() +
-                                ((dx + dy) * TOUCH_SCALE_FACTOR));
-                requestRender();
-                break;
-        }
-
-        mPreviousX = x;
-        mPreviousY = y;
-        */
         return true;
     }
 

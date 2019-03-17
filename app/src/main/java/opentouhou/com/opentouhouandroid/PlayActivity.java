@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import opentouhou.com.opentouhouandroid.game.OpenGLESTest.OpenGLES20TestActivity;
-import opentouhou.com.opentouhouandroid.game.OpenGLESTest.OpenGLES30TestActivity;
+import opentouhou.com.opentouhouandroid.game.OpenGLESTest.OpenTouhou30Activity;
 
 public class PlayActivity extends AppCompatActivity {
 
@@ -71,7 +71,7 @@ public class PlayActivity extends AppCompatActivity {
             startActivity(new Intent(PlayActivity.this, OpenGLES20TestActivity.class));
         }
         else if (listItem == "OpenGL ES 3.0 Test") {
-            startActivity(new Intent(PlayActivity.this, OpenGLES30TestActivity.class));
+            startActivity(new Intent(PlayActivity.this, OpenTouhou30Activity.class));
         }
     }
 }

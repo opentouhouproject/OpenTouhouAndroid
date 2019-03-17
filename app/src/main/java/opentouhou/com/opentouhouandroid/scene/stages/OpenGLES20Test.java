@@ -36,6 +36,8 @@ public class OpenGLES20Test extends Stage {
         getAudioPlayer().play("audio/music/loadingMusic.mp3");
     }
 
+    public void update() { getCurrentScene().update(); }
+
     public void draw() {
         getCurrentScene().draw();
     }

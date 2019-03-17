@@ -1,8 +1,6 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common;
 
-import android.util.Log;
-
-import opentouhou.com.opentouhouandroid.actor.TextAnimation;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.TextAnimation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.Font;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
@@ -83,6 +81,16 @@ public class Text
         this.animation = animation;
 
         return this;
+    }
+
+    /*
+     * Implement update method.
+     */
+    public void update() {
+        if (enableAnim == true)
+        {
+
+        }
     }
 
     // Drawing and rendering methods.

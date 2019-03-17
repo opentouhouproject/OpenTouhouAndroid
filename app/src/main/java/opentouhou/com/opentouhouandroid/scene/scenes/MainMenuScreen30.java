@@ -1,103 +1,58 @@
 package opentouhou.com.opentouhouandroid.scene.scenes;
 
-import opentouhou.com.opentouhouandroid.actor.MeilinSprite;
-import opentouhou.com.opentouhouandroid.actor.PetalFall;
-import opentouhou.com.opentouhouandroid.actor.TextAnimation;
 import opentouhou.com.opentouhouandroid.graphics.common.Background;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.Stage;
+import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
-/**
- * Loading screen implemented with OpenGL ES 3.0 .
- */
-
-public class LoadingScreen extends Scene
+public class MainMenuScreen30 extends Scene
 {
-    // Game Objects
-    private Background background;
-    private PetalFall petalFall;
-    private Text title, loadingMessage;
-    private MeilinSprite sprite;
+    public Background background;
 
     // Constructor(s)
-    public LoadingScreen(String name, Stage stage)
+    public MainMenuScreen30(String name, Stage stage)
     {
         super(name, stage);
     }
 
-    // Draws the game objects.
     public void draw()
     {
         background.draw(this);
-
-        petalFall.draw(this);
-
-        title.draw(this);
-
-        loadingMessage.draw(this);
-
-        sprite.draw(this);
     }
 
     // Loads resources for drawing the scene.
     public void setup()
     {
-        // Retrieve the renderer from the stage.
+        // Get the renderer.
         Renderer renderer = stage.getRenderer();
 
         // Load the shaders.
         loadShaders(renderer);
 
-        // Load the textures.
+        // Load bitmaps.
         loadTextures(renderer);
 
-        // Load the fonts.
+        // Load fonts.
         loadFonts(renderer);
 
         // Create the camera.
-        camera = new Camera(0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        camera = new Camera(0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0, 0, 1, 0);
 
         // Create light source(s).
-        light = new Vector4f(0.0f, 0.0f, 2.0f, 0.0f);
+        light = new Vector4f(0.0f, 0.0f, 2f, 0f);
 
         // Create background.
         background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30);
 
-        // Create text.
-        FontManager fontManager = renderer.getFontManager();
-
-        title = new Text(fontManager.getFont("fonts/yozakura/yozakura256.xml"));
-        title.setText("Scarlet")
-                .setPosition(new Vector3f(-3.5f, -1.0f, 3))
-                .setScaling(94f)
-                .setColor(new Vector4f(1.0f, 0.1412f, 0.0f, 1.0f))
-                .setShader("Font");
-
-        TextAnimation msgAnim = new TextAnimation("loading");
-        msgAnim.addSequence(new String[]{"Loading", "Loading.", "Loading..", "Loading..."});
-
-        loadingMessage = new Text(fontManager.getFont("fonts/popstar/popstar16.xml"));
-        loadingMessage.setText("Loading...")
-                .setPosition(new Vector3f(-2.0f, -6.75f, 3))
-                .setScaling(40f)
-                .setColor(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f))
-                .setShader("Font2")
-                .setAnimation(msgAnim);
-
-        // Create petal animation.
-        petalFall = new PetalFall(renderer);
-
-        // Create sprite.
-        sprite = new MeilinSprite("meilin", renderer);
+        // Load Audio
+        stage.getAudioPlayer().play("audio/music/loadingMusic.mp3");
 
         // Done loading.
         ready = true;
@@ -170,12 +125,19 @@ public class LoadingScreen extends Scene
         String[] fontList = {
                 "fonts/popstar/popstar16.xml",
                 "fonts/yozakura/yozakura256.xml"
-            };
+        };
 
         // Get the font manager.
         FontManager manager = renderer.getFontManager();
 
         // Load the fonts.
         manager.loadFonts(fontList, renderer, stage.getFileManager());
+    }
+
+    /*
+     * Update the scene.
+     */
+    public void update() {
+        return;
     }
 }

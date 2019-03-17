@@ -5,7 +5,8 @@ import android.content.Context;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
 import opentouhou.com.opentouhouandroid.io.FileManager;
 import opentouhou.com.opentouhouandroid.scene.Stage;
-import opentouhou.com.opentouhouandroid.scene.scenes.LoadingScreen;
+import opentouhou.com.opentouhouandroid.scene.scenes.LoadingScreen30;
+import opentouhou.com.opentouhouandroid.scene.scenes.MainMenuScreen30;
 import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 /*
@@ -13,8 +14,16 @@ import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
  */
 
 public class OpenGLES30Test extends Stage {
+    // States
+    private enum States {
+        Loading, MainMenu
+    }
+
+    private States state;
+
     // Scenes
-    private LoadingScreen loadingScreen;
+    private LoadingScreen30 loadingScreen30;
+    private MainMenuScreen30 mainMenuScreen30;
 
     /*
      * Constructor(s).
@@ -29,17 +38,31 @@ public class OpenGLES30Test extends Stage {
 
     // Implement Stage.
     public void setup() {
+        mainMenuScreen30 = new MainMenuScreen30("MM", this);
+
         // Load the scenes.
-        loadingScreen = new LoadingScreen("TEST", this);
-        loadingScreen.setup();
+        loadingScreen30 = new LoadingScreen30("TEST", this);
+        loadingScreen30.setup();
+
+        state = States.Loading;
 
         // Set the current scene.
-        setCurrentScene(loadingScreen);
+        setCurrentScene(loadingScreen30);
 
         // Start the audio.
         getAudioPlayer().play("audio/music/loadingMusic.mp3");
     }
 
+    /*
+     * Update the current scene.
+     */
+    public void update() {
+        getCurrentScene().update();
+    }
+
+    /*
+     * Draw the current scene.
+     */
     public void draw() {
         getCurrentScene().draw();
     }

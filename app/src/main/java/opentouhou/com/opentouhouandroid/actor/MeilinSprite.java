@@ -1,6 +1,8 @@
 package opentouhou.com.opentouhouandroid.actor;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.Animation;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.SpriteAnimation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
@@ -15,7 +17,7 @@ public class MeilinSprite extends Sprite
         TextureManager manager = renderer.getTextureManager();
 
         // Load the walking animation.
-        Animation walkingForward = new Animation("walkingForward");
+        SpriteAnimation walkingForward = new SpriteAnimation("walkingForward");
         Texture[] textures = {
                 manager.getTexture("sprites/meirin/walkfront/walkFront000.png"),
                 manager.getTexture("sprites/meirin/walkfront/walkFront001.png"),
@@ -25,10 +27,10 @@ public class MeilinSprite extends Sprite
                 manager.getTexture("sprites/meirin/walkfront/walkFront005.png")
         };
         walkingForward.stretch = new float[]{1, 1, 1, 1, 1, 1};
-        walkingForward.addSequence(textures);
+        walkingForward.setSequence(textures);
 
         // Load attack anim
-        Animation spellHa = new Animation("spellHa");
+        SpriteAnimation spellHa = new SpriteAnimation("spellHa");
         Texture[] textures2 = {
                 manager.getTexture("sprites/meirin/spellHa/spellHa000.png"),
                 manager.getTexture("sprites/meirin/spellHa/spellHa001.png"),
@@ -47,7 +49,7 @@ public class MeilinSprite extends Sprite
                 manager.getTexture("sprites/meirin/spellHa/spellHa014.png")
         };
         spellHa.stretch = new float[]{0.8f, 1.2f, 1.4f, 1.6f, 1.6f, 0.75f, 0.7f, 1.2f, 1.0f, 1.0f, 1f, 1f, 0.8f, 0.8f, 0.8f};
-        spellHa.addSequence(textures2);
+        spellHa.setSequence(textures2);
 
         addAnimation(walkingForward);
         addAnimation(spellHa);

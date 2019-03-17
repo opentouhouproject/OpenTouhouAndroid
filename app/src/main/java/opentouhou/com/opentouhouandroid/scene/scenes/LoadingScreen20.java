@@ -14,12 +14,11 @@ import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.Stage;
 
-/**
+/*
  * Loading screen implemented with OpenGL ES 2.0 .
  */
 
-public class LoadingScreen20 extends Scene
-{
+public class LoadingScreen20 extends Scene {
     // Game Objects
     private Background background;
     private PetalFall petalFall;
@@ -30,20 +29,6 @@ public class LoadingScreen20 extends Scene
     public LoadingScreen20(String name, Stage stage)
     {
         super(name, stage);
-    }
-
-    // Draws the game objects.
-    public void draw()
-    {
-        background.draw(this);
-
-        //petalFall.draw(this);
-
-        //title.draw(this);
-
-        //loadingMessage.draw(this);
-
-        //sprite.draw(this);
     }
 
     // Loads resources for drawing the scene.
@@ -176,5 +161,26 @@ public class LoadingScreen20 extends Scene
 
         // Load the fonts.
         manager.loadFonts(fontList, renderer, stage.getFileManager());
+    }
+
+    /*
+     * Update the scene.
+     */
+    public void update() {
+        return;
+    }
+
+    // Draws the game objects.
+    public void draw()
+    {
+        background.draw(this);
+
+        //petalFall.draw(this);
+
+        //title.draw(this);
+
+        //loadingMessage.draw(this);
+
+        //sprite.draw(this);
     }
 }

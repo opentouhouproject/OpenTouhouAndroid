@@ -1,14 +1,25 @@
 package opentouhou.com.opentouhouandroid.game.OpenGLESTest;
 
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class OpenGLES30TestActivity extends AppCompatActivity {
+import opentouhou.com.opentouhouandroid.scene.Stage;
+import opentouhou.com.opentouhouandroid.scene.stages.OpenGLES30Test;
+
+public class OpenTouhou30Activity extends Activity {
+    private OpenTouhou30View openTouhou30View;
+
+    private Stage stage;
+
+    /*
+     * Called when activity is starting.
+     * This is where most initialization should go.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,9 +27,15 @@ public class OpenGLES30TestActivity extends AppCompatActivity {
         setFullScreen();
 
         /*
+         * Create the new game.
+         */
+        stage = new OpenGLES30Test("OpenGLES30Test", this);
+
+        /*
          * Create a GLSurfaceView instance and set it as the ContentView for this Activity.
          */
-        setContentView(new OpenGLES30TestView(this));
+        openTouhou30View = new OpenTouhou30View(this, stage);
+        setContentView(openTouhou30View);
     }
 
     @Override
@@ -29,8 +46,24 @@ public class OpenGLES30TestActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
         Log.d("Activity Log","Pausing game activity.");
+
+        super.onPause();
+        openTouhou30View.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d("Activity Log","Resuming game activity.");
+
+        super.onResume();
+        openTouhou30View.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.d("Activity Log","Stopping game activity.");
 
         super.onStop();
     }
@@ -41,12 +74,6 @@ public class OpenGLES30TestActivity extends AppCompatActivity {
          */
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        /*
-         * Get rid of the action bar.
-         */
-        requestWindowFeature(Window.FEATURE_ACTION_BAR);
-        getSupportActionBar().hide();
 
         /*
          * Get rid of navigation bar.

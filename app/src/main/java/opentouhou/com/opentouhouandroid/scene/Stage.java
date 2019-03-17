@@ -63,6 +63,7 @@ public abstract class Stage {
      * OpenGL ES version dependant.
      */
     public abstract void setup();
+    public abstract void update();
     public abstract void draw();
 
     @Override

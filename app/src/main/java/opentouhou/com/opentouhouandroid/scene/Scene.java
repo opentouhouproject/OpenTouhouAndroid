@@ -42,6 +42,7 @@ public abstract class Scene
     public Vector4f getLight() { return light; }
 
     abstract public void setup();
+    abstract public void update();
     abstract public void draw();
 
     @Override

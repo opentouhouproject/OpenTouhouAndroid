@@ -34,7 +34,7 @@
             android:name="opentouhou.com.opentouhouandroid.game.OpenGLESTest.OpenGLES20TestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="opentouhou.com.opentouhouandroid.game.OpenGLESTest.OpenGLES30TestActivity"
+            android:name="opentouhou.com.opentouhouandroid.game.OpenGLESTest.OpenTouhou30Activity"
             android:screenOrientation="portrait" />
     </application>
 
