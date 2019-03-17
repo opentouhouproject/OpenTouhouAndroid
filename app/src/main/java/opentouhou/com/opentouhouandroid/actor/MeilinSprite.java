@@ -26,7 +26,7 @@ public class MeilinSprite extends Sprite
                 manager.getTexture("sprites/meirin/walkfront/walkFront004.png"),
                 manager.getTexture("sprites/meirin/walkfront/walkFront005.png")
         };
-        walkingForward.stretch = new float[]{1, 1, 1, 1, 1, 1};
+        walkingForward.setStretch(new float[]{1, 1, 1, 1, 1, 1});
         walkingForward.setSequence(textures);
 
         // Load attack anim
@@ -48,7 +48,7 @@ public class MeilinSprite extends Sprite
                 manager.getTexture("sprites/meirin/spellHa/spellHa013.png"),
                 manager.getTexture("sprites/meirin/spellHa/spellHa014.png")
         };
-        spellHa.stretch = new float[]{0.8f, 1.2f, 1.4f, 1.6f, 1.6f, 0.75f, 0.7f, 1.2f, 1.0f, 1.0f, 1f, 1f, 0.8f, 0.8f, 0.8f};
+        spellHa.setStretch(new float[]{0.8f, 1.2f, 1.4f, 1.6f, 1.6f, 0.75f, 0.7f, 1.2f, 1.0f, 1.0f, 1f, 1f, 0.8f, 0.8f, 0.8f});
         spellHa.setSequence(textures2);
 
         addAnimation(walkingForward);

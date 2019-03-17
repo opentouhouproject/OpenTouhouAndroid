@@ -3,13 +3,21 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.common.animation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 
 public class SpriteAnimation extends Animation<Texture> {
-    public float[] stretch;
+    private float[] stretch;
 
     /*
      * Constructor(s).
      */
     public SpriteAnimation(String name) {
         super(name);
+    }
+
+    public void setStretch(float[] newStretch) {
+        stretch = new float[newStretch.length];
+
+        for (int i = 0; i < newStretch.length; i++) {
+            stretch[i] = newStretch[i];
+        }
     }
 
     /*

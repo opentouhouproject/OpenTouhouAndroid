@@ -69,6 +69,7 @@ public class LoadingScreen30 extends Scene {
 
         TextAnimation msgAnim = new TextAnimation("loading");
         msgAnim.setSequence(new String[]{"Loading", "Loading.", "Loading..", "Loading..."});
+        msgAnim.setMaxDuration(267);
 
         loadingMessage = new Text(fontManager.getFont("fonts/popstar/popstar16.xml"));
         loadingMessage.setText("Loading...")
