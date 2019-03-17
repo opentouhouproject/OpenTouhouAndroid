@@ -12,11 +12,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureMa
  *
  */
 
-public abstract class Renderer implements GLSurfaceView.Renderer
-{
-    // Activity Context
-    protected Context context;
-
+public abstract class Renderer implements GLSurfaceView.Renderer {
     // Shader manager.
     protected ShaderManager shaderManager;
 
@@ -32,10 +28,7 @@ public abstract class Renderer implements GLSurfaceView.Renderer
     protected int lastFPS;
 
     // Constructor
-    public Renderer(Context context)
-    {
-        this.context = context;
-
+    public Renderer(Context context) {
         shaderManager = null;
         textureManager = null;
         fontManager = null;
@@ -46,8 +39,6 @@ public abstract class Renderer implements GLSurfaceView.Renderer
     }
 
     // Getters
-    public Context getContext() { return context; }
-
     public ShaderManager getShaderManager() { return shaderManager; }
 
     public TextureManager getTextureManager() { return textureManager; }

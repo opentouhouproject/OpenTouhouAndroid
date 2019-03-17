@@ -31,6 +31,8 @@ public class Renderer20 extends Renderer
         shaderManager = new ShaderManager20();
         textureManager = new TextureManager20();
         fontManager = new FontManager();
+
+        stage = new OpenGLES20Test("ES20Test", this, context);
     }
 
     // Implement GLSurfaceView.Renderer interface.
@@ -52,7 +54,6 @@ public class Renderer20 extends Renderer
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA );
 
         // load scene
-        stage = new OpenGLES20Test("ES20Test", this);
         stage.setup();
     }
 

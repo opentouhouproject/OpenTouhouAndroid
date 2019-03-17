@@ -35,6 +35,8 @@ public class Renderer30 extends Renderer
         shaderManager = new ShaderManager30();
         textureManager = new TextureManager30();
         fontManager = new FontManager();
+
+        stage = new OpenGLES30Test("example3", this, context);
     }
 
     // Implement GLSurfaceView.Renderer interface.
@@ -57,7 +59,6 @@ public class Renderer30 extends Renderer
         GLES30.glBlendFunc(GLES30.GL_SRC_ALPHA, GLES30.GL_ONE_MINUS_SRC_ALPHA );
 
         // load the scene.
-        stage = new OpenGLES30Test("example3", this);
         stage.setup();
 
         fpsCounter = new Text(this.getFontManager().getFont("fonts/popstar/popstar16.xml"));

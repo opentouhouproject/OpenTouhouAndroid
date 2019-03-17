@@ -16,8 +16,6 @@ public class MainMenuScreen extends Scene
 {
     public Background background;
 
-    private AudioPlayer aud;
-
     // Constructor(s)
     public MainMenuScreen(String name, Stage stage)
     {
@@ -54,8 +52,7 @@ public class MainMenuScreen extends Scene
         background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30);
 
         // Load Audio
-        aud = new AudioPlayer(renderer.getContext());
-        aud.play("audio/music/loadingMusic.mp3");
+        stage.getAudioPlayer().play("audio/music/loadingMusic.mp3");
 
         // Done loading.
         ready = true;

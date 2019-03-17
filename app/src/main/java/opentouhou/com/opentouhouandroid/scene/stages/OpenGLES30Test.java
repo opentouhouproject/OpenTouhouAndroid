@@ -1,10 +1,12 @@
 package opentouhou.com.opentouhouandroid.scene.stages;
 
+import android.content.Context;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.scene.Stage;
 import opentouhou.com.opentouhouandroid.scene.scenes.LoadingScreen;
 
-/**
+/*
  * Testing OpenGL ES 3.0 implementations.
  */
 
@@ -14,9 +16,9 @@ public class OpenGLES30Test extends Stage
     private LoadingScreen loadingScreen;
 
     // Constructor
-    public OpenGLES30Test(String name, Renderer renderer)
+    public OpenGLES30Test(String name, Renderer renderer, Context context)
     {
-        super(name, renderer);
+        super(name, renderer, context);
     }
 
     public void setup()
