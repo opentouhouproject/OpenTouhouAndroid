@@ -8,13 +8,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
+import opentouhou.com.opentouhouandroid.io.FileManager;
+
 /**
  * Manages all shaders.
  */
 
 public abstract class ShaderManager
 {
-    private AssetManager assetManager;
+    //private AssetManager assetManager;
 
     protected HashMap<String, ShaderProgram> shaderPrograms;
 
@@ -22,9 +24,9 @@ public abstract class ShaderManager
 
     protected HashMap<String, FragmentShader> fragmentShaders;
 
-    public ShaderManager(AssetManager assetManager)
+    public ShaderManager()
     {
-        this.assetManager = assetManager;
+        //this.assetManager = assetManager;
 
         shaderPrograms = new HashMap<>(8);
 
@@ -45,50 +47,14 @@ public abstract class ShaderManager
     }
 
     // Reads the shader code from file.
-    protected String readFile(String filePath)
-    {
-        BufferedReader reader = null;
-        StringBuffer buf = new StringBuffer();
-
-        try
-        {
-            InputStream stream = assetManager.open(filePath);
-
-            if (stream != null)
-            {
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                String line;
-                while ((line = reader.readLine()) != null)
-                {
-                    buf.append(line + "\n");
-                }
-            }
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException("Error reading shader from file.");
-        }
-        finally {
-            try
-            {
-                if (reader != null)
-                {
-                    reader.close();
-                }
-            }
-            catch (IOException e) {
-                throw new RuntimeException("Could not close BufferedReader.");
-            }
-        }
-
-        return buf.toString();
+    protected String readFile(String filePath, FileManager fileManager) {
+       return fileManager.openTextAsset(filePath).toString();
     }
 
     // Create shaders.
-    abstract public void createVertexShader(String name, String filePath);
+    abstract public void createVertexShader(String name, String filePath, FileManager fileManager);
 
-    abstract public void createFragmentShader(String name, String filePath);
+    abstract public void createFragmentShader(String name, String filePath, FileManager fileManager);
 
     abstract public void createShaderProgram(String name, String vertexShader, String fragmentShader);
 }

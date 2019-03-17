@@ -109,17 +109,17 @@ public class LoadingScreen extends Scene
         ShaderManager manager = renderer.getShaderManager();
 
         // Create vertex shaders.
-        manager.createVertexShader("TextureShader", "shaders/opengles30/TextureShader.vert");
-        manager.createVertexShader("Font", "shaders/opengles30/Font.vert");
-        manager.createVertexShader("Background", "shaders/opengles30/Background.vert");
-        manager.createVertexShader("Petal", "shaders/opengles30/Petal.vert");
+        manager.createVertexShader("TextureShader", "shaders/opengles30/TextureShader.vert", stage.getFileManager());
+        manager.createVertexShader("Font", "shaders/opengles30/Font.vert", stage.getFileManager());
+        manager.createVertexShader("Background", "shaders/opengles30/Background.vert", stage.getFileManager());
+        manager.createVertexShader("Petal", "shaders/opengles30/Petal.vert", stage.getFileManager());
 
         // Create fragment shaders.
-        manager.createFragmentShader("TextureShader", "shaders/opengles30/TextureShader.frag");
-        manager.createFragmentShader("Font", "shaders/opengles30/Font.frag");
-        manager.createFragmentShader("Font2", "shaders/opengles30/Font2.frag");
-        manager.createFragmentShader("Background", "shaders/opengles30/Background.frag");
-        manager.createFragmentShader("Petal", "shaders/opengles30/Petal.frag");
+        manager.createFragmentShader("TextureShader", "shaders/opengles30/TextureShader.frag", stage.getFileManager());
+        manager.createFragmentShader("Font", "shaders/opengles30/Font.frag", stage.getFileManager());
+        manager.createFragmentShader("Font2", "shaders/opengles30/Font2.frag", stage.getFileManager());
+        manager.createFragmentShader("Background", "shaders/opengles30/Background.frag", stage.getFileManager());
+        manager.createFragmentShader("Petal", "shaders/opengles30/Petal.frag", stage.getFileManager());
 
         // Create shader programs.
         manager.createShaderProgram("TextureShader", "TextureShader", "TextureShader");
@@ -160,9 +160,9 @@ public class LoadingScreen extends Scene
         TextureManager manager = renderer.getTextureManager();
 
         // Load the textures.
-        manager.loadAssetBitmap("art/loading_bg1.png", TextureManager.Options.GREYSCALE, renderer);
+        manager.loadAssetBitmap("art/loading_bg1.png", TextureManager.Options.GREYSCALE, stage.getFileManager());
 
-        manager.loadAssetBitmaps(assets, renderer);
+        manager.loadAssetBitmaps(assets, stage.getFileManager());
     }
 
     private void loadFonts(Renderer renderer)
@@ -176,6 +176,6 @@ public class LoadingScreen extends Scene
         FontManager manager = renderer.getFontManager();
 
         // Load the fonts.
-        manager.loadFonts(fontList, renderer);
+        manager.loadFonts(fontList, renderer, stage.getFileManager());
     }
 }

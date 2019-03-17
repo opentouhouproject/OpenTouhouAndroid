@@ -28,7 +28,7 @@ public class Renderer20 extends Renderer
     {
         super(context);
 
-        shaderManager = new ShaderManager20(context.getAssets());
+        shaderManager = new ShaderManager20();
         textureManager = new TextureManager20();
         fontManager = new FontManager();
     }

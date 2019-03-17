@@ -1,6 +1,7 @@
 package opentouhou.com.opentouhouandroid.scene;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.io.FileManager;
 import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 /**
@@ -16,6 +17,8 @@ public abstract class Stage
 
     private AudioPlayer audioPlayer;
 
+    private FileManager fileManager;
+
     private Scene currentScene;
 
     // Constructor(s)
@@ -23,7 +26,8 @@ public abstract class Stage
     {
         this.name = name;
         this.renderer = renderer;
-        this.audioPlayer = new AudioPlayer(renderer.getContext());
+        audioPlayer = new AudioPlayer(renderer.getContext());
+        fileManager = new FileManager(renderer.getContext());
     }
 
     // Getter(s)
@@ -35,6 +39,11 @@ public abstract class Stage
     public AudioPlayer getAudioPlayer()
     {
         return audioPlayer;
+    }
+
+    public FileManager getFileManager()
+    {
+        return fileManager;
     }
 
     public Scene getCurrentScene()

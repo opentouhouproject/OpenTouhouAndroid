@@ -3,6 +3,7 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader;
 import android.content.res.AssetManager;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
+import opentouhou.com.opentouhouandroid.io.FileManager;
 
 /**
  * Shader Manager implementation for OpenGL ES 3.0
@@ -10,24 +11,24 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderMana
 
 public class ShaderManager30 extends ShaderManager
 {
-    public ShaderManager30(AssetManager assetManager)
+    public ShaderManager30()
     {
-        super(assetManager);
+        //super(assetManager);
     }
 
     // Create shaders.
-    public void createVertexShader(String name, String filePath)
+    public void createVertexShader(String name, String filePath, FileManager fileManager)
     {
         VertexShader30 vertexShader30 = new VertexShader30(name);
-        vertexShader30.compile(readFile(filePath));
+        vertexShader30.compile(readFile(filePath, fileManager));
 
         vertexShaders.put(name, vertexShader30);
     }
 
-    public void createFragmentShader(String name, String filePath)
+    public void createFragmentShader(String name, String filePath, FileManager fileManager)
     {
         FragmentShader30 fragmentShader30 = new FragmentShader30(name);
-        fragmentShader30.compile(readFile(filePath));
+        fragmentShader30.compile(readFile(filePath, fileManager));
 
         fragmentShaders.put(name, fragmentShader30);
     }

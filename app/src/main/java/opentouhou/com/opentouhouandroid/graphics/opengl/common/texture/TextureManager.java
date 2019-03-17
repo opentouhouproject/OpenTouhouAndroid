@@ -10,6 +10,7 @@ import java.util.Hashtable;
 
 import opentouhou.com.opentouhouandroid.graphics.common.BitmapEditor;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.io.FileManager;
 
 /*
  * Manages all textures.
@@ -51,92 +52,85 @@ public abstract class TextureManager
     public int getTextureHandle(String path) { return assetMap.get(path).getTextureHandle(); }
 
     // Loads multiple resources.
-    public void loadResourceBitmaps(int[] resourceIds, Renderer renderer)
+    public void loadResourceBitmaps(int[] resourceIds, FileManager fileManager)
     {
         for (int id : resourceIds)
         {
-            loadResourceBitmap(id, Options.NONE, renderer);
+            loadResourceBitmap(id, Options.NONE, fileManager);
         }
     }
 
     // Loads multiple assets.
-    public void loadAssetBitmaps(String[] assetPaths, Renderer renderer)
+    public void loadAssetBitmaps(String[] assetPaths, FileManager fileManager)
     {
         for (String path : assetPaths)
         {
-            loadAssetBitmap(path, Options.NONE, renderer);
+            loadAssetBitmap(path, Options.NONE, fileManager);
         }
     }
 
     // Loads an image from the drawable resources.
-    public void loadResourceBitmap(int resourceId, Options option, Renderer renderer)
-    {
-        // Open a stream.
-        InputStream in = renderer.getContext().getResources().openRawResource(resourceId);
-
-        // Create the texture.
-        Texture texture = decodeBitmap(in, option);
-
-        // Save the association.
-        bitmapTable.put(resourceId, texture);
-    }
-
-    // Loads an image from the assets.
-    public void loadAssetBitmap(String path, Options option, Renderer renderer)
-    {
-        InputStream in;
-
-        try
-        {
-            // Open a stream.
-            in = renderer.getContext().getAssets().open(path);
-
-            // Create the texture.
-            Texture texture = decodeBitmap(in, option);
-
-            // Save the association.
-            assetMap.put(path, texture);
-        }
-        catch (IOException e)
-        {
-            Log.d("Game Debug", "Failed to open bitmap from assets. (" + path + ")");
-        }
-    }
-
-    // Decodes the bitmap given by the resource id.
-    private Texture decodeBitmap(InputStream stream, Options option)
-    {
+    public void loadResourceBitmap(int resourceId, Options option, FileManager fileManager) {
         // Set the decoding options.
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false; // No pre-scaling
         options.inMutable = true;
 
         // Decode the bitmap.
-        Bitmap bitmap = BitmapFactory.decodeStream(stream, null, options);
+        Bitmap bitmap = fileManager.openBitmapResource(resourceId, options);
 
-        // Check if we do anything.
-        switch (option)
-        {
-            case DESATURATE:
-                bitmap = BitmapEditor.desaturate(bitmap);
-                break;
-
-            case GREYSCALE:
-                bitmap = BitmapEditor.greyscale(bitmap, 0.5f);
-                break;
-
-            case LIGHTGREYSCALE:
-                bitmap = BitmapEditor.greyscale(bitmap, 0.1f);
-                break;
-        }
+        // Edit the bitmap.
+        bitmap = editBitmap(bitmap, option);
 
         // Create the texture.
         Texture texture = createTexture(bitmap, options);
 
-        // Recycle the bitmap.
+        // Free the native object associated with the bitmap.
         bitmap.recycle();
 
-        return texture;
+        // Save the association.
+        bitmapTable.put(resourceId, texture);
+    }
+
+    // Loads an image from the assets.
+    public void loadAssetBitmap(String path, Options option, FileManager fileManager) {
+        // Set the decoding options.
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inScaled = false; // No pre-scaling
+        options.inMutable = true;
+
+        // Decode the bitmap.
+        Bitmap bitmap = fileManager.openBitmapAsset(path, options);
+
+        // Edit the bitmap.
+        bitmap = editBitmap(bitmap, option);
+
+        // Create the texture.
+        Texture texture = createTexture(bitmap, options);
+
+        // Free the native object associated with the bitmap.
+        bitmap.recycle();
+
+        // Save the association.
+        assetMap.put(path, texture);
+    }
+
+    // Edits the given bitmap.
+    private Bitmap editBitmap(Bitmap bitmap, Options option) {
+        // Check if we edit the bitmap.
+        switch (option) {
+            case DESATURATE:
+                return BitmapEditor.desaturate(bitmap);
+
+            case GREYSCALE:
+                return BitmapEditor.greyscale(bitmap, 0.5f);
+
+            case LIGHTGREYSCALE:
+                return BitmapEditor.greyscale(bitmap, 0.1f);
+
+            default:
+                return bitmap;
+        }
     }
 
     abstract protected Texture createTexture(Bitmap bitmap, BitmapFactory.Options options);

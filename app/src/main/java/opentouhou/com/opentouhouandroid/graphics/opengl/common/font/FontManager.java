@@ -1,12 +1,11 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common.font;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
+import opentouhou.com.opentouhouandroid.io.FileManager;
 
 /**
  * Reads .fnt files and loads the font.
@@ -42,35 +41,14 @@ public class FontManager
     }
 
     // Load fonts.
-    public void loadFonts(String[] fontList, Renderer renderer)
-    {
-        for (String id : fontList)
-        {
-            // load the font metadata.
-            InputStreamReader in;
-
-            try
-            {
-                InputStream raw = renderer.getContext().getAssets().open(id);
-                in = new InputStreamReader(raw);
-            }
-            catch (IOException e)
-            {
-                throw new RuntimeException();
-            }
-
-            load(id, in);
-
+    public void loadFonts(String[] fontList, Renderer renderer, FileManager fileManager) {
+        for (String id : fontList) {
+            // Create the font.
+            load(id, fileManager.openRawAsset(id));
 
             // Create textures.
             String assetPath = "fonts/images/" + getImageFile(id);
-
-            //String resourceName = fileName.substring(0, fileName.lastIndexOf('.'));
-            //String type = "drawable";
-            //String packageName = "teamdroid.com.speedtestarena";
-            //int imageId = renderer.getContext().getResources().getIdentifier(resourceName, type, packageName);
-
-            renderer.getTextureManager().loadAssetBitmap(assetPath, TextureManager.Options.NONE, renderer);
+            renderer.getTextureManager().loadAssetBitmap(assetPath, TextureManager.Options.NONE, fileManager);
             setTextureId(id, assetPath);
 
             // Generate

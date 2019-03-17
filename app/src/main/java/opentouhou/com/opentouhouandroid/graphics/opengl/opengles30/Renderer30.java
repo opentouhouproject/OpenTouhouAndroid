@@ -32,7 +32,7 @@ public class Renderer30 extends Renderer
     {
         super(context);
 
-        shaderManager = new ShaderManager30(context.getAssets());
+        shaderManager = new ShaderManager30();
         textureManager = new TextureManager30();
         fontManager = new FontManager();
     }
