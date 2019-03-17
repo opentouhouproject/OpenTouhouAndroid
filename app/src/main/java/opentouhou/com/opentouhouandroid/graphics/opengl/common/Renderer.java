@@ -5,7 +5,7 @@ import android.opengl.GLSurfaceView;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTextureManager;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
 
 /**
  * Represents a renderer.
@@ -21,7 +21,7 @@ public abstract class Renderer implements GLSurfaceView.Renderer
     protected ShaderManager shaderManager;
 
     // Texture manager.
-    protected AbstractTextureManager textureManager;
+    protected TextureManager textureManager;
 
     // Font manager.
     protected FontManager fontManager;
@@ -50,7 +50,7 @@ public abstract class Renderer implements GLSurfaceView.Renderer
 
     public ShaderManager getShaderManager() { return shaderManager; }
 
-    public AbstractTextureManager getTextureManager() { return textureManager; }
+    public TextureManager getTextureManager() { return textureManager; }
 
     public FontManager getFontManager() { return fontManager; }
 }

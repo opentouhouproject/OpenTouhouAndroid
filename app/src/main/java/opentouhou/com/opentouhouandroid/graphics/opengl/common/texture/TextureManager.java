@@ -11,11 +11,11 @@ import java.util.Hashtable;
 import opentouhou.com.opentouhouandroid.graphics.common.BitmapEditor;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 
-/**
- * Created by Kenny 2019-02-21
+/*
+ * Manages all textures.
  */
 
-public abstract class AbstractTextureManager
+public abstract class TextureManager
 {
     public enum Options
     {
@@ -23,25 +23,25 @@ public abstract class AbstractTextureManager
     }
 
     // Hash table that maps resource ids to texture objects.
-    private Hashtable<Integer, AbstractTexture> bitmapTable;
+    private Hashtable<Integer, Texture> bitmapTable;
 
     // Hash table that maps asset paths to texture objects.
-    private Hashtable<String, AbstractTexture> assetMap;
+    private Hashtable<String, Texture> assetMap;
 
     // Constructor
-    public AbstractTextureManager()
+    public TextureManager()
     {
         bitmapTable = new Hashtable<>();
         assetMap = new Hashtable<>();
     }
 
     // Retrieve the texture object.
-    public AbstractTexture getTexture(int resourceId)
+    public Texture getTexture(int resourceId)
     {
         return bitmapTable.get(resourceId);
     }
 
-    public AbstractTexture getTexture(String path)
+    public Texture getTexture(String path)
     {
         return assetMap.get(path);
     }
@@ -75,7 +75,7 @@ public abstract class AbstractTextureManager
         InputStream in = renderer.getContext().getResources().openRawResource(resourceId);
 
         // Create the texture.
-        AbstractTexture texture = decodeBitmap(in, option);
+        Texture texture = decodeBitmap(in, option);
 
         // Save the association.
         bitmapTable.put(resourceId, texture);
@@ -92,7 +92,7 @@ public abstract class AbstractTextureManager
             in = renderer.getContext().getAssets().open(path);
 
             // Create the texture.
-            AbstractTexture texture = decodeBitmap(in, option);
+            Texture texture = decodeBitmap(in, option);
 
             // Save the association.
             assetMap.put(path, texture);
@@ -104,7 +104,7 @@ public abstract class AbstractTextureManager
     }
 
     // Decodes the bitmap given by the resource id.
-    private AbstractTexture decodeBitmap(InputStream stream, Options option)
+    private Texture decodeBitmap(InputStream stream, Options option)
     {
         // Set the decoding options.
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -131,7 +131,7 @@ public abstract class AbstractTextureManager
         }
 
         // Create the texture.
-        AbstractTexture texture = createTexture(bitmap, options);
+        Texture texture = createTexture(bitmap, options);
 
         // Recycle the bitmap.
         bitmap.recycle();
@@ -139,5 +139,5 @@ public abstract class AbstractTextureManager
         return texture;
     }
 
-    abstract protected AbstractTexture createTexture(Bitmap bitmap, BitmapFactory.Options options);
+    abstract protected Texture createTexture(Bitmap bitmap, BitmapFactory.Options options);
 }

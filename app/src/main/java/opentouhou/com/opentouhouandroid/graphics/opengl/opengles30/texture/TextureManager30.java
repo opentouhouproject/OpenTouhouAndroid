@@ -5,20 +5,20 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES30;
 import android.opengl.GLUtils;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTextureManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTexture;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 
 /**
  * Loads bitmap into GPU memory using OpenGL ES 3.0.
  */
 
-public class TextureManager30 extends AbstractTextureManager
+public class TextureManager30 extends TextureManager
 {
     @Override
-    protected AbstractTexture createTexture(Bitmap bitmap, BitmapFactory.Options options)
+    protected Texture createTexture(Bitmap bitmap, BitmapFactory.Options options)
     {
         // Create TextureGL class.
-        AbstractTexture tex = new Texture30(options);
+        Texture tex = new Texture30(options);
 
         // Bind to the texture in OpenGL.
         GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, tex.getTextureHandle());

@@ -2,7 +2,7 @@ package opentouhou.com.opentouhouandroid.actor.OpenGLES;
 
 import android.opengl.GLES20;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTexture;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
 
@@ -22,7 +22,7 @@ public class Rectangle extends GraphicsObject
     final int[] buffers;
     final int vertexBuffer;
 
-    AbstractTexture texture;
+    Texture texture;
 
     int programHandle = -1;
 
@@ -49,7 +49,7 @@ public class Rectangle extends GraphicsObject
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
     }
 
-    public void SetTexture(AbstractTexture texture)
+    public void SetTexture(Texture texture)
     {
         this.texture = texture;
     }

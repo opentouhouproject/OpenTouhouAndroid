@@ -1,7 +1,7 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTexture;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.Mesh;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
@@ -19,7 +19,7 @@ public abstract class GraphicsObject
 
     // Properties
     protected Mesh mesh;
-    protected AbstractTexture texture;
+    protected Texture texture;
     protected ShaderProgram shaderProgram;
     protected Matrix4f modelMatrix;
 
@@ -41,7 +41,7 @@ public abstract class GraphicsObject
     // Setter(s)
     public void setMesh(Mesh mesh) { this.mesh = mesh; }
 
-    public void setTexture(AbstractTexture texture) { this.texture = texture; }
+    public void setTexture(Texture texture) { this.texture = texture; }
 
     public void setShader(ShaderProgram program) { this.shaderProgram = program; }
 

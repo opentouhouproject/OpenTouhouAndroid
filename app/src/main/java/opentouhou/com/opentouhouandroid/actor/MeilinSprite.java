@@ -1,8 +1,8 @@
 package opentouhou.com.opentouhouandroid.actor;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTexture;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTextureManager;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
@@ -12,11 +12,11 @@ public class MeilinSprite extends Sprite
     {
         super(name);
 
-        AbstractTextureManager manager = renderer.getTextureManager();
+        TextureManager manager = renderer.getTextureManager();
 
         // Load the walking animation.
         Animation walkingForward = new Animation("walkingForward");
-        AbstractTexture[] textures = {
+        Texture[] textures = {
                 manager.getTexture("sprites/meirin/walkfront/walkFront000.png"),
                 manager.getTexture("sprites/meirin/walkfront/walkFront001.png"),
                 manager.getTexture("sprites/meirin/walkfront/walkFront002.png"),
@@ -29,7 +29,7 @@ public class MeilinSprite extends Sprite
 
         // Load attack anim
         Animation spellHa = new Animation("spellHa");
-        AbstractTexture[] textures2 = {
+        Texture[] textures2 = {
                 manager.getTexture("sprites/meirin/spellHa/spellHa000.png"),
                 manager.getTexture("sprites/meirin/spellHa/spellHa001.png"),
                 manager.getTexture("sprites/meirin/spellHa/spellHa002.png"),

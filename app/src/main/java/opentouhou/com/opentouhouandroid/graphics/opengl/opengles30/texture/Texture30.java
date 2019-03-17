@@ -3,9 +3,9 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.texture;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES30;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTexture;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 
-public class Texture30 extends AbstractTexture
+public class Texture30 extends Texture
 {
     public Texture30(BitmapFactory.Options options)
     {

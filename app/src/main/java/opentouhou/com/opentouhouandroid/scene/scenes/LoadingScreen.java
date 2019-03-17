@@ -10,7 +10,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTextureManager;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
@@ -157,10 +157,10 @@ public class LoadingScreen extends Scene
         };
 
         // Get the texture manager.
-        AbstractTextureManager manager = renderer.getTextureManager();
+        TextureManager manager = renderer.getTextureManager();
 
         // Load the textures.
-        manager.loadAssetBitmap("art/loading_bg1.png", AbstractTextureManager.Options.GREYSCALE, renderer);
+        manager.loadAssetBitmap("art/loading_bg1.png", TextureManager.Options.GREYSCALE, renderer);
 
         manager.loadAssetBitmaps(assets, renderer);
     }

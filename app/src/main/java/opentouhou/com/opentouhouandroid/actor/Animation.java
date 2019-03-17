@@ -1,6 +1,6 @@
 package opentouhou.com.opentouhouandroid.actor;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.AbstractTexture;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 
 /**
  * Represents a sequence of sprites in an animation.
@@ -13,7 +13,7 @@ public class Animation
     private int count = 0;
     private int currentFrame = 0;
     private int frameCount = 0;
-    private AbstractTexture[] textureHandles;
+    private Texture[] textureHandles;
     public float[] stretch;
 
 
@@ -29,7 +29,7 @@ public class Animation
         return stretch[currentFrame];
     }
 
-    public AbstractTexture currentFrame()
+    public Texture currentFrame()
     {
         return textureHandles[currentFrame];
     }
@@ -62,12 +62,12 @@ public class Animation
         }
     }
 
-    public void addSequence(AbstractTexture[] textures)
+    public void addSequence(Texture[] textures)
     {
         currentFrame = 0;
         frameCount = textures.length;
 
-        textureHandles = new AbstractTexture[frameCount];
+        textureHandles = new Texture[frameCount];
         for (int i = 0; i < frameCount; i++)
         {
             textureHandles[i] = textures[i];

@@ -2,7 +2,7 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.common.texture;
 
 import android.graphics.BitmapFactory;
 
-public abstract class AbstractTexture
+public abstract class Texture
 {
     protected final int[] textureHandle;
 
@@ -11,7 +11,7 @@ public abstract class AbstractTexture
     private String type;
 
     // Constructor
-    protected AbstractTexture(BitmapFactory.Options options)
+    protected Texture(BitmapFactory.Options options)
     {
         textureHandle = new int[1];
 

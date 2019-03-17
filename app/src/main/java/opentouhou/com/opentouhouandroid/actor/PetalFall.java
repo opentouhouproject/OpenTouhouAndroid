@@ -2,7 +2,7 @@ package opentouhou.com.opentouhouandroid.actor;
 
 import android.util.Log;
 
-import opentouhou.com.opentouhouandroid.graphics.common.CubicBezierCurve;
+import opentouhou.com.opentouhouandroid.math.CubicBezierCurve;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
