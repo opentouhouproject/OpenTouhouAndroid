@@ -29,6 +29,8 @@ public class Background
         }
     }
 
+    public void update() { return; }
+
     public void draw(Scene scene)
     {
         drawable.draw(scene);

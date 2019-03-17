@@ -87,33 +87,26 @@ public class Text
      * Implement update method.
      */
     public void update() {
-        if (enableAnim == true)
-        {
-
+        if (enableAnim == true) {
+            animation.update();
         }
     }
 
     // Drawing and rendering methods.
-    public void draw(Scene scene)
-    {
+    public void draw(Scene scene) {
         char[] chars;
 
-        if (enableAnim == true)
-        {
+        if (enableAnim == true) {
             chars = animation.currentFrame().toCharArray();
-
-            animation.nextFrame();
         }
-        else
-        {
+        else {
             chars = value.toCharArray();
         }
 
         float xOffset = 0;
         Vector3f drawPosition = new Vector3f(position);
 
-        for (char c : chars)
-        {
+        for (char c : chars) {
             // Update the render position of a glyph by the offset.
             drawPosition.x += xOffset;
 

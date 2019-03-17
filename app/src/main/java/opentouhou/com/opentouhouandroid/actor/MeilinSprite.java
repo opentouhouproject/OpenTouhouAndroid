@@ -1,7 +1,6 @@
 package opentouhou.com.opentouhouandroid.actor;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.Animation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.SpriteAnimation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
@@ -59,6 +58,10 @@ public class MeilinSprite extends Sprite
         createDrawable(renderer);
     }
 
+    public void update() {
+        currentAnimation.update();
+    }
+
     public void draw(Scene scene)
     {
         int h = currentAnimation.currentFrame().getHeight();
@@ -71,6 +74,5 @@ public class MeilinSprite extends Sprite
         drawable.setTexture(currentAnimation.currentFrame());
         drawable.setModelMatrix(model);
         drawable.draw(scene);
-        currentAnimation.nextFrame();
     }
 }

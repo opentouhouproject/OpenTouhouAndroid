@@ -169,7 +169,15 @@ public class LoadingScreen30 extends Scene {
      * Update the scene.
      */
     public void update() {
+        background.update();
+
         petalFall.update();
+
+        title.update();
+
+        loadingMessage.update();
+
+        sprite.update();
     }
 
     /*

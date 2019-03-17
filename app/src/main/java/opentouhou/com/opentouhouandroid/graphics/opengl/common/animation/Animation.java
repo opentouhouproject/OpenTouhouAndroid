@@ -9,7 +9,6 @@ import android.os.SystemClock;
 public abstract class Animation<T> {
     private String name;
 
-    protected int count = 0;
     protected int currentFrame = 0;
     protected int frameCount = 0;
 
@@ -54,7 +53,7 @@ public abstract class Animation<T> {
     /*
      * Move to the next sequence item.
      */
-    public void nextFrame() {
+    public void update() {
         curTime = SystemClock.uptimeMillis();
         curDuration += (curTime - lastTime);
 

@@ -167,12 +167,13 @@ public class LoadingScreen20 extends Scene {
      * Update the scene.
      */
     public void update() {
-        return;
+        background.update();
     }
 
-    // Draws the game objects.
-    public void draw()
-    {
+    /*
+     * Draw the scene.
+     */
+    public void draw() {
         background.draw(this);
 
         //petalFall.draw(this);
