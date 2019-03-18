@@ -1,105 +1,64 @@
-package opentouhou.com.opentouhouandroid.entity;
+package opentouhou.com.opentouhouandroid.entity.Petals;
 
+import android.opengl.GLES30;
 import android.util.Log;
 
-import opentouhou.com.opentouhouandroid.math.CubicBezierCurve;
+import opentouhou.com.opentouhouandroid.entity.Petals.Petal;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.PetalDrawable30;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.GraphicsObject30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
+import opentouhou.com.opentouhouandroid.math.CubicBezierCurve;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 /*
- * Simulates falling petals.
+ * Holds the information needed to draw a petal in OpenGL.
  */
 
-public class PetalFall extends GameObject {
-    Vector4f stemColor = new Vector4f(255f / 255f, 183f / 255f, 197f / 255f, 0.9f);
-    Vector4f leafColor = new Vector4f(255f / 255f, 197f / 255f, 208f / 255f, 0.9f);
-    Vector3f normal = new Vector3f(0, 0, 1);
-
-    private PetalDrawable30 drawable, drawable2;
-
-    private Petal[] petalList;
-
-    private int numberOfPetals = 50;
+public class PetalDrawable30 extends GraphicsObject30 {
+    private static Vector4f stemColor = new Vector4f(255f / 255f, 183f / 255f, 197f / 255f, 0.9f);
+    private static Vector4f leafColor = new Vector4f(255f / 255f, 197f / 255f, 208f / 255f, 0.9f);
+    private static Vector3f normal = new Vector3f(0, 0, 1);
 
     /*
      * Constructor(s).
      */
-    public PetalFall(Renderer renderer) {
-        // Generate a drawable petal.
-        drawable = createDrawable(renderer);
+    public PetalDrawable30(GraphicsOptions options, Renderer renderer) {
+        super(options);
 
-        // Generate new petals.
-        petalList = new Petal[numberOfPetals];
-
-        for (int i = 0; i < numberOfPetals; i++) {
-            petalList[i] = new Petal();
-        }
+        setup(renderer);
     }
 
     /*
-     * Implement update method.
+     * Setups the drawable data.
      */
-    public void update() {
-        for (int i = 0; i < numberOfPetals; i++) {
-            Petal petal = petalList[i];
-
-            if (petal.isAnimated()) {
-                petal.update();
-            }
-
-            petal.updateState();
-        }
-    }
-
-    /*
-     * Implement draw method.
-     */
-    public void draw(Scene scene) {
-        for (int i = 0; i < numberOfPetals; i++) {
-            Petal petal = petalList[i];
-
-            if (petal.isAnimated()) {
-                drawable.setModelMatrix(petal.getModel());
-                drawable.draw(scene, petal);
-            }
-        }
-    }
-
-    private PetalDrawable30 createDrawable(Renderer renderer) {
-        // Generate the mesh.
-        float[] meshPointsTEMP = generateMesh();
-        Mesh30 mesh = new Mesh30(meshPointsTEMP, renderer.getShaderManager().getShaderProgramHandle("Petal"), MeshLayout.Layout.PCN);
-
-        // Create the drawable.
-        GraphicsOptions opt = new GraphicsOptions(true, false);
-        drawable = new PetalDrawable30(opt);
+    private void setup(Renderer renderer) {
+        // Retrieve the needed variables.
+        ShaderProgram program = renderer.getShaderManager().getShaderProgram("Petal");
 
         // Set the mesh.
-        drawable.setMesh(mesh);
+        float[] meshPoints = generateMesh();
+        Mesh30 mesh = new Mesh30(meshPoints, program.getHandle(), MeshLayout.Layout.PCN);
+        setMesh(mesh);
 
-        // Set the shader.
-        drawable.setShader(renderer.getShaderManager().getShaderProgram("Petal"));
+        // Set the shader program.
+        setShader(program);
 
         // Set the model matrix.
-        Matrix4f model = Matrix4f.getIdentity();
-        drawable.setModelMatrix(model);
-
-        return drawable;
+        setModelMatrix(Matrix4f.getIdentity());
     }
 
     private float[] generateMesh() {
         // Setup the Bezier curves.
         Vector3f[] left = {new Vector3f(0, -1, 2), new Vector3f(-1.3f, -0.03f, 2),
-                           new Vector3f(-0.2f, 0.20f, 2), new Vector3f(0, 1, 2)};
+                new Vector3f(-0.2f, 0.20f, 2), new Vector3f(0, 1, 2)};
         Vector3f[] right = {new Vector3f(0, -1, 2), new Vector3f(1.3f, -0.03f, 2),
-                            new Vector3f(0.2f, 0.20f, 2), new Vector3f(0, 1, 2)};
+                new Vector3f(0.2f, 0.20f, 2), new Vector3f(0, 1, 2)};
 
         CubicBezierCurve leftCurve = new CubicBezierCurve(left);
         CubicBezierCurve rightCurve = new CubicBezierCurve(right);
@@ -281,5 +240,33 @@ public class PetalFall extends GameObject {
         meshIndex += 10;
 
         addPoint(mesh, meshIndex, stem[stemIndex + 1], stemColor, normal);
+    }
+
+    /*
+     * Draw this object.
+     */
+    public void draw(Scene scene, Petal petal) {
+        // Set the shader program to use.
+        int shaderHandle = shaderProgram.getHandle();
+        GLES30.glUseProgram(shaderHandle);
+
+        // Set the transformation matrices.
+        setTransformationMatrices(shaderHandle, scene);
+
+        // Set the light source(s).
+        if (option.lightingSetting()) setLightPosition(shaderHandle, scene);
+
+        // Set the texture.
+        if (option.textureSetting()) setTexture(shaderHandle);
+
+        // Set the lifetime.
+        int progressHandle = GLES30.glGetUniformLocation(shaderHandle, "uProgress");
+        GLES30.glUniform1f(progressHandle, petal.currentLife());
+
+        // Set the mesh.
+        setMesh();
+
+        // Draw the object.
+        GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, mesh.getVertexCount());
     }
 }

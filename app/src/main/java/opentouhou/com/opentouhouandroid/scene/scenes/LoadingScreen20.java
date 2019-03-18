@@ -1,7 +1,7 @@
 package opentouhou.com.opentouhouandroid.scene.scenes;
 
 import opentouhou.com.opentouhouandroid.entity.MeilinSprite;
-import opentouhou.com.opentouhouandroid.entity.PetalFall;
+import opentouhou.com.opentouhouandroid.entity.Petals.PetalFall;
 import opentouhou.com.opentouhouandroid.graphics.common.Background;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;

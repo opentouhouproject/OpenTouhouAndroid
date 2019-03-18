@@ -8,7 +8,7 @@ public final class LoadingState extends LoadingScreenState {
     /*
      * Constructor(s).
      */
-    public LoadingState() { }
+    protected LoadingState() { }
 
     /*
      * Implement LoadingScreenState.
@@ -16,6 +16,8 @@ public final class LoadingState extends LoadingScreenState {
     public void enter(LoadingScreen30 scene) {
         return;
     }
+
+    public void handleInput(LoadingScreen30 scene) { return; }
 
     public LoadingScreenState update(LoadingScreen30 scene) {
         scene.background.update();

@@ -6,7 +6,7 @@ public class FinishedState extends LoadingScreenState {
     /*
      * Constructor(s).
      */
-    public FinishedState() { }
+    protected FinishedState() { }
 
     /*
      * Implement LoadingScreenState.
@@ -15,6 +15,8 @@ public class FinishedState extends LoadingScreenState {
         scene.loadingMessage.selectAnimation(1);
         scene.sprite.selectAnimation("walkingForward");
     }
+
+    public void handleInput(LoadingScreen30 scene) { return; }
 
     public LoadingScreenState update(LoadingScreen30 scene) {
         scene.background.update();

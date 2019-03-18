@@ -3,7 +3,7 @@ package opentouhou.com.opentouhouandroid.scene.scenes;
 import android.os.SystemClock;
 
 import opentouhou.com.opentouhouandroid.entity.MeilinSprite;
-import opentouhou.com.opentouhouandroid.entity.PetalFall;
+import opentouhou.com.opentouhouandroid.entity.Petals.PetalFall;
 import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.graphics.common.Background;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
@@ -21,7 +21,6 @@ import opentouhou.com.opentouhouandroid.scene.state.LoadingScreen.LoadingScreenS
 /*
  * Loading screen implemented with OpenGL ES 3.0 .
  */
-
 public class LoadingScreen30 extends Scene {
     public boolean finishedLoading = false;
     public long start;
