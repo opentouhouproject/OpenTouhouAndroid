@@ -14,6 +14,5 @@ Active branch: 0.1-a2
 
 Major Goal: Create basic menu and loading screen.
 
-![Loading Screen](images/LoadingScreen.png)
-
-https://youtu.be/zMbH5SXehFA
+Update 2: https://www.youtube.com/watch?v=mFUpeIADx0I
+Update 1: https://www.youtube.com/watch?v=zMbH5SXehFA
