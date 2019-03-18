@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.actor.OpenGLES;
+package opentouhou.com.opentouhouandroid.entity.OpenGLES;
 
 import android.opengl.GLES20;
 

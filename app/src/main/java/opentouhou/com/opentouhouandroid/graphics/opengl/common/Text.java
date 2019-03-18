@@ -9,8 +9,8 @@ import opentouhou.com.opentouhouandroid.scene.Scene;
 /**
  * Represents a text object that can drawn to the screen.
  */
-public class Text
-{
+
+public class Text {
     Font font;
 
     String value;
@@ -20,11 +20,12 @@ public class Text
     String shaderProgram;
 
     boolean enableAnim = false;
+    TextAnimation[] animations = new TextAnimation[4];
     TextAnimation animation;
+    int count = 0;
 
     // Constructor(s)
-    public Text(Font font)
-    {
+    public Text(Font font) {
         this.font = font;
 
         // Set default values.
@@ -35,15 +36,13 @@ public class Text
     }
 
     // Setter(s)
-    public Text setText(String text)
-    {
+    public Text setText(String text) {
         value = text;
 
         return this;
     }
 
-    public Text setPosition(Vector3f position)
-    {
+    public Text setPosition(Vector3f position) {
         this.position.x = position.x;
         this.position.y = position.y;
         this.position.z = position.z;
@@ -51,15 +50,13 @@ public class Text
         return this;
     }
 
-    public Text setScaling(float scaling)
-    {
+    public Text setScaling(float scaling) {
         this.scaling = scaling;
 
         return this;
     }
 
-    public Text setColor(Vector4f color)
-    {
+    public Text setColor(Vector4f color) {
         this.color.x = color.x;
         this.color.y = color.y;
         this.color.z = color.z;
@@ -68,19 +65,26 @@ public class Text
         return this;
     }
 
-    public Text setShader(String shader)
-    {
+    public Text setShader(String shader) {
         shaderProgram = shader;
 
         return this;
     }
 
-    public Text setAnimation(TextAnimation animation)
-    {
+    public Text addAnimation(TextAnimation newAnimation) {
         enableAnim = true;
-        this.animation = animation;
+
+        animations[count] = newAnimation;
+
+        animation = animations[count];
+
+        count++;
 
         return this;
+    }
+
+    public void selectAnimation(int index) {
+        animation = animations[index];
     }
 
     /*

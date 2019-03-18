@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.actor;
+package opentouhou.com.opentouhouandroid.entity;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.SpriteAnimation;
@@ -9,6 +9,8 @@ import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public class MeilinSprite extends Sprite
 {
+    float positionX = 0;
+
     public MeilinSprite(String name, Renderer renderer)
     {
         super(name);
@@ -25,7 +27,7 @@ public class MeilinSprite extends Sprite
                 manager.getTexture("sprites/meirin/walkfront/walkFront004.png"),
                 manager.getTexture("sprites/meirin/walkfront/walkFront005.png")
         };
-        walkingForward.setStretch(new float[]{1, 1, 1, 1, 1, 1});
+        walkingForward.setStretch(new float[]{0.8f, 0.8f, 0.8f, 0.8f, 0.8f, 0.8f});
         walkingForward.setSequence(textures);
 
         // Load attack anim
@@ -60,6 +62,10 @@ public class MeilinSprite extends Sprite
 
     public void update() {
         currentAnimation.update();
+
+        if (currentAnimation.getName() == "walkingForward") {
+            positionX += 0.02f;
+        }
     }
 
     public void draw(Scene scene)
@@ -69,7 +75,7 @@ public class MeilinSprite extends Sprite
 
         Matrix4f model = Matrix4f.getIdentity();
         model.scale(1.2f*currentAnimation.currentStretch() * 1, 1.2f*currentAnimation.currentStretch() * ((float)h / (float)w), 1);
-        model.translate(-3.2f, -6.2f, 3.5f);
+        model.translate(-3.2f + positionX, -6.2f, 3.5f);
 
         drawable.setTexture(currentAnimation.currentFrame());
         drawable.setModelMatrix(model);

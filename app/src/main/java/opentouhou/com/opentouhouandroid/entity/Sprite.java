@@ -1,53 +1,68 @@
-package opentouhou.com.opentouhouandroid.actor;
+package opentouhou.com.opentouhouandroid.entity;
 
 import java.util.Hashtable;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.Animation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.SpriteAnimation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.GraphicsObject30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 
-/**
+/*
  * Represents a sprite in a game.
  */
 
-public class Sprite
-{
+public class Sprite {
     private String name;
 
+    // Stores all animations.
     protected Hashtable<String, SpriteAnimation> animations;
 
+    // Current animation.
     protected SpriteAnimation currentAnimation;
 
+    // Drawable object.
     protected GraphicsObject drawable;
 
-    public Sprite(String name)
-    {
+    /*
+     * Constructor(s).
+     */
+    public Sprite(String name) {
         this.name = name;
 
-        animations = new Hashtable<>();
+        animations = new Hashtable<>(8);
+        currentAnimation = null;
+        drawable = null;
     }
 
-    public String getName()
-    {
+    /*
+     * Getter(s).
+     */
+    public String getName() {
         return name;
     }
 
-    public void addAnimation(SpriteAnimation animation)
-    {
+    /*
+     * Animation Management.
+     */
+    public void addAnimation(SpriteAnimation animation) {
         animations.put(animation.getName(), animation);
     }
 
-    public void removeAnimation(String name)
-    {
+    public void removeAnimation(String name) {
         animations.remove(name);
     }
 
+    public void selectAnimation(String name) {
+        currentAnimation = animations.get(name);
+    }
+
+    /*
+     * Creates the drawable.
+     */
     protected void createDrawable(Renderer renderer)
     {
         // Generate the mesh.

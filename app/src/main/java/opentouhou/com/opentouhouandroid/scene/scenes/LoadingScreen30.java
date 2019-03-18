@@ -1,8 +1,10 @@
 package opentouhou.com.opentouhouandroid.scene.scenes;
 
-import opentouhou.com.opentouhouandroid.actor.MeilinSprite;
-import opentouhou.com.opentouhouandroid.actor.PetalFall;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.TextAnimation;
+import android.os.SystemClock;
+
+import opentouhou.com.opentouhouandroid.entity.MeilinSprite;
+import opentouhou.com.opentouhouandroid.entity.PetalFall;
+import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.graphics.common.Background;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
@@ -11,21 +13,27 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.Stage;
+import opentouhou.com.opentouhouandroid.scene.state.LoadingScreen.LoadingScreenState;
 
 /*
  * Loading screen implemented with OpenGL ES 3.0 .
  */
 
 public class LoadingScreen30 extends Scene {
+    public boolean finishedLoading = false;
+    public long start;
+    public long cur;
+
     // Game Objects
-    private Background background;
-    private PetalFall petalFall;
-    private Text title, loadingMessage;
-    private MeilinSprite sprite;
+    public Background background;
+    public PetalFall petalFall;
+    public Text title, loadingMessage, loadingFinishedMsg;
+    public MeilinSprite sprite;
+
+    LoadingScreenState state;
 
     // Constructor(s)
     public LoadingScreen30(String name, Stage stage)
@@ -59,31 +67,19 @@ public class LoadingScreen30 extends Scene {
 
         // Create text.
         FontManager fontManager = renderer.getFontManager();
-
-        title = new Text(fontManager.getFont("fonts/yozakura/yozakura256.xml"));
-        title.setText("Scarlet")
-                .setPosition(new Vector3f(-3.5f, -1.0f, 3))
-                .setScaling(94f)
-                .setColor(new Vector4f(1.0f, 0.1412f, 0.0f, 1.0f))
-                .setShader("Font");
-
-        TextAnimation msgAnim = new TextAnimation("loading");
-        msgAnim.setSequence(new String[]{"Loading", "Loading.", "Loading..", "Loading..."});
-        msgAnim.setMaxDuration(267);
-
-        loadingMessage = new Text(fontManager.getFont("fonts/popstar/popstar16.xml"));
-        loadingMessage.setText("Loading...")
-                .setPosition(new Vector3f(-2.0f, -6.75f, 3))
-                .setScaling(40f)
-                .setColor(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f))
-                .setShader("Font2")
-                .setAnimation(msgAnim);
+        title = TextEntityGenerator.CREATE_LOADING_SCREEN_TITLE(fontManager);
+        loadingMessage = TextEntityGenerator.CREATE_LOADING_TEXT(fontManager);
+        loadingFinishedMsg = TextEntityGenerator.CREATE_LOADING_DONE_TEXT(fontManager);
 
         // Create petal animation.
         petalFall = new PetalFall(renderer);
 
         // Create sprite.
         sprite = new MeilinSprite("meilin", renderer);
+
+        state = LoadingScreenState.LOADING_STATE;
+        start = SystemClock.uptimeMillis();
+        cur = SystemClock.uptimeMillis();
 
         // Done loading.
         ready = true;
@@ -169,15 +165,12 @@ public class LoadingScreen30 extends Scene {
      * Update the scene.
      */
     public void update() {
-        background.update();
-
-        petalFall.update();
-
-        title.update();
-
-        loadingMessage.update();
-
-        sprite.update();
+        LoadingScreenState result = state.update(this);
+        if (result != null)
+        {
+            state = result;
+            state.enter(this);
+        }
     }
 
     /*
@@ -185,13 +178,11 @@ public class LoadingScreen30 extends Scene {
      */
     public void draw() {
         background.draw(this);
-
         petalFall.draw(this);
-
         title.draw(this);
-
         loadingMessage.draw(this);
-
         sprite.draw(this);
+
+        if (state == LoadingScreenState.FINISHED_STATE) loadingFinishedMsg.draw(this);
     }
 }

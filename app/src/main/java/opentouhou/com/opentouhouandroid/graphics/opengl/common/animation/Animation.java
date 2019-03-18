@@ -12,6 +12,8 @@ public abstract class Animation<T> {
     protected int currentFrame = 0;
     protected int frameCount = 0;
 
+    public boolean repeat = true;
+
     protected T[] sequence;
     protected long maxDuration;
     protected long curDuration;
@@ -62,7 +64,7 @@ public abstract class Animation<T> {
                 currentFrame++;
             }
             else {
-                currentFrame = 0;
+                if (repeat) currentFrame = 0;
             }
 
             curDuration = 0;

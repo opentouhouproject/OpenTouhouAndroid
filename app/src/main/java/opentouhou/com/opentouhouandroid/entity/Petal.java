@@ -1,6 +1,4 @@
-package opentouhou.com.opentouhouandroid.actor;
-
-import android.util.Log;
+package opentouhou.com.opentouhouandroid.entity;
 
 import java.util.Random;
 

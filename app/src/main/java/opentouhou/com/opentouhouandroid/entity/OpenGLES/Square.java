@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.actor.OpenGLES;
+package opentouhou.com.opentouhouandroid.entity.OpenGLES;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

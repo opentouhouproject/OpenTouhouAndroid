@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.actor;
+package opentouhou.com.opentouhouandroid.entity;
 
 import android.util.Log;
 
