@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30;
+package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable;
 
 import android.opengl.GLES30;
 

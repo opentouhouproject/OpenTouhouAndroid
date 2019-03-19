@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.entity;
+package opentouhou.com.opentouhouandroid.entity.sprite;
 
 import java.util.Hashtable;
 
@@ -7,7 +7,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.SpriteAnimation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.GraphicsObject30;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.GraphicsObject30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 

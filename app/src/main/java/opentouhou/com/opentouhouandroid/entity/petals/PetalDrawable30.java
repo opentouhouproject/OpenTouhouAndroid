@@ -1,14 +1,13 @@
-package opentouhou.com.opentouhouandroid.entity.Petals;
+package opentouhou.com.opentouhouandroid.entity.petals;
 
 import android.opengl.GLES30;
 import android.util.Log;
 
-import opentouhou.com.opentouhouandroid.entity.Petals.Petal;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.GraphicsObject30;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.GraphicsObject30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
 import opentouhou.com.opentouhouandroid.math.CubicBezierCurve;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;

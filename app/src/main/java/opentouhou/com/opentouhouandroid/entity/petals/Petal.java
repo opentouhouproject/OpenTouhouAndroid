@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.entity.Petals;
+package opentouhou.com.opentouhouandroid.entity.petals;
 
 import android.os.SystemClock;
 

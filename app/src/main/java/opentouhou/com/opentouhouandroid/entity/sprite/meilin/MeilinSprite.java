@@ -1,5 +1,6 @@
-package opentouhou.com.opentouhouandroid.entity;
+package opentouhou.com.opentouhouandroid.entity.sprite.meilin;
 
+import opentouhou.com.opentouhouandroid.entity.sprite.Sprite;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.SpriteAnimation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;

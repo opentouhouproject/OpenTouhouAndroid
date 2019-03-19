@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.entity.Petals;
+package opentouhou.com.opentouhouandroid.entity.petals;
 
 import opentouhou.com.opentouhouandroid.entity.GameEntity;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;

@@ -1,6 +1,6 @@
 package opentouhou.com.opentouhouandroid.scene.scenes;
 
-import opentouhou.com.opentouhouandroid.graphics.common.Background;
+import opentouhou.com.opentouhouandroid.entity.background.Background;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
@@ -10,7 +10,6 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureMa
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.Stage;
-import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 public class MainMenuScreen30 extends Scene
 {

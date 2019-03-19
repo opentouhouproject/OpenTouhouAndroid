@@ -1,25 +1,27 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.drawable;
 
 import android.opengl.GLES20;
-import android.opengl.GLES30;
 
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.GraphicsObject20;
+import opentouhou.com.opentouhouandroid.math.Matrix4f;
+import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
-public class BackgroundDrawable20 extends GraphicsObject20
+public class GraphicsObject20 extends GraphicsObject
 {
-    // Override the parent draw method.
-    @Override
+    // Constructor
+    public GraphicsObject20()
+    {
+
+    }
+
+    // Draw
     public void draw(Scene scene)
     {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();
-        GLES30.glUseProgram(shaderHandle);
-
-        // Set color
-        int uniformColorHandle = GLES30.glGetUniformLocation(shaderHandle, "uColor");
-        GLES30.glUniform4f(uniformColorHandle, 0.9f, 0.6f, 0.3f, 1f);
+        GLES20.glUseProgram(shaderHandle);
 
         // Set the transformation matrices.
         setTransformationMatrices(shaderHandle, scene);
@@ -30,7 +32,6 @@ public class BackgroundDrawable20 extends GraphicsObject20
         // Set the texture.
         setTexture(shaderHandle);
 
-        // Set the mesh.
         // Bind to the buffer.
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, mesh.getBuffer());
 
@@ -59,7 +60,7 @@ public class BackgroundDrawable20 extends GraphicsObject20
         GLES20.glVertexAttribPointer(textureCoordinateHandle, MeshLayout.TEXTURE_COORDINATE_DATA_SIZE, GLES20.GL_FLOAT, false, MeshLayout.PCNT_Stride, MeshLayout.PCNT_TEXTURE_COORDINATE_OFFSET);
 
         // Draw the object.
-        GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, 6);
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 6);
 
         // Disable arrays.
         GLES20.glDisableVertexAttribArray(positionHandle);
@@ -69,5 +70,50 @@ public class BackgroundDrawable20 extends GraphicsObject20
 
         // Unbind from the buffer.
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
+    }
+
+    protected void setTransformationMatrices(int handle, Scene scene)
+    {
+        // Get the handles.
+        int modelViewMatrixHandle = GLES20.glGetUniformLocation(handle, "uMVMatrix");
+        int modelViewProjectionMatrixHandle = GLES20.glGetUniformLocation(handle, "uMVPMatrix");
+
+        // Get the matrices.
+        Matrix4f viewMatrix = scene.getCamera().getViewMatrix();
+        Matrix4f projectionMatrix = scene.getCamera().getProjectionMatrix();
+
+        // Compute the matrices.
+        Matrix4f mvMatrix = Matrix4f.multiply(viewMatrix, modelMatrix);
+        Matrix4f mvpMatrix = Matrix4f.multiply(projectionMatrix, mvMatrix);
+
+        // Send the matrices to the GPU.
+        GLES20.glUniformMatrix4fv(modelViewMatrixHandle, 1, false, mvMatrix.getArray(), 0);
+        GLES20.glUniformMatrix4fv(modelViewProjectionMatrixHandle, 1, false, mvpMatrix.getArray(), 0);
+    }
+
+    protected void setLightPosition(int handle, Scene scene)
+    {
+        // Get the handle.
+        int lightPositionHandle = GLES20.glGetUniformLocation(handle, "uLightSource");
+
+        // Compute the light position in Eye Space.
+        Vector4f lightPosition = Matrix4f.multiply(scene.getCamera().getViewMatrix(), scene.getLight());
+
+        // Send the light position to the GPU.
+        GLES20.glUniform3f(lightPositionHandle, lightPosition.x, lightPosition.y, lightPosition.z);
+    }
+
+    protected void setTexture(int handle)
+    {
+        // Get the handle.
+        int textureHandle = GLES20.glGetUniformLocation(handle, "uTexture");
+
+        // Set the active texture unit to texture unit 0.
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+        // Bind the texture to this unit.
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture.getTextureHandle());
+
+        // Tell the texture uniform sampler to use this texture in the shader by binding to texture unit 0.
+        GLES20.glUniform1i(textureHandle, 0);
     }
 }

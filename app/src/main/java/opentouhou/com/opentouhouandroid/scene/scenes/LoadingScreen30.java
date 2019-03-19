@@ -2,10 +2,10 @@ package opentouhou.com.opentouhouandroid.scene.scenes;
 
 import android.os.SystemClock;
 
-import opentouhou.com.opentouhouandroid.entity.MeilinSprite;
-import opentouhou.com.opentouhouandroid.entity.Petals.PetalFall;
+import opentouhou.com.opentouhouandroid.entity.sprite.meilin.MeilinSprite;
+import opentouhou.com.opentouhouandroid.entity.petals.PetalFall;
 import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
-import opentouhou.com.opentouhouandroid.graphics.common.Background;
+import opentouhou.com.opentouhouandroid.entity.background.Background;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
