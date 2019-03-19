@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<load>
+    <!-- Shader Loading Section -->
+    <shaders>
+        <!-- Compile Vertex Shaders -->
+        <vertex name="TextureShader" path="shaders/opengles30/TextureShader.vert" />
+        <vertex name="Font" path="shaders/opengles30/Font.vert" />
+        <vertex name="Background" path="shaders/opengles30/Background.vert" />
+        <vertex name="Petal" path="shaders/opengles30/Petal.vert" />
+
+        <!-- Compile Fragment Shaders -->
+        <fragment name="TextureShader" path="shaders/opengles30/TextureShader.frag" />
+        <fragment name="Font" path="shaders/opengles30/Font.frag" />
+        <fragment name="Font2" path="shaders/opengles30/Font2.frag" />
+        <fragment name="Background" path="shaders/opengles30/Background.frag" />
+        <fragment name="Petal" path="shaders/opengles30/Petal.frag" />
+
+        <!-- Link Shader Programs -->
+        <program name="TextureShader" vertex="TextureShader" fragment="TextureShader" />
+        <program name="Font" vertex="Font" fragment="Font" />
+        <program name="Font2" vertex="Font" fragment="Font2" />
+        <program name="Background" vertex="Background" fragment="Background" />
+        <program name="Petal" vertex="Petal" fragment="Petal" />
+    </shaders>
+
+    <!-- Texture Loading Section -->
+    <textures>
+        <texture path="sprites/meirin/walkfront/walkFront000.png" option="NONE" />
+        <texture path="sprites/meirin/walkfront/walkFront001.png" option="NONE" />
+        <texture path="sprites/meirin/walkfront/walkFront002.png" option="NONE" />
+        <texture path="sprites/meirin/walkfront/walkFront003.png" option="NONE" />
+        <texture path="sprites/meirin/walkfront/walkFront004.png" option="NONE" />
+        <texture path="sprites/meirin/walkfront/walkFront005.png" option="NONE" />
+
+        <texture path="sprites/meirin/spellHa/spellHa000.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa001.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa002.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa003.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa004.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa005.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa006.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa007.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa008.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa009.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa010.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa011.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa012.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa013.png" option="NONE" />
+        <texture path="sprites/meirin/spellHa/spellHa014.png" option="NONE" />
+
+        <texture path="art/loading_bg1.png" option="GREYSCALE" />
+    </textures>
+
+    <!-- Font Loading Section -->
+    <fonts>
+        <font path="fonts/popstar/popstar16.xml" />
+        <font path="fonts/yozakura/yozakura256.xml" />
+    </fonts>
+</load>

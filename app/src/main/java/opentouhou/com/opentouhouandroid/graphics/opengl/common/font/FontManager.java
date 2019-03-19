@@ -64,8 +64,26 @@ public class FontManager {
         }
     }
 
+    public void loadFont(String fontPath, Renderer renderer, FileManager fileManager) {
+        // Check if already loaded the font.
+        if (fonts.containsKey(fontPath)) {
+            return;
+        }
+
+        // Create the font.
+        load(fontPath, fileManager.openRawAsset(fontPath));
+
+        // Create textures.
+        String assetPath = "fonts/images/" + getImageFile(fontPath);
+        renderer.getTextureManager().loadAssetBitmap(assetPath, TextureManager.Options.NONE, fileManager);
+        setTextureId(fontPath, assetPath);
+
+        // Generate
+        fonts.get(fontPath).generate(renderer);
+    }
+
     // Load a font.
-    public void load(String fontPath, InputStreamReader reader) {
+    private void load(String fontPath, InputStreamReader reader) {
         fonts.put(fontPath, new Font(reader));
     }
 }

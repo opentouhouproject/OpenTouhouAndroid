@@ -2,6 +2,7 @@ package opentouhou.com.opentouhouandroid.scene;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 
 /**
@@ -41,6 +42,30 @@ public abstract class Scene
 
     public Vector4f getLight() { return light; }
 
+    /*
+     * Asset load methods.
+     */
+    public void loadVertexShader(String name, String path) {
+        stage.getRenderer().getShaderManager().createVertexShader(name, path, stage.getFileManager());
+    }
+
+    public void loadFragmentShader(String name, String path) {
+        stage.getRenderer().getShaderManager().createFragmentShader(name, path, stage.getFileManager());
+    }
+
+    public void loadShaderProgram(String name, String vertex, String fragment) {
+        stage.getRenderer().getShaderManager().createShaderProgram(name, vertex, fragment);
+    }
+
+    public void loadTexture(String path, TextureManager.Options option) {
+        stage.getRenderer().getTextureManager().loadAssetBitmap(path, option, stage.getFileManager());
+    }
+
+    public void loadFont(String path) {
+        stage.getRenderer().getFontManager().loadFont(path, stage.getRenderer(), stage.getFileManager());
+    }
+
+    // Implemented by sub classes.
     abstract public void setup();
     abstract public void update();
     abstract public void draw();

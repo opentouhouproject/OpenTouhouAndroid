@@ -1,5 +1,7 @@
 package opentouhou.com.opentouhouandroid.scene.scenes;
 
+import java.io.InputStreamReader;
+
 import opentouhou.com.opentouhouandroid.entity.sprite.meilin.MeilinSprite;
 import opentouhou.com.opentouhouandroid.entity.petals.PetalFall;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
@@ -7,9 +9,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
+import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.Stage;
@@ -37,14 +37,9 @@ public class LoadingScreen20 extends Scene {
         // Retrieve the renderer from the stage.
         Renderer renderer = stage.getRenderer();
 
-        // Load the shaders.
-        loadShaders(renderer);
-
-        // Load the textures.
-        loadTextures(renderer);
-
-        // Load the fonts.
-        loadFonts(renderer);
+        // Load the assets.
+        InputStreamReader reader = stage.getFileManager().openRawAsset("scene/loadingscreen/loadInfo20.xml");
+        SceneParser.parse(reader, this);
 
         // Create the camera.
         camera = new Camera(0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
@@ -85,82 +80,6 @@ public class LoadingScreen20 extends Scene {
         */
         // Done loading.
         ready = true;
-    }
-
-    private void loadShaders(Renderer renderer)
-    {
-        // Get the shader manager.
-        ShaderManager manager = renderer.getShaderManager();
-
-        // Create vertex shaders.
-        manager.createVertexShader("TextureShader", "shaders/opengles20/TextureShader.vert", stage.getFileManager());
-        manager.createVertexShader("Font", "shaders/opengles20/Font.vert", stage.getFileManager());
-        manager.createVertexShader("Background", "shaders/opengles20/Background.vert", stage.getFileManager());
-        manager.createVertexShader("Petal", "shaders/opengles20/Petal.vert", stage.getFileManager());
-
-        // Create fragment shaders.
-        manager.createFragmentShader("TextureShader", "shaders/opengles20/TextureShader.frag", stage.getFileManager());
-        manager.createFragmentShader("Font", "shaders/opengles20/Font.frag", stage.getFileManager());
-        manager.createFragmentShader("Font2", "shaders/opengles20/Font2.frag", stage.getFileManager());
-        manager.createFragmentShader("Background", "shaders/opengles20/Background.frag", stage.getFileManager());
-        manager.createFragmentShader("Petal", "shaders/opengles20/Petal.frag", stage.getFileManager());
-
-        // Create shader programs.
-        manager.createShaderProgram("TextureShader", "TextureShader", "TextureShader");
-        manager.createShaderProgram("Font", "Font", "Font");
-        manager.createShaderProgram("Font2", "Font", "Font2");
-        manager.createShaderProgram("Background", "Background", "Background");
-        manager.createShaderProgram("Petal", "Petal", "Petal");
-    }
-
-    private void loadTextures(Renderer renderer)
-    {
-        String[] assets = {
-                "sprites/meirin/walkfront/walkFront000.png",
-                "sprites/meirin/walkfront/walkFront001.png",
-                "sprites/meirin/walkfront/walkFront002.png",
-                "sprites/meirin/walkfront/walkFront003.png",
-                "sprites/meirin/walkfront/walkFront004.png",
-                "sprites/meirin/walkfront/walkFront005.png",
-
-                "sprites/meirin/spellHa/spellHa000.png",
-                "sprites/meirin/spellHa/spellHa001.png",
-                "sprites/meirin/spellHa/spellHa002.png",
-                "sprites/meirin/spellHa/spellHa003.png",
-                "sprites/meirin/spellHa/spellHa004.png",
-                "sprites/meirin/spellHa/spellHa005.png",
-                "sprites/meirin/spellHa/spellHa006.png",
-                "sprites/meirin/spellHa/spellHa007.png",
-                "sprites/meirin/spellHa/spellHa008.png",
-                "sprites/meirin/spellHa/spellHa009.png",
-                "sprites/meirin/spellHa/spellHa010.png",
-                "sprites/meirin/spellHa/spellHa011.png",
-                "sprites/meirin/spellHa/spellHa012.png",
-                "sprites/meirin/spellHa/spellHa013.png",
-                "sprites/meirin/spellHa/spellHa014.png"
-        };
-
-        // Get the texture manager.
-        TextureManager manager = renderer.getTextureManager();
-
-        // Load the textures.
-        manager.loadAssetBitmap("art/loading_bg1.png", TextureManager.Options.GREYSCALE, stage.getFileManager());
-
-        manager.loadAssetBitmaps(assets, stage.getFileManager());
-    }
-
-    private void loadFonts(Renderer renderer)
-    {
-        String[] fontList = {
-                "fonts/popstar/popstar16.xml",
-                "fonts/yozakura/yozakura256.xml"
-        };
-
-        // Get the font manager.
-        FontManager manager = renderer.getFontManager();
-
-        // Load the fonts.
-        manager.loadFonts(fontList, renderer, stage.getFileManager());
     }
 
     /*
