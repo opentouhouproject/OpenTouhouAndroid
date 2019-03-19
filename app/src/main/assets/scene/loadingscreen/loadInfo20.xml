@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<load>
+    <shaders>
+        <vertex></vertex>
+        <fragment></fragment>
+        <program></program>
+    </shaders>
+    <textures>
+        <texture></texture>
+    </textures>
+    <fonts>
+        <font></font>
+    </fonts>
+</load>
