@@ -1,10 +1,15 @@
 package opentouhou.com.opentouhouandroid.scene.scenes.mainmenu;
 
-public class StateInitial extends State {
-    public StateInitial() { }
+import opentouhou.com.opentouhouandroid.scene.State;
+
+public class StateInitial implements State<MainMenuScreen30> {
+    /*
+     * Constructor(s).
+     */
+    StateInitial() { }
 
     /*
-     * Implement State.
+     * Implement the State<T> interface.
      */
     @Override
     public void enter(MainMenuScreen30 scene) {
@@ -18,7 +23,7 @@ public class StateInitial extends State {
     }
 
     @Override
-    public State update(MainMenuScreen30 scene) {
+    public State<MainMenuScreen30> update(MainMenuScreen30 scene) {
         return null;
     }
 

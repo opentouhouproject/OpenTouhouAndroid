@@ -1,12 +1,13 @@
 package opentouhou.com.opentouhouandroid.scene.scenes.mainmenu;
 
+import opentouhou.com.opentouhouandroid.scene.State;
+
 /*
  * Holds the states for the main menu.
  */
-
-public class States {
+class States {
     // States
-    public static final State INITIAL_STATE = new StateInitial();
+    static final State<MainMenuScreen30> INITIAL_STATE = new StateInitial();
 
     /*
      * Constructor(s).

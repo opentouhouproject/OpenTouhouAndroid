@@ -15,20 +15,24 @@ import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.Stage;
+import opentouhou.com.opentouhouandroid.scene.State;
 
 /*
  * Loading screen implemented with OpenGL ES 3.0 .
  */
 public class LoadingScreen30 extends Scene {
+    // Track game state.
     public boolean finishedLoading = false;
+    private State<LoadingScreen30> state;
 
-    // Game Objects
-    public Background background;
-    public PetalFall petalFall;
-    public Text title, loadingMessage, loadingFinishedMsg;
-    public MeilinSprite sprite;
-
-    LoadingScreenState state;
+    /*
+     * Game Entities
+     * Should be package-private.
+     */
+    Background background;
+    PetalFall petalFall;
+    Text title, loadingMessage, loadingFinishedMsg;
+    MeilinSprite sprite;
 
     /*
      * Constructor(s)
@@ -74,35 +78,31 @@ public class LoadingScreen30 extends Scene {
     }
 
     /*
-     * Setup initial state.
+     * Enter the initial state.
      */
     public void init() {
-        // Setup the state.
-        state = LoadingScreenState.LOADING_STATE;
+        state = States.LOADING_STATE;
         state.enter(this);
-
-        // Set the current scene.
-        stage.setCurrentScene(this);
     }
 
     /*
-     * Update the scene.
+     * Implement the update method.
      */
     public void update() {
-        LoadingScreenState result = state.update(this);
+        State<LoadingScreen30> result = state.update(this);
 
         if (result != null) {
-            // Exit current state.
+            // Exit the current state.
             state.exit(this);
 
-            // Enter new state.
+            // Enter the new state.
             state = result;
             state.enter(this);
         }
     }
 
     /*
-     * Draw the scene.
+     * Implement the draw method.
      */
     public void draw() {
         background.draw(this);
@@ -111,6 +111,6 @@ public class LoadingScreen30 extends Scene {
         loadingMessage.draw(this);
         sprite.draw(this);
 
-        if (state == LoadingScreenState.FINISHED_STATE) loadingFinishedMsg.draw(this);
+        if (state == States.FINISHED_STATE) loadingFinishedMsg.draw(this);
     }
 }

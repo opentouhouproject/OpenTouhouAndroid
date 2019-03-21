@@ -4,7 +4,6 @@ import android.content.Context;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
 import opentouhou.com.opentouhouandroid.io.FileManager;
-import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.Stage;
 import opentouhou.com.opentouhouandroid.scene.State;
 import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
@@ -46,7 +45,16 @@ public class OpenGLES30Test extends Stage {
      * Update the current scene.
      */
     public void update() {
-        state.update(this);
+        State<OpenGLES30Test> result = state.update(this);
+
+        if (result != null) {
+            // Exit the current state.
+            state.exit(this);
+
+            // Enter the new state.
+            state = result;
+            state.enter(this);
+        }
     }
 
     /*
@@ -54,12 +62,5 @@ public class OpenGLES30Test extends Stage {
      */
     public void draw() {
         getCurrentScene().draw();
-    }
-
-    /*
-     * Scene Loading Methods.
-     */
-    private void loadMainMenu() {
-        mainMenuScreen30 = new MainMenuScreen30("MM", this);
     }
 }

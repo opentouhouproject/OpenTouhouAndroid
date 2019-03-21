@@ -10,16 +10,17 @@ import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.Stage;
+import opentouhou.com.opentouhouandroid.scene.State;
 
 /*
  * A main menu for the game!
  */
 public class MainMenuScreen30 extends Scene {
-    // Scene state.
-    private State state;
+    // Game State
+    private State<MainMenuScreen30> state;
 
     // Game Objects
-    public Background background;
+    Background background;
 
     /*
      * Constructor(s)
