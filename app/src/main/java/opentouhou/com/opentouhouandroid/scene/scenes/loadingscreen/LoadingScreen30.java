@@ -1,6 +1,4 @@
-package opentouhou.com.opentouhouandroid.scene.scenes;
-
-import android.os.SystemClock;
+package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
 import java.io.InputStreamReader;
 
@@ -17,15 +15,12 @@ import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.Stage;
-import opentouhou.com.opentouhouandroid.scene.state.LoadingScreen.LoadingScreenState;
 
 /*
  * Loading screen implemented with OpenGL ES 3.0 .
  */
 public class LoadingScreen30 extends Scene {
     public boolean finishedLoading = false;
-    public long start;
-    public long cur;
 
     // Game Objects
     public Background background;
@@ -35,15 +30,17 @@ public class LoadingScreen30 extends Scene {
 
     LoadingScreenState state;
 
-    // Constructor(s)
-    public LoadingScreen30(String name, Stage stage)
-    {
+    /*
+     * Constructor(s)
+     */
+    public LoadingScreen30(String name, Stage stage) {
         super(name, stage);
     }
 
-    // Loads resources for drawing the scene.
-    public void setup()
-    {
+    /*
+     * Loads resources for drawing the scene.
+     */
+    public void setup() {
         // Retrieve the renderer from the stage.
         Renderer renderer = stage.getRenderer();
 
@@ -72,12 +69,20 @@ public class LoadingScreen30 extends Scene {
         // Create sprite.
         sprite = new MeilinSprite("meilin", renderer);
 
-        state = LoadingScreenState.LOADING_STATE;
-        start = SystemClock.uptimeMillis();
-        cur = SystemClock.uptimeMillis();
-
         // Done loading.
         ready = true;
+    }
+
+    /*
+     * Setup initial state.
+     */
+    public void init() {
+        // Setup the state.
+        state = LoadingScreenState.LOADING_STATE;
+        state.enter(this);
+
+        // Set the current scene.
+        stage.setCurrentScene(this);
     }
 
     /*
@@ -85,8 +90,12 @@ public class LoadingScreen30 extends Scene {
      */
     public void update() {
         LoadingScreenState result = state.update(this);
-        if (result != null)
-        {
+
+        if (result != null) {
+            // Exit current state.
+            state.exit(this);
+
+            // Enter new state.
             state = result;
             state.enter(this);
         }

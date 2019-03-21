@@ -2,6 +2,7 @@ package opentouhou.com.opentouhouandroid.scene;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.io.FileManager;
+import opentouhou.com.opentouhouandroid.scene.loader.LoadManager;
 import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 /*
@@ -55,7 +56,7 @@ public abstract class Stage {
     /*
      * Setter(s).
      */
-    protected void setCurrentScene(Scene scene) {
+    public void setCurrentScene(Scene scene) {
         currentScene = scene;
     }
 

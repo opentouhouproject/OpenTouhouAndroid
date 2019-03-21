@@ -1,6 +1,4 @@
-package opentouhou.com.opentouhouandroid.scene.state.LoadingScreen;
-
-import opentouhou.com.opentouhouandroid.scene.scenes.LoadingScreen30;
+package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
 public abstract class LoadingScreenState {
     public static final LoadingScreenState LOADING_STATE = new LoadingState();

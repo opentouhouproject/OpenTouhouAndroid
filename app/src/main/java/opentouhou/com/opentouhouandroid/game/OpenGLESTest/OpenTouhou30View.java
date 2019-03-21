@@ -9,7 +9,6 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLDisplay;
 
 import opentouhou.com.opentouhouandroid.scene.Stage;
-import opentouhou.com.opentouhouandroid.scene.stages.OpenGLES30Test;
 
 public class OpenTouhou30View extends GLSurfaceView {
     private volatile boolean isPlaying;

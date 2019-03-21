@@ -1,23 +1,21 @@
-package opentouhou.com.opentouhouandroid.scene.state.LoadingScreen;
-
-import android.os.SystemClock;
-
-import opentouhou.com.opentouhouandroid.scene.scenes.LoadingScreen30;
+package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
 public final class LoadingState extends LoadingScreenState {
     /*
      * Constructor(s).
      */
-    protected LoadingState() { }
+    LoadingState() { }
 
     /*
      * Implement LoadingScreenState.
      */
     public void enter(LoadingScreen30 scene) {
-        return;
+        scene.getAudioPlayer().play("audio/music/loadingMusic.mp3");
     }
 
-    public void handleInput(LoadingScreen30 scene) { return; }
+    public void handleInput(LoadingScreen30 scene) {
+        // do nothing
+    }
 
     public LoadingScreenState update(LoadingScreen30 scene) {
         scene.background.update();
@@ -35,17 +33,10 @@ public final class LoadingState extends LoadingScreenState {
            return LoadingScreenState.FINISHED_STATE;
         }
 
-        if (scene.cur - scene.start > 20000) {
-            scene.finishedLoading = true;
-        }
-        else {
-            scene.cur = SystemClock.uptimeMillis();
-        }
-
         return null;
     }
 
     public void exit(LoadingScreen30 scene) {
-        return;
+        // do nothing.
     }
 }

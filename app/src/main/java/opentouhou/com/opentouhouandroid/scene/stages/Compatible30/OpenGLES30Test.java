@@ -1,12 +1,14 @@
-package opentouhou.com.opentouhouandroid.scene.stages;
+package opentouhou.com.opentouhouandroid.scene.stages.Compatible30;
 
 import android.content.Context;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
 import opentouhou.com.opentouhouandroid.io.FileManager;
+import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.Stage;
-import opentouhou.com.opentouhouandroid.scene.scenes.LoadingScreen30;
-import opentouhou.com.opentouhouandroid.scene.scenes.MainMenuScreen30;
+import opentouhou.com.opentouhouandroid.scene.State;
+import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
+import opentouhou.com.opentouhouandroid.scene.scenes.mainmenu.MainMenuScreen30;
 import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 /*
@@ -14,16 +16,12 @@ import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
  */
 
 public class OpenGLES30Test extends Stage {
-    // States
-    private enum States {
-        Loading, MainMenu
-    }
-
-    private States state;
+    // State
+    State<OpenGLES30Test> state;
 
     // Scenes
-    private LoadingScreen30 loadingScreen30;
-    private MainMenuScreen30 mainMenuScreen30;
+    LoadingScreen30 loadingScreen30;
+    MainMenuScreen30 mainMenuScreen30;
 
     /*
      * Constructor(s).
@@ -34,30 +32,21 @@ public class OpenGLES30Test extends Stage {
         renderer = new Renderer30(this);
         audioPlayer = new AudioPlayer(context);
         fileManager = new FileManager(context);
+
+        state = null;
     }
 
     // Implement Stage.
     public void setup() {
-        mainMenuScreen30 = new MainMenuScreen30("MM", this);
-
-        // Load the scenes.
-        loadingScreen30 = new LoadingScreen30("TEST", this);
-        loadingScreen30.setup();
-
-        state = States.Loading;
-
-        // Set the current scene.
-        setCurrentScene(loadingScreen30);
-
-        // Start the audio.
-        getAudioPlayer().play("audio/music/loadingMusic.mp3");
+        state = States.LOADING_SCREEN;
+        state.enter(this);
     }
 
     /*
      * Update the current scene.
      */
     public void update() {
-        getCurrentScene().update();
+        state.update(this);
     }
 
     /*
@@ -65,5 +54,12 @@ public class OpenGLES30Test extends Stage {
      */
     public void draw() {
         getCurrentScene().draw();
+    }
+
+    /*
+     * Scene Loading Methods.
+     */
+    private void loadMainMenu() {
+        mainMenuScreen30 = new MainMenuScreen30("MM", this);
     }
 }

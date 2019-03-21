@@ -9,7 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import opentouhou.com.opentouhouandroid.scene.Stage;
-import opentouhou.com.opentouhouandroid.scene.stages.OpenGLES30Test;
+import opentouhou.com.opentouhouandroid.scene.stages.Compatible30.OpenGLES30Test;
 
 public class OpenTouhou30Activity extends Activity {
     private OpenTouhou30View openTouhou30View;

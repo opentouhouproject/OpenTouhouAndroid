@@ -9,7 +9,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLDisplay;
 
 import opentouhou.com.opentouhouandroid.scene.Stage;
-import opentouhou.com.opentouhouandroid.scene.stages.OpenGLES20Test;
+import opentouhou.com.opentouhouandroid.scene.stages.Compatible20.OpenGLES20Test;
 
 public class OpenGLES20TestView extends GLSurfaceView {
     private Stage stage;

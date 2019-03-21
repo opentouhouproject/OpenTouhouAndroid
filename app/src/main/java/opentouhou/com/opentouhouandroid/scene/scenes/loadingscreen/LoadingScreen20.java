@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.scene.scenes;
+package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
 import java.io.InputStreamReader;
 

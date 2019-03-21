@@ -4,6 +4,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
+import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 /**
  * Manages a logical set of game objects.
@@ -41,6 +42,8 @@ public abstract class Scene
     public Camera getCamera() { return camera; }
 
     public Vector4f getLight() { return light; }
+
+    public AudioPlayer getAudioPlayer() { return stage.getAudioPlayer(); }
 
     /*
      * Asset load methods.
