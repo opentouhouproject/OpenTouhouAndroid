@@ -1,5 +1,7 @@
 package opentouhou.com.opentouhouandroid.scene;
 
+import android.view.MotionEvent;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
@@ -70,6 +72,8 @@ public abstract class Scene
 
     // Implemented by sub classes.
     abstract public void setup();
+    abstract public void init();
+    abstract public void handleInput(MotionEvent event);
     abstract public void update();
     abstract public void draw();
 

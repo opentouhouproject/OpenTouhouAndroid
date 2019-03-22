@@ -1,5 +1,7 @@
 package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
+import android.view.MotionEvent;
+
 import java.io.InputStreamReader;
 
 import opentouhou.com.opentouhouandroid.entity.sprite.meilin.MeilinSprite;
@@ -22,14 +24,15 @@ import opentouhou.com.opentouhouandroid.scene.State;
  */
 public class LoadingScreen30 extends Scene {
     // Track game state.
-    public boolean finishedLoading = false;
+    public boolean finishedLoading = true;
+    public boolean userContinue = false;
     private State<LoadingScreen30> state;
 
     /*
      * Game Entities
      * Should be package-private.
      */
-    Background background;
+    public Background background, background2;
     PetalFall petalFall;
     Text title, loadingMessage, loadingFinishedMsg;
     MeilinSprite sprite;
@@ -60,6 +63,9 @@ public class LoadingScreen30 extends Scene {
 
         // Create background.
         background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30);
+        //background2 = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30);
+        //background2.setPosition(0, 0, 2);
+        //background.setTexture(renderer.getTextureManager().getTexture("art/test_touhou_bg.png"));
 
         // Create text.
         FontManager fontManager = renderer.getFontManager();
@@ -86,6 +92,13 @@ public class LoadingScreen30 extends Scene {
     }
 
     /*
+     * Implement the handleInput method.
+     */
+    public void handleInput(MotionEvent event) {
+        state.handleInput(this, event);
+    }
+
+    /*
      * Implement the update method.
      */
     public void update() {
@@ -106,6 +119,7 @@ public class LoadingScreen30 extends Scene {
      */
     public void draw() {
         background.draw(this);
+        //background2.draw(this);
         petalFall.draw(this);
         title.draw(this);
         loadingMessage.draw(this);

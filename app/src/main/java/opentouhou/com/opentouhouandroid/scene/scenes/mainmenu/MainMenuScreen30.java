@@ -1,16 +1,25 @@
 package opentouhou.com.opentouhouandroid.scene.scenes.mainmenu;
 
+import android.util.Log;
+import android.view.MotionEvent;
+
 import java.io.InputStreamReader;
 
+import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
+import opentouhou.com.opentouhouandroid.entity.petals.PetalFall;
+import opentouhou.com.opentouhouandroid.entity.sprite.meilin.MeilinSprite;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.Stage;
 import opentouhou.com.opentouhouandroid.scene.State;
+import opentouhou.com.opentouhouandroid.scene.stages.Compatible30.OpenGLES30Test;
 
 /*
  * A main menu for the game!
@@ -21,6 +30,7 @@ public class MainMenuScreen30 extends Scene {
 
     // Game Objects
     Background background;
+    //Text title;
 
     /*
      * Constructor(s)
@@ -41,15 +51,20 @@ public class MainMenuScreen30 extends Scene {
         SceneParser.parse(reader, this);
 
         // Create the camera.
-        camera = new Camera(0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0, 0, 1, 0);
+        camera = new Camera(0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
         // Create light source(s).
-        light = new Vector4f(0.0f, 0.0f, 2f, 0f);
+        light = new Vector4f(0.0f, 0.0f, 2.0f, 0.0f);
 
         // Create background.
         background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30);
+        background.setTexture(renderer.getTextureManager().getTexture("art/test_touhou_bg.png"));
+
+        //FontManager fontManager = renderer.getFontManager();
+        //title = TextEntityGenerator.CREATE_LOADING_SCREEN_TITLE(fontManager);
 
         // Finished loading.
+        Log.d("DONE", "MAIN MENU LOAD COMPLETE.");
         ready = true;
     }
 
@@ -60,9 +75,13 @@ public class MainMenuScreen30 extends Scene {
         // Setup the state.
         state = States.INITIAL_STATE;
         state.enter(this);
+    }
 
-        // Set the current scene.
-        stage.setCurrentScene(this);
+    /*
+     * Implement the handleInput method.
+     */
+    public void handleInput(MotionEvent event) {
+        // do nothing
     }
 
     /*
@@ -77,5 +96,7 @@ public class MainMenuScreen30 extends Scene {
      */
     public void draw() {
         background.draw(this);
+        //((OpenGLES30Test)stage).loadingScreen30.background.draw(this);
+        //title.draw(this);
     }
 }

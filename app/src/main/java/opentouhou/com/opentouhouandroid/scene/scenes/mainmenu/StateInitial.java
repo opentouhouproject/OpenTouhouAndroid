@@ -1,5 +1,7 @@
 package opentouhou.com.opentouhouandroid.scene.scenes.mainmenu;
 
+import android.view.MotionEvent;
+
 import opentouhou.com.opentouhouandroid.scene.State;
 
 public class StateInitial implements State<MainMenuScreen30> {
@@ -14,12 +16,12 @@ public class StateInitial implements State<MainMenuScreen30> {
     @Override
     public void enter(MainMenuScreen30 scene) {
         scene.getAudioPlayer().stop();
-        scene.getAudioPlayer().play("audio/music/bgm3.mp3");
+        scene.getAudioPlayer().play("audio/music/bgm1.mp3");
     }
 
     @Override
-    public void handleInput(MainMenuScreen30 scene) {
-        // do nothing
+    public State<MainMenuScreen30> handleInput(MainMenuScreen30 scene, MotionEvent event) {
+        return null;
     }
 
     @Override

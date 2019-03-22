@@ -1,5 +1,7 @@
 package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
+import android.view.MotionEvent;
+
 import opentouhou.com.opentouhouandroid.scene.State;
 
 public final class StateLoading implements State<LoadingScreen30> {
@@ -11,16 +13,19 @@ public final class StateLoading implements State<LoadingScreen30> {
     /*
      * Implement the State<T> interface.
      */
+    @Override
     public void enter(LoadingScreen30 scene) {
         scene.getAudioPlayer().play("audio/music/loadingMusic.mp3");
     }
 
-    public void handleInput(LoadingScreen30 scene) {
-        // do nothing
+    @Override
+    public State<LoadingScreen30> handleInput(LoadingScreen30 scene, MotionEvent event) {
+        return null;
     }
 
+    @Override
     public State<LoadingScreen30> update(LoadingScreen30 scene) {
-        scene.background.update();
+        //scene.background.update();
         scene.petalFall.update();
         scene.title.update();
         scene.loadingMessage.update();
@@ -34,6 +39,7 @@ public final class StateLoading implements State<LoadingScreen30> {
         return null;
     }
 
+    @Override
     public void exit(LoadingScreen30 scene) {
         // do nothing.
     }

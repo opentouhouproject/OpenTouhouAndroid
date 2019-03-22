@@ -20,8 +20,9 @@ import javax.microedition.khronos.opengles.GL10;
  * Renderer implemented with OpenGL ES 3.0.
  */
 
-public class Renderer30 extends Renderer
-{
+public class Renderer30 extends Renderer {
+    private float ratio;
+
     // Scene(s)
     private Stage stage;
     private Text fpsCounter;
@@ -66,6 +67,7 @@ public class Renderer30 extends Renderer
         /**
          * Temporary Solution.
          */
+        stage.handleInput();
         stage.update();
 
         // Redraw background color.
@@ -101,11 +103,17 @@ public class Renderer30 extends Renderer
         GLES30.glViewport(0, 0, width, height);
 
         // Calculate the screen ratio.
-        float ratio = (float) width / height;
+        ratio = (float) width / (float) height;
 
         // Update the projection matrix.
         Camera camera = stage.getCurrentScene().getCamera();
         if (camera != null) camera.setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
         //scene.getCamera().setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
+    }
+
+    public void setProjection() {
+        // Update the projection matrix.
+        Camera camera = stage.getCurrentScene().getCamera();
+        if (camera != null) camera.setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
     }
 }

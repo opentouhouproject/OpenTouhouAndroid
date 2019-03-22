@@ -1,5 +1,7 @@
 package opentouhou.com.opentouhouandroid.scene.stages.Compatible30;
 
+import android.view.MotionEvent;
+
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.State;
 import opentouhou.com.opentouhouandroid.scene.loader.BatchLoadTask;
@@ -28,13 +30,21 @@ public class StateLoadScreen implements State<OpenGLES30Test> {
 
         // LOAD BABY LOAD
         stage.mainMenuScreen30 = new MainMenuScreen30("MM", stage);
-        Scene[] scenes = { stage.mainMenuScreen30 };
-        LoadManager.startBatchSceneLoad(new BatchLoadTask(scenes, stage.loadingScreen30));
+        stage.mainMenuScreen30.setup();
+
+        //Scene[] scenes = { stage.mainMenuScreen30 };
+        //LoadManager.startBatchSceneLoad(new BatchLoadTask(scenes, stage.loadingScreen30));
     }
 
     @Override
-    public void handleInput(OpenGLES30Test stage) {
-        // do nothing
+    public State<OpenGLES30Test> handleInput(OpenGLES30Test stage, MotionEvent event) {
+        stage.getCurrentScene().handleInput(event);
+
+        if (((LoadingScreen30) stage.getCurrentScene()).userContinue == true) {
+            return States.MAIN_MENU;
+        }
+
+        return null;
     }
 
     @Override

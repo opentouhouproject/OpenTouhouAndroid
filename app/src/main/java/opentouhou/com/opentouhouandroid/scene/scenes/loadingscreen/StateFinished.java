@@ -1,6 +1,10 @@
 package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
+import android.view.MotionEvent;
+
 import opentouhou.com.opentouhouandroid.scene.State;
+
+import static android.view.MotionEvent.ACTION_DOWN;
 
 public class StateFinished implements State<LoadingScreen30> {
     /*
@@ -16,12 +20,20 @@ public class StateFinished implements State<LoadingScreen30> {
         scene.sprite.selectAnimation("walkingForward");
     }
 
-    public void handleInput(LoadingScreen30 scene) {
-        // do nothing
+    public State<LoadingScreen30> handleInput(LoadingScreen30 scene, MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+
+        switch(event.getAction()) {
+            case ACTION_DOWN:
+                scene.userContinue = true;
+        }
+
+        return null;
     }
 
     public State<LoadingScreen30> update(LoadingScreen30 scene) {
-        scene.background.update();
+        //scene.background.update();
         scene.petalFall.update();
         scene.title.update();
         scene.loadingMessage.update();

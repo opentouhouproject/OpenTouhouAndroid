@@ -1,8 +1,10 @@
 package opentouhou.com.opentouhouandroid.scene;
 
+import android.view.MotionEvent;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.io.FileManager;
-import opentouhou.com.opentouhouandroid.scene.loader.LoadManager;
+import opentouhou.com.opentouhouandroid.io.eventqueue.MotionEventQueue;
 import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 /*
@@ -17,6 +19,7 @@ public abstract class Stage {
     protected Renderer renderer;
     protected AudioPlayer audioPlayer;
     protected FileManager fileManager;
+    protected MotionEventQueue motionEventQueue;
 
     /*
      * Constructor(s).
@@ -28,6 +31,7 @@ public abstract class Stage {
         renderer = null;
         audioPlayer = null;
         fileManager = null;
+        motionEventQueue = null;
     }
 
     /*
@@ -53,6 +57,8 @@ public abstract class Stage {
         return fileManager;
     }
 
+    public MotionEventQueue getMotionEventQueue() { return motionEventQueue; }
+
     /*
      * Setter(s).
      */
@@ -64,6 +70,7 @@ public abstract class Stage {
      * OpenGL ES version dependant.
      */
     public abstract void setup();
+    public abstract void handleInput();
     public abstract void update();
     public abstract void draw();
 

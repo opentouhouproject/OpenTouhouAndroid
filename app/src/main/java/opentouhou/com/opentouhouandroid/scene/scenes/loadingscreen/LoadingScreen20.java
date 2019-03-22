@@ -1,5 +1,7 @@
 package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
+import android.view.MotionEvent;
+
 import java.io.InputStreamReader;
 
 import opentouhou.com.opentouhouandroid.entity.sprite.meilin.MeilinSprite;
@@ -80,6 +82,17 @@ public class LoadingScreen20 extends Scene {
         */
         // Done loading.
         ready = true;
+    }
+
+    public void init() {
+        // do nothing
+    }
+
+    /*
+     * Implement the handleInput method.
+     */
+    public void handleInput(MotionEvent event) {
+        // do nothing
     }
 
     /*

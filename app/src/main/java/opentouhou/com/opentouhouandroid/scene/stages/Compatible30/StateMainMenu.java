@@ -1,5 +1,8 @@
 package opentouhou.com.opentouhouandroid.scene.stages.Compatible30;
 
+import android.view.MotionEvent;
+
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
 import opentouhou.com.opentouhouandroid.scene.State;
 
 public class StateMainMenu implements State<OpenGLES30Test> {
@@ -15,11 +18,17 @@ public class StateMainMenu implements State<OpenGLES30Test> {
     public void enter(OpenGLES30Test stage) {
         // Set the current scene.
         stage.setCurrentScene(stage.mainMenuScreen30);
+
+        stage.getCurrentScene().init();
+
+        ((Renderer30)stage.getRenderer()).setProjection();
     }
 
     @Override
-    public void handleInput(OpenGLES30Test stage) {
-        // do nothing
+    public State<OpenGLES30Test> handleInput(OpenGLES30Test stage, MotionEvent event) {
+        stage.getCurrentScene().handleInput(event);
+
+        return null;
     }
 
     @Override

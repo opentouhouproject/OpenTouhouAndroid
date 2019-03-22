@@ -4,13 +4,17 @@ import android.opengl.GLES30;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.GraphicsObject30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
+import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public class BackgroundDrawable30 extends GraphicsObject30 {
+    public Vector3f position = new Vector3f(-5.5f, -10.0f, 0);
+
     /*
      * Constructor(s).
      */
@@ -22,6 +26,10 @@ public class BackgroundDrawable30 extends GraphicsObject30 {
      * Setup the drawable object.
      */
     private void setup(Renderer renderer) {
+        // Get items.
+        ShaderProgram program = renderer.getShaderManager().getShaderProgram("Background");
+        Texture texture = renderer.getTextureManager().getTexture("art/loading_bg1.png");
+
         // Set the mesh.
         // (x, y, z), (r, g, b, a), (x, y, z), (s, t)
         float[] data = {
@@ -33,22 +41,21 @@ public class BackgroundDrawable30 extends GraphicsObject30 {
                 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0
         };
 
-        Mesh30 mesh = new Mesh30(data, renderer.getShaderManager().getShaderProgramHandle("Background"), MeshLayout.Layout.PCNT);
+        Mesh30 mesh = new Mesh30(data, program.getHandle(), MeshLayout.Layout.PCNT);
         setMesh(mesh);
 
         // Set the texture.
-        setTexture(renderer.getTextureManager().getTexture("art/loading_bg1.png"));
+        setTexture(texture);
 
         // Set the shader.
-        setShader(renderer.getShaderManager().getShaderProgram("Background"));
+        setShader(program);
 
         // Set the model.
-        Texture texture = renderer.getTextureManager().getTexture("art/loading_bg1.png");
         int width = texture.getWidth();
         int height = texture.getHeight();
         float scale = 11.5f;
         Matrix4f mat = Matrix4f.scaleMatrix(scale, scale * ((float)height / (float)width), 1);
-        mat.translate(-5.5f, -10.0f, 0);
+        mat.translate(position.x, position.y, position.z);
         setModelMatrix(mat);
     }
 
@@ -71,6 +78,14 @@ public class BackgroundDrawable30 extends GraphicsObject30 {
 
         // Set the texture.
         setTexture(shaderHandle);
+
+        // Set the model.
+        int width = texture.getWidth();
+        int height = texture.getHeight();
+        float scale = 11.5f;
+        Matrix4f mat = Matrix4f.scaleMatrix(scale, scale * ((float)height / (float)width), 1);
+        mat.translate(position.x, position.y, position.z);
+        setModelMatrix(mat);
 
         // Set the mesh.
         setMesh();

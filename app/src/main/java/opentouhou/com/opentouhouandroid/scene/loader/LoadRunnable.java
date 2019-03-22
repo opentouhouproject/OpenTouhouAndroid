@@ -1,5 +1,14 @@
 package opentouhou.com.opentouhouandroid.scene.loader;
 
+import android.opengl.EGLConfig;
+import android.opengl.EGLDisplay;
+
+import static android.opengl.EGL14.EGL_CONTEXT_CLIENT_VERSION;
+import static android.opengl.EGL14.EGL_DEFAULT_DISPLAY;
+import static android.opengl.EGL14.EGL_NONE;
+import static android.opengl.EGL14.EGL_NO_CONTEXT;
+import static android.opengl.EGL14.eglCreateContext;
+import static android.opengl.EGL14.eglGetDisplay;
 import static android.os.Process.setThreadPriority;
 
 public class LoadRunnable implements Runnable {

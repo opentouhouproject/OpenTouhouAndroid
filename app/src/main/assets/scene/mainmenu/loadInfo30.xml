@@ -3,34 +3,18 @@
     <!-- Shader Loading Section -->
     <shaders>
         <!-- Compile Vertex Shaders -->
-        <vertex name="TextureShader" path="shaders/opengles30/TextureShader.vert" />
-        <vertex name="Font" path="shaders/opengles30/Font.vert" />
-        <vertex name="Background" path="shaders/opengles30/Background.vert" />
-        <vertex name="Petal" path="shaders/opengles30/Petal.vert" />
 
         <!-- Compile Fragment Shaders -->
-        <fragment name="TextureShader" path="shaders/opengles30/TextureShader.frag" />
-        <fragment name="Font" path="shaders/opengles30/Font.frag" />
-        <fragment name="Font2" path="shaders/opengles30/Font2.frag" />
-        <fragment name="Background" path="shaders/opengles30/Background.frag" />
-        <fragment name="Petal" path="shaders/opengles30/Petal.frag" />
 
         <!-- Link Shader Programs -->
-        <program name="TextureShader" vertex="TextureShader" fragment="TextureShader" />
-        <program name="Font" vertex="Font" fragment="Font" />
-        <program name="Font2" vertex="Font" fragment="Font2" />
-        <program name="Background" vertex="Background" fragment="Background" />
-        <program name="Petal" vertex="Petal" fragment="Petal" />
     </shaders>
 
     <!-- Texture Loading Section -->
     <textures>
-        <texture path="art/loading_bg1.png" option="GREYSCALE" />
+        <texture path="art/test_touhou_bg.png" option="GREYSCALE" />
     </textures>
 
     <!-- Font Loading Section -->
     <fonts>
-        <font path="fonts/popstar/popstar16.xml" />
-        <font path="fonts/yozakura/yozakura256.xml" />
     </fonts>
 </load>

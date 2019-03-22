@@ -13,6 +13,8 @@ import opentouhou.com.opentouhouandroid.scene.Stage;
 public class OpenTouhou30View extends GLSurfaceView {
     private volatile boolean isPlaying;
 
+    private Stage stage;
+
     /*
      * Constructor(s).
      */
@@ -31,7 +33,10 @@ public class OpenTouhou30View extends GLSurfaceView {
 
         /*
          * Set the renderer.
+         * Sets up the context.
+         * Starts rendering thread separate from UI thread.
          */
+        this.stage = stage;
         setRenderer(stage.getRenderer());
 
         /*
@@ -56,6 +61,8 @@ public class OpenTouhou30View extends GLSurfaceView {
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
+        stage.getMotionEventQueue().enqueue(e);
+
         return true;
     }
 
