@@ -24,7 +24,7 @@ import opentouhou.com.opentouhouandroid.scene.State;
  */
 public class LoadingScreen30 extends Scene {
     // Track game state.
-    public boolean finishedLoading = true;
+    public boolean finishedLoading = false;
     public boolean userContinue = false;
     private State<LoadingScreen30> state;
 
@@ -62,7 +62,7 @@ public class LoadingScreen30 extends Scene {
         light = new Vector4f(0.0f, 0.0f, 2.0f, 0.0f);
 
         // Create background.
-        background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30);
+        background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30, false);
         //background2 = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30);
         //background2.setPosition(0, 0, 2);
         //background.setTexture(renderer.getTextureManager().getTexture("art/test_touhou_bg.png"));

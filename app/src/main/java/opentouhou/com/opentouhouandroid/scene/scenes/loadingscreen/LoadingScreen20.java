@@ -50,7 +50,7 @@ public class LoadingScreen20 extends Scene {
         light = new Vector4f(0.0f, 0.0f, 2.0f, 0.0f);
 
         // Create background.
-        background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_20);
+        background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_20, false);
 
         // Create text.
         /*

@@ -57,7 +57,7 @@ public class MainMenuScreen30 extends Scene {
         light = new Vector4f(0.0f, 0.0f, 2.0f, 0.0f);
 
         // Create background.
-        background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30);
+        background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30, true);
         background.setTexture(renderer.getTextureManager().getTexture("art/test_touhou_bg.png"));
 
         //FontManager fontManager = renderer.getFontManager();
@@ -96,7 +96,6 @@ public class MainMenuScreen30 extends Scene {
      */
     public void draw() {
         background.draw(this);
-        //((OpenGLES30Test)stage).loadingScreen30.background.draw(this);
         //title.draw(this);
     }
 }

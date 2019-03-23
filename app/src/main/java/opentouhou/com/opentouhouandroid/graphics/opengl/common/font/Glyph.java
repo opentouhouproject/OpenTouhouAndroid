@@ -4,6 +4,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.FontDrawable30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
@@ -69,15 +70,18 @@ public class Glyph
                 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, right, top
         };
 
+        ShaderProgram program = renderer.getShaderManager().getShaderProgram("Font");
+
         // Set the mesh.
-        Mesh30 mesh = new Mesh30(data, renderer.getShaderManager().getShaderProgramHandle("Font"), MeshLayout.Layout.PCNT);
+        Mesh30 mesh = new Mesh30(data, MeshLayout.Layout.PCNT);
+        mesh.createVAO(program.getHandle());
         drawable.setMesh(mesh);
 
         // Set the texture.
         drawable.setTexture(renderer.getTextureManager().getTexture(assetPath));
 
         // Set the shader.
-        drawable.setShader(renderer.getShaderManager().getShaderProgram("Font"));
+        drawable.setShader(program);
 
         // Set the model.
         drawable.setModelMatrix(Matrix4f.getIdentity());

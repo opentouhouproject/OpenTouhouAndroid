@@ -8,11 +8,9 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.Mesh;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.VertexArrayObject30;
 
-public class Mesh30 extends Mesh
-{
+public class Mesh30 extends Mesh {
     // Constructor.
-    public Mesh30(float[] attributes, int shader, MeshLayout.Layout layout)
-    {
+    public Mesh30(float[] attributes, MeshLayout.Layout layout) {
         layoutFormat = layout;
 
         // Generate the buffer(s).
@@ -24,13 +22,11 @@ public class Mesh30 extends Mesh
         allocateGPUMemory(attributes);
 
         // Setup the VAO.
-        vao = new VertexArrayObject30(attributeBuffer, shader, layout);
+        //vao = new VertexArrayObject30(attributeBuffer, shader, layout);
     }
 
-    private void allocateGPUMemory(float[] attributes)
-    {
-        switch(layoutFormat)
-        {
+    private void allocateGPUMemory(float[] attributes) {
+        switch(layoutFormat) {
             case PCNT:
                 vertexCount = attributes.length / 12;
                 break;
@@ -52,5 +48,9 @@ public class Mesh30 extends Mesh
 
         // Unbind from the buffer when done with it.
         GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, 0);
+    }
+
+    public void createVAO(int shader) {
+        vao = new VertexArrayObject30(attributeBuffer, shader, layoutFormat);
     }
 }

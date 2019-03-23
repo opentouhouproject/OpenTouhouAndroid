@@ -30,10 +30,10 @@ public class StateLoadScreen implements State<OpenGLES30Test> {
 
         // LOAD BABY LOAD
         stage.mainMenuScreen30 = new MainMenuScreen30("MM", stage);
-        stage.mainMenuScreen30.setup();
+        //stage.mainMenuScreen30.setup();
 
-        //Scene[] scenes = { stage.mainMenuScreen30 };
-        //LoadManager.startBatchSceneLoad(new BatchLoadTask(scenes, stage.loadingScreen30));
+        Scene[] scenes = { stage.mainMenuScreen30 };
+        LoadManager.startBatchSceneLoad(new BatchLoadTask(scenes, stage.loadingScreen30));
     }
 
     @Override

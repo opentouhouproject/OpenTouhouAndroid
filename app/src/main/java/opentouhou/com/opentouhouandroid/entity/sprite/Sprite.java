@@ -7,6 +7,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.SpriteAnimation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.GraphicsObject30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
@@ -65,6 +66,8 @@ public class Sprite {
      */
     protected void createDrawable(Renderer renderer)
     {
+        ShaderProgram program = renderer.getShaderManager().getShaderProgram("TextureShader");
+
         // Generate the mesh.
         float[] data = {
                 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0,
@@ -74,7 +77,8 @@ public class Sprite {
                 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1,
                 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0
         };
-        Mesh30 mesh = new Mesh30(data, renderer.getShaderManager().getShaderProgramHandle("TextureShader"), MeshLayout.Layout.PCNT);
+        Mesh30 mesh = new Mesh30(data, MeshLayout.Layout.PCNT);
+        mesh.createVAO(program.getHandle());
 
         // Create the drawable.
         GraphicsOptions opt = new GraphicsOptions(true, true);
@@ -84,7 +88,7 @@ public class Sprite {
         drawable.setMesh(mesh);
 
         // Set the shader.
-        drawable.setShader(renderer.getShaderManager().getShaderProgram("TextureShader"));
+        drawable.setShader(program);
 
         // Set the texture.
         drawable.setTexture(currentAnimation.currentFrame());

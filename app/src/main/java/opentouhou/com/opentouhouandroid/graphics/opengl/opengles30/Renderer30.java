@@ -1,5 +1,6 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30;
 
+import android.opengl.EGL14;
 import android.opengl.GLES30;
 import android.opengl.GLU;
 import android.util.Log;
@@ -24,7 +25,7 @@ public class Renderer30 extends Renderer {
     private float ratio;
 
     // Scene(s)
-    private Stage stage;
+
     private Text fpsCounter;
 
     public Renderer30(Stage stage) {
@@ -55,6 +56,9 @@ public class Renderer30 extends Renderer {
         // Enable blending.
         GLES30.glEnable(GLES30.GL_BLEND);
         GLES30.glBlendFunc(GLES30.GL_SRC_ALPHA, GLES30.GL_ONE_MINUS_SRC_ALPHA );
+
+        // ccc
+        eglContext = EGL14.eglGetCurrentContext();
 
         // load the scene.
         stage.setup();

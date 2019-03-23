@@ -39,6 +39,8 @@ public class OpenTouhou30View extends GLSurfaceView {
         this.stage = stage;
         setRenderer(stage.getRenderer());
 
+        this.stage.view = this;
+
         /*
          * Set the render mode.
          * Android caps the framerate at the screen refresh rate.

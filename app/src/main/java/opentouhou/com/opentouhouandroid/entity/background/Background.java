@@ -15,14 +15,14 @@ public class Background extends GameEntity {
     /*
      * Constructor(s).
      */
-    public Background(Renderer renderer, GraphicsObject.Version version) {
+    public Background(Renderer renderer, GraphicsObject.Version version, boolean async) {
         switch (version) {
             case OPENGL_ES_20:
                 drawable = new BackgroundDrawable20(renderer);
                 break;
 
             case OPENGL_ES_30:
-                drawable = new BackgroundDrawable30(renderer);
+                drawable = new BackgroundDrawable30(renderer, async);
                 break;
         }
     }

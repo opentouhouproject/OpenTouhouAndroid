@@ -1,5 +1,6 @@
 package opentouhou.com.opentouhouandroid.scene;
 
+import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
@@ -15,6 +16,7 @@ import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 public abstract class Stage {
     private String name;
     private Scene currentScene;
+    public GLSurfaceView view;
 
     protected Renderer renderer;
     protected AudioPlayer audioPlayer;

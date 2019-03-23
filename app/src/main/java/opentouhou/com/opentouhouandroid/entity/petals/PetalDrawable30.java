@@ -42,7 +42,8 @@ public class PetalDrawable30 extends GraphicsObject30 {
 
         // Set the mesh.
         float[] meshPoints = generateMesh();
-        Mesh30 mesh = new Mesh30(meshPoints, program.getHandle(), MeshLayout.Layout.PCN);
+        Mesh30 mesh = new Mesh30(meshPoints, MeshLayout.Layout.PCN);
+        mesh.createVAO(program.getHandle());
         setMesh(mesh);
 
         // Set the shader program.

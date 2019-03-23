@@ -11,6 +11,8 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
+import opentouhou.com.opentouhouandroid.scene.loader.CreateVAORunnable;
+import opentouhou.com.opentouhouandroid.scene.loader.CreateVAOTask;
 
 public class BackgroundDrawable30 extends GraphicsObject30 {
     public Vector3f position = new Vector3f(-5.5f, -10.0f, 0);
@@ -18,14 +20,14 @@ public class BackgroundDrawable30 extends GraphicsObject30 {
     /*
      * Constructor(s).
      */
-    public BackgroundDrawable30(Renderer renderer) {
-        setup(renderer);
+    public BackgroundDrawable30(Renderer renderer, boolean async) {
+        setup(renderer, async);
     }
 
     /*
      * Setup the drawable object.
      */
-    private void setup(Renderer renderer) {
+    private void setup(Renderer renderer, boolean async) {
         // Get items.
         ShaderProgram program = renderer.getShaderManager().getShaderProgram("Background");
         Texture texture = renderer.getTextureManager().getTexture("art/loading_bg1.png");
@@ -41,7 +43,15 @@ public class BackgroundDrawable30 extends GraphicsObject30 {
                 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0
         };
 
-        Mesh30 mesh = new Mesh30(data, program.getHandle(), MeshLayout.Layout.PCNT);
+        Mesh30 mesh = new Mesh30(data, MeshLayout.Layout.PCNT);
+        if (async) {
+            CreateVAOTask task = new CreateVAOTask(mesh, program.getHandle());
+            renderer.queue(task.getRunnable());
+        }
+        else {
+            mesh.createVAO(program.getHandle());
+        }
+
         setMesh(mesh);
 
         // Set the texture.
@@ -57,6 +67,10 @@ public class BackgroundDrawable30 extends GraphicsObject30 {
         Matrix4f mat = Matrix4f.scaleMatrix(scale, scale * ((float)height / (float)width), 1);
         mat.translate(position.x, position.y, position.z);
         setModelMatrix(mat);
+
+        //while(!task.done) {
+        //    continue;
+        //}
     }
 
     // Override the parent draw method.

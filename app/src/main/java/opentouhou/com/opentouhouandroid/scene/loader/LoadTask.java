@@ -1,5 +1,7 @@
 package opentouhou.com.opentouhouandroid.scene.loader;
 
+import android.opengl.EGLContext;
+
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 /*
@@ -63,4 +65,6 @@ public class LoadTask {
     public void handleState() {
         loadManager.handleState(this, this.state);
     }
+
+    public EGLContext getContext() { return scene.getRenderer().getContext(); }
 }
