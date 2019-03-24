@@ -30,7 +30,7 @@ public class MainMenuScreen30 extends Scene {
 
     // Game Objects
     Background background;
-    //Text title;
+    Text title;
 
     /*
      * Constructor(s)
@@ -60,8 +60,8 @@ public class MainMenuScreen30 extends Scene {
         background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30, true);
         background.setTexture(renderer.getTextureManager().getTexture("art/mm_bg1.png"));
 
-        //FontManager fontManager = renderer.getFontManager();
-        //title = TextEntityGenerator.CREATE_LOADING_SCREEN_TITLE(fontManager);
+        FontManager fontManager = renderer.getFontManager();
+        title = TextEntityGenerator.CREATE_MAIN_MENU_TITLE(fontManager);
 
         // Finished loading.
         Log.d("DONE", "MAIN MENU LOAD COMPLETE.");
@@ -96,6 +96,6 @@ public class MainMenuScreen30 extends Scene {
      */
     public void draw() {
         background.draw(this);
-        //title.draw(this);
+        title.draw(this);
     }
 }

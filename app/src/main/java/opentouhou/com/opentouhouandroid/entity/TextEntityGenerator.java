@@ -57,4 +57,18 @@ public class TextEntityGenerator {
 
         return text;
     }
+
+    public static Text CREATE_MAIN_MENU_TITLE(FontManager fontManager) {
+        // 0.529f 0.807f 0.921f
+        // 1.0f 0.717f 0.772f
+        Text text = new Text(fontManager.getFont("fonts/yozakura/yozakura256.xml"));
+
+        text.setText("Open Touhou")
+                .setPosition(new Vector3f(-3.5f, 4.0f, 3))
+                .setScaling(125f)
+                .setColor(new Vector4f(1.0f, 1.0f, 1.0f, 0.8f))
+                .setShader("Font");
+
+        return text;
+    }
 }
