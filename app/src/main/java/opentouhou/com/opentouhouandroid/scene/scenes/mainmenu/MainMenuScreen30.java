@@ -58,7 +58,7 @@ public class MainMenuScreen30 extends Scene {
 
         // Create background.
         background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30, true);
-        background.setTexture(renderer.getTextureManager().getTexture("art/test_touhou_bg.png"));
+        background.setTexture(renderer.getTextureManager().getTexture("art/mm_bg1.png"));
 
         //FontManager fontManager = renderer.getFontManager();
         //title = TextEntityGenerator.CREATE_LOADING_SCREEN_TITLE(fontManager);

@@ -16,7 +16,7 @@ public class StateInitial implements State<MainMenuScreen30> {
     @Override
     public void enter(MainMenuScreen30 scene) {
         scene.getAudioPlayer().stop();
-        scene.getAudioPlayer().play("audio/music/bgm1.mp3");
+        scene.getAudioPlayer().play("audio/music/soundcloud_bgm1.mp3");
     }
 
     @Override
