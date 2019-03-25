@@ -3,10 +3,13 @@
     <!-- Shader Loading Section -->
     <shaders>
         <!-- Compile Vertex Shaders -->
+        <vertex name="Button" path="shaders/opengles30/Button.vert" />
 
         <!-- Compile Fragment Shaders -->
+        <fragment name="Button" path="shaders/opengles30/Button.frag" />
 
         <!-- Link Shader Programs -->
+        <program name="Button" vertex="Button" fragment="Button" />
     </shaders>
 
     <!-- Texture Loading Section -->
