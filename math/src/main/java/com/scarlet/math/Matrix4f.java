@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.math;
+package com.scarlet.math;
 
 /**
  * 4x4 matrix of floats.

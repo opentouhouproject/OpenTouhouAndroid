@@ -2,10 +2,11 @@ package opentouhou.com.opentouhouandroid.scene;
 
 import android.view.MotionEvent;
 
+import com.scarlet.math.Vector4f;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
-import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 /**

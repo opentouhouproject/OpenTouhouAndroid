@@ -1,12 +1,13 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common.font;
 
+import com.scarlet.math.Vector3f;
+import com.scarlet.math.Vector4f;
+
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.io.xml.FontParser;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
-import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 /**

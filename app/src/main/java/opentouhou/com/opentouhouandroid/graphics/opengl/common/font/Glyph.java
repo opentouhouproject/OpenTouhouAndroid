@@ -1,15 +1,14 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common.font;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
+import com.scarlet.math.Matrix4f;
+import com.scarlet.math.Vector3f;
+import com.scarlet.math.Vector4f;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.FontDrawable30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
-import opentouhou.com.opentouhouandroid.math.Matrix4f;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
-import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 /**

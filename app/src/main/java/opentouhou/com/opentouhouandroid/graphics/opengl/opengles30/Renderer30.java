@@ -5,13 +5,14 @@ import android.opengl.GLES30;
 import android.opengl.GLU;
 import android.util.Log;
 
+import com.scarlet.math.Vector3f;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader.ShaderManager30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.texture.TextureManager30;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.scene.Stage;
 
 import javax.microedition.khronos.egl.EGLConfig;

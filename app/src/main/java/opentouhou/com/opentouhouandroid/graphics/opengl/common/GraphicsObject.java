@@ -1,9 +1,10 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common;
 
+import com.scarlet.math.Matrix4f;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.Mesh;
-import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public abstract class GraphicsObject

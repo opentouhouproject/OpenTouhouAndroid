@@ -2,19 +2,17 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.drawable;
 
 import android.opengl.GLES20;
 
+import com.scarlet.math.Matrix4f;
+import com.scarlet.math.Vector4f;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
-import opentouhou.com.opentouhouandroid.math.Matrix4f;
-import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public class GraphicsObject20 extends GraphicsObject
 {
     // Constructor
-    public GraphicsObject20()
-    {
-
-    }
+    public GraphicsObject20() { }
 
     // Draw
     public void draw(Scene scene)

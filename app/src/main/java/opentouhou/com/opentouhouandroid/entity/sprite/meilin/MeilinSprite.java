@@ -1,11 +1,12 @@
 package opentouhou.com.opentouhouandroid.entity.sprite.meilin;
 
+import com.scarlet.math.Matrix4f;
+
 import opentouhou.com.opentouhouandroid.entity.sprite.Sprite;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.SpriteAnimation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
-import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public class MeilinSprite extends Sprite

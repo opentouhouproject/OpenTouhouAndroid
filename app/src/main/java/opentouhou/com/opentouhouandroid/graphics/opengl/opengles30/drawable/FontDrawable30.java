@@ -2,7 +2,8 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable;
 
 import android.opengl.GLES30;
 
-import opentouhou.com.opentouhouandroid.math.Vector4f;
+import com.scarlet.math.Vector4f;
+
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public class FontDrawable30 extends GraphicsObject30

@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.math;
+package com.scarlet.math;
 
 /**
  * 4 dimensional vector of floats.

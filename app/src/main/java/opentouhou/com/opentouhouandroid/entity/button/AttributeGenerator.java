@@ -1,17 +1,16 @@
 package opentouhou.com.opentouhouandroid.entity.button;
 
+import android.util.Log;
+
+import com.scarlet.math.CubicBezierCurve;
+import com.scarlet.math.Vector3f;
+import com.scarlet.math.Vector4f;
+
 /*
  * Generates the attributes used for drawing a button entity.
  * This button is drawn using vector graphics.
  * PCN format.
  */
-
-import android.util.Log;
-
-import opentouhou.com.opentouhouandroid.math.CubicBezierCurve;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
-import opentouhou.com.opentouhouandroid.math.Vector4f;
-
 public class AttributeGenerator {
     public float[] attributes;
 

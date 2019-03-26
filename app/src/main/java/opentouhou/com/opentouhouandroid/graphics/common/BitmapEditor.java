@@ -1,9 +1,8 @@
 package opentouhou.com.opentouhouandroid.graphics.common;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
-import opentouhou.com.opentouhouandroid.math.Vector3f;
+import com.scarlet.math.Vector3f;
 
 /**
  * Used to apply effects to a bitmap.

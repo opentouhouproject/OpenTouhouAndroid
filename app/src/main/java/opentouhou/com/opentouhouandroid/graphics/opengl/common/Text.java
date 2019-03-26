@@ -1,15 +1,15 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common;
 
+import com.scarlet.math.Vector3f;
+import com.scarlet.math.Vector4f;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.TextAnimation;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.Font;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
-import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
-/**
+/*
  * Represents a text object that can drawn to the screen.
  */
-
 public class Text {
     Font font;
 

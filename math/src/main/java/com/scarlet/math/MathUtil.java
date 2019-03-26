@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.math;
+package com.scarlet.math;
 
 /**
  * Common methods for math.

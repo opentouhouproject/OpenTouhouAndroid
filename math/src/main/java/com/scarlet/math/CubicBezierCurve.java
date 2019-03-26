@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.math;
+package com.scarlet.math;
 
 public class CubicBezierCurve {
     private Vector3f[] points;

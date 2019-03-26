@@ -2,8 +2,9 @@ package opentouhou.com.opentouhouandroid.scene.scenes.mainmenu;
 
 import android.view.MotionEvent;
 
+import com.scarlet.math.Vector3f;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.scene.State;
 
 import static android.view.MotionEvent.ACTION_DOWN;

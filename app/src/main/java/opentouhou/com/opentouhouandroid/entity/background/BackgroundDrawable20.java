@@ -2,12 +2,13 @@ package opentouhou.com.opentouhouandroid.entity.background;
 
 import android.opengl.GLES20;
 
+import com.scarlet.math.Matrix4f;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.drawable.GraphicsObject20;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.mesh.Mesh20;
-import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public class BackgroundDrawable20 extends GraphicsObject20 {

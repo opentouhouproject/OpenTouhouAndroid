@@ -1,10 +1,11 @@
 package opentouhou.com.opentouhouandroid.entity.background;
 
+import com.scarlet.math.Vector3f;
+
 import opentouhou.com.opentouhouandroid.entity.GameEntity;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 public class Background extends GameEntity {

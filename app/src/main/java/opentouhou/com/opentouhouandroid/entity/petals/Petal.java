@@ -2,10 +2,10 @@ package opentouhou.com.opentouhouandroid.entity.petals;
 
 import android.os.SystemClock;
 
-import java.util.Random;
+import com.scarlet.math.Matrix4f;
+import com.scarlet.math.Vector3f;
 
-import opentouhou.com.opentouhouandroid.math.Matrix4f;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
+import java.util.Random;
 
 /*
  * Represents a single petal.

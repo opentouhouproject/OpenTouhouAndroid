@@ -2,10 +2,10 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.common;
 
 import android.util.Log;
 
-import opentouhou.com.opentouhouandroid.math.MathUtil;
-import opentouhou.com.opentouhouandroid.math.Matrix4f;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
-import opentouhou.com.opentouhouandroid.math.Vector4f;
+import com.scarlet.math.MathUtil;
+import com.scarlet.math.Matrix4f;
+import com.scarlet.math.Vector3f;
+import com.scarlet.math.Vector4f;
 
 /*
  * Represents a camera for 3D graphics.
