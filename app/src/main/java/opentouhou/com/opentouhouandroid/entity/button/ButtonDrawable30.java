@@ -5,7 +5,6 @@ import android.opengl.GLES30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.GraphicsObject30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
@@ -34,7 +33,7 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         AttributeGenerator gen = new AttributeGenerator();
         gen.generate();
         //float[] data = gen.innerAttributes;
-        float[] data2 = gen.borderAttributes;
+        float[] data2 = gen.attributes;
 
         Mesh30 mesh = new Mesh30(data2, MeshLayout.Layout.PCN);
         if (async) {

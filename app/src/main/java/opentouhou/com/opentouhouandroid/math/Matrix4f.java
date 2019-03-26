@@ -589,10 +589,8 @@ public class Matrix4f
     }
 
     // resets all the values of the matrix to "value"
-    public void reset(float value)
-    {
-        for (int i = 0; i < 16; i++)
-        {
+    public void reset(float value) {
+        for (int i = 0; i < 16; i++) {
             values[i] = value;
         }
     }

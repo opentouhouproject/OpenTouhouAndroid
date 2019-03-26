@@ -4,12 +4,10 @@ import opentouhou.com.opentouhouandroid.math.MathUtil;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 
-/**
- * Represents a camaera for 3D graphics.
+/*
+ * Represents a camera for 3D graphics.
  */
-
-public class Camera
-{
+public class Camera {
     // Lazy Update of matrices.
     private boolean dirty = false;
 
@@ -17,46 +15,69 @@ public class Camera
     private Matrix4f viewMatrix;
     private Matrix4f projectionMatrix;
 
+    private Matrix4f invViewMatrix;
+    private Matrix4f invProjectionMatrix;
+
     // Vectors
     private Vector4f cameraPosition;
     private Vector4f lookAtPosition;
     private Vector4f lookDirection;
     private Vector4f upDirection;
 
-    // Constructor(s).
-    public Camera(float p_x, float p_y, float p_z, float l_x, float l_y, float l_z)
-    {
-        cameraPosition = new Vector4f(p_x, p_y, p_z, 0);
+    /*
+     * Constructor(s).
+     */
+    public Camera(float pX, float pY, float pZ, float lX, float lY, float lZ) {
+        // Set the camera position.
+        cameraPosition = new Vector4f(pX, pY, pZ, 0);
 
-        lookAtPosition = new Vector4f(l_x, l_y, l_z, 0);
+        // Set the position we are looking at.
+        lookAtPosition = new Vector4f(lX, lY, lZ, 0);
 
-        lookDirection = new Vector4f(l_x - p_x, l_y - p_y, l_z - p_z, 0);
+        // Compute the look vector using the camera position and look at position.
+        lookDirection = new Vector4f(lX - pX, lY - pY, lZ - pZ, 0);
         lookDirection.selfNormalize();
 
-        upDirection = new Vector4f(0, 1, 0, 0); // y coordinate is up
+        // Set the up direction.
+        upDirection = new Vector4f(0.0f, 1.0f, 0.0f, 0.0f); // y coordinate is up
 
+        // Initialize the view matrix.
         viewMatrix = Matrix4f.getIdentity();
+        // Compute the view matrix.
         updateViewMatrix(cameraPosition, lookAtPosition, upDirection);
+
+        // Initialize the projection matrix.
         projectionMatrix = Matrix4f.getIdentity();
+        invProjectionMatrix = Matrix4f.getIdentity();
     }
 
-    public Camera(float p_x, float p_y, float p_z, float l_x, float l_y, float l_z, float up_x, float up_y, float up_z)
-    {
-        cameraPosition = new Vector4f(p_x, p_y, p_z, 0);
+    public Camera(float pX, float pY, float pZ, float lX, float lY, float lZ, float upX, float upY, float upZ) {
+        // Set the camera position.
+        cameraPosition = new Vector4f(pX, pY, pZ, 0);
 
-        lookAtPosition = new Vector4f(l_x, l_y, l_z, 0);
+        // Set the position we are looking at.
+        lookAtPosition = new Vector4f(lX, lY, lZ, 0);
 
-        lookDirection = new Vector4f(l_x - p_x, l_y - p_y, l_z - p_z, 0);
+        // Compute the look vector using the camera position and look at position.
+        lookDirection = new Vector4f(lX - pX, lY - pY, lZ - pZ, 0);
         lookDirection.selfNormalize();
 
-        upDirection = new Vector4f(up_x, up_y, up_z, 0);
+        // Set the up direction.
+        upDirection = new Vector4f(upX, upY, upZ, 0);
 
+        // Initialize the view matrix.
         viewMatrix = Matrix4f.getIdentity();
+        // Compute the view matrix.
         updateViewMatrix(cameraPosition, lookAtPosition, upDirection);
+
+        // Initialize the projection matrix.
         projectionMatrix = Matrix4f.getIdentity();
+        invProjectionMatrix = Matrix4f.getIdentity();
     }
 
-    // Getters
+    /*
+     * Getter(s).
+     */
     Vector4f getCameraPosition() {
         return cameraPosition;
     }
@@ -73,45 +94,52 @@ public class Camera
         return upDirection;
     }
 
-    // Setters
-    public void setCameraPosition(float x, float y, float z)
-    {
+    /*
+     * Setter(s).
+     */
+    public void setCameraPosition(float x, float y, float z) {
+        // Set the camera position.
         cameraPosition.set(x, y, z, 0);
 
+        // Update the look vector.
         lookDirection.set(lookAtPosition.x - x, lookAtPosition.y - y, lookAtPosition.z - z, 0);
         lookDirection.selfNormalize();
 
+        // Flag the view matrix for an update.
         dirty = true;
     }
 
-    public void setLookAtPosition(float x, float y, float z)
-    {
+    public void setLookAtPosition(float x, float y, float z) {
+        // Set the look at position.
         lookAtPosition.set(x, y, z, 0);
 
+        // Update the look vector.
         lookDirection.set(x - cameraPosition.x, y - cameraPosition.y, z - cameraPosition.z, 0);
         lookDirection.selfNormalize();
 
+        // Flag the view matrix for an update.
         dirty = true;
     }
 
-    public void setUpDirection(float x, float y, float z)
-    {
+    public void setUpDirection(float x, float y, float z) {
+        // Update the up vector.
         upDirection.set(x, y, z, 0);
 
+        // Flag the view matrix for an update.
         dirty = true;
     }
 
-    // Movement
-    public void moveForward(float unit)
-    {
+    /*
+     * Movement
+     */
+    public void moveForward(float unit) {
         cameraPosition.set(cameraPosition.x + unit, cameraPosition.y + unit, cameraPosition.z + unit, 0);
         lookAtPosition.set(lookAtPosition.x + unit, lookAtPosition.y + unit, lookAtPosition.z + unit, 0);
 
         dirty = true;
     }
 
-    public void rotateCamZ(float angle)
-    {
+    public void rotateCamZ(float angle) {
         lookDirection = Matrix4f.multiply(Matrix4f.getZAxisRotation(angle, true), lookDirection);
         lookDirection.selfNormalize();
 
@@ -125,8 +153,7 @@ public class Camera
         dirty = true;
     }
 
-    public void rotateCamX(float angle)
-    {
+    public void rotateCamX(float angle) {
         lookDirection = Matrix4f.multiply(Matrix4f.getXAxisRotation(angle, true), lookDirection);
         lookDirection.selfNormalize();
 
@@ -135,8 +162,7 @@ public class Camera
         dirty = true;
     }
 
-    public void rotateCamY(float angle)
-    {
+    public void rotateCamY(float angle) {
         lookDirection = Matrix4f.multiply(Matrix4f.getYAxisRotation(angle, true), lookDirection);
         lookDirection.selfNormalize();
 
@@ -145,11 +171,11 @@ public class Camera
         dirty = true;
     }
 
-    // View Matrix
-    public Matrix4f getViewMatrix()
-    {
-        if (dirty)
-        {
+    /*
+     * View Matrix
+     */
+    public Matrix4f getViewMatrix() {
+        if (dirty) {
             updateViewMatrix(cameraPosition, lookAtPosition, upDirection);
 
             dirty = false;
@@ -158,8 +184,7 @@ public class Camera
         return viewMatrix;
     }
 
-    private void updateViewMatrix(Vector4f position, Vector4f lookAtPoint, Vector4f upVector)
-    {
+    private void updateViewMatrix(Vector4f position, Vector4f lookAtPoint, Vector4f upVector) {
         // Compute the forward vector.
         Vector4f forward = lookAtPoint.subtract(position);
         forward.selfNormalize();
@@ -224,8 +249,7 @@ public class Camera
         projectionMatrix.setValue(0, 3, 3);
     }
 
-    public void setFrustumMatrix(float left, float right, float bottom, float top, float near, float far)
-    {
+    public void setFrustumMatrix(float left, float right, float bottom, float top, float near, float far) {
         projectionMatrix.reset(0);
 
         // column 0
@@ -244,8 +268,7 @@ public class Camera
         projectionMatrix.setValue(2 * far * near / (near - far), 2, 3);
     }
 
-    public void setOrthographicProjection(float left, float right, float bottom, float top, float near, float far)
-    {
+    public void setOrthographicProjection(float left, float right, float bottom, float top, float near, float far) {
         projectionMatrix.reset(0);
 
         // column 0
@@ -262,5 +285,27 @@ public class Camera
         projectionMatrix.setValue(-(top + bottom) / (top - bottom), 1, 3);
         projectionMatrix.setValue(-(far + near) / (far - near), 2, 3);
         projectionMatrix.setValue(1, 3, 3);
+    }
+
+    /*
+     * Inverse Projection Matrix
+     */
+    public void setInverseFrustumMatrix(float left, float right, float bottom, float top, float near, float far) {
+        projectionMatrix.reset(0);
+
+        // column 0
+        projectionMatrix.setValue(2 * near / (right - left), 0, 0);
+
+        // column 1
+        projectionMatrix.setValue(2 * near / (top - bottom), 1, 1);
+
+        // column 2
+        projectionMatrix.setValue((right + left) / (right - left), 0, 2);
+        projectionMatrix.setValue((top + bottom) / (top - bottom), 1, 2);
+        projectionMatrix.setValue((far + near) / (near - far), 2, 2);
+        projectionMatrix.setValue(-1, 3, 2);
+
+        // column 3
+        projectionMatrix.setValue(2 * far * near / (near - far), 2, 3);
     }
 }
