@@ -1,6 +1,5 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20;
 
-import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLU;
 import android.util.Log;
@@ -10,27 +9,27 @@ import javax.microedition.khronos.opengles.GL10;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader.ShaderManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.texture.TextureManager;
-import opentouhou.com.opentouhouandroid.scene.OpenGLES20Test;
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader.ShaderManager20;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.texture.TextureManager20;
+import opentouhou.com.opentouhouandroid.scene.Stage;
 
-/**
+/*
  * Renderer implemented with OpenGL ES 2.0.
  */
 
 public class Renderer20 extends Renderer
 {
     // Scene(s)
-    private Scene testScene;
+    private Stage stage;
 
-    public Renderer20(Context context)
-    {
-        super(context);
+    public Renderer20(Stage stage) {
+        super();
 
-        shaderManager = new ShaderManager(context.getAssets());
-        textureManager = new TextureManager();
+        shaderManager = new ShaderManager20();
+        textureManager = new TextureManager20();
         fontManager = new FontManager();
+
+        this.stage = stage;
     }
 
     // Implement GLSurfaceView.Renderer interface.
@@ -52,8 +51,7 @@ public class Renderer20 extends Renderer
         GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA );
 
         // load scene
-        testScene = new OpenGLES20Test("ES20Test");
-        testScene.setup(this);
+        stage.setup();
     }
 
     public void onDrawFrame(GL10 unused)
@@ -62,7 +60,7 @@ public class Renderer20 extends Renderer
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         // Draw the scene.
-        testScene.draw();
+        stage.draw();
 
         // Error handling.
         int errorCode;
@@ -93,6 +91,7 @@ public class Renderer20 extends Renderer
 
         // Update the projection matrix.
         // This projection matrix is applied to object coordinates in the onDrawFrame() method.
-        testScene.getCamera().setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
+        stage.getCurrentScene().getCamera().setPerspectiveProjectionMatrix(-ratio, ratio, -1, 1, 1, 10);
+        //scene.getCamera().setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
     }
 }

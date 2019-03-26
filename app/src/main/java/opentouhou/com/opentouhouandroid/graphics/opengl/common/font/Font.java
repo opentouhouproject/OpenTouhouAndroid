@@ -1,41 +1,43 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common.font;
 
-import android.util.Xml;
+import com.scarlet.math.Vector3f;
+import com.scarlet.math.Vector4f;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
+import opentouhou.com.opentouhouandroid.io.xml.FontParser;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 /**
- * Represents a bitmap font from a .fnt file.
+ * Represents a bitmap font with a corresponding xml metadata file.
  */
+public class Font {
+    // Font info.
+    private String face, imageFile;
+    private int size, width, height;
+    private boolean italic, bold, unicode;
 
-public class Font
-{
-    // Font info
-    String face, imageFile;
-    int size, width, height;
-    boolean italic, bold, unicode;
-
-    // Glyphs
+    // Glyph mapping.
     private HashMap<Character, Glyph> glyphs;
 
-    public Font(InputStreamReader reader)
-    {
+    /*
+     * Constructor(s).
+     */
+    public Font(InputStreamReader reader) {
         glyphs = new HashMap<>();
 
-        open(reader);
+        FontParser.parse(reader, this);
+        //open(reader);
     }
 
-    // Getters
+    /*
+     * Getter(s).
+     */
     public String getFace() { return face; }
+
+    public String getImageFile() { return imageFile; }
 
     public int getSize() { return size; }
 
@@ -45,93 +47,39 @@ public class Font
 
     public boolean isUnicode() { return unicode; }
 
-    public String getImageFile() { return imageFile; }
-
     public Glyph getGlyph(char c) { return glyphs.get(c); }
 
-    // Open font file.
-    private void open(InputStreamReader reader)
-    {
-        try
-        {
+    /*
+     * Setter(s).
+     */
+    public void setFace(String input) { face = input; }
 
-            XmlPullParser parser = Xml.newPullParser();
-            parser.setInput(reader);
+    public void setImageFile(String input) { imageFile = input; }
 
-            int eventType = parser.getEventType();
-            while (eventType != XmlPullParser.END_DOCUMENT)
-            {
-                if (eventType == XmlPullParser.START_TAG)
-                {
-                    String name = parser.getName();
+    public void setSize(int input) { size = input; }
 
-                    if (name.equals("info"))
-                    {
-                        face = parser.getAttributeValue(null, "face");
-                        size = Integer.parseInt(parser.getAttributeValue(null, "size"));
-                        bold = 0 != Integer.parseInt(parser.getAttributeValue(null, "bold"));
-                        italic = 0 != Integer.parseInt(parser.getAttributeValue(null, "italic"));
-                        unicode = 0 != Integer.parseInt(parser.getAttributeValue(null, "unicode"));
-                    }
-                    else if (name.equals("common"))
-                    {
-                        width = Integer.parseInt(parser.getAttributeValue(null, "scaleW"));
-                        height = Integer.parseInt(parser.getAttributeValue(null, "scaleH"));
-                    }
-                    else if (name.equals("page"))
-                    {
-                        imageFile = parser.getAttributeValue(null, "file");
-                    }
-                    else if (name.equals("char"))
-                    {
-                        int id = Integer.parseInt(parser.getAttributeValue(null, "id"));
-                        int x = Integer.parseInt(parser.getAttributeValue(null, "x"));
-                        int y = Integer.parseInt(parser.getAttributeValue(null, "y"));
-                        int width = Integer.parseInt(parser.getAttributeValue(null, "width"));
-                        int height = Integer.parseInt(parser.getAttributeValue(null, "height"));
+    public void setWidth(int input) { width = input; }
 
-                        glyphs.put(Character.toChars(id)[0], new Glyph(id, x, y, width, height));
-                    }
-                }
+    public void setHeight(int input) { height = input; }
 
-                eventType = parser.next();
-            }
-        }
-        catch (XmlPullParserException e)
-        {
-            throw new RuntimeException("Failed to parse font file. " + e.getMessage(), e);
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException("Failed to parse font file. " + e.getMessage());
-        }
-        finally
-        {
-            try
-            {
-                if (reader != null)
-                {
-                    reader.close();
-                }
-            }
-            catch (IOException e)
-            {
-                throw new RuntimeException("Could not close stream.");
-            }
+    public void setBold(boolean input) { bold = input; }
+
+    public void setItalic(boolean input) { italic = input; }
+
+    public void setUnicode(boolean input) { unicode = input; }
+
+    public void putGlyph(char key, Glyph value) { glyphs.put(key, value); }
+
+    // Generates binding between glyphs and textures.
+    public void generate(Renderer renderer) {
+        for (Glyph g : glyphs.values()) {
+            String assetPath = "fonts/images/" + imageFile;
+            g.generate(width, height, assetPath, renderer);
         }
     }
 
-    public void generate(Renderer renderer)
-    {
-        for (Glyph g : glyphs.values())
-        {
-            g.generate(width, height, renderer);
-        }
-    }
-
-    // Draw
-    public void draw(char c, Vector3f point, Scene scene)
-    {
-        glyphs.get(c).draw(point, scene);
+    // Handles rendering of a single UNICODE character.
+    public void render(char c, Vector3f position, float scaling, Vector4f color, String shaderProgram, Scene scene) {
+        glyphs.get(c).draw(position, scaling, color, shaderProgram, scene);
     }
 }

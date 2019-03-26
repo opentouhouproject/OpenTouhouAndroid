@@ -1,86 +1,89 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common.font;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
+import opentouhou.com.opentouhouandroid.io.FileManager;
 
-/**
- * Reads .fnt files and loads the font.
+/*
+ * Reads xml font files and loads the font.
  */
 
-public class FontManager
-{
+public class FontManager {
+    private static int INITIAL_CAPACITY = 16;
+
     private HashMap<String, Font> fonts;
-    private HashMap<String, Integer> textures;
+    private HashMap<String, String> textures;
 
-    // Constructor
-    public FontManager()
-    {
-        fonts = new HashMap<>();
-        textures = new HashMap<>();
+    /*
+     * Constructor(s).
+     */
+    public FontManager() {
+        fonts = new HashMap<>(INITIAL_CAPACITY);
+        textures = new HashMap<>(INITIAL_CAPACITY);
     }
 
-    // Getters
-    public Font getFont(String id)
-    {
-        return fonts.get(id);
+    /*
+     * Getter(s).
+     */
+    public Font getFont(String fontName) {
+        return fonts.get(fontName);
     }
 
-    public String getImageFile(String id)
-    {
-        return fonts.get(id).getImageFile();
+    public String getImageFile(String fontName) {
+        return fonts.get(fontName).getImageFile();
     }
 
-    // Setters
-    public void setTextureId(String id, int imageId)
-    {
-        textures.put(id, imageId);
+    /*
+     * Setter(s).
+     */
+    public void setTextureId(String fontName, String assetPath) {
+        textures.put(fontName, assetPath);
     }
 
     // Load fonts.
-    public void loadFonts(String[] fontList, Renderer renderer)
-    {
-        for (String id : fontList)
-        {
-            // load the font metadata.
-            InputStreamReader in;
-
-            try
-            {
-                InputStream raw = renderer.getContext().getAssets().open(id);
-                in = new InputStreamReader(raw);
-            }
-            catch (IOException e)
-            {
-                throw new RuntimeException();
+    public void loadFonts(String[] fontPaths, Renderer renderer, FileManager fileManager) {
+        for (String fontPath : fontPaths) {
+            // Check if already loaded the font.
+            if (fonts.containsKey(fontPath)) {
+                continue;
             }
 
-            load(id, in);
-
+            // Create the font.
+            load(fontPath, fileManager.openRawAsset(fontPath));
 
             // Create textures.
-            String fileName = getImageFile(id);
-
-            String resourceName = fileName.substring(0, fileName.lastIndexOf('.'));
-            String type = "drawable";
-            String packageName = "teamdroid.com.speedtestarena";
-            int imageId = renderer.getContext().getResources().getIdentifier(resourceName, type, packageName);
-
-            renderer.getTextureManager().loadBitmap(imageId, renderer);
-            setTextureId(id, imageId);
+            String assetPath = "fonts/images/" + getImageFile(fontPath);
+            renderer.getTextureManager().loadAssetBitmap(assetPath, TextureManager.Options.NONE, fileManager);
+            setTextureId(fontPath, assetPath);
 
             // Generate
-            fonts.get(id).generate(renderer);
+            fonts.get(fontPath).generate(renderer);
         }
     }
 
+    public void loadFont(String fontPath, Renderer renderer, FileManager fileManager) {
+        // Check if already loaded the font.
+        if (fonts.containsKey(fontPath)) {
+            return;
+        }
+
+        // Create the font.
+        load(fontPath, fileManager.openRawAsset(fontPath));
+
+        // Create textures.
+        String assetPath = "fonts/images/" + getImageFile(fontPath);
+        renderer.getTextureManager().loadAssetBitmap(assetPath, TextureManager.Options.NONE, fileManager);
+        setTextureId(fontPath, assetPath);
+
+        // Generate
+        fonts.get(fontPath).generate(renderer);
+    }
+
     // Load a font.
-    public void load(String resourceId, InputStreamReader reader)
-    {
-        Font font = new Font(reader);
-        fonts.put(resourceId, font);
+    private void load(String fontPath, InputStreamReader reader) {
+        fonts.put(fontPath, new Font(reader));
     }
 }

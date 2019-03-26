@@ -1,44 +1,48 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common.font;
 
-import opentouhou.com.opentouhouandroid.R;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
+import com.scarlet.math.Matrix4f;
+import com.scarlet.math.Vector3f;
+import com.scarlet.math.Vector4f;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.GraphicsObject30;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Quad30;
-import opentouhou.com.opentouhouandroid.math.Matrix4f;
-import opentouhou.com.opentouhouandroid.math.Vector3f;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.FontDrawable30;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
 /**
- * Represents a single character.
+ * Represents a single UNICODE character.
  */
-
 public class Glyph
 {
     // UNICODE number.
     private int id;
 
-    // Top Left coordinate.
+    // Top left coordinate.
     private int x, y;
 
-    // dimensions.
+    // Dimensions.
     private int width, height;
 
-    // Mesh
-    private GraphicsObject drawable;
+    // Drawing.
+    private FontDrawable30 drawable;
 
+    // Constructor(s)
     public Glyph(int id, int x, int y, int width, int height)
     {
-        // Initialise information
         this.id = id;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+
+        // Initialise objects.
+        drawable = new FontDrawable30();
     }
 
-    // Getters
-    public int getCharId() { return id; }
+    // Getter(s)
+    public int getUnicodeId() { return id; }
 
     public int getX() { return x; }
 
@@ -48,15 +52,13 @@ public class Glyph
 
     public int getHeight() { return height; }
 
-    // Draw
-    public void generate(int texWidth, int texHeight, Renderer renderer)
+    // Set the drawable.
+    public void generate(int texWidth, int texHeight, String assetPath, Renderer renderer)
     {
         float left = (float)x / (float)texWidth;
         float right = (float)(x + width) / (float)texWidth;
         float top = (float)y / (float)texHeight;
         float bottom = (float)(y + height) / (float)texHeight;
-
-        // Generate drawable object.
 
         float[] data = {
                 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, left, top,
@@ -66,28 +68,40 @@ public class Glyph
                 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, right, bottom,
                 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, right, top
         };
-        /*
-        float[] data = {
-                0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0.0f, 0.0f,
-                0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0.0f, bottom,
-                1, 0, 0, 1, 1, 1, 1, 0, 0, 1, right, bottom,
-                0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0.0f, 0.0f,
-                1, 0, 0, 1, 1, 1, 1, 0, 0, 1, right, bottom,
-                1, 1, 0, 1, 1, 1, 1, 0, 0, 1, right, 0.0f
-        };*/
 
-        drawable = new GraphicsObject30();
-        drawable.setMesh(new Quad30(data, renderer.getShaderManager().getShaderProgramHandle("TextureShader")));
-        drawable.setTexture(renderer.getTextureManager().getTexture(R.drawable.popstar16_0));
-        drawable.setShader(renderer.getShaderManager().getShaderProgram("TextureShader"));
-        drawable.setModelMatrix(Matrix4f.scaleMatrix(4, 4, 1));
+        ShaderProgram program = renderer.getShaderManager().getShaderProgram("Font");
+
+        // Set the mesh.
+        Mesh30 mesh = new Mesh30(data, MeshLayout.Layout.PCNT);
+        mesh.createVAO(program.getHandle());
+        drawable.setMesh(mesh);
+
+        // Set the texture.
+        drawable.setTexture(renderer.getTextureManager().getTexture(assetPath));
+
+        // Set the shader.
+        drawable.setShader(program);
+
+        // Set the model.
+        drawable.setModelMatrix(Matrix4f.getIdentity());
     }
 
-    public void draw(Vector3f point, Scene scene)
+    // Draw the glyph on the screen.
+    public void draw(Vector3f position, float scale, Vector4f color, String shaderProgram, Scene scene)
     {
-        Matrix4f mat = Matrix4f.scaleMatrix(width/40f, height/40f, 1);
-        mat.translate(point.x, point.y, point.z);
-        drawable.setModelMatrix(mat);
+        // Set the model matrix.
+        Matrix4f model = Matrix4f.scaleMatrix(width / scale, height / scale, 1);
+        model.translate(position.x, position.y, position.z);
+        drawable.setModelMatrix(model);
+
+        // Set the color.
+        drawable.setColor(color);
+
+        // Set the shader.
+        ShaderProgram p = scene.getRenderer().getShaderManager().getShaderProgram(shaderProgram);
+        drawable.setShader(p);
+
+        // Draw the glyph.
         drawable.draw(scene);
     }
 }

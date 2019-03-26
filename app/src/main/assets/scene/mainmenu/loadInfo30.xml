@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<load name="MainMenuScreen30">
+    <!-- Shader Loading Section -->
+    <shaders>
+        <!-- Compile Vertex Shaders -->
+        <vertex name="Button" path="shaders/opengles30/Button.vert" />
+
+        <!-- Compile Fragment Shaders -->
+        <fragment name="Button" path="shaders/opengles30/Button.frag" />
+
+        <!-- Link Shader Programs -->
+        <program name="Button" vertex="Button" fragment="Button" />
+    </shaders>
+
+    <!-- Texture Loading Section -->
+    <textures>
+        <texture path="art/test_touhou_bg.png" option="GREYSCALE" />
+        <texture path="art/mm_bg1.png" option="GREYSCALE" />
+    </textures>
+
+    <!-- Font Loading Section -->
+    <fonts>
+    </fonts>
+</load>
