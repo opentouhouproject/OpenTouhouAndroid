@@ -249,6 +249,7 @@ public class Camera {
      * Inverse Projection Matrix
      */
     public void setInverseFrustumMatrix(float left, float right, float bottom, float top, float near, float far) {
+        /*
         projectionMatrix.reset(0);
 
         // column 0
@@ -265,5 +266,7 @@ public class Camera {
 
         // column 3
         projectionMatrix.setValue(2 * far * near / (near - far), 2, 3);
+        */
+        return;
     }
 }
