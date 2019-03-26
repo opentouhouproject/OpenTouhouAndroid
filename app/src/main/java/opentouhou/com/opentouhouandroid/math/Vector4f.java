@@ -117,17 +117,17 @@ public class Vector4f {
     }
 
     public static Vector3f cross(Vector4f u, Vector4f v) {
-        float vv_x = u.y * v.z - v.y * u.z;
-        float vv_y = -1 * (u.x * v.z - v.x * u.z);
-        float vv_z = u.x * v.y - v.x * u.y;
+        float vv_x = u.y * v.z - u.z * v.y;
+        float vv_y = u.z * v.x - u.x * v.z;
+        float vv_z = u.x * v.y - u.y * v.x;
 
         return new Vector3f(vv_x, vv_y, vv_z);
     }
 
     public static float cross_value(Vector4f u, Vector4f v) {
-        float vv_x = u.y * v.z - v.y * u.z;
-        float vv_y = -1 * (u.x * v.z - v.x * u.z);
-        float vv_z = u.x * v.y - v.x * u.y;
+        float vv_x = u.y * v.z - u.z * v.y;
+        float vv_y = u.z * v.x - u.x * v.z;
+        float vv_z = u.x * v.y - u.y * v.x;
 
         return vv_x + vv_y + vv_z;
     }

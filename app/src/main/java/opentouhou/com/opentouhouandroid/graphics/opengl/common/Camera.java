@@ -22,7 +22,7 @@ public class Camera {
     private Vector4f cameraPosition;
     private Vector4f lookAtPosition;
     private Vector4f lookDirection;
-    private Vector4f upDirection;
+    private Vector4f rightDirection;
 
     /*
      * Constructor(s).
@@ -39,19 +39,19 @@ public class Camera {
         lookDirection.selfNormalize();
 
         // Set the up direction.
-        upDirection = new Vector4f(0.0f, 1.0f, 0.0f, 0.0f); // y coordinate is up
+        rightDirection = new Vector4f(1.0f, 0.0f, 0.0f, 0.0f); // x coordinate is right
 
         // Initialize the view matrix.
         viewMatrix = Matrix4f.getIdentity();
         // Compute the view matrix.
-        updateViewMatrix(cameraPosition, lookAtPosition, upDirection);
+        updateViewMatrix(cameraPosition, lookAtPosition, rightDirection);
 
         // Initialize the projection matrix.
         projectionMatrix = Matrix4f.getIdentity();
         invProjectionMatrix = Matrix4f.getIdentity();
     }
 
-    public Camera(float pX, float pY, float pZ, float lX, float lY, float lZ, float upX, float upY, float upZ) {
+    public Camera(float pX, float pY, float pZ, float lX, float lY, float lZ, float rX, float rY, float rZ) {
         // Set the camera position.
         cameraPosition = new Vector4f(pX, pY, pZ, 0);
 
@@ -63,12 +63,12 @@ public class Camera {
         lookDirection.selfNormalize();
 
         // Set the up direction.
-        upDirection = new Vector4f(upX, upY, upZ, 0);
+        rightDirection = new Vector4f(rX, rY, rZ, 0);
 
         // Initialize the view matrix.
         viewMatrix = Matrix4f.getIdentity();
         // Compute the view matrix.
-        updateViewMatrix(cameraPosition, lookAtPosition, upDirection);
+        updateViewMatrix(cameraPosition, lookAtPosition, rightDirection);
 
         // Initialize the projection matrix.
         projectionMatrix = Matrix4f.getIdentity();
@@ -90,8 +90,8 @@ public class Camera {
         return lookDirection;
     }
 
-    Vector4f getUp() {
-        return upDirection;
+    Vector4f getRight() {
+        return rightDirection;
     }
 
     /*
@@ -121,53 +121,11 @@ public class Camera {
         dirty = true;
     }
 
-    public void setUpDirection(float x, float y, float z) {
+    public void setRightDirection(float x, float y, float z) {
         // Update the up vector.
-        upDirection.set(x, y, z, 0);
+        rightDirection.set(x, y, z, 0);
 
         // Flag the view matrix for an update.
-        dirty = true;
-    }
-
-    /*
-     * Movement
-     */
-    public void moveForward(float unit) {
-        cameraPosition.set(cameraPosition.x + unit, cameraPosition.y + unit, cameraPosition.z + unit, 0);
-        lookAtPosition.set(lookAtPosition.x + unit, lookAtPosition.y + unit, lookAtPosition.z + unit, 0);
-
-        dirty = true;
-    }
-
-    public void rotateCamZ(float angle) {
-        lookDirection = Matrix4f.multiply(Matrix4f.getZAxisRotation(angle, true), lookDirection);
-        lookDirection.selfNormalize();
-
-        lookAtPosition.set(cameraPosition.x + lookDirection.x,cameraPosition.y + lookDirection.y, cameraPosition.z + lookDirection.z, 0);
-
-        Vector4f up = Matrix4f.multiply(Matrix4f.getZAxisRotation(angle, true), upDirection);
-        up.selfNormalize();
-
-        upDirection.set(up.x, up.y, up.z, 0);
-
-        dirty = true;
-    }
-
-    public void rotateCamX(float angle) {
-        lookDirection = Matrix4f.multiply(Matrix4f.getXAxisRotation(angle, true), lookDirection);
-        lookDirection.selfNormalize();
-
-        lookAtPosition.set(cameraPosition.x + lookDirection.x,cameraPosition.y + lookDirection.y, cameraPosition.z + lookDirection.z, 0);
-
-        dirty = true;
-    }
-
-    public void rotateCamY(float angle) {
-        lookDirection = Matrix4f.multiply(Matrix4f.getYAxisRotation(angle, true), lookDirection);
-        lookDirection.selfNormalize();
-
-        lookAtPosition.set(cameraPosition.x + lookDirection.x, cameraPosition.y + lookDirection.y, cameraPosition.z + lookDirection.z, 0);
-
         dirty = true;
     }
 
@@ -176,7 +134,7 @@ public class Camera {
      */
     public Matrix4f getViewMatrix() {
         if (dirty) {
-            updateViewMatrix(cameraPosition, lookAtPosition, upDirection);
+            updateViewMatrix(cameraPosition, lookAtPosition, rightDirection);
 
             dirty = false;
         }
@@ -184,40 +142,40 @@ public class Camera {
         return viewMatrix;
     }
 
-    private void updateViewMatrix(Vector4f position, Vector4f lookAtPoint, Vector4f upVector) {
+    private void updateViewMatrix(Vector4f position, Vector4f lookAtPoint, Vector4f rightVector) {
         // Compute the forward vector.
         Vector4f forward = lookAtPoint.subtract(position);
         forward.selfNormalize();
 
-        // Compute the right vector.
-        Vector4f right = new Vector4f(Vector4f.cross(forward, upVector), 0);
-        right.selfNormalize();
+        // Compute the up vector.
+        Vector4f up = new Vector4f(Vector4f.cross(rightVector, forward), 0);
+        up.selfNormalize();
 
-        // Compute the orthogonal up vector.
-        Vector4f up = new Vector4f(Vector4f.cross(right, forward), 0);
+        // Compute the orthogonal right vector.
+        Vector4f right = new Vector4f(Vector4f.cross(forward, up), 0);
 
         // column 0
         viewMatrix.setValue(right.x, 0, 0);
-        viewMatrix.setValue(right.y, 1, 0);
-        viewMatrix.setValue(right.z, 2, 0);
+        viewMatrix.setValue(up.x, 1, 0);
+        viewMatrix.setValue(-forward.x, 2, 0);
         viewMatrix.setValue(0, 3, 0);
 
         // column 1
-        viewMatrix.setValue(up.x, 0, 1);
+        viewMatrix.setValue(right.y, 0, 1);
         viewMatrix.setValue(up.y, 1, 1);
-        viewMatrix.setValue(up.z, 2, 1);
+        viewMatrix.setValue(-forward.y, 2, 1);
         viewMatrix.setValue(0, 3, 1);
 
         // column 2
-        viewMatrix.setValue(-forward.x, 0, 2);
-        viewMatrix.setValue(-forward.y, 1, 2);
+        viewMatrix.setValue(right.z, 0, 2);
+        viewMatrix.setValue(up.z, 1, 2);
         viewMatrix.setValue(-forward.z, 2, 2);
         viewMatrix.setValue(0, 3, 2);
 
         // column 3
-        viewMatrix.setValue(-position.x, 0, 3);
-        viewMatrix.setValue(-position.y, 1, 3);
-        viewMatrix.setValue(-position.z, 2, 3);
+        viewMatrix.setValue(-(right.x * position.x + right.y * position.y + right.z * position.z), 0, 3);
+        viewMatrix.setValue(-(up.x * position.x + up.y * position.y + up.z * position.z), 1, 3);
+        viewMatrix.setValue((forward.x * position.x + forward.y * position.y + forward.z * position.z), 2, 3);
         viewMatrix.setValue(1, 3, 3);
     }
 

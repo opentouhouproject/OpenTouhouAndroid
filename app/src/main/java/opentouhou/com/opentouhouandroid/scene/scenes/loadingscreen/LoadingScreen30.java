@@ -32,7 +32,7 @@ public class LoadingScreen30 extends Scene {
      * Game Entities
      * Should be package-private.
      */
-    public Background background, background2;
+    public Background background;
     PetalFall petalFall;
     Text title, loadingMessage, loadingFinishedMsg;
     MeilinSprite sprite;
@@ -56,16 +56,13 @@ public class LoadingScreen30 extends Scene {
         SceneParser.parse(reader, this);
 
         // Create the camera.
-        camera = new Camera(0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        camera = new Camera(0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
 
         // Create light source(s).
         light = new Vector4f(0.0f, 0.0f, 2.0f, 0.0f);
 
         // Create background.
         background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30, false);
-        //background2 = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30);
-        //background2.setPosition(0, 0, 2);
-        //background.setTexture(renderer.getTextureManager().getTexture("art/test_touhou_bg.png"));
 
         // Create text.
         FontManager fontManager = renderer.getFontManager();

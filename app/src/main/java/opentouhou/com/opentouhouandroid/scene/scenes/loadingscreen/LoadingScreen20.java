@@ -44,7 +44,7 @@ public class LoadingScreen20 extends Scene {
         SceneParser.parse(reader, this);
 
         // Create the camera.
-        camera = new Camera(0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        camera = new Camera(0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
 
         // Create light source(s).
         light = new Vector4f(0.0f, 0.0f, 2.0f, 0.0f);
