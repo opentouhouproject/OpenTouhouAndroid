@@ -95,14 +95,12 @@ public class Renderer30 extends Renderer {
 
         // Error handling.
         int errorCode = GLES30.glGetError();
-        if (errorCode != 0)
-        {
+        if (errorCode != 0) {
             Log.e("KJ_Debug", GLU.gluErrorString(errorCode));
         }
     }
 
-    public void onSurfaceChanged(GL10 unused, int width, int height)
-    {
+    public void onSurfaceChanged(GL10 unused, int width, int height) {
         // Set the Viewport.
         GLES30.glViewport(0, 0, width, height);
 

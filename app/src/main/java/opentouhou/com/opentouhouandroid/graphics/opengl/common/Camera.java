@@ -21,7 +21,6 @@ public class Camera {
     // Vectors
     private Vector4f cameraPosition;
     private Vector4f lookAtPosition;
-    private Vector4f lookDirection;
     private Vector4f rightDirection;
 
     /*
@@ -34,11 +33,7 @@ public class Camera {
         // Set the position we are looking at.
         lookAtPosition = new Vector4f(lX, lY, lZ, 0);
 
-        // Compute the look vector using the camera position and look at position.
-        lookDirection = new Vector4f(lX - pX, lY - pY, lZ - pZ, 0);
-        lookDirection.selfNormalize();
-
-        // Set the up direction.
+        // Set the positive x axis direction.
         rightDirection = new Vector4f(1.0f, 0.0f, 0.0f, 0.0f); // x coordinate is right
 
         // Initialize the view matrix.
@@ -58,11 +53,7 @@ public class Camera {
         // Set the position we are looking at.
         lookAtPosition = new Vector4f(lX, lY, lZ, 0);
 
-        // Compute the look vector using the camera position and look at position.
-        lookDirection = new Vector4f(lX - pX, lY - pY, lZ - pZ, 0);
-        lookDirection.selfNormalize();
-
-        // Set the up direction.
+        // Set the positive x axis direction.
         rightDirection = new Vector4f(rX, rY, rZ, 0);
 
         // Initialize the view matrix.
@@ -86,10 +77,6 @@ public class Camera {
         return lookAtPosition;
     }
 
-    Vector4f getLook() {
-        return lookDirection;
-    }
-
     Vector4f getRight() {
         return rightDirection;
     }
@@ -101,10 +88,6 @@ public class Camera {
         // Set the camera position.
         cameraPosition.set(x, y, z, 0);
 
-        // Update the look vector.
-        lookDirection.set(lookAtPosition.x - x, lookAtPosition.y - y, lookAtPosition.z - z, 0);
-        lookDirection.selfNormalize();
-
         // Flag the view matrix for an update.
         dirty = true;
     }
@@ -112,10 +95,6 @@ public class Camera {
     public void setLookAtPosition(float x, float y, float z) {
         // Set the look at position.
         lookAtPosition.set(x, y, z, 0);
-
-        // Update the look vector.
-        lookDirection.set(x - cameraPosition.x, y - cameraPosition.y, z - cameraPosition.z, 0);
-        lookDirection.selfNormalize();
 
         // Flag the view matrix for an update.
         dirty = true;
@@ -179,14 +158,21 @@ public class Camera {
         viewMatrix.setValue(1, 3, 3);
     }
 
-    // Projection Matrix
+    /*
+     * Projection Matrix
+     */
 
-    // Retrieves the current projection matrix.
+    /*
+     * Retrieves the current projection matrix.
+     */
     public Matrix4f getProjectionMatrix()
     {
         return projectionMatrix;
     }
 
+    /*
+     * Defines a perspective projection matrix using FoV and the aspect ration.
+     */
     public void setSymmetricPerspectiveProjectionMatrix(float fieldOfView, float aspectRatio, float nearPlane, float farPlane) {
         projectionMatrix.reset(0);
 
@@ -207,6 +193,9 @@ public class Camera {
         projectionMatrix.setValue(0, 3, 3);
     }
 
+    /*
+     * Defines a perspective projection matrix using the aspect ratio.
+     */
     public void setPerspectiveProjectionMatrix(float left, float right, float bottom, float top, float near, float far) {
         projectionMatrix.reset(0);
 
@@ -226,6 +215,9 @@ public class Camera {
         projectionMatrix.setValue(2 * far * near / (near - far), 2, 3);
     }
 
+    /*
+     * Defines an orthographic projection using the aspect ratio.
+     */
     public void setOrthographicProjection(float left, float right, float bottom, float top, float near, float far) {
         projectionMatrix.reset(0);
 
