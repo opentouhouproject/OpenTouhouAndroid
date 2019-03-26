@@ -1,22 +1,19 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common;
 
-import android.opengl.EGL14;
 import android.opengl.EGLContext;
 import android.opengl.GLSurfaceView;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
 import opentouhou.com.opentouhouandroid.scene.Stage;
+import opentouhou.com.opentouhouandroid.sys.SystemInfo;
 
 /*
  * Represents a renderer.
  */
-
 public abstract class Renderer implements GLSurfaceView.Renderer {
-    // EGLContext.
+    // OpenGL context.
     protected EGLContext eglContext;
 
     // Shader manager.
@@ -28,12 +25,16 @@ public abstract class Renderer implements GLSurfaceView.Renderer {
     // Font manager.
     protected FontManager fontManager;
 
+    // Stage.
     protected Stage stage;
 
-    // FPS tracking.
-    protected int numberOfFrames;
-    protected long lastTime;
-    protected int lastFPS;
+    // Track system info.
+    protected SystemInfo sysInfo;
+
+    // Screen info.
+    protected int screenWidth;
+    protected int screenHeight;
+    protected float aspectRatio;
 
     // Constructor
     public Renderer() {
@@ -41,9 +42,11 @@ public abstract class Renderer implements GLSurfaceView.Renderer {
         textureManager = null;
         fontManager = null;
 
-        numberOfFrames = 0;
-        lastTime = System.currentTimeMillis();
-        lastFPS = 0;
+        sysInfo = new SystemInfo();
+
+        screenWidth = 0;
+        screenHeight = 0;
+        aspectRatio = 0;
     }
 
     // Getters
@@ -55,6 +58,13 @@ public abstract class Renderer implements GLSurfaceView.Renderer {
 
     public EGLContext getContext() { return eglContext; }
 
+    public int getScreenWidth() { return screenWidth; }
+
+    public int getScreenHeight() { return screenHeight; }
+
+    /*
+     * Queues a runnable to execute on the OpenGL thread.
+     */
     public void queue(Runnable r) {
         stage.view.queueEvent(r);
     }

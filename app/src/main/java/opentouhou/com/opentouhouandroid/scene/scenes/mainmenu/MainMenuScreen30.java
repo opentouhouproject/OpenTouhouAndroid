@@ -8,8 +8,6 @@ import java.io.InputStreamReader;
 import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
 import opentouhou.com.opentouhouandroid.entity.button.Button;
-import opentouhou.com.opentouhouandroid.entity.petals.PetalFall;
-import opentouhou.com.opentouhouandroid.entity.sprite.meilin.MeilinSprite;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
@@ -20,7 +18,6 @@ import opentouhou.com.opentouhouandroid.math.Vector4f;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.Stage;
 import opentouhou.com.opentouhouandroid.scene.State;
-import opentouhou.com.opentouhouandroid.scene.stages.Compatible30.OpenGLES30Test;
 
 /*
  * A main menu for the game!
@@ -85,7 +82,7 @@ public class MainMenuScreen30 extends Scene {
      * Implement the handleInput method.
      */
     public void handleInput(MotionEvent event) {
-        // do nothing
+        state.handleInput(this, event);
     }
 
     /*

@@ -17,17 +17,15 @@ import opentouhou.com.opentouhouandroid.scene.Stage;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-/**
+/*
  * Renderer implemented with OpenGL ES 3.0.
  */
-
 public class Renderer30 extends Renderer {
-    private float ratio;
-
-    // Scene(s)
-
     private Text fpsCounter;
 
+    /*
+     * Constructor(s).
+     */
     public Renderer30(Stage stage) {
         super();
 
@@ -38,9 +36,10 @@ public class Renderer30 extends Renderer {
         this.stage = stage;
     }
 
-    // Implement GLSurfaceView.Renderer interface.
-    public void onSurfaceCreated(GL10 unused, EGLConfig config)
-    {
+    /*
+     * Implement GLSurfaceView.Renderer interface.
+     */
+    public void onSurfaceCreated(GL10 unused, EGLConfig config) {
         // Log the OpenGL ES version.
         Log.e("KJ_Debug", GLES30.glGetString(GLES30.GL_VERSION));
 
@@ -57,18 +56,18 @@ public class Renderer30 extends Renderer {
         GLES30.glEnable(GLES30.GL_BLEND);
         GLES30.glBlendFunc(GLES30.GL_SRC_ALPHA, GLES30.GL_ONE_MINUS_SRC_ALPHA );
 
-        // ccc
+        // Get the current OpenGL context.
         eglContext = EGL14.eglGetCurrentContext();
 
-        // load the scene.
+        // load the stage.
         stage.setup();
 
+        // Load the fps counter.
         fpsCounter = new Text(this.getFontManager().getFont("fonts/popstar/popstar16.xml"));
     }
 
-    public void onDrawFrame(GL10 unused)
-    {
-        /**
+    public void onDrawFrame(GL10 unused) {
+        /*
          * Temporary Solution.
          */
         stage.handleInput();
@@ -80,18 +79,11 @@ public class Renderer30 extends Renderer {
         // Draw the scene.
         stage.draw();
 
-        // Measure fps.
-        long currentTime = System.currentTimeMillis();
-        numberOfFrames++;
-        if (currentTime - lastTime >= 1000 )
-        {
-            lastFPS = numberOfFrames;
-            numberOfFrames = 0;
-            lastTime = System.currentTimeMillis();
-        }
+        // Update fps.
+        sysInfo.updateFPS();
 
         // Draw fps counter.
-        fpsCounter.render(String.valueOf(lastFPS), new Vector3f(2.4f, 5.4f, 4), 40f, "Font2", stage.getCurrentScene());
+        fpsCounter.render(String.valueOf(sysInfo.getFPS()), new Vector3f(2.4f, 5.4f, 4), 40f, "Font2", stage.getCurrentScene());
 
         // Error handling.
         int errorCode = GLES30.glGetError();
@@ -104,16 +96,18 @@ public class Renderer30 extends Renderer {
         // Set the Viewport.
         GLES30.glViewport(0, 0, width, height);
 
-        // Calculate the screen ratio.
-        ratio = (float) width / (float) height;
+        // Update info.
+        screenWidth = width;
+        screenHeight = height;
+        aspectRatio = (float) width / (float) height;
 
         // Update the projection matrix.
         Camera camera = stage.getCurrentScene().getCamera();
 
         if (camera != null) {
-            camera.setPerspectiveProjectionMatrix(-ratio, ratio, -1, 1, 1, 10);
-            //camera.setSymmetricPerspectiveProjectionMatrix(48, ratio, 1, 10);
-            //camera.setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
+            camera.setPerspectiveProjectionMatrix(-aspectRatio, aspectRatio, -1, 1, 1, 10);
+            //camera.setSymmetricPerspectiveProjectionMatrix(48, aspectRatio, 1, 10);
+            //camera.setOrthographicProjection(-aspectRatio, aspectRatio, -1, 1, 1, 10);
         }
     }
 
@@ -122,9 +116,9 @@ public class Renderer30 extends Renderer {
         Camera camera = stage.getCurrentScene().getCamera();
 
         if (camera != null) {
-            camera.setPerspectiveProjectionMatrix(-ratio, ratio, -1, 1, 1, 10);
-            //camera.setSymmetricPerspectiveProjectionMatrix(48, ratio, 1, 10);
-            //camera.setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
+            camera.setPerspectiveProjectionMatrix(-aspectRatio, aspectRatio, -1, 1, 1, 10);
+            //camera.setSymmetricPerspectiveProjectionMatrix(48, aspectRatio, 1, 10);
+            //camera.setOrthographicProjection(-aspectRatio, aspectRatio, -1, 1, 1, 10);
         }
     }
 }

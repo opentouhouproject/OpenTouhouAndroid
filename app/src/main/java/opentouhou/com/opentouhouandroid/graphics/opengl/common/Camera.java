@@ -1,7 +1,10 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common;
 
+import android.util.Log;
+
 import opentouhou.com.opentouhouandroid.math.MathUtil;
 import opentouhou.com.opentouhouandroid.math.Matrix4f;
+import opentouhou.com.opentouhouandroid.math.Vector3f;
 import opentouhou.com.opentouhouandroid.math.Vector4f;
 
 /*
@@ -259,5 +262,17 @@ public class Camera {
         // column 3
         projectionMatrix.setValue(2 * far * near / (near - far), 2, 3);
         */
+    }
+
+    /*
+     * Convert screen coordinates to normalised device coordinates.
+     */
+    public Vector3f convertToNDC(float x, float y, int screenWidth, int screenHeight) {
+        float nX = 2 * (x / (float) screenWidth) - 1;
+        float nY = 1 - 2 * (y / (float) screenHeight);
+
+        Log.d("NDC Conversion", "Point: " + x + " " + y + " NDC: " + nX + " " + nY + " " + -1.0f);
+
+        return new Vector3f(nX, nY, -1.0f);
     }
 }
