@@ -91,7 +91,7 @@ public class Renderer20 extends Renderer
 
         // Update the projection matrix.
         // This projection matrix is applied to object coordinates in the onDrawFrame() method.
-        stage.getCurrentScene().getCamera().setFrustumMatrix(-ratio, ratio, -1, 1, 1, 10);
+        stage.getCurrentScene().getCamera().setPerspectiveProjectionMatrix(-ratio, ratio, -1, 1, 1, 10);
         //scene.getCamera().setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
     }
 }

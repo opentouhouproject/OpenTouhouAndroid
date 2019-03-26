@@ -111,13 +111,22 @@ public class Renderer30 extends Renderer {
 
         // Update the projection matrix.
         Camera camera = stage.getCurrentScene().getCamera();
-        if (camera != null) camera.setFrustumMatrix(-ratio, ratio, -1, 1, 1, 18);
-        //scene.getCamera().setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
+
+        if (camera != null) {
+            camera.setPerspectiveProjectionMatrix(-ratio, ratio, -1, 1, 1, 10);
+            //camera.setSymmetricPerspectiveProjectionMatrix(48, ratio, 1, 10);
+            //camera.setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
+        }
     }
 
     public void setProjection() {
         // Update the projection matrix.
         Camera camera = stage.getCurrentScene().getCamera();
-        if (camera != null) camera.setFrustumMatrix(-ratio, ratio, -1, 1, 1, 18);
+
+        if (camera != null) {
+            camera.setPerspectiveProjectionMatrix(-ratio, ratio, -1, 1, 1, 10);
+            //camera.setSymmetricPerspectiveProjectionMatrix(48, ratio, 1, 10);
+            //camera.setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
+        }
     }
 }
