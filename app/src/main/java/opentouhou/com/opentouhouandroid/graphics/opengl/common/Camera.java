@@ -319,32 +319,31 @@ public class Camera {
         float nX = 2 * (x / (float) screenWidth) - 1;
         float nY = 1 - 2 * (y / (float) screenHeight);
 
-        Log.d("NDC Conversion","Point: " + x + " " + y);
-        Log.d("NDC Conversion", "NDC: " + nX + " " + nY + " " + -1.0f);
+        //Log.d("NDC Conversion","Point: " + x + " " + y);
+        //Log.d("NDC Conversion", "NDC: " + nX + " " + nY + " " + -1.0f);
 
         return new Vector4f(nX, nY, -1.0f, 1.0f);
     }
 
     /*
-     * Convert NDC coordinates to World Coordinates
+     * Convert NDC coordinates to World Coordinates.
+     * Compute intersection of ray and xy-plane.
      */
     public Vector3f unProject(Vector4f ndc, float z) {
-        Vector4f pCoord = Matrix4f.multiply(getInvProjectionMatrix(), ndc);
-        Log.d("unProject", "P: " + pCoord.x + " " + pCoord.y + " " + pCoord.z + " " + pCoord.w);
+        Vector4f viewSpaceCoord = Matrix4f.multiply(getInvProjectionMatrix(), ndc);
+        //Log.d("unProject", "P: " + pCoord.x + " " + pCoord.y + " " + pCoord.z + " " + pCoord.w);
 
-        Vector4f vCoord = Matrix4f.multiply(getInvViewMatrix(), pCoord);
-        Log.d("unProject", "V: " + vCoord.x + " " + vCoord.y + " " + vCoord.z + " " + vCoord.w);
+        Vector4f worldSpaceCoord = Matrix4f.multiply(getInvViewMatrix(), viewSpaceCoord);
+        //Log.d("unProject", "V: " + vCoord.x + " " + vCoord.y + " " + vCoord.z + " " + vCoord.w);
 
-        Vector3f p0 = new Vector3f(0, 0, z);
-        Vector3f n = new Vector3f(0, 0, 1);
+        Vector3f p0 = new Vector3f(0, 0, z); // position inside plane
+        Vector3f n = new Vector3f(0, 0, 1); // normal to plane
+        Vector3f e = new Vector3f(cameraPosition); // camera position
+        Vector3f w = new Vector3f(worldSpaceCoord.x, worldSpaceCoord.y, worldSpaceCoord.z); // loaction of screen touch
 
-        Vector3f e = new Vector3f(cameraPosition);
-        Vector3f w = new Vector3f(vCoord.x, vCoord.y, vCoord.z);
-
+        // Compute intersection of the plane and ray.
         Vector3f r = w.subtract(e);
-
-        float t = (p0.subtract(e)).dot(p0.subtract(e), n) / r.dot(r, n);
-
-        return r.scale(t).add(e);
+        float t = p0.subtract(e).dot(n) / r.dot(n);
+        return r.multiply(t).add(e);
     }
 }

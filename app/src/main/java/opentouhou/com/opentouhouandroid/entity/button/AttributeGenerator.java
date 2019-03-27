@@ -12,52 +12,71 @@ import com.scarlet.math.Vector4f;
  * PCN format.
  */
 public class AttributeGenerator {
-    public float[] attributes;
+    private static Vector4f innerColor = new Vector4f(1.0f, 1.0f, 1.0f, 0.5f);
+    //private static Vector4f borderColor = new Vector4f(0.529f, 0.807f, 0.921f, 0.7f);
+    private static Vector4f borderColor = new Vector4f(1.0f, 1.0f, 1.0f, 0.5f);
 
-    private Vector4f innerColor = new Vector4f(1.0f, 1.0f, 1.0f, 0.5f);
-    private Vector4f borderColor = new Vector4f(0.529f, 0.807f, 0.921f, 0.7f);
+    private static float borderThickness = 0.10f;
 
-    private float borderThickness = 0.10f;
-    private float xMax = 1.0f + borderThickness;
-    private float xMin = -1.0f - borderThickness;
-    private float yMax = 1.0f + borderThickness;
-    private float yMin = -1.0f - borderThickness;
+    private static float xInnerMax = 1.0f;
+    private static float xInnerMin = -1.0f;
+    private static float yInnerMax = 1.0f;
+    private static float yInnerMin = -1.0f;
+
+    private static float xOuterMax = xInnerMax + borderThickness;
+    private static float xOuterMin = xInnerMin - borderThickness;
+    private static float yOuterMax = yInnerMax + borderThickness;
+    private static float yOuterMin = yInnerMin - borderThickness;
 
     /*
      * Constructor(s).
      */
-    public AttributeGenerator() {
-        attributes = new float[1020];
-    }
+    private AttributeGenerator() { }
 
     /*
-     *
+     * Generate the attributes.
      */
-    public void generate() {
-        tesselateInnerQuad();
+    public static float[] generate(float width, float height, float borderWidth) {
+        float[] attributes = new float[1020];
 
-        tesselateSideBorders();
+        borderThickness = borderWidth;
 
-        tesselateTopLeftCorner();
+        xInnerMax = width / 2.0f;
+        xInnerMin = width / -2.0f;
+        yInnerMax = height / 2.0f;
+        yInnerMin = height / -2.0f;
 
-        tesselateTopRightCorner();
+        xOuterMax = xInnerMax + borderThickness;
+        xOuterMin = xInnerMin - borderThickness;
+        yOuterMax = yInnerMax + borderThickness;
+        yOuterMin = yInnerMin - borderThickness;
 
-        tesselateBottomLeftCorner();
+        tesselateInnerQuad(attributes);
 
-        tesselateBottomRightCorner();
+        tesselateSideBorders(attributes);
+
+        tesselateTopLeftCorner(attributes);
+
+        tesselateTopRightCorner(attributes);
+
+        tesselateBottomLeftCorner(attributes);
+
+        tesselateBottomRightCorner(attributes);
+
+        return attributes;
     }
 
     /*
      * Generate the vertex data for the inner quad.
      */
-    private void tesselateInnerQuad() {
+    private static void tesselateInnerQuad(float[] attributes) {
         float[] data = {
-                -1,  1, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
-                -1, -1, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
-                 1, -1, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
-                 1, -1, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
-                 1,  1, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
-                -1,  1, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1
+                xInnerMin, yInnerMax, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
+                xInnerMin, yInnerMin, 0, 0, 0, 0, innerColor.w, 0, 0, 1,
+                xInnerMax, yInnerMin, 0, 0, 0, 0, innerColor.w, 0, 0, 1,
+                xInnerMax, yInnerMin, 0, 0, 0, 0, innerColor.w, 0, 0, 1,
+                xInnerMax, yInnerMax, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
+                xInnerMin, yInnerMax, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1
         };
         System.arraycopy(data, 0, attributes, 0, 60);
     }
@@ -65,44 +84,44 @@ public class AttributeGenerator {
     /*
      * Generate the vertex data for the side border quads.
      */
-    private void tesselateSideBorders() {
+    private static void tesselateSideBorders(float[] attributes) {
         float[] dataLeft = {
-                xMin,  1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1, // Top-Left
-                xMin, -1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1, // Bottom-Left
-                -1.0f, -1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1, // Bottom-Right
-                -1.0f, -1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1, // Bottom-Right
-                -1.0f,  1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1, // Top-Right
-                xMin,  1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1  // Top-Left
+                xOuterMin, yInnerMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1, // Top-Left
+                xOuterMin, yInnerMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1, // Bottom-Left
+                xInnerMin, yInnerMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1, // Bottom-Right
+                xInnerMin, yInnerMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1, // Bottom-Right
+                xInnerMin, yInnerMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1, // Top-Right
+                xOuterMin, yInnerMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1  // Top-Left
         };
         System.arraycopy(dataLeft, 0, attributes, 60, 60);
 
         float[] dataRight = {
-                1.0f,  1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                1.0f, -1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                xMax, -1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                xMax, -1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                xMax,  1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                1.0f,  1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1
+                xInnerMax, yInnerMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xInnerMax, yInnerMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xOuterMax, yInnerMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xOuterMax, yInnerMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xOuterMax, yInnerMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xInnerMax, yInnerMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1
         };
         System.arraycopy(dataRight, 0, attributes, 120, 60);
 
         float[] dataTop = {
-                -1.0f, yMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                -1.0f, 1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                 1.0f, 1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                 1.0f, 1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                 1.0f, yMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                -1.0f, yMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1
+                xInnerMin, yOuterMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xInnerMin, yInnerMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xInnerMax, yInnerMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xInnerMax, yInnerMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xInnerMax, yOuterMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xInnerMin, yOuterMax, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1
         };
         System.arraycopy(dataTop, 0, attributes, 180, 60);
 
         float[] dataBottom = {
-                -1.0f, -1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                -1.0f, yMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                 1.0f, yMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                 1.0f, yMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                 1.0f, -1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
-                -1.0f, -1.0f, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1
+                xInnerMin, yInnerMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xInnerMin, yOuterMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xInnerMax, yOuterMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xInnerMax, yOuterMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xInnerMax, yInnerMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1,
+                xInnerMin, yInnerMin, 0.0f, borderColor.x, borderColor.y, borderColor.z, borderColor.w, 0, 0, 1
         };
         System.arraycopy(dataBottom, 0, attributes, 240, 60);
     }
@@ -110,14 +129,14 @@ public class AttributeGenerator {
     /*
      * Generate vertex data for the top-left corner.
      */
-    private void tesselateTopLeftCorner() {
-        Vector3f innerCorner = new Vector3f(-1.0f, 1.0f, 0.0f);
+    private static void tesselateTopLeftCorner(float[] attributes) {
+        Vector3f innerCorner = new Vector3f(xInnerMin, yInnerMax, 0.0f);
 
         Vector3f[] controlPoints = {
-                new Vector3f(-1.0f, yMax, 0.0f), // c0
-                new Vector3f(xMin, yMax, 0.0f), // c1
-                new Vector3f(xMin, yMax, 0.0f), // c2
-                new Vector3f(xMin, 1.0f, 0.0f), // c3
+                new Vector3f(xInnerMin, yOuterMax, 0.0f), // c0
+                new Vector3f(xOuterMin, yOuterMax, 0.0f), // c1
+                new Vector3f(xOuterMin, yOuterMax, 0.0f), // c2
+                new Vector3f(xOuterMin, yInnerMax, 0.0f), // c3
         };
         CubicBezierCurve cornerCurve = new CubicBezierCurve(controlPoints);
 
@@ -129,29 +148,29 @@ public class AttributeGenerator {
             Log.d("Button Point", "Point: " + points[i].x + " " + points[i].y + " " + points[i].z);
 
             //Log.d("Button", "Index: " + index);
-            addVertex(points[i], index);
+            addVertex(attributes, points[i], index);
             index += 10;
 
             //Log.d("Button", "Index: " + index);
-            addVertex(innerCorner, index);
+            addVertex(attributes, innerCorner, index);
             index += 10;
 
             //Log.d("Button", "Index: " + index);
-            addVertex(points[i - 1], index);
+            addVertex(attributes, points[i - 1], index);
             index += 10;
         }
 
         Log.d("Button", "Index: " + index);
     }
 
-    private void tesselateTopRightCorner() {
-        Vector3f innerCorner = new Vector3f(1.0f, 1.0f, 0.0f);
+    private static void tesselateTopRightCorner(float[] attributes) {
+        Vector3f innerCorner = new Vector3f(xInnerMax, yInnerMax, 0.0f);
 
         Vector3f[] controlPoints = {
-                new Vector3f(xMax, 1.0f, 0.0f), // c0
-                new Vector3f(xMax, yMax, 0.0f), // c1
-                new Vector3f(xMax, yMax, 0.0f), // c2
-                new Vector3f(1.0f, yMax, 0.0f), // c3
+                new Vector3f(xOuterMax, yInnerMax, 0.0f), // c0
+                new Vector3f(xOuterMax, yOuterMax, 0.0f), // c1
+                new Vector3f(xOuterMax, yOuterMax, 0.0f), // c2
+                new Vector3f(xInnerMax, yOuterMax, 0.0f), // c3
         };
 
         CubicBezierCurve cornerCurve = new CubicBezierCurve(controlPoints);
@@ -160,27 +179,27 @@ public class AttributeGenerator {
 
         int index = 480;
         for (int i = 1; i < points.length; i++) {
-            addVertex(points[i], index);
+            addVertex(attributes, points[i], index);
             index += 10;
 
-            addVertex(innerCorner, index);
+            addVertex(attributes, innerCorner, index);
             index += 10;
 
-            addVertex(points[i - 1], index);
+            addVertex(attributes, points[i - 1], index);
             index += 10;
         }
 
         Log.d("Button", "Index: " + index);
     }
 
-    private void tesselateBottomLeftCorner() {
-        Vector3f innerCorner = new Vector3f(-1.0f, -1.0f, 0.0f);
+    private static void tesselateBottomLeftCorner(float[] attributes) {
+        Vector3f innerCorner = new Vector3f(xInnerMin, yInnerMin, 0.0f);
 
         Vector3f[] controlPoints = {
-                new Vector3f(xMin, -1.0f, 0.0f), // c0
-                new Vector3f(xMin, yMin, 0.0f), // c1
-                new Vector3f(xMin, yMin, 0.0f), // c2
-                new Vector3f(-1.0f, yMin, 0.0f), // c3
+                new Vector3f(xOuterMin, yInnerMin, 0.0f), // c0
+                new Vector3f(xOuterMin, yOuterMin, 0.0f), // c1
+                new Vector3f(xOuterMin, yOuterMin, 0.0f), // c2
+                new Vector3f(xInnerMin, yOuterMin, 0.0f), // c3
         };
 
         CubicBezierCurve cornerCurve = new CubicBezierCurve(controlPoints);
@@ -189,27 +208,27 @@ public class AttributeGenerator {
 
         int index = 660;
         for (int i = 1; i < points.length; i++) {
-            addVertex(points[i], index);
+            addVertex(attributes, points[i], index);
             index += 10;
 
-            addVertex(innerCorner, index);
+            addVertex(attributes, innerCorner, index);
             index += 10;
 
-            addVertex(points[i - 1], index);
+            addVertex(attributes, points[i - 1], index);
             index += 10;
         }
 
         Log.d("Button", "Index: " + index);
     }
 
-    private void tesselateBottomRightCorner() {
-        Vector3f innerCorner = new Vector3f(1.0f, -1.0f, 0.0f);
+    private static void tesselateBottomRightCorner(float[] attributes) {
+        Vector3f innerCorner = new Vector3f(xInnerMax, yInnerMin, 0.0f);
 
         Vector3f[] controlPoints = {
-                new Vector3f(1.0f, yMin, 0.0f), // c0
-                new Vector3f(xMax, yMin, 0.0f), // c1
-                new Vector3f(xMax, yMin, 0.0f), // c2
-                new Vector3f(xMax, -1.0f, 0.0f), // c3
+                new Vector3f(xInnerMax, yOuterMin, 0.0f), // c0
+                new Vector3f(xOuterMax, yOuterMin, 0.0f), // c1
+                new Vector3f(xOuterMax, yOuterMin, 0.0f), // c2
+                new Vector3f(xOuterMax, yInnerMin, 0.0f), // c3
         };
 
         CubicBezierCurve cornerCurve = new CubicBezierCurve(controlPoints);
@@ -218,13 +237,13 @@ public class AttributeGenerator {
 
         int index = 840;
         for (int i = 1; i < points.length; i++) {
-            addVertex(points[i], index);
+            addVertex(attributes, points[i], index);
             index += 10;
 
-            addVertex(innerCorner, index);
+            addVertex(attributes, innerCorner, index);
             index += 10;
 
-            addVertex(points[i - 1], index);
+            addVertex(attributes, points[i - 1], index);
             index += 10;
         }
 
@@ -234,7 +253,7 @@ public class AttributeGenerator {
     /*
      * A helper method to add a vertex.
      */
-    private void addVertex(Vector3f position, int index) {
+    private static void addVertex(float[] attributes, Vector3f position, int index) {
         attributes[index] = position.x;
         attributes[index + 1] = position.y;
         attributes[index + 2] = position.z;

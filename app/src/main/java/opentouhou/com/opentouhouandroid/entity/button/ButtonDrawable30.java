@@ -14,7 +14,7 @@ import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.loader.CreateVAOTask;
 
 public class ButtonDrawable30 extends GraphicsObject30 {
-    public Vector3f position = new Vector3f(0f, 0f, 3f);
+    public Vector3f position = new Vector3f(0f, 0f, 0f);
     /*
      * Constructor(s).
      */
@@ -30,13 +30,9 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         ShaderProgram program = renderer.getShaderManager().getShaderProgram("Button");
 
         // Set the mesh.
-        // (x, y, z), (r, g, b, a), (x, y, z), (s, t)
-        AttributeGenerator gen = new AttributeGenerator();
-        gen.generate();
-        //float[] data = gen.innerAttributes;
-        float[] data2 = gen.attributes;
+        float[] data = AttributeGenerator.generate(6.0f, 1.0f, 0.10f);
 
-        Mesh30 mesh = new Mesh30(data2, MeshLayout.Layout.PCN);
+        Mesh30 mesh = new Mesh30(data, MeshLayout.Layout.PCN);
         if (async) {
             CreateVAOTask task = new CreateVAOTask(mesh, program.getHandle());
             renderer.queue(task.getRunnable());
@@ -63,10 +59,6 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         int shaderHandle = shaderProgram.getHandle();
         GLES30.glUseProgram(shaderHandle);
 
-        // Set color
-        //int uniformColorHandle = GLES30.glGetUniformLocation(shaderHandle, "uColor");
-        //GLES30.glUniform4f(uniformColorHandle, 0.9f, 0.6f, 0.3f, 1f);
-
         // Set the transformation matrices.
         setTransformationMatrices(shaderHandle, scene);
 
@@ -81,11 +73,10 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         // Set the mesh.
         setMesh();
 
-        // Draw the object.
-        //GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, ((4 * 2) + (4 * 6)) * 3);
-
+        // Draw the inner button.
         GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, 2 * 3);
 
+        // Draw the border.
         GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 6, ((4 * 2) + (4 * 6)) * 3);
     }
 }

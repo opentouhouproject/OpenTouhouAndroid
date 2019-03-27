@@ -119,7 +119,7 @@ public class Matrix4f
         return matrix;
     }
 
-    // Return a new scale matrix.
+    // Return a new multiply matrix.
     public static Matrix4f scaleMatrix(float scaleX, float scaleY, float scaleZ)
     {
         Matrix4f matrix = new Matrix4f();
@@ -239,7 +239,7 @@ public class Matrix4f
     {
         if (isDegrees) angle = MathUtil.degreesToRadians(angle);
 
-        v.normalize();
+        v.selfNormalize();
         float x = v.x;
         float y = v.y;
         float z = v.z;
@@ -386,7 +386,7 @@ public class Matrix4f
     }
 
     /**
-     * Multiply by the scale matrix.
+     * Multiply by the multiply matrix.
      */
     public Matrix4f scale(float scaleX, float scaleY, float scaleZ)
     {
@@ -542,7 +542,7 @@ public class Matrix4f
     public void rotate(Vector3f v, float angle, boolean isDegrees) {
         if (isDegrees) angle = MathUtil.degreesToRadians(angle);
 
-        v.normalize();
+        v.selfNormalize();
         float x = v.x;
         float y = v.y;
         float z = v.z;

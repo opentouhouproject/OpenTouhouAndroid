@@ -3,6 +3,7 @@ package opentouhou.com.opentouhouandroid.scene.scenes.mainmenu;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 
 import java.io.InputStreamReader;
@@ -30,7 +31,9 @@ public class MainMenuScreen30 extends Scene {
     // Game Objects
     Background background;
     Text title;
-    Button button;
+    Button startButton;
+    Button optionsButton;
+    Button exitButton;
 
     /*
      * Constructor(s)
@@ -63,7 +66,17 @@ public class MainMenuScreen30 extends Scene {
         FontManager fontManager = renderer.getFontManager();
         title = TextEntityGenerator.CREATE_MAIN_MENU_TITLE(fontManager);
 
-        button = new Button(renderer, true);
+        startButton = new Button(renderer, true);
+        startButton.setPosition(0, 0, 3);
+        startButton.setText("Start");
+
+        optionsButton = new Button(renderer, true);
+        optionsButton.setPosition(0, -2, 3);
+        optionsButton.setText("Options");
+
+        exitButton = new Button(renderer, true);
+        exitButton.setPosition(0, -4, 3);
+        exitButton.setText("Exit");
 
         // Finished loading.
         Log.d("DONE", "MAIN MENU LOAD COMPLETE.");
@@ -99,6 +112,8 @@ public class MainMenuScreen30 extends Scene {
     public void draw() {
         background.draw(this);
         title.draw(this);
-        button.draw(this);
+        startButton.draw(this);
+        optionsButton.draw(this);
+        exitButton.draw(this);
     }
 }

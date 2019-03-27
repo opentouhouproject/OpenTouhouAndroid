@@ -29,7 +29,7 @@ public class CubicBezierCurve {
         float c_2 = 3 * diff * t * t;
         float c_3 = t * t * t;
 
-        return points[0].scale(c_0).add(points[1].scale(c_1).add(points[2].scale(c_2).add(points[3].scale(c_3))));
+        return points[0].multiply(c_0).add(points[1].multiply(c_1).add(points[2].multiply(c_2).add(points[3].multiply(c_3))));
     }
 
     /*
