@@ -143,7 +143,7 @@ public class PetalDrawable30 extends GraphicsObject30 {
         mesh[meshIndex + 1] = position.y;
         mesh[meshIndex + 2] = position.z;
 
-        Log.d("PETAL DEBUG", "Point " + mesh[meshIndex] + " " + mesh[meshIndex + 1] + " " + mesh[meshIndex + 2]);
+        //Log.d("PETAL DEBUG", "Point " + mesh[meshIndex] + " " + mesh[meshIndex + 1] + " " + mesh[meshIndex + 2]);
 
         mesh[meshIndex + 3] = color.x;
         mesh[meshIndex + 4] = color.y;

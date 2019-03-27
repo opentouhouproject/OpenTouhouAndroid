@@ -41,8 +41,10 @@ public class Camera {
 
         // Initialize the view matrix.
         viewMatrix = Matrix4f.getIdentity();
+        invViewMatrix = Matrix4f.getIdentity();
         // Compute the view matrix.
         updateViewMatrix(cameraPosition, lookAtPosition, rightDirection);
+        updateInverseViewMatrix(cameraPosition, lookAtPosition, rightDirection);
 
         // Initialize the projection matrix.
         projectionMatrix = Matrix4f.getIdentity();
@@ -61,8 +63,10 @@ public class Camera {
 
         // Initialize the view matrix.
         viewMatrix = Matrix4f.getIdentity();
+        invViewMatrix = Matrix4f.getIdentity();
         // Compute the view matrix.
         updateViewMatrix(cameraPosition, lookAtPosition, rightDirection);
+        updateInverseViewMatrix(cameraPosition, lookAtPosition, rightDirection);
 
         // Initialize the projection matrix.
         projectionMatrix = Matrix4f.getIdentity();
@@ -83,6 +87,10 @@ public class Camera {
     Vector4f getRight() {
         return rightDirection;
     }
+
+    public Matrix4f getInvProjectionMatrix() { return invProjectionMatrix; }
+
+    public Matrix4f getInvViewMatrix() { return invViewMatrix; }
 
     /*
      * Setter(s).
@@ -117,6 +125,7 @@ public class Camera {
     public Matrix4f getViewMatrix() {
         if (dirty) {
             updateViewMatrix(cameraPosition, lookAtPosition, rightDirection);
+            updateInverseViewMatrix(cameraPosition, lookAtPosition, rightDirection);
 
             dirty = false;
         }
@@ -160,6 +169,47 @@ public class Camera {
         viewMatrix.setValue((forward.x * position.x + forward.y * position.y + forward.z * position.z), 2, 3);
         viewMatrix.setValue(1, 3, 3);
     }
+
+    /*
+     * Set inverse view matrix.
+     */
+    private void updateInverseViewMatrix(Vector4f position, Vector4f lookAtPoint, Vector4f rightVector) {
+        // Compute the forward vector.
+        Vector4f forward = lookAtPoint.subtract(position);
+        forward.selfNormalize();
+
+        // Compute the up vector.
+        Vector4f up = new Vector4f(Vector4f.cross(rightVector, forward), 0);
+        up.selfNormalize();
+
+        // Compute the orthogonal right vector.
+        Vector4f right = new Vector4f(Vector4f.cross(forward, up), 0);
+
+        // column 0
+        invViewMatrix.setValue(right.x, 0, 0);
+        invViewMatrix.setValue(right.y, 1, 0);
+        invViewMatrix.setValue(right.z, 2, 0);
+        invViewMatrix.setValue(0, 3, 0);
+
+        // column 1
+        invViewMatrix.setValue(up.x, 0, 1);
+        invViewMatrix.setValue(up.y, 1, 1);
+        invViewMatrix.setValue(up.z, 2, 1);
+        invViewMatrix.setValue(0, 3, 1);
+
+        // column 2
+        invViewMatrix.setValue(-forward.x, 0, 2);
+        invViewMatrix.setValue(-forward.y, 1, 2);
+        invViewMatrix.setValue(-forward.z, 2, 2);
+        invViewMatrix.setValue(0, 3, 2);
+
+        // column 3
+        invViewMatrix.setValue(position.x, 0, 3);
+        invViewMatrix.setValue(position.y, 1, 3);
+        invViewMatrix.setValue(position.z, 2, 3);
+        invViewMatrix.setValue(1, 3, 3);
+    }
+
 
     /*
      * Projection Matrix
@@ -211,11 +261,11 @@ public class Camera {
         // column 2
         projectionMatrix.setValue((right + left) / (right - left), 0, 2);
         projectionMatrix.setValue((top + bottom) / (top - bottom), 1, 2);
-        projectionMatrix.setValue((far + near) / (near - far), 2, 2);
+        projectionMatrix.setValue(-(far + near) / (far - near), 2, 2);
         projectionMatrix.setValue(-1, 3, 2);
 
         // column 3
-        projectionMatrix.setValue(2 * far * near / (near - far), 2, 3);
+        projectionMatrix.setValue(-2 * far * near / (far - near), 2, 3);
     }
 
     /*
@@ -244,35 +294,57 @@ public class Camera {
      * Inverse Projection Matrix
      */
     public void setInversePerspectiveProjectionMatrix(float left, float right, float bottom, float top, float near, float far) {
-        /*
-        projectionMatrix.reset(0);
+        invProjectionMatrix.reset(0);
 
         // column 0
-        projectionMatrix.setValue(2 * near / (right - left), 0, 0);
+        invProjectionMatrix.setValue((right - left) / (2 * near), 0, 0);
 
         // column 1
-        projectionMatrix.setValue(2 * near / (top - bottom), 1, 1);
+        invProjectionMatrix.setValue((top - bottom) / (2 * near), 1, 1);
 
         // column 2
-        projectionMatrix.setValue((right + left) / (right - left), 0, 2);
-        projectionMatrix.setValue((top + bottom) / (top - bottom), 1, 2);
-        projectionMatrix.setValue((far + near) / (near - far), 2, 2);
-        projectionMatrix.setValue(-1, 3, 2);
+        invProjectionMatrix.setValue((near - far) / (2 * far * near), 3, 2);
 
         // column 3
-        projectionMatrix.setValue(2 * far * near / (near - far), 2, 3);
-        */
+        invProjectionMatrix.setValue((right + left) / (2 * near), 0, 3);
+        invProjectionMatrix.setValue((top + bottom) / (2 * near), 1, 3);
+        invProjectionMatrix.setValue(-1, 2, 3);
+        invProjectionMatrix.setValue((far + near) / (2 * far * near), 3, 3);
     }
 
     /*
      * Convert screen coordinates to normalised device coordinates.
      */
-    public Vector3f convertToNDC(float x, float y, int screenWidth, int screenHeight) {
+    public Vector4f convertToNDC(float x, float y, int screenWidth, int screenHeight) {
         float nX = 2 * (x / (float) screenWidth) - 1;
         float nY = 1 - 2 * (y / (float) screenHeight);
 
-        Log.d("NDC Conversion", "Point: " + x + " " + y + " NDC: " + nX + " " + nY + " " + -1.0f);
+        Log.d("NDC Conversion","Point: " + x + " " + y);
+        Log.d("NDC Conversion", "NDC: " + nX + " " + nY + " " + -1.0f);
 
-        return new Vector3f(nX, nY, -1.0f);
+        return new Vector4f(nX, nY, -1.0f, 1.0f);
+    }
+
+    /*
+     * Convert NDC coordinates to World Coordinates
+     */
+    public Vector3f unProject(Vector4f ndc, float z) {
+        Vector4f pCoord = Matrix4f.multiply(getInvProjectionMatrix(), ndc);
+        Log.d("unProject", "P: " + pCoord.x + " " + pCoord.y + " " + pCoord.z + " " + pCoord.w);
+
+        Vector4f vCoord = Matrix4f.multiply(getInvViewMatrix(), pCoord);
+        Log.d("unProject", "V: " + vCoord.x + " " + vCoord.y + " " + vCoord.z + " " + vCoord.w);
+
+        Vector3f p0 = new Vector3f(0, 0, z);
+        Vector3f n = new Vector3f(0, 0, 1);
+
+        Vector3f e = new Vector3f(cameraPosition);
+        Vector3f w = new Vector3f(vCoord.x, vCoord.y, vCoord.z);
+
+        Vector3f r = w.subtract(e);
+
+        float t = (p0.subtract(e)).dot(p0.subtract(e), n) / r.dot(r, n);
+
+        return r.scale(t).add(e);
     }
 }

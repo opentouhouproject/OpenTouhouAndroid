@@ -101,12 +101,14 @@ public class Renderer30 extends Renderer {
         screenWidth = width;
         screenHeight = height;
         aspectRatio = (float) width / (float) height;
+        Log.d("Aspect Ratio: ", "AR: " + aspectRatio);
 
         // Update the projection matrix.
         Camera camera = stage.getCurrentScene().getCamera();
 
         if (camera != null) {
             camera.setPerspectiveProjectionMatrix(-aspectRatio, aspectRatio, -1, 1, 1, 10);
+            camera.setInversePerspectiveProjectionMatrix(-aspectRatio, aspectRatio, -1, 1, 1, 10);
             //camera.setSymmetricPerspectiveProjectionMatrix(48, aspectRatio, 1, 10);
             //camera.setOrthographicProjection(-aspectRatio, aspectRatio, -1, 1, 1, 10);
         }
@@ -118,6 +120,7 @@ public class Renderer30 extends Renderer {
 
         if (camera != null) {
             camera.setPerspectiveProjectionMatrix(-aspectRatio, aspectRatio, -1, 1, 1, 10);
+            camera.setInversePerspectiveProjectionMatrix(-aspectRatio, aspectRatio, -1, 1, 1, 10);
             //camera.setSymmetricPerspectiveProjectionMatrix(48, aspectRatio, 1, 10);
             //camera.setOrthographicProjection(-aspectRatio, aspectRatio, -1, 1, 1, 10);
         }
