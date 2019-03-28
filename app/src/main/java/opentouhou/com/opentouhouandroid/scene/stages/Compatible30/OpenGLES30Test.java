@@ -1,7 +1,8 @@
 package opentouhou.com.opentouhouandroid.scene.stages.Compatible30;
 
 import android.content.Context;
-import android.view.MotionEvent;
+
+import com.scarlet.audio.opensles.AudioPlayer;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
 import opentouhou.com.opentouhouandroid.io.FileManager;
@@ -10,7 +11,6 @@ import opentouhou.com.opentouhouandroid.scene.Stage;
 import opentouhou.com.opentouhouandroid.scene.State;
 import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
 import opentouhou.com.opentouhouandroid.scene.scenes.mainmenu.MainMenuScreen30;
-import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 /*
  * Testing OpenGL ES 3.0 implementations.

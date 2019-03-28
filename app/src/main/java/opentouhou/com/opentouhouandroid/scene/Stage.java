@@ -1,12 +1,12 @@
 package opentouhou.com.opentouhouandroid.scene;
 
 import android.opengl.GLSurfaceView;
-import android.view.MotionEvent;
+
+import com.scarlet.audio.opensles.AudioPlayer;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.io.FileManager;
 import opentouhou.com.opentouhouandroid.io.eventqueue.MotionEventQueue;
-import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
 
 /*
  * Manages a set of scenes.

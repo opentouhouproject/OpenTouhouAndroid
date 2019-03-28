@@ -1,1 +1,1 @@
-include ':app', ':math'
+include ':app', ':math', ':audio'
