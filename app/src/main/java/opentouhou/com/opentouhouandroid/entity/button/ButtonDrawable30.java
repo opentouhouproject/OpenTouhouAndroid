@@ -14,23 +14,52 @@ import opentouhou.com.opentouhouandroid.scene.Scene;
 import opentouhou.com.opentouhouandroid.scene.loader.CreateVAOTask;
 
 public class ButtonDrawable30 extends GraphicsObject30 {
-    public Vector3f position = new Vector3f(0f, 0f, 0f);
+    private Vector3f position;
+    private float width, height, borderWidth;
+
     /*
      * Constructor(s).
      */
-    public ButtonDrawable30(Renderer renderer, boolean async) {
-        setup(renderer, async);
+    ButtonDrawable30() {
+        position = new Vector3f(0.0f, 0.0f, 0.0f);
+        width = 1.0f;
+        height = 1.0f;
+        borderWidth = 0.1f;
+    }
+
+    /*
+     * Setter(s).
+     */
+    public ButtonDrawable30 setPosition(Vector3f vector) {
+        position.x = vector.x;
+        position.y = vector.y;
+        position.z = vector.z;
+
+        return this;
+    }
+
+    public ButtonDrawable30 setDimensions(float width, float height) {
+        this.width = width;
+        this.height = height;
+
+        return this;
+    }
+
+    public ButtonDrawable30 setBorderWidth(float borderWidth) {
+        this.borderWidth = borderWidth;
+
+        return this;
     }
 
     /*
      * Setup the drawable object.
      */
-    private void setup(Renderer renderer, boolean async) {
-        // Get items.
+    public void create(Renderer renderer, boolean async) {
+        // Get the shader program.
         ShaderProgram program = renderer.getShaderManager().getShaderProgram("Button");
 
-        // Set the mesh.
-        float[] data = AttributeGenerator.generate(6.0f, 1.0f, 0.10f);
+        // Create the mesh.
+        float[] data = AttributeGenerator.generate(width, height, borderWidth);
 
         Mesh30 mesh = new Mesh30(data, MeshLayout.Layout.PCN);
         if (async) {

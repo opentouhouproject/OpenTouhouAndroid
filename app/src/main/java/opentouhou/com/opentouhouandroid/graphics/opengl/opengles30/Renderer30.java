@@ -65,6 +65,9 @@ public class Renderer30 extends Renderer {
 
         // Load the fps counter.
         fpsCounter = new Text(this.getFontManager().getFont("fonts/popstar/popstarpop128.xml"));
+        fpsCounter.setPosition(new Vector3f(2.4f, 5.4f, 4))
+                  .setScaling(280f)
+                  .setShader("Font2");
     }
 
     public void onDrawFrame(GL10 unused) {
@@ -84,7 +87,8 @@ public class Renderer30 extends Renderer {
         sysInfo.updateFPS();
 
         // Draw fps counter.
-        fpsCounter.render(String.valueOf(sysInfo.getFPS()), new Vector3f(2.4f, 5.4f, 4), 280f, "Font2", stage.getCurrentScene());
+        fpsCounter.setText(String.valueOf(sysInfo.getFPS()));
+        fpsCounter.draw(stage.getCurrentScene());
 
         // Error handling.
         int errorCode = GLES30.glGetError();

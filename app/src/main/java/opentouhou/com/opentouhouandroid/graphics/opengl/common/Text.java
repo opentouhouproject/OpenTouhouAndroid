@@ -91,7 +91,7 @@ public class Text {
      * Implement update method.
      */
     public void update() {
-        if (enableAnim == true) {
+        if (enableAnim) {
             animation.update();
         }
     }
@@ -100,7 +100,7 @@ public class Text {
     public void draw(Scene scene) {
         char[] chars;
 
-        if (enableAnim == true) {
+        if (enableAnim) {
             chars = animation.currentFrame().toCharArray();
         }
         else {
@@ -119,18 +119,6 @@ public class Text {
 
             // Update the offset.
             xOffset = (float)font.getGlyph(c).getWidth() / scaling;
-        }
-    }
-
-    public void render(String s, Vector3f position, float scale, String shaderProgram, Scene scene)
-    {
-        float offsetX = 0;
-
-        for (char c : s.toCharArray())
-        {
-            position.x += offsetX;
-            font.render(c, position, scale, color, shaderProgram, scene);
-            offsetX = font.getGlyph(c).getWidth() / scale;
         }
     }
 }
