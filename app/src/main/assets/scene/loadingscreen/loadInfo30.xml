@@ -53,7 +53,7 @@
 
     <!-- Font Loading Section -->
     <fonts>
-        <font path="fonts/popstar/popstar16.xml" />
+        <font path="fonts/popstar/popstarpop128.xml" />
         <font path="fonts/yozakura/yozakura256.xml" />
     </fonts>
 </load>

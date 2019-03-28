@@ -29,7 +29,7 @@ public class MeilinSprite extends Sprite
                 manager.getTexture("sprites/meirin/walkfront/walkFront004.png"),
                 manager.getTexture("sprites/meirin/walkfront/walkFront005.png")
         };
-        walkingForward.setStretch(new float[]{0.8f, 0.8f, 0.8f, 0.8f, 0.8f, 0.8f});
+        walkingForward.setStretch(new float[]{0.65f, 0.65f, 0.65f, 0.65f, 0.65f, 0.65f});
         walkingForward.setSequence(textures);
 
         // Load attack anim

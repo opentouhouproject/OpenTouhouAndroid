@@ -20,11 +20,11 @@ public class Button extends GameEntity {
      */
     public Button(Renderer renderer, boolean async) {
         drawable30 = new ButtonDrawable30(renderer, async);
-        labelText = new Text(renderer.getFontManager().getFont("fonts/popstar/popstar16.xml"));
+        labelText = new Text(renderer.getFontManager().getFont("fonts/popstar/popstarpop128.xml"));
 
         labelText.setText("")
                  .setPosition(new Vector3f(0f, 0f, 0f))
-                 .setScaling(20f)
+                 .setScaling(200f)
                  .setColor(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f))
                  .setShader("Font2");
     }

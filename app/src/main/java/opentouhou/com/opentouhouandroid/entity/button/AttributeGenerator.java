@@ -72,9 +72,9 @@ public class AttributeGenerator {
     private static void tesselateInnerQuad(float[] attributes) {
         float[] data = {
                 xInnerMin, yInnerMax, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
-                xInnerMin, yInnerMin, 0, 0, 0, 0, innerColor.w, 0, 0, 1,
-                xInnerMax, yInnerMin, 0, 0, 0, 0, innerColor.w, 0, 0, 1,
-                xInnerMax, yInnerMin, 0, 0, 0, 0, innerColor.w, 0, 0, 1,
+                xInnerMin, yInnerMin, 0, 255f / 255f, 197f / 255f, 208f / 255f, 1, 0, 0, 1,
+                xInnerMax, yInnerMin, 0, 255f / 255f, 197f / 255f, 208f / 255f, 1, 0, 0, 1,
+                xInnerMax, yInnerMin, 0, 255f / 255f, 197f / 255f, 208f / 255f, 1, 0, 0, 1,
                 xInnerMax, yInnerMax, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
                 xInnerMin, yInnerMax, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1
         };
