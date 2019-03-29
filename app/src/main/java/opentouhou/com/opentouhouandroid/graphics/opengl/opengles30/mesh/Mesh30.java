@@ -20,9 +20,6 @@ public class Mesh30 extends Mesh {
 
         // Allocate memory on GPU for the attribute data.
         allocateGPUMemory(attributes);
-
-        // Setup the VAO.
-        //vao = new VertexArrayObject30(attributeBuffer, shader, layout);
     }
 
     private void allocateGPUMemory(float[] attributes) {
@@ -33,6 +30,10 @@ public class Mesh30 extends Mesh {
 
             case PCN:
                 vertexCount = attributes.length / 10;
+                break;
+
+            case P2T:
+                vertexCount = attributes.length / 4;
                 break;
         }
 

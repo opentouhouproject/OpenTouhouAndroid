@@ -11,6 +11,15 @@ public abstract class Texture
     private String type;
 
     // Constructor
+    protected Texture()
+    {
+        textureHandle = new int[1];
+
+        width = -1;
+        height = -1;
+        type = "";
+    }
+
     protected Texture(BitmapFactory.Options options)
     {
         textureHandle = new int[1];

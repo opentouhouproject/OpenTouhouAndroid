@@ -9,6 +9,12 @@ public class Texture30 extends Texture {
     /*
      * Constructor(s).
      */
+    public Texture30(int handle) {
+        super();
+
+        this.textureHandle[0] = handle;
+    }
+
     public Texture30(BitmapFactory.Options options) {
         super(options);
 

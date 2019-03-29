@@ -23,6 +23,7 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class Renderer30 extends Renderer {
     private Text fpsCounter;
+    private RenderQuad renderQuad;
 
     /*
      * Constructor(s).
@@ -77,11 +78,30 @@ public class Renderer30 extends Renderer {
         stage.handleInput();
         stage.update();
 
-        // Redraw background color.
+        // Bind the framebuffer.
+        frameBuffer.bind();
+
+        // Draw the background color.
+        GLES30.glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT | GLES30.GL_DEPTH_BUFFER_BIT);
+
+        // Enable depth test.
+        GLES30.glEnable(GLES30.GL_DEPTH_TEST);
 
         // Draw the scene.
         stage.draw();
+
+        // Post-processing
+
+        // Rebind the deafult framebuffer.
+        frameBuffer.unbind();
+
+        // Draw the background color.
+        GLES30.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT);
+
+        GLES30.glDisable(GLES30.GL_DEPTH_TEST);
+        renderQuad.draw(stage.getCurrentScene());
 
         // Update fps.
         sysInfo.updateFPS();
@@ -101,7 +121,11 @@ public class Renderer30 extends Renderer {
         // Set the Viewport.
         GLES30.glViewport(0, 0, width, height);
 
-        // Update info.
+        // Create the framebuffer.
+        frameBuffer = new FrameBuffer30(width, height);
+        renderQuad = new RenderQuad(this, (float)width, (float)height, frameBuffer.getTexture());
+
+                // Update info.
         screenWidth = width;
         screenHeight = height;
         aspectRatio = (float) width / (float) height;

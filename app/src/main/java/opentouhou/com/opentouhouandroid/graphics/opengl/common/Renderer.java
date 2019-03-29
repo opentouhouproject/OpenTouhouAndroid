@@ -16,6 +16,8 @@ public abstract class Renderer implements GLSurfaceView.Renderer {
     // OpenGL context.
     protected EGLContext eglContext;
 
+    protected FrameBuffer frameBuffer;
+
     // Shader manager.
     protected ShaderManager shaderManager;
 
@@ -38,6 +40,8 @@ public abstract class Renderer implements GLSurfaceView.Renderer {
 
     // Constructor
     public Renderer() {
+        frameBuffer = null;
+
         shaderManager = null;
         textureManager = null;
         fontManager = null;

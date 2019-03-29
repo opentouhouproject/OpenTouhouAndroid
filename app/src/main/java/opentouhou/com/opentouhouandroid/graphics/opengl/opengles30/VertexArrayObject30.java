@@ -7,10 +7,8 @@ import java.nio.IntBuffer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.VertexArrayObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 
-public class VertexArrayObject30 extends VertexArrayObject
-{
-    public VertexArrayObject30(int buffer, int shader, MeshLayout.Layout layout)
-    {
+public class VertexArrayObject30 extends VertexArrayObject {
+    public VertexArrayObject30(int buffer, int shader, MeshLayout.Layout layout) {
         // Bind the vertex buffer object
         GLES30.glBindBuffer(GLES30.GL_ARRAY_BUFFER, buffer);
 
@@ -21,14 +19,17 @@ public class VertexArrayObject30 extends VertexArrayObject
         // Bind the VAO.
         GLES30.glBindVertexArray(handles.get(0));
 
-        switch (layout)
-        {
+        switch (layout) {
             case PCNT:
                 initialisePCNT(shader);
                 break;
 
             case PCN:
                 initialisePCN(shader);
+                break;
+
+            case P2T:
+                initialiseP2T(shader);
                 break;
         }
 
@@ -37,8 +38,7 @@ public class VertexArrayObject30 extends VertexArrayObject
     }
 
     // Set VAO for a PCNT layout.
-    private void initialisePCNT(int shader)
-    {
+    private void initialisePCNT(int shader) {
         setPosition(shader, MeshLayout.PCNT_Stride, MeshLayout.PCNT_POSITION_OFFSET);
 
         setColor(shader, MeshLayout.PCNT_Stride, MeshLayout.PCNT_COLOR_OFFSET);
@@ -49,8 +49,7 @@ public class VertexArrayObject30 extends VertexArrayObject
     }
 
     // Set VAO for a PCN layout.
-    private void initialisePCN(int shader)
-    {
+    private void initialisePCN(int shader) {
         setPosition(shader, MeshLayout.PCN_Stride, MeshLayout.PCN_POSITION_OFFSET);
 
         setColor(shader, MeshLayout.PCN_Stride, MeshLayout.PCN_COLOR_OFFSET);
@@ -58,33 +57,36 @@ public class VertexArrayObject30 extends VertexArrayObject
         setNormal(shader, MeshLayout.PCN_Stride, MeshLayout.PCN_NORMAL_OFFSET);
     }
 
+    // Set VAO for a P2T layout.
+    private void initialiseP2T(int shader) {
+        setPosition(shader, MeshLayout.P2T_Stride, MeshLayout.P2T_POSITION_OFFSET);
+
+        setTextureCoordinate(shader, MeshLayout.P2T_Stride, MeshLayout.P2T_TEXTURE_COORDINATE_OFFSET);
+    }
+
     // Set the position attribute.
-    private void setPosition(int shader, int stride, int offset)
-    {
+    private void setPosition(int shader, int stride, int offset) {
         int positionHandle = GLES30.glGetAttribLocation(shader, "aVertex");
         GLES30.glEnableVertexAttribArray(positionHandle);
         GLES30.glVertexAttribPointer(positionHandle, MeshLayout.POSITION_DATA_SIZE, GLES30.GL_FLOAT, false, stride, offset);
     }
 
     // Set the color attribute.
-    private void setColor(int shader, int stride, int offset)
-    {
+    private void setColor(int shader, int stride, int offset) {
         int colorHandle = GLES30.glGetAttribLocation(shader, "aColor");
         GLES30.glEnableVertexAttribArray(colorHandle);
         GLES30.glVertexAttribPointer(colorHandle, MeshLayout.COLOR_DATA_SIZE, GLES30.GL_FLOAT, false, stride, offset);
     }
 
     // Set the normal attribute.
-    private void setNormal(int shader, int stride, int offset)
-    {
+    private void setNormal(int shader, int stride, int offset) {
         int normalHandle = GLES30.glGetAttribLocation(shader, "aNormal");
         GLES30.glEnableVertexAttribArray(normalHandle);
         GLES30.glVertexAttribPointer(normalHandle, MeshLayout.NORMAL_DATA_SIZE, GLES30.GL_FLOAT, false, stride, offset);
     }
 
     // Set the texture coordinate attribute.
-    private void setTextureCoordinate(int shader, int stride, int offset)
-    {
+    private void setTextureCoordinate(int shader, int stride, int offset) {
         int textureCoordinateHandle = GLES30.glGetAttribLocation(shader, "aTexCoordinate");
         GLES30.glEnableVertexAttribArray(textureCoordinateHandle);
         GLES30.glVertexAttribPointer(textureCoordinateHandle, MeshLayout.TEXTURE_COORDINATE_DATA_SIZE, GLES30.GL_FLOAT, false, stride, offset);

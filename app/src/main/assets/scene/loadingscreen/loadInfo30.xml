@@ -7,6 +7,7 @@
         <vertex name="Font" path="shaders/opengles30/Font.vert" />
         <vertex name="Background" path="shaders/opengles30/Background.vert" />
         <vertex name="Petal" path="shaders/opengles30/Petal.vert" />
+        <vertex name="RenderQuad" path="shaders/opengles30/RenderQuad.vert" />
 
         <!-- Compile Fragment Shaders -->
         <fragment name="TextureShader" path="shaders/opengles30/TextureShader.frag" />
@@ -14,6 +15,7 @@
         <fragment name="Font2" path="shaders/opengles30/Font2.frag" />
         <fragment name="Background" path="shaders/opengles30/Background.frag" />
         <fragment name="Petal" path="shaders/opengles30/Petal.frag" />
+        <fragment name="RenderQuad" path="shaders/opengles30/RenderQuad.frag" />
 
         <!-- Link Shader Programs -->
         <program name="TextureShader" vertex="TextureShader" fragment="TextureShader" />
@@ -21,6 +23,7 @@
         <program name="Font2" vertex="Font" fragment="Font2" />
         <program name="Background" vertex="Background" fragment="Background" />
         <program name="Petal" vertex="Petal" fragment="Petal" />
+        <program name="RenderQuad" vertex="RenderQuad" fragment="RenderQuad" />
     </shaders>
 
     <!-- Texture Loading Section -->
