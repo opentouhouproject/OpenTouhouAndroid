@@ -124,10 +124,10 @@ public abstract class TextureManager {
                 return BitmapEditor.desaturate(bitmap);
 
             case GREYSCALE:
-                return BitmapEditor.greyscale(bitmap, 0.5f);
+                return BitmapEditor.greyscale(bitmap, 0.1f);
 
             case LIGHTGREYSCALE:
-                return BitmapEditor.greyscale(bitmap, 0.1f);
+                return BitmapEditor.greyscale(bitmap, 0.5f);
 
             default:
                 return bitmap;

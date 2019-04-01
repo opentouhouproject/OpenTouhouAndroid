@@ -154,6 +154,10 @@ public class SceneParser {
             case "GREYSCALE":
                 opt = TextureManager.Options.GREYSCALE;
                 break;
+
+            case "LIGHTGREYSCALE":
+                opt = TextureManager.Options.LIGHTGREYSCALE;
+                break;
         }
 
         // Perform action.

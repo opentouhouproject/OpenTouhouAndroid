@@ -12,9 +12,9 @@ import com.scarlet.math.Vector4f;
  * PCN format.
  */
 public class AttributeGenerator {
-    private static Vector4f innerColor = new Vector4f(1.0f, 1.0f, 1.0f, 0.5f);
+    private static Vector4f innerColor = new Vector4f(0.86f, 0.62f, 0.86f, 0.8f);
     //private static Vector4f borderColor = new Vector4f(0.529f, 0.807f, 0.921f, 0.7f);
-    private static Vector4f borderColor = new Vector4f(1.0f, 1.0f, 1.0f, 0.5f);
+    private static Vector4f borderColor = new Vector4f(0.95f, 0.95f, 0.15f, 1.0f);
 
     private static float borderThickness = 0.10f;
 
@@ -72,9 +72,9 @@ public class AttributeGenerator {
     private static void tesselateInnerQuad(float[] attributes) {
         float[] data = {
                 xInnerMin, yInnerMax, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
-                xInnerMin, yInnerMin, 0, 255f / 255f, 197f / 255f, 208f / 255f, 1, 0, 0, 1,
-                xInnerMax, yInnerMin, 0, 255f / 255f, 197f / 255f, 208f / 255f, 1, 0, 0, 1,
-                xInnerMax, yInnerMin, 0, 255f / 255f, 197f / 255f, 208f / 255f, 1, 0, 0, 1,
+                xInnerMin, yInnerMin, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
+                xInnerMax, yInnerMin, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
+                xInnerMax, yInnerMin, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
                 xInnerMax, yInnerMax, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1,
                 xInnerMin, yInnerMax, 0, innerColor.x, innerColor.y, innerColor.z, innerColor.w, 0, 0, 1
         };

@@ -10,14 +10,17 @@ public abstract class FrameBuffer implements AutoCloseable {
     protected int[] handle;
     protected Texture[] textures;
     protected int renderBufferHandle;
+    protected int numberOfRenderTargets;
 
     /*
      * Constructor(s).
      */
-    protected FrameBuffer() {
+    protected FrameBuffer(int numRenderTargets) {
         handle = new int[1];
-        textures = new Texture[2];
+        textures = new Texture[numRenderTargets];
         renderBufferHandle = 0;
+
+        numberOfRenderTargets = numRenderTargets;
     }
 
     public Texture getTexture(int index) {

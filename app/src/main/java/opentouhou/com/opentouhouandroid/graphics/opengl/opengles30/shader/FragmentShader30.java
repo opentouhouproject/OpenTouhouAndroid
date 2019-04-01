@@ -33,7 +33,7 @@ public class FragmentShader30 extends FragmentShader
         if (compileStatus[0] == 0)
         {
             String err = GLES30.glGetShaderInfoLog(handle);
-            throw new RuntimeException("Error compiling shader. " + err);
+            throw new RuntimeException("Error compiling shader (" + getName() + "). " + err);
         }
     }
 

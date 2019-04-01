@@ -12,7 +12,9 @@ public class FrameBuffer30 extends FrameBuffer {
     /*
      * Constructor(s).
      */
-    public FrameBuffer30(int width, int height) {
+    public FrameBuffer30(int width, int height, int numRenderTargets) {
+        super(numRenderTargets);
+
         setup(width, height);
     }
 
@@ -24,10 +26,9 @@ public class FrameBuffer30 extends FrameBuffer {
         GLES30.glBindFramebuffer(GLES30.GL_FRAMEBUFFER, handle[0]);
 
         // Create render targets.
-        setupRenderTarget(0, width, height, GLES30.GL_COLOR_ATTACHMENT0);
-        setupRenderTarget(1, width, height, GLES30.GL_COLOR_ATTACHMENT1);
-        int attachments[] = { GLES30.GL_COLOR_ATTACHMENT0, GLES30.GL_COLOR_ATTACHMENT1 };
-        GLES30.glDrawBuffers(2, attachments, 0);
+        for (int i = 0; i < numberOfRenderTargets; i++) {
+            setupRenderTarget(i, width, height, GLES30.GL_COLOR_ATTACHMENT0 + i);
+        }
 
         // Create a render buffer.
         int[] rbo = new int[1];
@@ -91,6 +92,16 @@ public class FrameBuffer30 extends FrameBuffer {
      */
     public void bind() {
         GLES30.glBindFramebuffer(GLES30.GL_FRAMEBUFFER, handle[0]);
+
+        int attachments[] = {
+                GLES30.GL_COLOR_ATTACHMENT0,
+                GLES30.GL_COLOR_ATTACHMENT1,
+                GLES30.GL_COLOR_ATTACHMENT2,
+                GLES30.GL_COLOR_ATTACHMENT3,
+                GLES30.GL_COLOR_ATTACHMENT4,
+                GLES30.GL_COLOR_ATTACHMENT5
+        };
+        GLES30.glDrawBuffers(numberOfRenderTargets, attachments, 0);
     }
 
     /*

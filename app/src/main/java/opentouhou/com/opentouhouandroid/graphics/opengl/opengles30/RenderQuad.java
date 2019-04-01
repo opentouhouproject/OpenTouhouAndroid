@@ -6,6 +6,7 @@ import android.util.Log;
 import com.scarlet.math.Matrix4f;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
@@ -55,25 +56,49 @@ public class RenderQuad extends GraphicsObject30 {
         setMesh(mesh);
 
         // Set the texture.
-        setTexture(texture);
+        super.setTexture(texture);
 
         // Set the shader.
-        setShader(program);
+        super.setShader(program);
 
         // Set the model.
         setModelMatrix(Matrix4f.getIdentity());
     }
 
-    public void draw(Scene scene) {
+    public void setTexture(Texture texture) { super.setTexture(texture); }
+
+    public void setShader(ShaderProgram program) { super.setShader(program); }
+
+    public void useShader() {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();
         GLES30.glUseProgram(shaderHandle);
+    }
+
+    public void setupTexture(Texture texture, int texUnit, String texName) {
+        int handle = shaderProgram.getHandle();
+
+        int textureHandle = GLES30.glGetUniformLocation(handle, texName);
+
+        // Set the active texture unit to texture unit 0.
+        GLES30.glActiveTexture(texUnit);
+        // Bind the texture to this unit.
+        GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, texture.getTextureHandle());
+
+        // Tell the texture uniform sampler to use this texture in the shader by binding to texture unit.
+        if (texUnit == GLES30.GL_TEXTURE0) {
+            GLES30.glUniform1i(textureHandle, 0);
+        } else if (texUnit == GLES30.GL_TEXTURE1) {
+            GLES30.glUniform1i(textureHandle, 1);
+        }
+
+    }
+
+    public void draw(Scene scene) {
+        int shaderHandle = shaderProgram.getHandle();
 
         // Set the transformation matrices.
         setTransformationMatrices(shaderHandle, scene);
-
-        // Set the texture.
-        setTexture(shaderHandle);
 
         // Set the mesh.
         setMesh();

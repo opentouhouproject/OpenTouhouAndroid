@@ -16,7 +16,10 @@ public abstract class Renderer implements GLSurfaceView.Renderer {
     // OpenGL context.
     protected EGLContext eglContext;
 
+    // framebuffers
     protected FrameBuffer frameBuffer;
+    protected FrameBuffer postProcessingBuffer1;
+    protected FrameBuffer postProcessingBuffer2;
 
     // Shader manager.
     protected ShaderManager shaderManager;
