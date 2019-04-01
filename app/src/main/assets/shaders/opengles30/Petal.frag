@@ -1,11 +1,15 @@
+#version 300 es
+
 precision mediump float;
 
 uniform vec3 uLightPos;
 uniform float uProgress;
 
-varying vec3 vVertex;
-varying vec4 vColor;
-varying vec3 vNormal;
+in vec3 vVertex;
+in vec4 vColor;
+in vec3 vNormal;
+
+out vec4 fragmentColor;
 
 void main() {
 	// Will be used for attenuation.
@@ -27,5 +31,5 @@ void main() {
     // To get the final output color, multiply the color by the diffuse lighting value.
     vec4 outColor = vColor;
     outColor.w *= (1.0f - uProgress);
-    gl_FragColor = outColor;
+    fragmentColor = outColor;
 }

@@ -1,14 +1,16 @@
+#version 300 es
+
 uniform mat4 uMVPMatrix;
 uniform mat4 uMVMatrix;
 uniform float uProgress;
 
-attribute vec4 aVertex;
-attribute vec4 aColor;
-attribute vec3 aNormal;
+in vec4 aVertex;
+in vec4 aColor;
+in vec3 aNormal;
 
-varying vec3 vVertex;
-varying vec4 vColor;
-varying vec3 vNormal;
+out vec3 vVertex;
+out vec4 vColor;
+out vec3 vNormal;
 
 void main() {
     // Set the position vector before projection.

@@ -1,16 +1,19 @@
+#version 300 es
+
 precision mediump float;
 
 uniform vec3 uLightPos;
 uniform vec4 uColor;
 uniform sampler2D uTexture; // interpolated texture coordinate
 
-varying vec3 vVertex;
-varying vec4 vColor;
-varying vec3 vNormal;
-varying vec2 vTexCoordinate;
+in vec3 vVertex;
+in vec4 vColor;
+in vec3 vNormal;
+in vec2 vTexCoordinate;
 
-void main()
-{
+out vec4 fragmentColor;
+
+void main() {
 	// Will be used for attenuation.
 	float distance = length(uLightPos - vVertex);
 
@@ -32,11 +35,10 @@ void main()
     // (2) the texture value
 
     vec4 newColor = vec4(1.0, 1.0, 1.0, 0.0);
-    if (texture2D(uTexture, vTexCoordinate).w > 0.0)
-    {
+    if (texture(uTexture, vTexCoordinate).w > 0.0) {
         newColor = vec4(1.0, 1.0, 1.0, 1.0);
     }
 
     //gl_FragColor = diffuse * vColor * (uColor * texture2D(uTexture, vTexCoordinate).w);
-    gl_FragColor = diffuse * vColor * (uColor * newColor.w);
+    fragmentColor = diffuse * vColor * (uColor * newColor.w);
 }
