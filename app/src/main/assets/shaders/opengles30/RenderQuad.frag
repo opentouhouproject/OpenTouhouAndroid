@@ -1,9 +1,13 @@
+#version 300 es
+
 uniform sampler2D uTexture;
 
-varying vec2 vTexCoords;
+in vec2 vTexCoords;
+
+out vec4 fragmentColor;
 
 void main() {
-    gl_FragColor = texture2D(uTexture, vTexCoords);
+    fragmentColor = texture(uTexture, vTexCoords);
 
-    //gl_FragColor = vec4(vec3(1.0 - texture2D(uTexture, vTexCoords)), 1.0);
+    //fragmentColor = vec4(vec3(1.0 - texture2D(uTexture, vTexCoords)), 1.0);
 }

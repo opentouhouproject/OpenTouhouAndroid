@@ -72,9 +72,6 @@ public class RenderQuad extends GraphicsObject30 {
         // Set the transformation matrices.
         setTransformationMatrices(shaderHandle, scene);
 
-        // Set the light source(s).
-        //setLightPosition(shaderHandle, scene);
-
         // Set the texture.
         setTexture(shaderHandle);
 

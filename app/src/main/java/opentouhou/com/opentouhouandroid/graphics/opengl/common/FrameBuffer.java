@@ -8,7 +8,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
  */
 public abstract class FrameBuffer implements AutoCloseable {
     protected int[] handle;
-    protected Texture texture;
+    protected Texture[] textures;
     protected int renderBufferHandle;
 
     /*
@@ -16,12 +16,12 @@ public abstract class FrameBuffer implements AutoCloseable {
      */
     protected FrameBuffer() {
         handle = new int[1];
-        texture = null;
+        textures = new Texture[2];
         renderBufferHandle = 0;
     }
 
-    public Texture getTexture() {
-        return texture;
+    public Texture getTexture(int index) {
+        return textures[index];
     }
 
     public abstract void bind();

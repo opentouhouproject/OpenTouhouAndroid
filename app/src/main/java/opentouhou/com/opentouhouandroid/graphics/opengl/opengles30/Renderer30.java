@@ -123,7 +123,7 @@ public class Renderer30 extends Renderer {
 
         // Create the framebuffer.
         frameBuffer = new FrameBuffer30(width, height);
-        renderQuad = new RenderQuad(this, (float)width, (float)height, frameBuffer.getTexture());
+        renderQuad = new RenderQuad(this, (float)width, (float)height, frameBuffer.getTexture(0));
 
                 // Update info.
         screenWidth = width;

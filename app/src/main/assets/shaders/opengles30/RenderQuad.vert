@@ -1,10 +1,12 @@
+#version 300 es
+
 uniform mat4 uMVPMatrix;
 uniform mat4 uMVMatrix;
 
-attribute vec2 aVertex;
-attribute vec2 aTexCoordinate;
+in vec2 aVertex;
+in vec2 aTexCoordinate;
 
-varying  vec2 vTexCoords;
+out vec2 vTexCoords;
 
 void main() {
     vTexCoords = aTexCoordinate;
