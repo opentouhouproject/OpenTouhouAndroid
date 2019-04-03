@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.common;
+package com.scarlet.graphics.opengl;
 
 import android.util.Log;
 

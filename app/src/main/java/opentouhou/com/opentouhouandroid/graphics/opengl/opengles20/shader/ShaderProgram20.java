@@ -2,9 +2,9 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader;
 
 import android.opengl.GLES20;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.FragmentShader;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.VertexShader;
+import com.scarlet.graphics.opengl.shader.FragmentShader;
+import com.scarlet.graphics.opengl.shader.ShaderProgram;
+import com.scarlet.graphics.opengl.shader.VertexShader;
 
 public class ShaderProgram20 extends ShaderProgram
 {

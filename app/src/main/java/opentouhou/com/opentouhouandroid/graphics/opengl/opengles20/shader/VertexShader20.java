@@ -2,7 +2,7 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader;
 
 import android.opengl.GLES20;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.VertexShader;
+import com.scarlet.graphics.opengl.shader.VertexShader;
 
 public class VertexShader20 extends VertexShader
 {

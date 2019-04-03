@@ -1,1 +1,1 @@
-include ':app', ':math', ':audio'
+include ':app', ':math', ':audio', ':graphics_opengl'

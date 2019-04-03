@@ -2,7 +2,7 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader;
 
 import android.opengl.GLES20;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.FragmentShader;
+import com.scarlet.graphics.opengl.shader.FragmentShader;
 
 public class FragmentShader20 extends FragmentShader
 {

@@ -2,14 +2,10 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.common.texture;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Hashtable;
 
 import opentouhou.com.opentouhouandroid.graphics.common.BitmapEditor;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.io.FileManager;
 
 /*

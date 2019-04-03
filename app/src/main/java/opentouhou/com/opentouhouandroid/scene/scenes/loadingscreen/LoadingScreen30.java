@@ -10,7 +10,7 @@ import opentouhou.com.opentouhouandroid.entity.sprite.meilin.MeilinSprite;
 import opentouhou.com.opentouhouandroid.entity.petals.PetalFall;
 import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
+import com.scarlet.graphics.opengl.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;

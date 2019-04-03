@@ -1,7 +1,6 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.common.shader;
+package com.scarlet.graphics.opengl.shader;
 
-public abstract class Shader implements AutoCloseable
-{
+public abstract class Shader implements AutoCloseable {
     private String name;
 
     public Shader(String name)

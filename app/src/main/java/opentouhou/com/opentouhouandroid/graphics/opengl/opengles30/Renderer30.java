@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.scarlet.math.Vector3f;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
+import com.scarlet.graphics.opengl.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;

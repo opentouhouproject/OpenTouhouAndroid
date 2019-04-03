@@ -2,7 +2,7 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.postprocessi
 
 import android.opengl.GLES30;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
+import com.scarlet.graphics.opengl.shader.ShaderProgram;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
 
 public class PostProcessing {

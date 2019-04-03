@@ -1,6 +1,5 @@
 package opentouhou.com.opentouhouandroid.entity.button;
 
-import android.opengl.GLES30;
 import android.util.Log;
 
 import com.scarlet.math.Matrix4f;

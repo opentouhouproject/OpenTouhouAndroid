@@ -7,7 +7,7 @@ import com.scarlet.math.Vector3f;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
+import com.scarlet.graphics.opengl.shader.ShaderProgram;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.GraphicsObject30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;

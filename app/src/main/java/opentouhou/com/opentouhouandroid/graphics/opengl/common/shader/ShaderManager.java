@@ -1,5 +1,9 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common.shader;
 
+import com.scarlet.graphics.opengl.shader.FragmentShader;
+import com.scarlet.graphics.opengl.shader.ShaderProgram;
+import com.scarlet.graphics.opengl.shader.VertexShader;
+
 import java.util.HashMap;
 
 import opentouhou.com.opentouhouandroid.io.FileManager;

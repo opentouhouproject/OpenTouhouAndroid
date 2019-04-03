@@ -3,7 +3,6 @@ package opentouhou.com.opentouhouandroid.scene.scenes.mainmenu;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 

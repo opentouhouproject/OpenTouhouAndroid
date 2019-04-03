@@ -3,16 +3,14 @@ package opentouhou.com.opentouhouandroid.scene.scenes.mainmenu;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 
 import java.io.InputStreamReader;
 
 import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
-import opentouhou.com.opentouhouandroid.entity.button.Button;
 import opentouhou.com.opentouhouandroid.entity.menu.Menu;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
+import com.scarlet.graphics.opengl.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;

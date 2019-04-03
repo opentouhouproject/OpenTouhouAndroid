@@ -1,7 +1,5 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader;
 
-import android.content.res.AssetManager;
-
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
 import opentouhou.com.opentouhouandroid.io.FileManager;
 

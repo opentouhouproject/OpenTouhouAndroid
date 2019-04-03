@@ -1,10 +1,7 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl;
+package com.scarlet.graphics.opengl.shader;
 
-public interface Compilable
-{
+public interface Compilable {
     void compile();
-
     void compile(String code);
-
     void compile(StringBuffer codeBuffer);
 }

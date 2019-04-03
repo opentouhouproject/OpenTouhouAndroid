@@ -8,7 +8,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
 import opentouhou.com.opentouhouandroid.scene.Scene;
 
