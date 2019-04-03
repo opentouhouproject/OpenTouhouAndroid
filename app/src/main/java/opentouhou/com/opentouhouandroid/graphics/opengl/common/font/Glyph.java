@@ -1,5 +1,7 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common.font;
 
+import android.util.Log;
+
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
@@ -92,6 +94,29 @@ public class Glyph
         // Set the model matrix.
         Matrix4f model = Matrix4f.scaleMatrix(width / scale, height / scale, 1);
         model.translate(position.x, position.y, position.z);
+        drawable.setModelMatrix(model);
+
+        // Set the color.
+        drawable.setColor(color);
+
+        // Set the shader.
+        ShaderProgram p = scene.getRenderer().getShaderManager().getShaderProgram(shaderProgram);
+        drawable.setShader(p);
+
+        // Draw the glyph.
+        drawable.draw(scene);
+    }
+
+    public void draw(Vector3f position, float scale, float angle, Vector4f color, String shaderProgram, Scene scene)
+    {
+        // Set the model matrix.
+        Matrix4f model = Matrix4f.scaleMatrix(width / scale, height / scale, 1);
+        model.rotateY(angle, true);
+        model.translate(position.x, position.y, position.z);
+
+        //Vector4f forward = Matrix4f.multiply(Matrix4f.getYAxisRotation(angle, true), new Vector4f(0, 0, 1, 1));
+        //forward.selfScale(-0.5f);
+        //model.translate(forward.x, forward.y, forward.z);
         drawable.setModelMatrix(model);
 
         // Set the color.

@@ -12,9 +12,9 @@ import com.scarlet.math.Vector4f;
  * PCN format.
  */
 public class AttributeGenerator {
-    private static Vector4f innerColor = new Vector4f(0.86f, 0.62f, 0.86f, 0.8f);
+    private static Vector4f innerColor = new Vector4f(0.2f, 0.2f, 0.2f, 0.8f);
     //private static Vector4f borderColor = new Vector4f(0.529f, 0.807f, 0.921f, 0.7f);
-    private static Vector4f borderColor = new Vector4f(0.95f, 0.95f, 0.15f, 1.0f);
+    private static Vector4f borderColor = new Vector4f(0.6f, 0.6f, 0.9f, 1.0f);
 
     private static float borderThickness = 0.10f;
 

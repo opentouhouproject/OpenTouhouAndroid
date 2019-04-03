@@ -13,7 +13,7 @@ void main() {
 
     // Get the size of single texel.
     vec2 tex_offset = 1.0 / vec2(textureSize(image, 0));
-    tex_offset = 2.0f * tex_offset;
+    tex_offset = 1.0f * tex_offset;
 
     // Current fragment's contribution.
     vec3 result = texture(image, textureCoordinate).rgb * weight[0];

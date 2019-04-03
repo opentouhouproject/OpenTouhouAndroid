@@ -17,9 +17,9 @@ public abstract class Renderer implements GLSurfaceView.Renderer {
     protected EGLContext eglContext;
 
     // framebuffers
-    protected FrameBuffer frameBuffer;
-    protected FrameBuffer postProcessingBuffer1;
-    protected FrameBuffer postProcessingBuffer2;
+    public FrameBuffer frameBuffer;
+    public FrameBuffer postProcessingBuffer1;
+    public FrameBuffer postProcessingBuffer2;
 
     // Shader manager.
     protected ShaderManager shaderManager;
@@ -31,7 +31,7 @@ public abstract class Renderer implements GLSurfaceView.Renderer {
     protected FontManager fontManager;
 
     // Stage.
-    protected Stage stage;
+    public Stage stage;
 
     // Track system info.
     protected SystemInfo sysInfo;

@@ -1,9 +1,11 @@
 package opentouhou.com.opentouhouandroid.entity.button;
 
 import android.opengl.GLES30;
+import android.util.Log;
 
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
+import com.scarlet.math.Vector4f;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
@@ -16,6 +18,7 @@ import opentouhou.com.opentouhouandroid.scene.loader.CreateVAOTask;
 public class ButtonDrawable30 extends GraphicsObject30 {
     private Vector3f position;
     private float width, height, borderWidth;
+    private float angle;
 
     /*
      * Constructor(s).
@@ -54,7 +57,7 @@ public class ButtonDrawable30 extends GraphicsObject30 {
     /*
      * Setup the drawable object.
      */
-    public void create(Renderer renderer, boolean async) {
+    public void create(Renderer renderer, boolean async, float degree) {
         // Get the shader program.
         ShaderProgram program = renderer.getShaderManager().getShaderProgram("Button");
 
@@ -76,7 +79,8 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         setShader(program);
 
         // Set the model.
-        Matrix4f mat = Matrix4f.getIdentity();
+        angle = degree;
+        Matrix4f mat = Matrix4f.getYAxisRotation(degree, true);
         mat.translate(position.x, position.y, position.z);
         setModelMatrix(mat);
     }
@@ -96,6 +100,7 @@ public class ButtonDrawable30 extends GraphicsObject30 {
 
         // Set the model.
         Matrix4f mat = Matrix4f.getIdentity();
+        mat = Matrix4f.getYAxisRotation(angle, true);
         mat.translate(position.x, position.y, position.z);
         setModelMatrix(mat);
 

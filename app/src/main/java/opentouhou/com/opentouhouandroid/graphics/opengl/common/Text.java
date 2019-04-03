@@ -1,5 +1,6 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common;
 
+import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 
@@ -19,6 +20,8 @@ public class Text {
     Vector4f color;
     String shaderProgram;
 
+    float angle;
+
     boolean enableAnim = false;
     TextAnimation[] animations = new TextAnimation[4];
     TextAnimation animation;
@@ -32,6 +35,7 @@ public class Text {
         value = "";
         position = new Vector3f(0, 0, 0);
         scaling = 1.0f;
+        angle = 0.0f;
         color = new Vector4f(1, 1, 1, 1);
     }
 
@@ -52,6 +56,12 @@ public class Text {
 
     public Text setScaling(float scaling) {
         this.scaling = scaling;
+
+        return this;
+    }
+
+    public Text setRotation(float degree) {
+        angle = degree;
 
         return this;
     }
@@ -102,23 +112,28 @@ public class Text {
 
         if (enableAnim) {
             chars = animation.currentFrame().toCharArray();
-        }
-        else {
+        } else {
             chars = value.toCharArray();
         }
 
-        float xOffset = 0;
+        float l = 0;
         Vector3f drawPosition = new Vector3f(position);
 
-        for (char c : chars) {
-            // Update the render position of a glyph by the offset.
-            drawPosition.x += xOffset;
+        Vector4f drawOffset = new Vector4f(1f, 0f, 0f, 1f);
+        drawOffset = Matrix4f.multiply(Matrix4f.getYAxisRotation(angle, true), drawOffset);
+        drawOffset.normalize();
 
+        for (char c : chars) {
             // Draw the glyph.
-            font.render(c, drawPosition, scaling, color, shaderProgram, scene);
+            font.render(c, drawPosition, scaling, angle, color, shaderProgram, scene);
 
             // Update the offset.
-            xOffset = (float)font.getGlyph(c).getWidth() / scaling;
+            l = (float)font.getGlyph(c).getWidth() / scaling;
+            Vector3f drawOffset2 = new Vector3f(drawOffset.scale(l));
+
+
+            // Update the render position of a glyph by the offset.
+            drawPosition.selfAdd(new Vector3f(drawOffset2));
         }
     }
 }

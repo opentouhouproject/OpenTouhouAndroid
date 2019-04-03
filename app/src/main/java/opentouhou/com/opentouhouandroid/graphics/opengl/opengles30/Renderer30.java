@@ -11,6 +11,7 @@ import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.postprocessing.PostProcessing;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader.ShaderManager30;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.texture.TextureManager30;
 import opentouhou.com.opentouhouandroid.scene.Stage;
@@ -23,7 +24,7 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class Renderer30 extends Renderer {
     private Text fpsCounter;
-    private RenderQuad renderQuad;
+    public RenderQuad renderQuad;
 
     /*
      * Constructor(s).
@@ -93,30 +94,15 @@ public class Renderer30 extends Renderer {
 
         frameBuffer.unbind();
 
-        // Post-processing
-        //postProcessing();
-
-        // Rebind the deafult framebuffer.
-
-
         // Draw the background color.
         GLES30.glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
         GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT);
-
         GLES30.glDisable(GLES30.GL_DEPTH_TEST);
-        //renderQuad.setTexture(postProcessingBuffer1.getTexture(0));
-        //renderQuad.setTexture(frameBuffer.getTexture(1));
-        //renderQuad.setShader(getShaderManager().getShaderProgram("GaussianBlur"));
-        //renderQuad.setShader(getShaderManager().getShaderProgram("RenderQuad"));
-        //renderQuad.draw(stage.getCurrentScene());
 
         postProcessing();
 
-        frameBuffer.unbind();
-
         renderQuad.setShader(getShaderManager().getShaderProgram("Combine"));
         renderQuad.useShader();
-        //renderQuad.setupTexture(frameBuffer.getTexture(0), GLES30.GL_TEXTURE0, "uTexture");
         renderQuad.setupTexture(frameBuffer.getTexture(0), GLES30.GL_TEXTURE0, "scene");
         renderQuad.setupTexture(postProcessingBuffer2.getTexture(0), GLES30.GL_TEXTURE1, "bloomBlur");
         renderQuad.draw(stage.getCurrentScene());
@@ -175,55 +161,6 @@ public class Renderer30 extends Renderer {
     }
 
     private void postProcessing() {
-        boolean isHorizontal = true;
-        boolean isFirstIteration = true;
-        int amount = 2;
-
-        for (int i = 0; i < amount; i++) {
-            if (isHorizontal) {
-                //Log.d("Post Processing", "BIND PP 1");
-                postProcessingBuffer1.bind();
-            } else {
-                postProcessingBuffer2.bind();
-            }
-
-            renderQuad.setShader(getShaderManager().getShaderProgram("GaussianBlur"));
-            renderQuad.useShader();
-
-            int handle = GLES30.glGetUniformLocation(getShaderManager().getShaderProgram("GaussianBlur").getHandle(), "isHorizontal");
-            float val = 1.0f;
-            if (isHorizontal) {
-                val = 0.0f;
-            }
-            GLES30.glUniform1f(handle, val);
-
-            if (isFirstIteration) {
-                //Log.d("Post Processing", "TEXTURE FB 01");
-                renderQuad.setupTexture(frameBuffer.getTexture(1), GLES30.GL_TEXTURE0, "image");
-            } else {
-                if (isHorizontal) {
-                    //Log.d("Post Processing", "TEXTURE pp2 00");
-                    renderQuad.setupTexture(postProcessingBuffer2.getTexture(0), GLES30.GL_TEXTURE0, "image");
-                } else {
-                    //Log.d("Post Processing", "TEXTURE pp1 00");
-                    renderQuad.setupTexture(postProcessingBuffer1.getTexture(0), GLES30.GL_TEXTURE0, "image");
-                }
-            }
-
-            renderQuad.draw(stage.getCurrentScene());
-
-            if (isHorizontal) {
-                //Log.d("Post Processing", "BIND PP 1");
-                postProcessingBuffer1.unbind();
-            } else {
-                postProcessingBuffer2.unbind();
-            }
-
-            isHorizontal = !isHorizontal;
-
-            if (isFirstIteration) {
-                isFirstIteration = false;
-            }
-        }
+        PostProcessing.GaussianBlur(this);
     }
 }

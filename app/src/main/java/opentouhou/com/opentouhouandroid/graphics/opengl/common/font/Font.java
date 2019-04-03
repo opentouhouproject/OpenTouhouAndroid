@@ -82,4 +82,8 @@ public class Font {
     public void render(char c, Vector3f position, float scaling, Vector4f color, String shaderProgram, Scene scene) {
         glyphs.get(c).draw(position, scaling, color, shaderProgram, scene);
     }
+
+    public void render(char c, Vector3f position, float scaling, float angle, Vector4f color, String shaderProgram, Scene scene) {
+        glyphs.get(c).draw(position, scaling, angle, color, shaderProgram, scene);
+    }
 }

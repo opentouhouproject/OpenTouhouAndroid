@@ -19,7 +19,7 @@ void main() {
     result = sceneColor + bloomColor;
 
 
-    //vec3 result = sceneColor;
+    //result = sceneColor;
     //result = bloomColor;
 
     // tone mapping

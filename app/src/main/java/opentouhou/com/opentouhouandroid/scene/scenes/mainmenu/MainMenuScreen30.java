@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
 import opentouhou.com.opentouhouandroid.entity.button.Button;
+import opentouhou.com.opentouhouandroid.entity.menu.Menu;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
@@ -31,9 +32,7 @@ public class MainMenuScreen30 extends Scene {
     // Game Objects
     Background background;
     Text title;
-    Button startButton;
-    Button optionsButton;
-    Button exitButton;
+    Menu menu;
 
     /*
      * Constructor(s)
@@ -66,17 +65,7 @@ public class MainMenuScreen30 extends Scene {
         FontManager fontManager = renderer.getFontManager();
         title = TextEntityGenerator.CREATE_MAIN_MENU_TITLE(fontManager);
 
-        startButton = new Button(renderer, true);
-        startButton.setPosition(0, 0, 3);
-        startButton.setText("Start");
-
-        optionsButton = new Button(renderer, true);
-        optionsButton.setPosition(0, -2, 3);
-        optionsButton.setText("Options");
-
-        exitButton = new Button(renderer, true);
-        exitButton.setPosition(0, -4, 3);
-        exitButton.setText("Exit");
+        menu = new Menu(renderer);
 
         // Finished loading.
         Log.d("DONE", "MAIN MENU LOAD COMPLETE.");
@@ -111,9 +100,9 @@ public class MainMenuScreen30 extends Scene {
      */
     public void draw() {
         background.draw(this);
+
         title.draw(this);
-        startButton.draw(this);
-        optionsButton.draw(this);
-        exitButton.draw(this);
+
+        menu.draw(this);
     }
 }
