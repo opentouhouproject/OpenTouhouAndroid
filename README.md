@@ -46,7 +46,7 @@ Goals:
 
 - Setup basic CI with unit testing.
 
-Demo 1: https://www.youtube.com/watch?v=FoVAZPTSaAQ
+**Demo 1** : https://www.youtube.com/watch?v=FoVAZPTSaAQ
 
 ### Branch: 0.1-a2
 
@@ -56,9 +56,9 @@ Goals Completed:
 
 - Implement basic scene transition.
 
-Demo 2: https://www.youtube.com/watch?v=mFUpeIADx0I
+**Demo 2** : https://www.youtube.com/watch?v=mFUpeIADx0I
 
-Demo 1: https://www.youtube.com/watch?v=zMbH5SXehFA
+**Demo 1** : https://www.youtube.com/watch?v=zMbH5SXehFA
 
 ### Branch: 0.1-a1
 
