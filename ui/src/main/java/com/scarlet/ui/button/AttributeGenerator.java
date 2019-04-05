@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.entity.button;
+package com.scarlet.ui.button;
 
 import android.util.Log;
 

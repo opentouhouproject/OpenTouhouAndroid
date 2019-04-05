@@ -1,6 +1,6 @@
 package opentouhou.com.opentouhouandroid.scene.stages.Compatible30;
 
-import opentouhou.com.opentouhouandroid.scene.State;
+import com.scarlet.scene.State;
 
 public class States {
     public static final State<OpenGLES30Test> LOADING_SCREEN = new StateLoadScreen();

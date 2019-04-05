@@ -9,7 +9,7 @@ import com.scarlet.opengles30.Renderer30;
 import com.scarlet.io.event.MotionEventQueue;
 import com.scarlet.scene.Stage;
 
-import opentouhou.com.opentouhouandroid.scene.State;
+import com.scarlet.scene.State;
 import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
 import opentouhou.com.opentouhouandroid.scene.scenes.mainmenu.MainMenuScreen30;
 

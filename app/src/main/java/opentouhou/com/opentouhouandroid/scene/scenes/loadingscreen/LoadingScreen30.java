@@ -15,18 +15,18 @@ import com.scarlet.graphics.opengl.GraphicsObject;
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.Text;
 import com.scarlet.graphics.opengl.font.FontManager;
+import com.scarlet.scene.LoadingScreen;
 import com.scarlet.scene.Scene;
 import com.scarlet.scene.Stage;
 
 import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
-import opentouhou.com.opentouhouandroid.scene.State;
+import com.scarlet.scene.State;
 
 /*
  * Loading screen implemented with OpenGL ES 3.0 .
  */
-public class LoadingScreen30 extends Scene {
+public class LoadingScreen30 extends LoadingScreen {
     // Track game state.
-    public boolean finishedLoading = false;
     public boolean userContinue = false;
     private State<LoadingScreen30> state;
 

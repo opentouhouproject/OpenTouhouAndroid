@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.scene;
+package com.scarlet.scene;
 
 import android.view.MotionEvent;
 

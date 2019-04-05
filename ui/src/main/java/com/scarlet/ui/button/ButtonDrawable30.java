@@ -1,17 +1,15 @@
-package opentouhou.com.opentouhouandroid.entity.button;
+package com.scarlet.ui.button;
 
 import android.opengl.GLES30;
 
-import com.scarlet.math.Matrix4f;
-import com.scarlet.math.Vector3f;
-
+import com.scarlet.concurrent.CreateVAOTask;
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.mesh.MeshLayout;
 import com.scarlet.graphics.opengl.shader.ShaderProgram;
+import com.scarlet.math.Matrix4f;
+import com.scarlet.math.Vector3f;
 import com.scarlet.opengles30.GraphicsObject30;
 import com.scarlet.opengles30.mesh.Mesh30;
-
-import opentouhou.com.opentouhouandroid.scene.loader.CreateVAOTask;
 
 public class ButtonDrawable30 extends GraphicsObject30 {
     private Vector3f position;

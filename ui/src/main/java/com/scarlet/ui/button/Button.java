@@ -1,14 +1,14 @@
-package opentouhou.com.opentouhouandroid.entity.button;
+package com.scarlet.ui.button;
 
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 
-import opentouhou.com.opentouhouandroid.entity.GameEntity;
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.Text;
+import com.scarlet.ui.UIEntity;
 
-public class Button extends GameEntity {
+public class Button extends UIEntity {
     // Center of mass position of Button in 3d space.
     private Vector3f position;
     // If the button is rotated then we have a normal and edge.

@@ -1,6 +1,6 @@
 package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
-import opentouhou.com.opentouhouandroid.scene.State;
+import com.scarlet.scene.State;
 
 /*
  * Holds the possible states for the loading screen.

@@ -40,4 +40,6 @@ dependencies {
     implementation project(":opengles30")
     implementation project(":scene")
     implementation project(":opengles20")
+    implementation project(path: ':concurrent')
+    implementation project(path: ':ui')
 }

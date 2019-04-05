@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 
 import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
-import opentouhou.com.opentouhouandroid.entity.menu.Menu;
 import com.scarlet.graphics.opengl.Camera;
 import com.scarlet.graphics.opengl.GraphicsObject;
 import com.scarlet.graphics.opengl.Renderer;
@@ -19,7 +18,8 @@ import com.scarlet.scene.Scene;
 import com.scarlet.scene.Stage;
 
 import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
-import opentouhou.com.opentouhouandroid.scene.State;
+import com.scarlet.scene.State;
+import com.scarlet.ui.menu.Menu;
 
 /*
  * A main menu for the game!

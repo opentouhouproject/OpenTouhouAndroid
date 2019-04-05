@@ -1,8 +1,7 @@
-package opentouhou.com.opentouhouandroid.scene.loader;
+package com.scarlet.concurrent;
 
+import com.scarlet.scene.LoadingScreen;
 import com.scarlet.scene.Scene;
-
-import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
 
 /*
  * Represents a task to load multiple scenes.
@@ -46,7 +45,7 @@ public class BatchLoadTask {
         completionCount++;
 
         if (completionCount == tasks.length) {
-            ((LoadingScreen30) load).finishedLoading = true;
+            ((LoadingScreen) load).finishedLoading = true;
         }
     }
 }

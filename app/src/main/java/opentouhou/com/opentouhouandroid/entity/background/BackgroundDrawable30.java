@@ -2,6 +2,7 @@ package opentouhou.com.opentouhouandroid.entity.background;
 
 import android.opengl.GLES30;
 
+import com.scarlet.concurrent.CreateVAOTask;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 
@@ -11,8 +12,6 @@ import com.scarlet.graphics.opengl.shader.ShaderProgram;
 import com.scarlet.graphics.opengl.texture.Texture;
 import com.scarlet.opengles30.GraphicsObject30;
 import com.scarlet.opengles30.mesh.Mesh30;
-
-import opentouhou.com.opentouhouandroid.scene.loader.CreateVAOTask;
 
 public class BackgroundDrawable30 extends GraphicsObject30 {
     public Vector3f position = new Vector3f(-5.5f, -10.0f, 0);

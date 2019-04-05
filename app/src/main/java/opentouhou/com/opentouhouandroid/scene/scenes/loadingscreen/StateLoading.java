@@ -2,7 +2,7 @@ package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
 import android.view.MotionEvent;
 
-import opentouhou.com.opentouhouandroid.scene.State;
+import com.scarlet.scene.State;
 
 public final class StateLoading implements State<LoadingScreen30> {
     /*

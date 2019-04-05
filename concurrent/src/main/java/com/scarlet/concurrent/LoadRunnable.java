@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.scene.loader;
+package com.scarlet.concurrent;
 
 import android.opengl.EGL14;
 import android.opengl.EGLConfig;

@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.scene.loader;
+package com.scarlet.concurrent;
 
 import com.scarlet.opengles30.mesh.Mesh30;
 

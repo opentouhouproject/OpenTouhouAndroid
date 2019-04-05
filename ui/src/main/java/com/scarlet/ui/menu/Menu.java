@@ -1,12 +1,12 @@
-package opentouhou.com.opentouhouandroid.entity.menu;
+package com.scarlet.ui.menu;
 
 import android.opengl.GLES30;
 
-import opentouhou.com.opentouhouandroid.entity.GameEntity;
-import opentouhou.com.opentouhouandroid.entity.button.Button;
 import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.ui.UIEntity;
+import com.scarlet.ui.button.Button;
 
-public class Menu extends GameEntity {
+public class Menu extends UIEntity {
     private float xSelection = 0.0f;
 
     Button startButton;

@@ -2,7 +2,7 @@ package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
 import android.view.MotionEvent;
 
-import opentouhou.com.opentouhouandroid.scene.State;
+import com.scarlet.scene.State;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 

@@ -1,6 +1,6 @@
 package opentouhou.com.opentouhouandroid.scene.scenes.mainmenu;
 
-import opentouhou.com.opentouhouandroid.scene.State;
+import com.scarlet.scene.State;
 
 /*
  * Holds the states for the main menu.
