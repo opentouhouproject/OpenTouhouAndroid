@@ -35,4 +35,5 @@ dependencies {
     implementation project(":math")
     implementation project(":audio")
     implementation project(":graphics_opengl")
+    implementation project(":io")
 }

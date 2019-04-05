@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.io;
+package com.scarlet.io.event;
 
 public class Event<T> {
     /*

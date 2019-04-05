@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.io;
+package com.scarlet.io;
 
 import android.content.Context;
 import android.graphics.Bitmap;

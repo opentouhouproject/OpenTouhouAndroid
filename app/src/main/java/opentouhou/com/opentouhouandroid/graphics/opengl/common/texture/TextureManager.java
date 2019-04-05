@@ -3,10 +3,11 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.common.texture;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.scarlet.io.FileManager;
+
 import java.util.Hashtable;
 
 import opentouhou.com.opentouhouandroid.graphics.common.BitmapEditor;
-import opentouhou.com.opentouhouandroid.io.FileManager;
 
 /*
  * Manages all textures.

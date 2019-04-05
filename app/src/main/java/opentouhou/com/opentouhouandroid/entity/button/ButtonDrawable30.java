@@ -15,17 +15,22 @@ import opentouhou.com.opentouhouandroid.scene.loader.CreateVAOTask;
 
 public class ButtonDrawable30 extends GraphicsObject30 {
     private Vector3f position;
-    private float width, height, borderWidth;
     private float angle;
+    private float width, height, borderWidth;
+
+    private boolean isDirty;
 
     /*
      * Constructor(s).
      */
     ButtonDrawable30() {
         position = new Vector3f(0.0f, 0.0f, 0.0f);
+        angle = 0.0f;
         width = 1.0f;
         height = 1.0f;
         borderWidth = 0.1f;
+
+        isDirty = true;
     }
 
     /*
@@ -35,6 +40,16 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         position.x = vector.x;
         position.y = vector.y;
         position.z = vector.z;
+
+        isDirty = true;
+
+        return this;
+    }
+
+    public ButtonDrawable30 setAngle(float angle) {
+        this.angle = angle;
+
+        isDirty = true;
 
         return this;
     }
@@ -55,7 +70,7 @@ public class ButtonDrawable30 extends GraphicsObject30 {
     /*
      * Setup the drawable object.
      */
-    public void create(Renderer renderer, boolean async, float degree) {
+    public void create(Renderer renderer, boolean async) {
         // Get the shader program.
         ShaderProgram program = renderer.getShaderManager().getShaderProgram("Button");
 
@@ -77,10 +92,15 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         setShader(program);
 
         // Set the model.
-        angle = degree;
-        Matrix4f mat = Matrix4f.getYAxisRotation(degree, true);
-        mat.translate(position.x, position.y, position.z);
-        setModelMatrix(mat);
+        updateModelMatrix();
+    }
+
+    private void updateModelMatrix() {
+        Matrix4f model = Matrix4f.getYAxisRotation(angle, true);
+        model.translate(position.x, position.y, position.z);
+        setModelMatrix(model);
+
+        isDirty = false;
     }
 
     // Override the parent draw method.
@@ -90,17 +110,16 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         int shaderHandle = shaderProgram.getHandle();
         GLES30.glUseProgram(shaderHandle);
 
+        // Set the model.
+        if (isDirty) {
+            updateModelMatrix();
+        }
+
         // Set the transformation matrices.
         setTransformationMatrices(shaderHandle, scene);
 
         // Set the light source(s).
         setLightPosition(shaderHandle, scene);
-
-        // Set the model.
-        Matrix4f mat = Matrix4f.getIdentity();
-        mat = Matrix4f.getYAxisRotation(angle, true);
-        mat.translate(position.x, position.y, position.z);
-        setModelMatrix(mat);
 
         // Set the mesh.
         setMesh();

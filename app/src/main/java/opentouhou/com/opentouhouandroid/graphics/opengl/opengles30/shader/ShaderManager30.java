@@ -1,7 +1,8 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.shader;
 
+import com.scarlet.io.FileManager;
+
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
-import opentouhou.com.opentouhouandroid.io.FileManager;
 
 /**
  * Shader Manager implementation for OpenGL ES 3.0

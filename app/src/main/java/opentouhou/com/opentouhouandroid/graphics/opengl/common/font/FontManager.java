@@ -1,11 +1,12 @@
 package opentouhou.com.opentouhouandroid.graphics.opengl.common.font;
 
+import com.scarlet.io.FileManager;
+
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
 import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
-import opentouhou.com.opentouhouandroid.io.FileManager;
 
 /*
  * Reads xml font files and loads the font.

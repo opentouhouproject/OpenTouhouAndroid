@@ -1,6 +1,8 @@
-package opentouhou.com.opentouhouandroid.io.eventqueue;
+package com.scarlet.io.event;
 
 import android.view.MotionEvent;
+
+import com.scarlet.io.event.EventQueue;
 
 public class MotionEventQueue extends EventQueue<MotionEvent> {
     /*

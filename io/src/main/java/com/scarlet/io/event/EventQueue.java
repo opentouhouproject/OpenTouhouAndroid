@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.io.eventqueue;
+package com.scarlet.io.event;
 
 public abstract class EventQueue<T> {
     // Queue size and capacity.
