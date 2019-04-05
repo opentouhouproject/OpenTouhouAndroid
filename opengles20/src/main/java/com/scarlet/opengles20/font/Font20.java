@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.font;
+package com.scarlet.opengles20.font;
 
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.font.Font;

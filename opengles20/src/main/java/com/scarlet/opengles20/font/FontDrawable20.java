@@ -1,11 +1,10 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.font;
+package com.scarlet.opengles20.font;
 
 import android.opengl.GLES20;
 
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.math.Vector4f;
-
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.drawable.GraphicsObject20;
+import com.scarlet.opengles20.GraphicsObject20;
 
 public class FontDrawable20 extends GraphicsObject20 {
     private Vector4f fontColor;

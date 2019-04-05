@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader;
+package com.scarlet.opengles20.shader;
 
 import com.scarlet.io.FileManager;
 

@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.texture;
+package com.scarlet.opengles20.texture;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

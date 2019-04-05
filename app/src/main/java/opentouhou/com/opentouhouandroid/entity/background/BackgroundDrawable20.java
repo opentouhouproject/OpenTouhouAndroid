@@ -7,8 +7,8 @@ import com.scarlet.math.Matrix4f;
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.mesh.MeshLayout;
 import com.scarlet.graphics.opengl.texture.Texture;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.drawable.GraphicsObject20;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.mesh.Mesh20;
+import com.scarlet.opengles20.GraphicsObject20;
+import com.scarlet.opengles20.mesh.Mesh20;
 
 public class BackgroundDrawable20 extends GraphicsObject20 {
     /*

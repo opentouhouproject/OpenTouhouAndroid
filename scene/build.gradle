@@ -33,7 +33,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation project(":audio")
-    implementation project(":graphics_opengl")
+    implementation project(':opengl')
     implementation project(":io")
     implementation project(":math")
 }

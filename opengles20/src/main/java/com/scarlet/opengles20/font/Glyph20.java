@@ -1,14 +1,12 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.font;
+package com.scarlet.opengles20.font;
 
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.font.Glyph;
-import com.scarlet.graphics.opengl.mesh.MeshLayout;
 import com.scarlet.graphics.opengl.shader.ShaderProgram;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
-
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.mesh.Mesh20;
+import com.scarlet.opengles20.mesh.Mesh20;
 
 public class Glyph20 extends Glyph {
     // Drawing.

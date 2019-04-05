@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.mesh;
+package com.scarlet.opengles20.mesh;
 
 import android.opengl.GLES20;
 

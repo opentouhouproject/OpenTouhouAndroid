@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20;
+package com.scarlet.opengles20;
 
 import android.opengl.GLES20;
 import android.opengl.GLU;
@@ -8,11 +8,10 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.opengles20.font.FontManager20;
+import com.scarlet.opengles20.shader.ShaderManager20;
+import com.scarlet.opengles20.texture.TextureManager20;
 import com.scarlet.scene.Stage;
-
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.font.FontManager20;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader.ShaderManager20;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.texture.TextureManager20;
 
 /*
  * Renderer implemented with OpenGL ES 2.0.

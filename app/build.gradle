@@ -34,9 +34,10 @@ dependencies {
     // module dependencies
     implementation project(":math")
     implementation project(":audio")
-    implementation project(":graphics_opengl")
+    implementation project(':opengl')
     implementation project(":io")
     implementation project(":graphics")
     implementation project(":opengles30")
     implementation project(":scene")
+    implementation project(":opengles20")
 }
