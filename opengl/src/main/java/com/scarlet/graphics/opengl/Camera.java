@@ -329,21 +329,22 @@ public class Camera {
      * Convert NDC coordinates to World Coordinates.
      * Compute intersection of ray and xy-plane.
      */
-    public Vector3f unProject(Vector4f ndc, float z) {
+    public Vector3f unProject(Vector4f ndc) {
         Vector4f viewSpaceCoord = Matrix4f.multiply(getInvProjectionMatrix(), ndc);
         //Log.d("unProject", "P: " + pCoord.x + " " + pCoord.y + " " + pCoord.z + " " + pCoord.w);
 
         Vector4f worldSpaceCoord = Matrix4f.multiply(getInvViewMatrix(), viewSpaceCoord);
         //Log.d("unProject", "V: " + vCoord.x + " " + vCoord.y + " " + vCoord.z + " " + vCoord.w);
 
-        Vector3f p0 = new Vector3f(0, 0, z); // position inside plane
-        Vector3f n = new Vector3f(0, 0, 1); // normal to plane
-        Vector3f e = new Vector3f(cameraPosition); // camera position
-        Vector3f w = new Vector3f(worldSpaceCoord.x, worldSpaceCoord.y, worldSpaceCoord.z); // loaction of screen touch
+        return new Vector3f(worldSpaceCoord.x, worldSpaceCoord.y, worldSpaceCoord.z);
+    }
+
+    public Vector3f intersectionPoint(Vector3f planePoint, Vector3f normal, Vector3f touchPoint) {
+        Vector3f eye = new Vector3f(cameraPosition); // camera position
 
         // Compute intersection of the plane and ray.
-        Vector3f r = w.subtract(e);
-        float t = p0.subtract(e).dot(n) / r.dot(n);
-        return r.multiply(t).add(e);
+        Vector3f ray = touchPoint.subtract(eye);
+        float t = planePoint.subtract(eye).dot(normal) / ray.dot(normal);
+        return ray.multiply(t).add(eye);
     }
 }

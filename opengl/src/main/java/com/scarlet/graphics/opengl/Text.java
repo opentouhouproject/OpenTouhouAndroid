@@ -11,34 +11,51 @@ import com.scarlet.graphics.opengl.font.Font;
  * Represents a text object that can drawn to the screen.
  */
 public class Text {
-    Font font;
+    private Font font;
+    private String shaderProgram;
 
-    String value;
-    Vector3f position;
-    float scaling;
-    Vector4f color;
-    String shaderProgram;
+    private String value;
 
-    float angle;
+    private Vector3f position;
+    private float scaling;
+    private float angle;
 
-    boolean enableAnim = false;
-    TextAnimation[] animations = new TextAnimation[4];
-    TextAnimation animation;
-    int count = 0;
+    private Vector4f drawOffset;
 
-    // Constructor(s)
+    private Vector4f color;
+
+    private boolean enableAnim;
+    private TextAnimation[] animations;
+    private TextAnimation animation;
+    private int numberOfAnimations;
+
+    /*
+     * Constructor(s)
+     */
     public Text(Font font) {
         this.font = font;
+        shaderProgram = "";
 
         // Set default values.
         value = "";
+
         position = new Vector3f(0, 0, 0);
         scaling = 1.0f;
         angle = 0.0f;
+
+        drawOffset = new Vector4f(1f, 0f, 0f, 1f);
+
         color = new Vector4f(1, 1, 1, 1);
+
+        enableAnim = false;
+        animations = new TextAnimation[4];
+        animation = null;
+        numberOfAnimations = 0;
     }
 
-    // Setter(s)
+    /*
+     * Setter(s)
+     */
     public Text setText(String text) {
         value = text;
 
@@ -62,6 +79,9 @@ public class Text {
     public Text setRotation(float degree) {
         angle = degree;
 
+        drawOffset = Matrix4f.multiply(Matrix4f.getYAxisRotation(angle, true), new Vector4f(1f, 0f, 0f, 1f));
+        drawOffset.normalize();
+
         return this;
     }
 
@@ -83,11 +103,11 @@ public class Text {
     public Text addAnimation(TextAnimation newAnimation) {
         enableAnim = true;
 
-        animations[count] = newAnimation;
+        animations[numberOfAnimations] = newAnimation;
 
-        animation = animations[count];
+        animation = animations[numberOfAnimations];
 
-        count++;
+        numberOfAnimations++;
 
         return this;
     }
@@ -109,30 +129,24 @@ public class Text {
     public void draw(Renderer renderer) {
         char[] chars;
 
+        // Update text.
         if (enableAnim) {
             chars = animation.currentFrame().toCharArray();
         } else {
             chars = value.toCharArray();
         }
 
-        float l = 0;
         Vector3f drawPosition = new Vector3f(position);
-
-        Vector4f drawOffset = new Vector4f(1f, 0f, 0f, 1f);
-        drawOffset = Matrix4f.multiply(Matrix4f.getYAxisRotation(angle, true), drawOffset);
-        drawOffset.normalize();
 
         for (char c : chars) {
             // Draw the glyph.
             font.render(c, drawPosition, scaling, angle, color, shaderProgram, renderer);
 
             // Update the offset.
-            l = (float)font.getGlyph(c).getWidth() / scaling;
-            Vector3f drawOffset2 = new Vector3f(drawOffset.scale(l));
-
+            float factor = (float)font.getGlyph(c).getWidth() / scaling;
 
             // Update the render position of a glyph by the offset.
-            drawPosition.selfAdd(new Vector3f(drawOffset2));
+            drawPosition.selfAdd(new Vector3f(drawOffset.scale(factor)));
         }
     }
 }

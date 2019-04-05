@@ -4,7 +4,7 @@ package com.scarlet.graphics.opengl.animation;
  * Tracks text that changes dynamically.
  */
 
-public class TextAnimation extends Animation<String> {
+public class TextAnimation extends FrameAnimation<String> {
     /*
      * Constructor(s).
      */
@@ -20,8 +20,6 @@ public class TextAnimation extends Animation<String> {
         frameCount = newSequence.length;
 
         sequence = new String[frameCount];
-        for (int i = 0; i < frameCount; i++) {
-            sequence[i] = newSequence[i];
-        }
+        System.arraycopy(newSequence, 0, sequence, 0, frameCount);
     }
 }

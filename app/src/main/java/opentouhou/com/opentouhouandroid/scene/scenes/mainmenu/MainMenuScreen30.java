@@ -100,8 +100,8 @@ public class MainMenuScreen30 extends Scene {
     public void draw() {
         background.draw(stage.getRenderer());
 
-        title.draw(stage.getRenderer());
-
         menu.draw(stage.getRenderer());
+
+        title.draw(stage.getRenderer());
     }
 }

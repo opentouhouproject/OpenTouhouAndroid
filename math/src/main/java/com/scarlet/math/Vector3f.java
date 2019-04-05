@@ -143,4 +143,9 @@ public class Vector3f {
 
         return vv_x + vv_y + vv_z;
     }
+
+    @Override
+    public String toString() {
+        return x + " " + y + " " + z;
+    }
 }

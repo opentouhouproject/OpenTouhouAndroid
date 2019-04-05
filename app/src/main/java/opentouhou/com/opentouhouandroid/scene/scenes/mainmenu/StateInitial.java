@@ -37,33 +37,22 @@ public class StateInitial implements State<MainMenuScreen30> {
 
                 Vector4f ndc = scene.getCamera().convertToNDC(x, y, renderer.getScreenWidth(), renderer.getScreenHeight());
 
-                Vector3f position = scene.getCamera().unProject(ndc, 0);
+                Vector3f position = scene.getCamera().unProject(ndc);
 
-                Log.d("World Coord Conversion", "Pos: " + position.x + " " + position.y + " " + position.z);
+                Vector3f intersection = scene.getCamera().intersectionPoint(new Vector3f(0, 0, 3), new Vector3f(0, 0, 1), position);
 
-                // TEST
-                //Vector4f teste1 = Matrix4f.multiply(scene.getCamera().getViewMatrix(), new Vector4f(1, 1, 9, 1));
-
-                //Log.d("World Coord Conversion", "Eye: " + teste1.x + " " + teste1.y + " " + teste1.z + " " + teste1.w);
-
-                //Vector4f teste2 = Matrix4f.multiply(scene.getCamera().getInvViewMatrix(), teste1);
-
-                //Log.d("World Coord Conversion", "Model: " + teste2.x + " " + teste2.y + " " + teste2.z + " " + teste2.w);
-
-                //Vector4f testt2 = Matrix4f.multiply(scene.getCamera().getProjectionMatrix(), testtl);
-
-                //Log.d("World Coord Conversion", "Proj: " + testt2.x + " " + testt2.y + " " + testt2.z + " " + testt2.w);
-
-                //Vector4f testt3 = Matrix4f.multiply(scene.getCamera().getInvProjectionMatrix(), testt2);
-
-                //Log.d("World Coord Conversion", "Eye: " + testt3.x + " " + testt3.y + " " + testt3.z + " " + testtl.w);
+                Log.d("Intersection", "Pos: " + intersection.x + " " + intersection.y + " " + intersection.z);
         }
+
+        scene.menu.handleInput(event, scene.getRenderer());
 
         return null;
     }
 
     @Override
     public State<MainMenuScreen30> update(MainMenuScreen30 scene) {
+        scene.menu.update();
+
         return null;
     }
 

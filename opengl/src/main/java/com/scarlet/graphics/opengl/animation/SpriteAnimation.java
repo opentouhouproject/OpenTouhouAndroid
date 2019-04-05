@@ -2,7 +2,11 @@ package com.scarlet.graphics.opengl.animation;
 
 import com.scarlet.graphics.opengl.texture.Texture;
 
-public class SpriteAnimation extends Animation<Texture> {
+/*
+ * Represents a sprite animation.
+ */
+public class SpriteAnimation extends FrameAnimation<Texture> {
+    // Holds the scale values for an image.
     private float[] stretch;
 
     /*
@@ -12,16 +16,17 @@ public class SpriteAnimation extends Animation<Texture> {
         super(name);
     }
 
+    /*
+     * Setter(s).
+     */
     public void setStretch(float[] newStretch) {
         stretch = new float[newStretch.length];
 
-        for (int i = 0; i < newStretch.length; i++) {
-            stretch[i] = newStretch[i];
-        }
+        System.arraycopy(newStretch, 0, stretch, 0, newStretch.length);
     }
 
     /*
-     * Return the strech factor for the sprite image.
+     * Return the strech factor for the current sprite image.
      */
     public float currentStretch() {
         return stretch[currentFrame];
@@ -35,8 +40,6 @@ public class SpriteAnimation extends Animation<Texture> {
         frameCount = newSequence.length;
 
         sequence = new Texture[frameCount];
-        for (int i = 0; i < frameCount; i++) {
-            sequence[i] = newSequence[i];
-        }
+        System.arraycopy(newSequence, 0, sequence, 0, frameCount);
     }
 }
