@@ -2,12 +2,13 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.drawable;
 
 import android.opengl.GLES20;
 
+import com.scarlet.graphics.opengl.Camera;
+import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector4f;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.graphics.opengl.GraphicsObject;
+import com.scarlet.graphics.opengl.mesh.MeshLayout;
 
 public class GraphicsObject20 extends GraphicsObject
 {
@@ -15,17 +16,17 @@ public class GraphicsObject20 extends GraphicsObject
     public GraphicsObject20() { }
 
     // Draw
-    public void draw(Scene scene)
+    public void draw(Renderer renderer)
     {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();
         GLES20.glUseProgram(shaderHandle);
 
         // Set the transformation matrices.
-        setTransformationMatrices(shaderHandle, scene);
+        setTransformationMatrices(shaderHandle, renderer.getCamera());
 
         // Set the light source(s).
-        setLightPosition(shaderHandle, scene);
+        setLightPosition(shaderHandle, renderer.getCamera(), renderer.getLight());
 
         // Set the texture.
         setTexture(shaderHandle);
@@ -70,15 +71,15 @@ public class GraphicsObject20 extends GraphicsObject
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, 0);
     }
 
-    protected void setTransformationMatrices(int handle, Scene scene)
+    protected void setTransformationMatrices(int handle, Camera camera)
     {
         // Get the handles.
         int modelViewMatrixHandle = GLES20.glGetUniformLocation(handle, "uMVMatrix");
         int modelViewProjectionMatrixHandle = GLES20.glGetUniformLocation(handle, "uMVPMatrix");
 
         // Get the matrices.
-        Matrix4f viewMatrix = scene.getCamera().getViewMatrix();
-        Matrix4f projectionMatrix = scene.getCamera().getProjectionMatrix();
+        Matrix4f viewMatrix = camera.getViewMatrix();
+        Matrix4f projectionMatrix = camera.getProjectionMatrix();
 
         // Compute the matrices.
         Matrix4f mvMatrix = Matrix4f.multiply(viewMatrix, modelMatrix);
@@ -89,13 +90,13 @@ public class GraphicsObject20 extends GraphicsObject
         GLES20.glUniformMatrix4fv(modelViewProjectionMatrixHandle, 1, false, mvpMatrix.getArray(), 0);
     }
 
-    protected void setLightPosition(int handle, Scene scene)
+    protected void setLightPosition(int handle, Camera camera, Vector4f light)
     {
         // Get the handle.
         int lightPositionHandle = GLES20.glGetUniformLocation(handle, "uLightSource");
 
         // Compute the light position in Eye Space.
-        Vector4f lightPosition = Matrix4f.multiply(scene.getCamera().getViewMatrix(), scene.getLight());
+        Vector4f lightPosition = Matrix4f.multiply(camera.getViewMatrix(), light);
 
         // Send the light position to the GPU.
         GLES20.glUniform3f(lightPositionHandle, lightPosition.x, lightPosition.y, lightPosition.z);

@@ -5,8 +5,8 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
+import com.scarlet.graphics.opengl.texture.TextureManager;
+import com.scarlet.graphics.opengl.texture.Texture;
 
 /**
  * Loads bitmap into GPU memory using OpenGL ES 2.0.

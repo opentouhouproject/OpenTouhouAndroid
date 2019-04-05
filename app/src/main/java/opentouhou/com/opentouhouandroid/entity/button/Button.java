@@ -1,15 +1,12 @@
 package opentouhou.com.opentouhouandroid.entity.button;
 
-import android.util.Log;
-
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 
 import opentouhou.com.opentouhouandroid.entity.GameEntity;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.Text;
 
 public class Button extends GameEntity {
     // Center of mass position of Button in 3d space.
@@ -102,8 +99,8 @@ public class Button extends GameEntity {
     }
 
     @Override
-    public void draw(Scene scene) {
-        drawable.draw(scene);
-        labelText.draw(scene);
+    public void draw(Renderer renderer) {
+        drawable.draw(renderer);
+        labelText.draw(renderer);
     }
 }

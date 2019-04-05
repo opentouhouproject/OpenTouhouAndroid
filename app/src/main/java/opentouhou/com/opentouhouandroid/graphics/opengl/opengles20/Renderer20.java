@@ -7,11 +7,12 @@ import android.util.Log;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.scene.Stage;
+
+import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.font.FontManager20;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader.ShaderManager20;
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.texture.TextureManager20;
-import opentouhou.com.opentouhouandroid.scene.Stage;
 
 /*
  * Renderer implemented with OpenGL ES 2.0.
@@ -27,7 +28,7 @@ public class Renderer20 extends Renderer
 
         shaderManager = new ShaderManager20();
         textureManager = new TextureManager20();
-        fontManager = new FontManager();
+        fontManager = new FontManager20();
 
         this.stage = stage;
     }
@@ -60,6 +61,7 @@ public class Renderer20 extends Renderer
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         // Draw the scene.
+        light = stage.getCurrentScene().getLight();
         stage.draw();
 
         // Error handling.
@@ -92,6 +94,8 @@ public class Renderer20 extends Renderer
         // Update the projection matrix.
         // This projection matrix is applied to object coordinates in the onDrawFrame() method.
         stage.getCurrentScene().getCamera().setPerspectiveProjectionMatrix(-ratio, ratio, -1, 1, 1, 10);
+
+        camera = stage.getCurrentScene().getCamera();
         //scene.getCamera().setOrthographicProjection(-ratio, ratio, -1, 1, 1, 10);
     }
 }

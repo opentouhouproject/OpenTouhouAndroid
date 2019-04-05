@@ -5,9 +5,10 @@ import android.content.Context;
 import com.scarlet.audio.opensles.AudioPlayer;
 import com.scarlet.io.FileManager;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
+import com.scarlet.opengles30.Renderer30;
 import com.scarlet.io.event.MotionEventQueue;
-import opentouhou.com.opentouhouandroid.scene.Stage;
+import com.scarlet.scene.Stage;
+
 import opentouhou.com.opentouhouandroid.scene.State;
 import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
 import opentouhou.com.opentouhouandroid.scene.scenes.mainmenu.MainMenuScreen30;

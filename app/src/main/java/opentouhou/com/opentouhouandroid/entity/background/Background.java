@@ -3,10 +3,9 @@ package opentouhou.com.opentouhouandroid.entity.background;
 import com.scarlet.math.Vector3f;
 
 import opentouhou.com.opentouhouandroid.entity.GameEntity;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.graphics.opengl.GraphicsObject;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.texture.Texture;
 
 public class Background extends GameEntity {
     private GraphicsObject drawable;
@@ -49,7 +48,7 @@ public class Background extends GameEntity {
     /*
      * Implement draw method.
      */
-    public void draw(Scene scene) {
-        drawable.draw(scene);
+    public void draw(Renderer renderer) {
+        drawable.draw(renderer);
     }
 }

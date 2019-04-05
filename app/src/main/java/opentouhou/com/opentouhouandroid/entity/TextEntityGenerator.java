@@ -3,9 +3,9 @@ package opentouhou.com.opentouhouandroid.entity;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.TextAnimation;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
+import com.scarlet.graphics.opengl.Text;
+import com.scarlet.graphics.opengl.animation.TextAnimation;
+import com.scarlet.graphics.opengl.font.FontManager;
 
 public class TextEntityGenerator {
     private TextEntityGenerator() { }

@@ -1,6 +1,6 @@
 package opentouhou.com.opentouhouandroid.entity;
 
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.graphics.opengl.Renderer;
 
 public abstract class GameEntity {
     protected boolean isVisible;
@@ -14,5 +14,5 @@ public abstract class GameEntity {
     }
 
     public abstract void update();
-    public abstract void draw(Scene scene);
+    public abstract void draw(Renderer renderer);
 }

@@ -1,6 +1,7 @@
 package opentouhou.com.opentouhouandroid.scene.loader;
 
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.scene.Scene;
+
 import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
 
 /*

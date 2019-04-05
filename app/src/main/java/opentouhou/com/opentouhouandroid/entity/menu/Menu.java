@@ -4,8 +4,7 @@ import android.opengl.GLES30;
 
 import opentouhou.com.opentouhouandroid.entity.GameEntity;
 import opentouhou.com.opentouhouandroid.entity.button.Button;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.graphics.opengl.Renderer;
 
 public class Menu extends GameEntity {
     private float xSelection = 0.0f;
@@ -49,22 +48,22 @@ public class Menu extends GameEntity {
     }
 
     @Override
-    public void draw(Scene scene) {
+    public void draw(Renderer renderer) {
         //GLES30.glDisable(GLES30.GL_DEPTH_TEST);
         GLES30.glDisable(GLES30.GL_CULL_FACE);
 
 
-        exitButton.draw(scene);
+        exitButton.draw(renderer);
 
-        credits.draw(scene);
+        credits.draw(renderer);
 
-        jukeBox.draw(scene);
+        jukeBox.draw(renderer);
 
-        optionsButton.draw(scene);
+        optionsButton.draw(renderer);
 
-        highScores.draw(scene);
+        highScores.draw(renderer);
 
-        startButton.draw(scene);
+        startButton.draw(renderer);
 
         GLES30.glEnable(GLES30.GL_CULL_FACE);
         //GLES30.glEnable(GLES30.GL_DEPTH_TEST);

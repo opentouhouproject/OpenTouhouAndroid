@@ -3,7 +3,7 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.texture;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
+import com.scarlet.graphics.opengl.texture.Texture;
 
 public class Texture20 extends Texture
 {

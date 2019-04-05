@@ -11,13 +11,14 @@ import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
 import opentouhou.com.opentouhouandroid.entity.menu.Menu;
 import com.scarlet.graphics.opengl.Camera;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
+import com.scarlet.graphics.opengl.GraphicsObject;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.Text;
+import com.scarlet.graphics.opengl.font.FontManager;
+import com.scarlet.scene.Scene;
+import com.scarlet.scene.Stage;
+
 import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
-import opentouhou.com.opentouhouandroid.scene.Scene;
-import opentouhou.com.opentouhouandroid.scene.Stage;
 import opentouhou.com.opentouhouandroid.scene.State;
 
 /*
@@ -97,10 +98,10 @@ public class MainMenuScreen30 extends Scene {
      * Implement the draw method.
      */
     public void draw() {
-        background.draw(this);
+        background.draw(stage.getRenderer());
 
-        title.draw(this);
+        title.draw(stage.getRenderer());
 
-        menu.draw(this);
+        menu.draw(stage.getRenderer());
     }
 }

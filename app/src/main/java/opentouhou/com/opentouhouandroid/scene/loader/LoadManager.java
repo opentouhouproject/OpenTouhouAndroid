@@ -10,9 +10,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import opentouhou.com.opentouhouandroid.scene.Scene;
-import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
-
 /*
  * Constructs thread pools and work queues.
  */

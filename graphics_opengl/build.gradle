@@ -29,4 +29,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation project(":math")
+    implementation project(":io")
+    implementation project(":graphics")
 }

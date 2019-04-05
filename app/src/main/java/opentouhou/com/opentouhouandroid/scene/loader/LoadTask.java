@@ -2,7 +2,7 @@ package opentouhou.com.opentouhouandroid.scene.loader;
 
 import android.opengl.EGLContext;
 
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.scene.Scene;
 
 /*
  * Represents a task to load a single scene.

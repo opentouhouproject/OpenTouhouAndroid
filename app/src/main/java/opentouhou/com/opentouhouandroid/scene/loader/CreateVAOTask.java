@@ -1,6 +1,6 @@
 package opentouhou.com.opentouhouandroid.scene.loader;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
+import com.scarlet.opengles30.mesh.Mesh30;
 
 public class CreateVAOTask {
     // The scene to load/setup.

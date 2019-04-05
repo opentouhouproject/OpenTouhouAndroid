@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
+import com.scarlet.graphics.opengl.Renderer;
 import opentouhou.com.opentouhouandroid.scene.State;
 
 import static android.view.MotionEvent.ACTION_DOWN;

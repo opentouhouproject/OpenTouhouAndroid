@@ -5,12 +5,12 @@ import android.opengl.GLES30;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.mesh.MeshLayout;
 import com.scarlet.graphics.opengl.shader.ShaderProgram;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.GraphicsObject30;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.opengles30.GraphicsObject30;
+import com.scarlet.opengles30.mesh.Mesh30;
+
 import opentouhou.com.opentouhouandroid.scene.loader.CreateVAOTask;
 
 public class ButtonDrawable30 extends GraphicsObject30 {
@@ -105,7 +105,7 @@ public class ButtonDrawable30 extends GraphicsObject30 {
 
     // Override the parent draw method.
     @Override
-    public void draw(Scene scene) {
+    public void draw(Renderer renderer) {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();
         GLES30.glUseProgram(shaderHandle);
@@ -116,10 +116,10 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         }
 
         // Set the transformation matrices.
-        setTransformationMatrices(shaderHandle, scene);
+        setTransformationMatrices(shaderHandle, renderer.getCamera());
 
         // Set the light source(s).
-        setLightPosition(shaderHandle, scene);
+        setLightPosition(shaderHandle, renderer.getCamera(), renderer.getLight());
 
         // Set the mesh.
         setMesh();

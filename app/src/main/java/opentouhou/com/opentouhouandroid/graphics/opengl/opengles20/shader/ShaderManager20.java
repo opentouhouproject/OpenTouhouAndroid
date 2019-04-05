@@ -2,7 +2,7 @@ package opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.shader;
 
 import com.scarlet.io.FileManager;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderManager;
+import com.scarlet.graphics.opengl.shader.ShaderManager;
 
 /**
  * Shader Manager implementation for OpenGL ES 2.0

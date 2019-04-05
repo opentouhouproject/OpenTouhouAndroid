@@ -2,7 +2,7 @@ package opentouhou.com.opentouhouandroid.scene.stages.Compatible30;
 
 import android.view.MotionEvent;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
+import com.scarlet.opengles30.Renderer30;
 import opentouhou.com.opentouhouandroid.scene.State;
 
 public class StateMainMenu implements State<OpenGLES30Test> {

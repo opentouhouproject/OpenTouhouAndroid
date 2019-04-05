@@ -4,9 +4,9 @@ import android.content.Context;
 
 import com.scarlet.audio.opensles.AudioPlayer;
 import com.scarlet.io.FileManager;
+import com.scarlet.scene.Stage;
 
 import opentouhou.com.opentouhouandroid.graphics.opengl.opengles20.Renderer20;
-import opentouhou.com.opentouhouandroid.scene.Stage;
 import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen20;
 
 public class OpenGLES20Test extends Stage {

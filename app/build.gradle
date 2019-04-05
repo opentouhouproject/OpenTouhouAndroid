@@ -36,4 +36,7 @@ dependencies {
     implementation project(":audio")
     implementation project(":graphics_opengl")
     implementation project(":io")
+    implementation project(":graphics")
+    implementation project(":opengles30")
+    implementation project(":scene")
 }

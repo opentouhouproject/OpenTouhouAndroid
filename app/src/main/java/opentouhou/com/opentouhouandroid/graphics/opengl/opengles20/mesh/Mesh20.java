@@ -4,8 +4,8 @@ import android.opengl.GLES20;
 
 import java.nio.FloatBuffer;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.Mesh;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
+import com.scarlet.graphics.opengl.mesh.Mesh;
+import com.scarlet.graphics.opengl.mesh.MeshLayout;
 
 public class Mesh20 extends Mesh
 {

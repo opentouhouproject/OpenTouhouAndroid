@@ -2,7 +2,8 @@ package opentouhou.com.opentouhouandroid.scene.stages.Compatible30;
 
 import android.view.MotionEvent;
 
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.scene.Scene;
+
 import opentouhou.com.opentouhouandroid.scene.State;
 import opentouhou.com.opentouhouandroid.scene.loader.BatchLoadTask;
 import opentouhou.com.opentouhouandroid.scene.loader.LoadManager;

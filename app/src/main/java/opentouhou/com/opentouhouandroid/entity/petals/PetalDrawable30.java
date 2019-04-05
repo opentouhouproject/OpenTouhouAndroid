@@ -7,13 +7,12 @@ import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
+import com.scarlet.graphics.opengl.GraphicsOptions;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.mesh.MeshLayout;
 import com.scarlet.graphics.opengl.shader.ShaderProgram;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.GraphicsObject30;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.opengles30.GraphicsObject30;
+import com.scarlet.opengles30.mesh.Mesh30;
 
 /*
  * Holds the information needed to draw a petal in OpenGL.
@@ -245,16 +244,16 @@ public class PetalDrawable30 extends GraphicsObject30 {
     /*
      * Draw this object.
      */
-    public void draw(Scene scene, Petal petal) {
+    public void draw(Renderer renderer, Petal petal) {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();
         GLES30.glUseProgram(shaderHandle);
 
         // Set the transformation matrices.
-        setTransformationMatrices(shaderHandle, scene);
+        setTransformationMatrices(shaderHandle, renderer.getCamera());
 
         // Set the light source(s).
-        if (option.lightingSetting()) setLightPosition(shaderHandle, scene);
+        if (option.lightingSetting()) setLightPosition(shaderHandle, renderer.getCamera(), renderer.getLight());
 
         // Set the texture.
         if (option.textureSetting()) setTexture(shaderHandle);

@@ -1,1 +1,1 @@
-include ':app', ':math', ':audio', ':graphics_opengl', ':io'
+include ':app', ':math', ':audio', ':graphics_opengl', ':io', ':graphics', ':scene', ':opengles30'
