@@ -111,7 +111,7 @@ public class BitmapEditor
         if (rgb.x >= max) {
             h = (rgb.y - rgb.z) / delta;
         }
-        else if (rgb.x >= max) {
+        else if (rgb.y >= max) {
             h = 2.0f + (rgb.z - rgb.x) / delta;
         }
         else {

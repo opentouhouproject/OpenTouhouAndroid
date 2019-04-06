@@ -24,6 +24,7 @@ public abstract class InterpolatedAnimation extends Animation {
     public void start() {
         startTime = SystemClock.uptimeMillis();
         currentTime = SystemClock.uptimeMillis();
+        t = 0;
     }
 
     public void update() {
