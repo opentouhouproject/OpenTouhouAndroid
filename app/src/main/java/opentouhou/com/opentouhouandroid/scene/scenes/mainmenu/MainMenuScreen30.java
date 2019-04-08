@@ -9,15 +9,18 @@ import java.io.InputStreamReader;
 
 import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
+
 import com.scarlet.graphics.opengl.Camera;
 import com.scarlet.graphics.opengl.GraphicsObject;
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.Text;
 import com.scarlet.graphics.opengl.font.FontManager;
+
 import com.scarlet.scene.Scene;
 import com.scarlet.scene.Stage;
 
 import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
+
 import com.scarlet.scene.State;
 import com.scarlet.ui.menu.Menu;
 
@@ -98,10 +101,6 @@ public class MainMenuScreen30 extends Scene {
      * Implement the draw method.
      */
     public void draw() {
-        background.draw(stage.getRenderer());
-
-        menu.draw(stage.getRenderer());
-
-        title.draw(stage.getRenderer());
+        state.draw(this);
     }
 }

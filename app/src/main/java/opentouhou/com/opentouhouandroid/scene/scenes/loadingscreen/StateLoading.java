@@ -2,6 +2,7 @@ package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
 import android.view.MotionEvent;
 
+import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.scene.State;
 
 public final class StateLoading implements State<LoadingScreen30> {
@@ -37,6 +38,17 @@ public final class StateLoading implements State<LoadingScreen30> {
         }
 
         return null;
+    }
+
+    @Override
+    public void draw(LoadingScreen30 scene) {
+        Renderer renderer = scene.getRenderer();
+
+        scene.background.draw(renderer);
+        scene.petalFall.draw(renderer);
+        scene.title.draw(renderer);
+        scene.loadingMessage.draw(renderer);
+        scene.sprite.draw(renderer);
     }
 
     @Override

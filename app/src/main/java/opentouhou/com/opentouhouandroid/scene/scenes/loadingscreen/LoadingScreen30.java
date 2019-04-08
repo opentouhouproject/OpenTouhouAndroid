@@ -117,13 +117,6 @@ public class LoadingScreen30 extends LoadingScreen {
      * Implement the draw method.
      */
     public void draw() {
-        background.draw(stage.getRenderer());
-        //background2.draw(this);
-        petalFall.draw(stage.getRenderer());
-        title.draw(stage.getRenderer());
-        loadingMessage.draw(stage.getRenderer());
-        sprite.draw(stage.getRenderer());
-
-        if (state == States.FINISHED_STATE) loadingFinishedMsg.draw(stage.getRenderer());
+        state.draw(this);
     }
 }

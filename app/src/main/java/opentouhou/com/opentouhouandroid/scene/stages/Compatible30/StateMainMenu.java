@@ -39,6 +39,11 @@ public class StateMainMenu implements State<OpenGLES30Test> {
     }
 
     @Override
+    public void draw(OpenGLES30Test stage) {
+        stage.getCurrentScene().draw();
+    }
+
+    @Override
     public void exit(OpenGLES30Test stage) {
         // do nothing
     }

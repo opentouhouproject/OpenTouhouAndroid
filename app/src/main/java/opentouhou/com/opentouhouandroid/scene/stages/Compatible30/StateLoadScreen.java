@@ -41,7 +41,7 @@ public class StateLoadScreen implements State<OpenGLES30Test> {
     public State<OpenGLES30Test> handleInput(OpenGLES30Test stage, MotionEvent event) {
         stage.getCurrentScene().handleInput(event);
 
-        if (((LoadingScreen30) stage.getCurrentScene()).userContinue == true) {
+        if (((LoadingScreen30) stage.getCurrentScene()).userContinue) {
             return States.MAIN_MENU;
         }
 
@@ -53,6 +53,11 @@ public class StateLoadScreen implements State<OpenGLES30Test> {
         stage.getCurrentScene().update();
 
         return null;
+    }
+
+    @Override
+    public void draw(OpenGLES30Test stage) {
+        stage.getCurrentScene().draw();
     }
 
     @Override

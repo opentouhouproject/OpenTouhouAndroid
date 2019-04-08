@@ -57,6 +57,15 @@ public class StateInitial implements State<MainMenuScreen30> {
     }
 
     @Override
+    public void draw(MainMenuScreen30 scene) {
+        Renderer renderer = scene.getRenderer();
+
+        scene.background.draw(renderer);
+        scene.menu.draw(renderer);
+        scene.title.draw(renderer);
+    }
+
+    @Override
     public void exit(MainMenuScreen30 scene) {
         // do nothing
     }

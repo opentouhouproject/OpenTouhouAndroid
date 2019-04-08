@@ -2,6 +2,7 @@ package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
 import android.view.MotionEvent;
 
+import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.scene.State;
 
 import static android.view.MotionEvent.ACTION_DOWN;
@@ -21,8 +22,8 @@ public class StateFinished implements State<LoadingScreen30> {
     }
 
     public State<LoadingScreen30> handleInput(LoadingScreen30 scene, MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
+        //float x = event.getX();
+        //float y = event.getY();
 
         switch(event.getAction()) {
             case ACTION_DOWN:
@@ -40,6 +41,17 @@ public class StateFinished implements State<LoadingScreen30> {
         scene.sprite.update();
 
         return null;
+    }
+
+    public void draw(LoadingScreen30 scene) {
+        Renderer renderer = scene.getRenderer();
+
+        scene.background.draw(renderer);
+        scene.petalFall.draw(renderer);
+        scene.title.draw(renderer);
+        scene.loadingMessage.draw(renderer);
+        scene.sprite.draw(renderer);
+        scene.loadingFinishedMsg.draw(renderer);
     }
 
     public void exit(LoadingScreen30 scene) {
