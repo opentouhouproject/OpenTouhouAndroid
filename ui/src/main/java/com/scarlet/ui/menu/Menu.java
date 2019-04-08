@@ -1,13 +1,13 @@
 package com.scarlet.ui.menu;
 
 import android.opengl.GLES30;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
+import com.scarlet.ui.ExitActivityListener;
 import com.scarlet.ui.UIEntity;
 import com.scarlet.ui.button.Button;
 
@@ -15,7 +15,7 @@ public class Menu extends UIEntity {
     private float xSelection = 0.0f;
 
     private Button[] menuItems;
-    private int currentItem = -1;
+    private int currentItem;
 
     private boolean isSelected = false;
     private float startY = 0;
@@ -53,6 +53,7 @@ public class Menu extends UIEntity {
         menuItems[5].setPosition(xSelection + 0.0f, -6.5f, 3.0f);
         menuItems[5].setAngle(75);
         menuItems[5].setText("Exit");
+        menuItems[5].registerOnEventListener(new ExitActivityListener());
 
         currentItem = 0;
     }
@@ -62,16 +63,14 @@ public class Menu extends UIEntity {
         float x = event.getX();
         float y = event.getY();
 
+        Vector3f intersection;
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                Vector4f ndc = renderer.getCamera().convertToNDC(x, y, renderer.getScreenWidth(), renderer.getScreenHeight());
-
-                Vector3f position = renderer.getCamera().unProject(ndc);
-
-                Vector3f intersection = renderer.getCamera().intersectionPoint(new Vector3f(0, 0, 3), new Vector3f(0, 0, 1), position);
+                intersection = computeIntersectionPoint(x, y, renderer);
 
                 if (menuItems[currentItem].checkCollision(intersection.x, intersection.y)) {
-                    Log.d("Menu Collision", "MAIN ITEM SELECTED");
+                    Log.d("Main Menu", "Menu Item Selected");
                     isSelected = true;
                     startY = event.getY();
                 }
@@ -79,28 +78,22 @@ public class Menu extends UIEntity {
                 break;
 
             case MotionEvent.ACTION_UP:
-                Log.d("delta y", "deltaY: " + (y - startY));
+                Log.d("Main Menu", "deltaY: " + (y - startY));
 
-                if (isSelected && (y - startY > 50)) {
-                    Log.d("anim", "anim down");
+                intersection = computeIntersectionPoint(x, y, renderer);
 
-                    if (currentItem > 0) {
-                        for (int i = 0; i < 6; i++) {
-                            menuItems[i].setAnimationDown();
-                        }
-                        currentItem--;
-                    }
-                }
+                if (isSelected && menuItems[currentItem].checkCollision(intersection.x, intersection.y)) {
+                    Log.d("Main Menu", "Clicked menu item.");
+                    menuItems[currentItem].executeSynchronousListener();
+                    //menuItems[currentItem].executeAsynchronousListener();
 
-                if (isSelected && (y - startY < 50)) {
-                    Log.d("anim", "anim up");
+                } else if (isSelected && (y - startY > 50)) {
+                    Log.d("Main Menu", "anim down");
+                    setDownAnimation();
 
-                    if (currentItem < 5) {
-                        for (int i = 0; i < 6; i++) {
-                            menuItems[i].setAnimationUp();
-                        }
-                        currentItem++;
-                    }
+                } else if (isSelected && (y - startY < 50)) {
+                    Log.d("Main Menu", "anim up");
+                    setUpAnimation();
                 }
 
                 isSelected = false;
@@ -125,5 +118,33 @@ public class Menu extends UIEntity {
         }
 
         GLES30.glEnable(GLES30.GL_CULL_FACE);
+    }
+
+    /*
+     * Helper methods.
+     */
+    private Vector3f computeIntersectionPoint(float x, float y, Renderer renderer) {
+        Vector4f ndc = renderer.getCamera().convertToNDC(x, y, renderer.getScreenWidth(), renderer.getScreenHeight());
+        Vector3f position = renderer.getCamera().unProject(ndc);
+
+        return renderer.getCamera().intersectionPoint(new Vector3f(0, 0, 3), new Vector3f(0, 0, 1), position);
+    }
+
+    private void setDownAnimation() {
+        if (currentItem > 0) {
+            for (int i = 0; i < 6; i++) {
+                menuItems[i].setAnimationDown();
+            }
+            currentItem--;
+        }
+    }
+
+    private void setUpAnimation() {
+        if (currentItem < 5) {
+            for (int i = 0; i < 6; i++) {
+                menuItems[i].setAnimationUp();
+            }
+            currentItem++;
+        }
     }
 }
