@@ -9,6 +9,7 @@ import com.scarlet.scene.Scene;
 import com.scarlet.scene.State;
 import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
 import opentouhou.com.opentouhouandroid.scene.scenes.mainmenu.MainMenuScreen30;
+import opentouhou.com.opentouhouandroid.scene.scenes.startmenu.StartMenuScreen30;
 
 public class StateLoadScreen implements State<OpenGLES30Test> {
     /*
@@ -31,9 +32,9 @@ public class StateLoadScreen implements State<OpenGLES30Test> {
 
         // LOAD BABY LOAD
         stage.mainMenuScreen30 = new MainMenuScreen30("MM", stage);
-        //stage.mainMenuScreen30.setup();
+        stage.startMenuScreen30 = new StartMenuScreen30("StartMenu", stage);
 
-        Scene[] scenes = { stage.mainMenuScreen30 };
+        Scene[] scenes = { stage.mainMenuScreen30, stage.startMenuScreen30 };
         LoadManager.startBatchSceneLoad(new BatchLoadTask(scenes, stage.loadingScreen30));
     }
 

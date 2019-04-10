@@ -14,6 +14,7 @@ import com.scarlet.scene.State;
 
 import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
 import opentouhou.com.opentouhouandroid.scene.scenes.mainmenu.MainMenuScreen30;
+import opentouhou.com.opentouhouandroid.scene.scenes.startmenu.StartMenuScreen30;
 
 /*
  * Testing OpenGL ES 3.0 implementations.
@@ -25,6 +26,7 @@ public class OpenGLES30Test extends Stage {
     // Scenes
     LoadingScreen30 loadingScreen30;
     MainMenuScreen30 mainMenuScreen30;
+    StartMenuScreen30 startMenuScreen30;
 
     /*
      * Constructor(s).

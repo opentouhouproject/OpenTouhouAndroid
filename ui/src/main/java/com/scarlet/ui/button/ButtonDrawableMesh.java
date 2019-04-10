@@ -11,7 +11,7 @@ import com.scarlet.math.Vector4f;
  * This button is drawn using vector graphics.
  * PCN format.
  */
-public class AttributeGenerator {
+public class ButtonDrawableMesh {
     private static Vector4f innerColor = new Vector4f(0.2f, 0.2f, 0.2f, 0.8f);
     //private static Vector4f borderColor = new Vector4f(0.529f, 0.807f, 0.921f, 0.7f);
     private static Vector4f borderColor = new Vector4f(0.6f, 0.6f, 0.9f, 1.0f);
@@ -31,7 +31,7 @@ public class AttributeGenerator {
     /*
      * Constructor(s).
      */
-    private AttributeGenerator() { }
+    private ButtonDrawableMesh() { }
 
     /*
      * Generate the attributes.

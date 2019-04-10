@@ -21,6 +21,8 @@ public class Menu extends UIEntity {
     private float startY = 0;
     private float endY = 0;
 
+    private String clickValue = "";
+
     public Menu(Renderer renderer) {
         menuItems = new Button[6];
 
@@ -58,6 +60,10 @@ public class Menu extends UIEntity {
         currentItem = 0;
     }
 
+    public String getClickValue() {
+        return clickValue;
+    }
+
     @Override
     public void handleInput(MotionEvent event, Renderer renderer) {
         float x = event.getX();
@@ -86,6 +92,8 @@ public class Menu extends UIEntity {
                     Log.d("Main Menu", "Clicked menu item.");
                     menuItems[currentItem].executeSynchronousListener();
                     //menuItems[currentItem].executeAsynchronousListener();
+
+                    clickValue = menuItems[currentItem].getText();
 
                 } else if (isSelected && (y - startY > 50)) {
                     Log.d("Main Menu", "anim down");

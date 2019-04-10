@@ -11,22 +11,21 @@ import com.scarlet.math.Vector3f;
 import com.scarlet.opengles30.GraphicsObject30;
 import com.scarlet.opengles30.mesh.Mesh30;
 
-public class ButtonDrawable30 extends GraphicsObject30 {
+public class LeftRoundedButtonDrawable30 extends GraphicsObject30 {
     private Vector3f position;
     private float angle;
-    private float width, height, borderWidth;
+    private float width, height;
 
     private boolean isDirty;
 
     /*
      * Constructor(s).
      */
-    public ButtonDrawable30() {
+    public LeftRoundedButtonDrawable30() {
         position = new Vector3f(0.0f, 0.0f, 0.0f);
         angle = 0.0f;
         width = 1.0f;
         height = 1.0f;
-        borderWidth = 0.1f;
 
         isDirty = true;
     }
@@ -34,7 +33,7 @@ public class ButtonDrawable30 extends GraphicsObject30 {
     /*
      * Setter(s).
      */
-    public ButtonDrawable30 setPosition(Vector3f vector) {
+    public LeftRoundedButtonDrawable30 setPosition(Vector3f vector) {
         position.x = vector.x;
         position.y = vector.y;
         position.z = vector.z;
@@ -44,7 +43,7 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         return this;
     }
 
-    public ButtonDrawable30 setAngle(float angle) {
+    public LeftRoundedButtonDrawable30 setAngle(float angle) {
         this.angle = angle;
 
         isDirty = true;
@@ -52,15 +51,9 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         return this;
     }
 
-    public ButtonDrawable30 setDimensions(float width, float height) {
+    public LeftRoundedButtonDrawable30 setDimensions(float width, float height) {
         this.width = width;
         this.height = height;
-
-        return this;
-    }
-
-    public ButtonDrawable30 setBorderWidth(float borderWidth) {
-        this.borderWidth = borderWidth;
 
         return this;
     }
@@ -73,7 +66,7 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         ShaderProgram program = renderer.getShaderManager().getShaderProgram("Button");
 
         // Create the mesh.
-        float[] data = ButtonDrawableMesh.generate(width, height, borderWidth);
+        float[] data = LeftRoundedButtonMesh.generate(width, height);
 
         Mesh30 mesh = new Mesh30(data, MeshLayout.Layout.PCN);
         if (async) {
@@ -122,10 +115,7 @@ public class ButtonDrawable30 extends GraphicsObject30 {
         // Set the mesh.
         setMesh();
 
-        // Draw the inner button.
-        GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, 2 * 3);
-
-        // Draw the border.
-        GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 6, ((4 * 2) + (4 * 6)) * 3);
+        // Draw
+        GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, (11 + 2) * 3);
     }
 }

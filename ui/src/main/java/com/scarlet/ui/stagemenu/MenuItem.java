@@ -1,19 +1,19 @@
-package com.scarlet.ui.button;
+package com.scarlet.ui.stagemenu;
 
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.scarlet.graphics.opengl.Camera;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.Text;
 import com.scarlet.graphics.opengl.animation.UIAnimation;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
-
-import com.scarlet.graphics.opengl.Renderer;
-import com.scarlet.graphics.opengl.Text;
 import com.scarlet.ui.UIEntity;
+import com.scarlet.ui.button.ButtonDrawable30;
+import com.scarlet.ui.button.LeftRoundedButtonDrawable30;
 
-public class Button extends UIEntity {
+public class MenuItem extends UIEntity {
     private String value = "";
 
     // Center of mass position of Button in 3d space.
@@ -30,13 +30,13 @@ public class Button extends UIEntity {
     private float angle = 0;
 
     // Drawables.
-    private ButtonDrawable30 drawable;
+    private LeftRoundedButtonDrawable30 drawable;
     private Text labelText;
 
     /*
      * Constructor(s).
      */
-    public Button(Renderer renderer, boolean async) {
+    public MenuItem(Renderer renderer, boolean async) {
         position = new Vector3f(0f, 0f, 0f);
         normal = new Vector3f(0f, 0f, 1f);
         edge = new Vector3f(1f, 0f, 0f);
@@ -47,21 +47,20 @@ public class Button extends UIEntity {
         angle = 0f;
 
         // Create the button drawable.
-        drawable = new ButtonDrawable30();
+        drawable = new LeftRoundedButtonDrawable30();
         drawable.setPosition(position)
                 .setAngle(angle)
                 .setDimensions(width, height)
-                .setBorderWidth(0.1f)
                 .create(renderer, async);
 
         // Create the text drawable.
         labelText = new Text(renderer.getFontManager().getFont("fonts/popstar/popstarpop128.xml"));
         labelText.setText("")
-                 .setPosition(new Vector3f(0f, 0f, 0f))
-                 .setScaling(200f)
-                 .setRotation(angle)
-                 .setColor(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f))
-                 .setShader("Font2");
+                .setPosition(new Vector3f(0f, 0f, 0f))
+                .setScaling(200f)
+                .setRotation(angle)
+                .setColor(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f))
+                .setShader("Font2");
 
         animations = new UIAnimation[1];
         animations[0] = new UIAnimation("button");
@@ -86,7 +85,7 @@ public class Button extends UIEntity {
         // Set the label position.
         Matrix4f mat = Matrix4f.getYAxisRotation(angle, true);
         mat.translate(position.x, position.y, position.z);
-        Vector4f offsetPos = Matrix4f.multiply(mat, new Vector4f(position.x - 2.5f, -0.3f, 0.1f, 1.0f));
+        Vector4f offsetPos = Matrix4f.multiply(mat, new Vector4f(0.5f, 0.1f, 0.1f, 1.0f));
         labelText.setPosition(new Vector3f(offsetPos.x, offsetPos.y, offsetPos.z)); // + 0.12f
     }
 
@@ -98,7 +97,7 @@ public class Button extends UIEntity {
         // Set the label position.
         Matrix4f mat = Matrix4f.getYAxisRotation(angle, true);
         mat.translate(position.x, position.y, position.z);
-        Vector4f offsetPos = Matrix4f.multiply(mat, new Vector4f(position.x - 2.5f, -0.3f, 0.1f, 1.0f));
+        Vector4f offsetPos = Matrix4f.multiply(mat, new Vector4f(0.5f, 0.1f, 0.1f, 1.0f));
         labelText.setPosition(new Vector3f(offsetPos.x, offsetPos.y, offsetPos.z)); // + 0.12f
 
         labelText.setRotation(angle);
@@ -109,35 +108,54 @@ public class Button extends UIEntity {
         value = text;
     }
 
-    public void setAnimationUp() {
-        isAnimated = true;
-
-        currentAnim = 0;
-
-        animations[currentAnim].setDuration(500);
-        animations[currentAnim].setAngleParameters(angle, angle - 15);
-        animations[currentAnim].setPositionParameters(position, position.add(new Vector3f(0f, 1.3f, 0f)));
-
-        animations[currentAnim].start();
-    }
-
-    public void setAnimationDown() {
+    public void setAnimationLeft() {
         isAnimated = true;
 
         currentAnim = 0;
 
         animations[currentAnim].setDuration(500);
         animations[currentAnim].setAngleParameters(angle, angle + 15);
-        animations[currentAnim].setPositionParameters(position, position.add(new Vector3f(0f, -1.3f, 0f)));
+
+        Vector4f newPosition = Matrix4f.multiply(Matrix4f.getYAxisRotation(15, true), new Vector4f(position.x, position.y, position.z + 20.0f, 1.0f));
+
+        animations[currentAnim].setPositionParameters(position, new Vector3f(newPosition.x, newPosition.y, newPosition.z - 20.0f));
+
+        animations[currentAnim].start();
+    }
+
+    public void setAnimationRight() {
+        isAnimated = true;
+
+        currentAnim = 0;
+
+        animations[currentAnim].setDuration(500);
+        animations[currentAnim].setAngleParameters(angle, angle - 15);
+
+        Vector4f newPosition = Matrix4f.multiply(Matrix4f.getYAxisRotation(-15, true), new Vector4f(position.x, position.y, position.z + 20.0f, 1.0f));
+
+        animations[currentAnim].setPositionParameters(position, new Vector3f(newPosition.x, newPosition.y, newPosition.z - 20.0f));
 
         animations[currentAnim].start();
     }
 
     public boolean checkCollision(float x, float y) {
-        if ((x <= position.x + width / 2) && (x >= position.x - width / 2)) {
-            if ((y <= position.y + height / 2) && (y >= position.y - height / 2)) {
-                return true;
-            }
+        // Check circle collision.
+        float deltaX = x - (position.x + (height / 2));
+        float deltaY = y - (position.y + (height / 2));
+        float dist = (float)Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        if (dist < height / 2) {
+            return true;
+        }
+
+        // check box collision
+        float xMin = position.x + height / 2;
+        float xMax = position.x + width;
+        float yMin = position.y;
+        float yMax = position.y + height;
+
+        if ((x <= xMax) && (x >= xMin) && (y <= yMax) && (y >= yMin)) {
+            return true;
         }
 
         return false;

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<load name="StartMenuScreen30">
+    <!-- Shader Loading Section -->
+    <shaders>
+        <!-- Compile Vertex Shaders -->
+        <vertex name="Button" path="shaders/opengles30/Button.vert" />
+
+        <!-- Compile Fragment Shaders -->
+        <fragment name="Button" path="shaders/opengles30/Button.frag" />
+
+        <!-- Link Shader Programs -->
+        <program name="Button" vertex="Button" fragment="Button" />
+    </shaders>
+
+    <!-- Texture Loading Section -->
+    <textures>
+        <texture path="art/startmenu_bg.png" option="LIGHTGREYSCALE" />
+    </textures>
+
+    <!-- Font Loading Section -->
+    <fonts>
+    </fonts>
+</load>

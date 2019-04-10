@@ -34,6 +34,10 @@ public abstract class InterpolatedAnimation extends Animation {
         // Compute the normalised duration.
         t = (float) (currentTime - startTime) / (float) duration;
 
+        if (t > 1.0f) {
+            t = 1.0f;
+        }
+
         // Set the updated values.
         update(t);
     }

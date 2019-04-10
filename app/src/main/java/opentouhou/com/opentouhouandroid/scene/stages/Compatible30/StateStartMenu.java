@@ -5,13 +5,11 @@ import android.view.MotionEvent;
 import com.scarlet.opengles30.Renderer30;
 import com.scarlet.scene.State;
 
-import opentouhou.com.opentouhouandroid.scene.scenes.mainmenu.MainMenuScreen30;
-
-public class StateMainMenu implements State<OpenGLES30Test> {
+public class StateStartMenu implements State<OpenGLES30Test> {
     /*
      * Constructor(s).
      */
-    StateMainMenu() { }
+    StateStartMenu() { }
 
     /*
      * Implement State<T> interface.
@@ -19,7 +17,7 @@ public class StateMainMenu implements State<OpenGLES30Test> {
     @Override
     public void enter(OpenGLES30Test stage) {
         // Set the current scene.
-        stage.setCurrentScene(stage.mainMenuScreen30);
+        stage.setCurrentScene(stage.startMenuScreen30);
 
         stage.getCurrentScene().init();
 
@@ -29,10 +27,6 @@ public class StateMainMenu implements State<OpenGLES30Test> {
     @Override
     public State<OpenGLES30Test> handleInput(OpenGLES30Test stage, MotionEvent event) {
         stage.getCurrentScene().handleInput(event);
-
-        if (((MainMenuScreen30) stage.getCurrentScene()).selectedValue.equals("Start")) {
-            return States.START_MENU;
-        }
 
         return null;
     }

@@ -36,6 +36,8 @@ public class MainMenuScreen30 extends Scene {
     Text title;
     Menu menu;
 
+    public String selectedValue = "";
+
     /*
      * Constructor(s)
      */

@@ -22,9 +22,6 @@ public class StateFinished implements State<LoadingScreen30> {
     }
 
     public State<LoadingScreen30> handleInput(LoadingScreen30 scene, MotionEvent event) {
-        //float x = event.getX();
-        //float y = event.getY();
-
         switch(event.getAction()) {
             case ACTION_DOWN:
                 scene.userContinue = true;
@@ -34,9 +31,7 @@ public class StateFinished implements State<LoadingScreen30> {
     }
 
     public State<LoadingScreen30> update(LoadingScreen30 scene) {
-        //scene.background.update();
         scene.petalFall.update();
-        scene.title.update();
         scene.loadingMessage.update();
         scene.sprite.update();
 
