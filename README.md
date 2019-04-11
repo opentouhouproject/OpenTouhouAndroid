@@ -46,6 +46,8 @@ Goals:
 
 - Setup basic CI with unit testing.
 
+**Demo 2** : https://www.youtube.com/watch?v=tPzyq1SCu7w
+
 **Demo 1** : https://www.youtube.com/watch?v=FoVAZPTSaAQ
 
 ### Branch: 0.1-a2
