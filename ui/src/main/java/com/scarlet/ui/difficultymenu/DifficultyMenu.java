@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.Text;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
@@ -16,6 +17,8 @@ public class DifficultyMenu extends UIEntity {
     private int currentItem;
     private int minIndex = 0;
     private int maxIndex = 3;
+
+    private Text title;
 
     // Motion Event
     private float startX;
@@ -29,7 +32,15 @@ public class DifficultyMenu extends UIEntity {
      */
     public DifficultyMenu(Renderer renderer) {
         // Formatting
-        Vector4f initialPosition = new Vector4f(-3.0f, 2.5f, 3.0f + 20.0f, 1.0f);
+        Vector4f initialPosition = new Vector4f(-3.0f, 1.0f, 3.0f + 20.0f, 1.0f);
+
+        // Build the title
+        title = new Text(renderer.getFontManager().getFont("fonts/popstar/popstarpop128.xml"));
+        title.setText("Difficulty")
+             .setPosition(new Vector3f(initialPosition.x + 0.2f, initialPosition.y + 1.1f, initialPosition.z - 20.0f))
+             .setScaling(200f)
+             .setColor(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f))
+             .setShader("Font2");
 
         menuItems = new MenuItem[4];
 
@@ -122,6 +133,8 @@ public class DifficultyMenu extends UIEntity {
         for (int i = 0; i < menuItems.length; i++) {
             menuItems[i].draw(renderer);
         }
+
+        title.draw(renderer);
 
         GLES30.glEnable(GLES30.GL_CULL_FACE);
     }

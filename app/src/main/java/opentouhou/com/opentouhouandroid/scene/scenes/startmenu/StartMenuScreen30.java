@@ -69,7 +69,7 @@ public class StartMenuScreen30 extends Scene {
         stageMenu = new StageMenu(renderer);
 
         playButton = new PlayButton(renderer, true);
-        playButton.setPosition(-3.0f, -2.0f, 3.0f);
+        playButton.setPosition(-3.0f, -4.0f, 3.0f);
         playButton.setAngle(0);
         playButton.setText("Play");
 
