@@ -32,38 +32,34 @@ https://www.khronos.org/opensles/
 
 ## Roadmap
 
+For previous versions see the wiki: https://github.com/opentouhouproject/OpenTouhouAndroid/wiki/Project-Roadmap
+
 ### Version 0.1.
 
 Major Goal: Setup basic UI and game engine.
 
-### Active Branch: 0.1-a3
+### Active Branch: 0.1-a4
 
-Goals: 
+Goals:
 
-- Implement basic menu UI.
+- Create a prototype UI for Stage 1 level.
 
-- Refactor into separate modules for libraries.
+- Enhance and redesign the audio code.
 
-- Setup basic CI with unit testing.
+- Refactor and clean up the math module.
+
+- Polish the menu UI. 
+
+### Branch: 0.1-a3
+
+Goals Completed: 
+
+- Implemented a basic menu UI for the title screen and start game screen.
+
+- Refactored the app module into separate modules.
+
+- Setup a build machine using Jenkins on a spare machine.
 
 **Demo 2** : https://www.youtube.com/watch?v=tPzyq1SCu7w
 
 **Demo 1** : https://www.youtube.com/watch?v=FoVAZPTSaAQ
-
-### Branch: 0.1-a2
-
-Goals Completed: 
-
-- Implement basic loading screen.
-
-- Implement basic scene transition.
-
-**Demo 2** : https://www.youtube.com/watch?v=mFUpeIADx0I
-
-**Demo 1** : https://www.youtube.com/watch?v=zMbH5SXehFA
-
-### Branch: 0.1-a1
-
-Goals Completed: 
-
-- Setup project initial on GitHub.
