@@ -1,4 +1,4 @@
-/**
+/*
  * Loads and plays audio files.
  */
 
@@ -8,13 +8,13 @@
 #include <SLES/OpenSLES.h>
 #include <SLES/OpenSLES_Android.h>
 
-#include "ResourceManager.h"
+#include "Resource.h"
 #include "OutputMixer.h"
 
-class AudioPlayer
-{
+class AudioPlayer {
     public:
         AudioPlayer();
+        ~AudioPlayer();
 
         void create(SLEngineItf audioEngineInterface);
         void close();
@@ -32,12 +32,11 @@ class AudioPlayer
 
         // Playing audio.
         void play();
-        void stop();
 
     private:
         SLObjectItf audioPlayer;
-        SLPlayItf audioPlayerPlay;
-        SLSeekItf audioPlayerSeek;
+        SLPlayItf playInterface;
+        SLSeekItf seekInterface;
 
         // Settings here
         SLDataLocator_AndroidFD dataLocatorIn;

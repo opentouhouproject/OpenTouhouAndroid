@@ -1,4 +1,4 @@
-/**
+/*
  * Class that manages the audio using OpenSL ES.
  * Provides a simpler way for us to interface with JAVA using JNI.
  */
@@ -7,22 +7,18 @@
 #define SRC_AUDIOMANAGER_H
 
 #include <android/log.h>
-
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
 
 #include "AudioEngine.h"
-
 #include "OutputMixer.h"
-
 #include "AudioPlayer.h"
+#include "Resource.h"
 
-#include "ResourceManager.h"
-
-class AudioManager
-{
+class AudioManager {
     public:
         AudioManager();
+        ~AudioManager();
 
         void create();
         void close();

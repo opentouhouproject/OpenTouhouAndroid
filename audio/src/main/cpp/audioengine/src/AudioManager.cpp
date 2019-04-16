@@ -6,44 +6,46 @@
 #include "include/AudioManager.h"
 
 // Constructor(s)
-AudioManager::AudioManager() { }
-
-// Start the manager.
-void AudioManager::create()
-{
+AudioManager::AudioManager() {
     audioEngine = new AudioEngine();
-    audioEngine->createEngine();
-
     outputMixer = new OutputMixer();
-    outputMixer->start(audioEngine->getInterface());
+    audioPlayer = nullptr;
+}
+
+// Destructor(s)
+AudioManager::~AudioManager() {
+    delete outputMixer;
+    delete audioEngine;
+}
+
+// Create the manager.
+void AudioManager::create() {
+    audioEngine->create();
+    outputMixer->create(audioEngine->getInterface());
 }
 
 // Close the manager.
-void AudioManager::close()
-{
+void AudioManager::close() {
+    outputMixer->close();
     audioEngine->close();
 }
 
-// Set asset manager.
-void AudioManager::setAssetManager(JNIEnv* env, jobject obj)
-{
+// Set the asset manager.
+void AudioManager::setAssetManager(JNIEnv* env, jobject obj) {
     assetManager = AAssetManager_fromJava(env, obj);
 }
 
 // Play a BGM file.
-void AudioManager::playBGM(const char* filePath)
-{
-    SLresult result;
-
-    Resource res = Resource(assetManager, filePath); // fix
-    ResourceDescriptor desc = res.descript();
-
-    if (desc.descriptor < 0)
-    {
-        __android_log_print(ANDROID_LOG_VERBOSE, "SL LIB ERR", "Resource descriptor invalid.");
+void AudioManager::playBGM(const char* filePath) {
+    // Open the resource.
+    ResourceManager res = ResourceManager(assetManager);
+    ResourceDescriptor desc = res.descript(filePath);
+    if (desc.descriptor < 0) {
+        __android_log_print(ANDROID_LOG_VERBOSE, "Scarlet Audio ERR", "Resource descriptor is invalid.");
         return;
     }
 
+    // Create a new audio player.
     audioPlayer = new AudioPlayer();
 
     audioPlayer->setDataLocatorIn(desc);
@@ -61,7 +63,9 @@ void AudioManager::playBGM(const char* filePath)
 }
 
 // Stop the music.
-void AudioManager::stopBGM()
-{
-    audioPlayer->stop();
+void AudioManager::stopBGM() {
+    if (audioPlayer != nullptr) {
+        delete audioPlayer;
+        audioPlayer = nullptr;
+    }
 }

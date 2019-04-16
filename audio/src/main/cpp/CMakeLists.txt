@@ -23,7 +23,7 @@ add_library(audio-engine-jni SHARED
         audioengine/src/AudioEngine.cpp
         audioengine/src/OutputMixer.cpp
         audioengine/src/AudioPlayer.cpp
-        audioengine/src/ResourceManager.cpp
+        audioengine/src/Resource.cpp
         audioengine/src/JNIMapping.cpp
         )
 

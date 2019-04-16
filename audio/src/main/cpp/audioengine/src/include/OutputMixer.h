@@ -1,20 +1,20 @@
-/**
+/*
  * Manages the OpenSL ES output mix.
  */
 
 #ifndef SRC_OUTPUTMIXER_H
 #define SRC_OUTPUTMIXER_H
 
+#include <android/log.h>
 #include <SLES/OpenSLES.h>
-
 #include <SLES/OpenSLES_Android.h>
 
-class OutputMixer
-{
+class OutputMixer {
     public:
         OutputMixer();
+        ~OutputMixer();
 
-        void start(SLEngineItf audioEngineInterface);
+        void create(SLEngineItf audioEngineInterface);
         void close();
 
         SLObjectItf getSLObject();
