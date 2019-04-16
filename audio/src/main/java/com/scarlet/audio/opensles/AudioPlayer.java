@@ -3,6 +3,8 @@ package com.scarlet.audio.opensles;
 import android.content.Context;
 import android.content.res.AssetManager;
 
+import com.scarlet.concurrent.ThreadManager;
+
 /*
  * Android does not have a Java library for calling OpenSL ES functions.
  * We need use JNI to call the C++ libraries that we created to use OpenSL ES.
@@ -34,15 +36,32 @@ public class AudioPlayer implements AutoCloseable {
     }
 
     // Play BGM
-    public void play(String file)
-    {
-        playBGM(file);
+    public void play(String file) {
+        //playBGM(file);
+
+        final String myfile = file;
+        Runnable runnable = new Runnable() {
+            String p = myfile;
+
+            public void run() {
+                playBGM(p);
+            };
+        };
+
+        ThreadManager.queueJob(runnable);
     }
 
     // Close BGM
-    public void stop()
-    {
-        stopBGM();
+    public void stop() {
+        //stopBGM();
+
+        Runnable runnable = new Runnable() {
+            public void run() {
+                stopBGM();
+            }
+        };
+
+        ThreadManager.queueJob(runnable);
     }
 
     /*

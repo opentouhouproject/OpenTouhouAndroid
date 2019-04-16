@@ -1,7 +1,8 @@
-package com.scarlet.concurrent;
+package com.scarlet.loader;
 
 import android.opengl.EGLContext;
 
+import com.scarlet.concurrent.ThreadManager;
 import com.scarlet.scene.Scene;
 
 /*
@@ -18,7 +19,7 @@ public class LoadTask {
     private Thread thread;
 
     // A handle to the object that creates the thread pools.
-    private LoadManager loadManager;
+    private ThreadManager threadManager;
 
     // The scene to load/setup.
     private Scene scene;
@@ -32,7 +33,7 @@ public class LoadTask {
     public LoadTask(Scene scene, BatchLoadTask batchTask) {
         state = State.NOT_STARTED;
         thread = null;
-        loadManager = LoadManager.instance;
+        threadManager = ThreadManager.instance;
 
         this.scene = scene;
         this.batchTask = batchTask;
@@ -63,7 +64,7 @@ public class LoadTask {
      * Sends a message to the thread pool manager on the UI thread.
      */
     public void handleState() {
-        loadManager.handleState(this, this.state);
+        batchTask.handleState(this, this.state);
     }
 
     public EGLContext getContext() { return scene.getRenderer().getContext(); }

@@ -1,4 +1,4 @@
-package com.scarlet.concurrent;
+package com.scarlet.loader;
 
 import com.scarlet.opengles30.mesh.Mesh30;
 

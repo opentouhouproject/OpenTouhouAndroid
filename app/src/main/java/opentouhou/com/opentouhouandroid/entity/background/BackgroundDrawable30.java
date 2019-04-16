@@ -2,7 +2,7 @@ package opentouhou.com.opentouhouandroid.entity.background;
 
 import android.opengl.GLES30;
 
-import com.scarlet.concurrent.CreateVAOTask;
+import com.scarlet.loader.CreateVAOTask;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 

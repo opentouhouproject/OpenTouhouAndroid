@@ -1,4 +1,4 @@
-package com.scarlet.concurrent;
+package com.scarlet.loader;
 
 import android.opengl.EGL14;
 import android.opengl.EGLConfig;

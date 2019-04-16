@@ -36,4 +36,5 @@ dependencies {
     implementation project(path: ':opengles30')
     implementation project(path: ':math')
     implementation project(path: ':concurrent')
+    implementation project(path: ':loader')
 }
