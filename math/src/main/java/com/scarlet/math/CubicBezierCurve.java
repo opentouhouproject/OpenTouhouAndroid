@@ -39,7 +39,7 @@ public class CubicBezierCurve {
         // Check the input.
         if (numberOfPoints < 2) throw new RuntimeException("Cannot subdivide a bezier curve with less than 2 points.");
 
-        // Allocate a new array and compute the interval length.
+        // Allocate a new array and compute the interval magnitude.
         float interval = 1.0f / (numberOfPoints - 1);
         Vector3f[] points = new Vector3f[numberOfPoints];
 

@@ -146,7 +146,7 @@ public class Text {
             float factor = (float)font.getGlyph(c).getWidth() / scaling;
 
             // Update the render position of a glyph by the offset.
-            drawPosition.selfAdd(new Vector3f(drawOffset.scale(factor)));
+            drawPosition.selfAdd(new Vector3f(drawOffset.multiply(factor)));
         }
     }
 }

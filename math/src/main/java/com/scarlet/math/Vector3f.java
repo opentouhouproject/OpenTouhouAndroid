@@ -3,7 +3,7 @@ package com.scarlet.math;
 /*
  * 3 dimensional vector of floats.
  */
-public class Vector3f {
+public final class Vector3f {
     public float x, y, z;
 
     /*
@@ -21,94 +21,128 @@ public class Vector3f {
         this.z = z;
     }
 
-    public Vector3f(Vector3f v) {
-        x = v.x;
-        y = v.y;
-        z = v.z;
+    public Vector3f(Vector3f other) {
+        x = other.x;
+        y = other.y;
+        z = other.z;
     }
 
-    public Vector3f(Vector4f v) {
-        x = v.x;
-        y = v.y;
-        z = v.z;
+    public Vector3f(Vector4f other) {
+        x = other.x;
+        y = other.y;
+        z = other.z;
     }
 
     /*
      * Setter(s).
      */
-    public void set(float x, float y, float z) {
+    public final void set(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public final void set(Vector3f vector) {
+        x = vector.x;
+        y = vector.y;
+        z = vector.z;
     }
 
     /*
      * Mutable operations.
      * Methods that mutate this vector.
      */
-    public void selfNegate() {
-        set(-x, -y, -z);
+    public final Vector3f selfNegate() {
+        return selfMultiply(-1.0f);
     }
 
-    public void selfAdd(Vector3f other) {
-        set(x + other.x, y + other.y, z + other.z);
+    public final Vector3f selfNormalize() {
+        return selfMultiply(1.0f / length());
     }
 
-    public void selfSubtract(Vector3f other) {
-        set(x - other.x, y - other.y, z - other.z);
+    public final Vector3f selfAdd(Vector3f vector) {
+        x += vector.x;
+        y += vector.y;
+        z += vector.z;
+
+        return this;
     }
 
-    public void selfMultiply(Vector3f other) {
-        set(x * other.x, y * other.y, z * other.z);
+    public final Vector3f selfSubtract(Vector3f vector) {
+        x -= vector.x;
+        y -= vector.y;
+        z -= vector.z;
+
+        return this;
     }
 
-    public void selfMultiply(float scalar) {
-        set(x * scalar, y * scalar, z * scalar);
+    public final Vector3f selfMultiply(Vector3f vector) {
+        x *= vector.x;
+        y *= vector.y;
+        z *= vector.z;
+
+        return this;
     }
 
-    public void selfNormalize() {
-        selfMultiply(1.0f / length());
+    public final Vector3f selfMultiply(float scalar) {
+        x *= scalar;
+        y *= scalar;
+        z *= scalar;
+
+        return this;
     }
 
     /*
      * Non-mutable operations.
      * Methods that do not mutate this vector.
      */
-    public Vector3f negate() {
-        return new Vector3f(-x, -y, -z);
+    public final Vector3f negate() {
+        return copy().selfNegate();
     }
 
-    public Vector3f add(Vector3f other) {
-        return new Vector3f(x + other.x, y + other.y, z + other.z);
+    public final Vector3f normalize() {
+        return copy().selfNormalize();
     }
 
-    public Vector3f subtract(Vector3f other) {
-        return new Vector3f(x - other.x, y - other.y, z - other.z);
+    public final Vector3f add(Vector3f vector) {
+        return copy().selfAdd(vector);
     }
 
-    public Vector3f multiply(Vector3f other) {
-        return new Vector3f(x * other.x, y * other.y, z * other.z);
+    public final Vector3f subtract(Vector3f vector) {
+        return copy().selfSubtract(vector);
     }
 
-    public Vector3f multiply(float scalar) {
-        return new Vector3f(x * scalar, y * scalar, z * scalar);
+    public final Vector3f multiply(Vector3f vector) {
+        return copy().selfMultiply(vector);
     }
 
-    public Vector3f normalize() {
-        return multiply(1.0f / length());
+    public final Vector3f multiply(float scalar) {
+        return copy().selfMultiply(scalar);
     }
 
-    public Vector3f cross(Vector3f other) {
-        float vv_x = y * other.z - other.y * z;
-        float vv_y = -1 * (x * other.z - other.x * z);
-        float vv_z = x * other.y - other.x * y;
-
-        return new Vector3f(vv_x, vv_y, vv_z);
+    public final Vector3f cross(Vector3f vector) {
+        return cross(this, vector);
     }
 
     /*
-     * Static Vector Operations.
+     * Non-Vector Operations.
+     * We do not return a vector result.
      */
+    public final float length() {
+        return (float) Math.sqrt((double) (x * x + y * y + z * z));
+    }
+
+    public final float dot(Vector3f vector) {
+        return dot(this, vector);
+    }
+
+    /*
+     * Static Operations.
+     */
+    public static float dot(Vector3f u, Vector3f v) {
+        return u.x * v.x + u.y * v.y + u.z * v.z;
+    }
+
     public static Vector3f cross(Vector3f u,  Vector3f v) {
         float vv_x = u.y * v.z - v.y * u.z;
         float vv_y = -1 * (u.x * v.z - v.x * u.z);
@@ -117,26 +151,7 @@ public class Vector3f {
         return new Vector3f(vv_x, vv_y, vv_z);
     }
 
-    /*
-     * Non-Vector Operations.
-     * We do not return a vector result.
-     */
-    public float length() {
-        return (float) Math.sqrt((double) (x * x + y * y + z * z));
-    }
-
-    public float dot(Vector3f other) {
-        return x * other.x + y * other.y + z * other.z;
-    }
-
-    /*
-     * Static Non-Vector Operations.
-     */
-    public static float dot(Vector3f u, Vector3f v) {
-        return u.x * v.x + u.y * v.y + u.z * v.z;
-    }
-
-    public static float cross_value(Vector3f u, Vector3f v) {
+    public static float crossValue(Vector3f u, Vector3f v) {
         float vv_x = u.y * v.z - v.y * u.z;
         float vv_y = -1 * (u.x * v.z - v.x * u.z);
         float vv_z = u.x * v.y - v.x * u.y;
@@ -144,8 +159,15 @@ public class Vector3f {
         return vv_x + vv_y + vv_z;
     }
 
+    /*
+     * Copy method.
+     */
+    public final Vector3f copy() {
+        return new Vector3f(this);
+    }
+
     @Override
-    public String toString() {
+    public final String toString() {
         return x + " " + y + " " + z;
     }
 }

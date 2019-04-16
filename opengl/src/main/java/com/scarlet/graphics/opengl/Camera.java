@@ -135,15 +135,14 @@ public class Camera {
 
     private void updateViewMatrix(Vector4f position, Vector4f lookAtPoint, Vector4f rightVector) {
         // Compute the forward vector.
-        Vector4f forward = lookAtPoint.subtract(position);
-        forward.selfNormalize();
+        Vector4f forward = lookAtPoint.subtract(position).selfNormalize();
 
         // Compute the up vector.
-        Vector4f up = new Vector4f(Vector4f.cross(rightVector, forward), 0);
+        Vector4f up = new Vector4f(rightVector.cross3(forward), 0);
         up.selfNormalize();
 
         // Compute the orthogonal right vector.
-        Vector4f right = new Vector4f(Vector4f.cross(forward, up), 0);
+        Vector4f right = new Vector4f(Vector4f.cross3(forward, up), 0);
 
         // column 0
         viewMatrix.setValue(right.x, 0, 0);
@@ -175,15 +174,14 @@ public class Camera {
      */
     private void updateInverseViewMatrix(Vector4f position, Vector4f lookAtPoint, Vector4f rightVector) {
         // Compute the forward vector.
-        Vector4f forward = lookAtPoint.subtract(position);
-        forward.selfNormalize();
+        Vector4f forward = lookAtPoint.subtract(position).selfNormalize();
 
         // Compute the up vector.
-        Vector4f up = new Vector4f(Vector4f.cross(rightVector, forward), 0);
+        Vector4f up = new Vector4f(rightVector.cross3(forward), 0);
         up.selfNormalize();
 
         // Compute the orthogonal right vector.
-        Vector4f right = new Vector4f(Vector4f.cross(forward, up), 0);
+        Vector4f right = new Vector4f(Vector4f.cross3(forward, up), 0);
 
         // column 0
         invViewMatrix.setValue(right.x, 0, 0);
