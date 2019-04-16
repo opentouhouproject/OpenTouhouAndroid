@@ -1,20 +1,18 @@
 package opentouhou.com.opentouhouandroid.entity.petals;
 
 import android.opengl.GLES30;
-import android.util.Log;
 
 import com.scarlet.math.CubicBezierCurve;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.GraphicsObject30;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.graphics.opengl.GraphicsOptions;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.mesh.MeshLayout;
+import com.scarlet.graphics.opengl.shader.ShaderProgram;
+import com.scarlet.opengles30.GraphicsObject30;
+import com.scarlet.opengles30.mesh.Mesh30;
 
 /*
  * Holds the information needed to draw a petal in OpenGL.
@@ -143,7 +141,7 @@ public class PetalDrawable30 extends GraphicsObject30 {
         mesh[meshIndex + 1] = position.y;
         mesh[meshIndex + 2] = position.z;
 
-        Log.d("PETAL DEBUG", "Point " + mesh[meshIndex] + " " + mesh[meshIndex + 1] + " " + mesh[meshIndex + 2]);
+        //Log.d("PETAL DEBUG", "Point " + mesh[meshIndex] + " " + mesh[meshIndex + 1] + " " + mesh[meshIndex + 2]);
 
         mesh[meshIndex + 3] = color.x;
         mesh[meshIndex + 4] = color.y;
@@ -246,16 +244,16 @@ public class PetalDrawable30 extends GraphicsObject30 {
     /*
      * Draw this object.
      */
-    public void draw(Scene scene, Petal petal) {
+    public void draw(Renderer renderer, Petal petal) {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();
         GLES30.glUseProgram(shaderHandle);
 
         // Set the transformation matrices.
-        setTransformationMatrices(shaderHandle, scene);
+        setTransformationMatrices(shaderHandle, renderer.getCamera());
 
         // Set the light source(s).
-        if (option.lightingSetting()) setLightPosition(shaderHandle, scene);
+        if (option.lightingSetting()) setLightPosition(shaderHandle, renderer.getCamera(), renderer.getLight());
 
         // Set the texture.
         if (option.textureSetting()) setTexture(shaderHandle);

@@ -3,9 +3,9 @@ package opentouhou.com.opentouhouandroid.entity;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.TextAnimation;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
+import com.scarlet.graphics.opengl.Text;
+import com.scarlet.graphics.opengl.animation.TextAnimation;
+import com.scarlet.graphics.opengl.font.FontManager;
 
 public class TextEntityGenerator {
     private TextEntityGenerator() { }
@@ -23,11 +23,11 @@ public class TextEntityGenerator {
     }
 
     public static Text CREATE_LOADING_TEXT(FontManager fontManager) {
-        Text text = new Text(fontManager.getFont("fonts/popstar/popstar16.xml"));
+        Text text = new Text(fontManager.getFont("fonts/popstar/popstarpop128.xml"));
 
         text.setText("Loading...")
             .setPosition(new Vector3f(-2.0f, -6.75f, 3))
-            .setScaling(40f)
+            .setScaling(280f)
             .setColor(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f))
             .setShader("Font2");
 
@@ -48,11 +48,11 @@ public class TextEntityGenerator {
     }
 
     public static Text CREATE_LOADING_DONE_TEXT(FontManager fontManager) {
-        Text text = new Text(fontManager.getFont("fonts/popstar/popstar16.xml"));
+        Text text = new Text(fontManager.getFont("fonts/popstar/popstarpop128.xml"));
 
         text.setText("Touch to Continue!")
                 .setPosition(new Vector3f(-3.2f, -1.5f, 3))
-                .setScaling(40f)
+                .setScaling(280f)
                 .setColor(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f))
                 .setShader("Font2");
 

@@ -9,16 +9,20 @@ import java.io.InputStreamReader;
 
 import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
-import opentouhou.com.opentouhouandroid.entity.button.Button;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
+
+import com.scarlet.graphics.opengl.Camera;
+import com.scarlet.graphics.opengl.GraphicsObject;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.Text;
+import com.scarlet.graphics.opengl.font.FontManager;
+
+import com.scarlet.scene.Scene;
+import com.scarlet.scene.Stage;
+
 import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
-import opentouhou.com.opentouhouandroid.scene.Scene;
-import opentouhou.com.opentouhouandroid.scene.Stage;
-import opentouhou.com.opentouhouandroid.scene.State;
+
+import com.scarlet.scene.State;
+import com.scarlet.ui.menu.Menu;
 
 /*
  * A main menu for the game!
@@ -30,7 +34,9 @@ public class MainMenuScreen30 extends Scene {
     // Game Objects
     Background background;
     Text title;
-    Button button;
+    Menu menu;
+
+    public String selectedValue = "";
 
     /*
      * Constructor(s)
@@ -63,7 +69,7 @@ public class MainMenuScreen30 extends Scene {
         FontManager fontManager = renderer.getFontManager();
         title = TextEntityGenerator.CREATE_MAIN_MENU_TITLE(fontManager);
 
-        button = new Button(renderer, true);
+        menu = new Menu(renderer);
 
         // Finished loading.
         Log.d("DONE", "MAIN MENU LOAD COMPLETE.");
@@ -97,8 +103,6 @@ public class MainMenuScreen30 extends Scene {
      * Implement the draw method.
      */
     public void draw() {
-        background.draw(this);
-        title.draw(this);
-        button.draw(this);
+        state.draw(this);
     }
 }

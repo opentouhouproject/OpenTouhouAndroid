@@ -8,9 +8,8 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.graphics.opengl.texture.TextureManager;
+import com.scarlet.scene.Scene;
 
 /*
  * Parses a load file.
@@ -153,6 +152,10 @@ public class SceneParser {
 
             case "GREYSCALE":
                 opt = TextureManager.Options.GREYSCALE;
+                break;
+
+            case "LIGHTGREYSCALE":
+                opt = TextureManager.Options.LIGHTGREYSCALE;
                 break;
         }
 

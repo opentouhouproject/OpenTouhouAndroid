@@ -2,17 +2,16 @@ package opentouhou.com.opentouhouandroid.entity.background;
 
 import android.opengl.GLES30;
 
+import com.scarlet.concurrent.CreateVAOTask;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.GraphicsObject30;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
-import opentouhou.com.opentouhouandroid.scene.Scene;
-import opentouhou.com.opentouhouandroid.scene.loader.CreateVAOTask;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.mesh.MeshLayout;
+import com.scarlet.graphics.opengl.shader.ShaderProgram;
+import com.scarlet.graphics.opengl.texture.Texture;
+import com.scarlet.opengles30.GraphicsObject30;
+import com.scarlet.opengles30.mesh.Mesh30;
 
 public class BackgroundDrawable30 extends GraphicsObject30 {
     public Vector3f position = new Vector3f(-5.5f, -10.0f, 0);
@@ -75,7 +74,7 @@ public class BackgroundDrawable30 extends GraphicsObject30 {
 
     // Override the parent draw method.
     @Override
-    public void draw(Scene scene) {
+    public void draw(Renderer renderer) {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();
         GLES30.glUseProgram(shaderHandle);
@@ -85,10 +84,10 @@ public class BackgroundDrawable30 extends GraphicsObject30 {
         GLES30.glUniform4f(uniformColorHandle, 0.9f, 0.6f, 0.3f, 1f);
 
         // Set the transformation matrices.
-        setTransformationMatrices(shaderHandle, scene);
+        setTransformationMatrices(shaderHandle, renderer.getCamera());
 
         // Set the light source(s).
-        setLightPosition(shaderHandle, scene);
+        setLightPosition(shaderHandle, renderer.getCamera(), renderer.getLight());
 
         // Set the texture.
         setTexture(shaderHandle);

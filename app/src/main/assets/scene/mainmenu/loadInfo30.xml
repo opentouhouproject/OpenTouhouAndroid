@@ -15,7 +15,7 @@
     <!-- Texture Loading Section -->
     <textures>
         <texture path="art/test_touhou_bg.png" option="GREYSCALE" />
-        <texture path="art/mm_bg1.png" option="GREYSCALE" />
+        <texture path="art/mm_bg1.png" option="LIGHTGREYSCALE" />
     </textures>
 
     <!-- Font Loading Section -->

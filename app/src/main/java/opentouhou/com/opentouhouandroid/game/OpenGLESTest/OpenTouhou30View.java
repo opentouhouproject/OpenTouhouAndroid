@@ -4,11 +4,11 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 
+import com.scarlet.scene.Stage;
+
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLDisplay;
-
-import opentouhou.com.opentouhouandroid.scene.Stage;
 
 public class OpenTouhou30View extends GLSurfaceView {
     private volatile boolean isPlaying;
@@ -39,7 +39,7 @@ public class OpenTouhou30View extends GLSurfaceView {
         this.stage = stage;
         setRenderer(stage.getRenderer());
 
-        this.stage.view = this;
+        stage.getRenderer().view = this;
 
         /*
          * Set the render mode.

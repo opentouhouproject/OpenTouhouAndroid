@@ -1,28 +1,32 @@
 package opentouhou.com.opentouhouandroid.scene.stages.Compatible30;
 
 import android.content.Context;
-import android.view.MotionEvent;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.Renderer30;
-import opentouhou.com.opentouhouandroid.io.FileManager;
-import opentouhou.com.opentouhouandroid.io.eventqueue.MotionEventQueue;
-import opentouhou.com.opentouhouandroid.scene.Stage;
-import opentouhou.com.opentouhouandroid.scene.State;
+import com.scarlet.audio.opensles.AudioPlayer;
+
+import com.scarlet.opengles30.Renderer30;
+
+import com.scarlet.io.event.MotionEventQueue;
+import com.scarlet.io.FileManager;
+
+import com.scarlet.scene.Stage;
+import com.scarlet.scene.State;
+
 import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
 import opentouhou.com.opentouhouandroid.scene.scenes.mainmenu.MainMenuScreen30;
-import opentouhou.com.opentouhouandroid.sound.opensl.AudioPlayer;
+import opentouhou.com.opentouhouandroid.scene.scenes.startmenu.StartMenuScreen30;
 
 /*
  * Testing OpenGL ES 3.0 implementations.
  */
-
 public class OpenGLES30Test extends Stage {
     // State
     private State<OpenGLES30Test> state;
 
     // Scenes
-    public LoadingScreen30 loadingScreen30;
+    LoadingScreen30 loadingScreen30;
     MainMenuScreen30 mainMenuScreen30;
+    StartMenuScreen30 startMenuScreen30;
 
     /*
      * Constructor(s).
@@ -79,6 +83,6 @@ public class OpenGLES30Test extends Stage {
 
     @Override
     public void draw() {
-        getCurrentScene().draw();
+        state.draw(this);
     }
 }

@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import opentouhou.com.opentouhouandroid.scene.Stage;
+import com.scarlet.scene.Stage;
+
 import opentouhou.com.opentouhouandroid.scene.stages.Compatible30.OpenGLES30Test;
 
 public class OpenTouhou30Activity extends Activity {

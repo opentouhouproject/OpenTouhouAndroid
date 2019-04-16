@@ -1,16 +1,19 @@
+#version 300 es
+
 precision mediump float;
 
 uniform vec3 uLightPos;
 uniform vec4 uColor;
 uniform sampler2D uTexture; // interpolated texture coordinate
 
-varying vec3 vVertex;
-varying vec4 vColor;
-varying vec3 vNormal;
-varying vec2 vTexCoordinate;
+in vec3 vVertex;
+in vec4 vColor;
+in vec3 vNormal;
+in vec2 vTexCoordinate;
 
-void main()
-{
+out vec4 fragmentColor;
+
+void main() {
 	// Will be used for attenuation.
 	float distance = length(uLightPos - vVertex);
 
@@ -34,5 +37,5 @@ void main()
 
     // Luma conversion.
     //gl_FragColor = dot(vec3(tex.x, tex.y, tex.z), vec3(0.299, 0.587, 0.114)) * tex;
-    gl_FragColor = texture2D(uTexture, vTexCoordinate);
+    fragmentColor = texture(uTexture, vTexCoordinate);
 }

@@ -3,11 +3,10 @@ package opentouhou.com.opentouhouandroid.entity.sprite.meilin;
 import com.scarlet.math.Matrix4f;
 
 import opentouhou.com.opentouhouandroid.entity.sprite.Sprite;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.SpriteAnimation;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.Texture;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.texture.TextureManager;
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.animation.SpriteAnimation;
+import com.scarlet.graphics.opengl.texture.Texture;
+import com.scarlet.graphics.opengl.texture.TextureManager;
 
 public class MeilinSprite extends Sprite
 {
@@ -29,7 +28,7 @@ public class MeilinSprite extends Sprite
                 manager.getTexture("sprites/meirin/walkfront/walkFront004.png"),
                 manager.getTexture("sprites/meirin/walkfront/walkFront005.png")
         };
-        walkingForward.setStretch(new float[]{0.8f, 0.8f, 0.8f, 0.8f, 0.8f, 0.8f});
+        walkingForward.setStretch(new float[]{0.65f, 0.65f, 0.65f, 0.65f, 0.65f, 0.65f});
         walkingForward.setSequence(textures);
 
         // Load attack anim
@@ -70,7 +69,7 @@ public class MeilinSprite extends Sprite
         }
     }
 
-    public void draw(Scene scene)
+    public void draw(Renderer renderer)
     {
         int h = currentAnimation.currentFrame().getHeight();
         int w = currentAnimation.currentFrame().getWidth();
@@ -81,6 +80,6 @@ public class MeilinSprite extends Sprite
 
         drawable.setTexture(currentAnimation.currentFrame());
         drawable.setModelMatrix(model);
-        drawable.draw(scene);
+        drawable.draw(renderer);
     }
 }

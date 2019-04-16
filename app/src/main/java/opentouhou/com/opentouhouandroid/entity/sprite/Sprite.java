@@ -4,14 +4,14 @@ import com.scarlet.math.Matrix4f;
 
 import java.util.Hashtable;
 
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.animation.SpriteAnimation;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.mesh.MeshLayout;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.shader.ShaderProgram;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.drawable.GraphicsObject30;
-import opentouhou.com.opentouhouandroid.graphics.opengl.opengles30.mesh.Mesh30;
+import com.scarlet.graphics.opengl.GraphicsObject;
+import com.scarlet.graphics.opengl.GraphicsOptions;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.animation.SpriteAnimation;
+import com.scarlet.graphics.opengl.mesh.MeshLayout;
+import com.scarlet.graphics.opengl.shader.ShaderProgram;
+import com.scarlet.opengles30.GraphicsObject30;
+import com.scarlet.opengles30.mesh.Mesh30;
 
 /*
  * Represents a sprite in a game.

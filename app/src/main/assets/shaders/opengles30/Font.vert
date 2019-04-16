@@ -1,16 +1,18 @@
+#version 300 es
+
 uniform mat4 uMVPMatrix;
 uniform mat4 uMVMatrix;
 uniform vec4 uColor;
 
-attribute vec4 aVertex;
-attribute vec4 aColor;
-attribute vec3 aNormal;
-attribute vec2 aTexCoordinate;
+in vec4 aVertex;
+in vec4 aColor;
+in vec3 aNormal;
+in vec2 aTexCoordinate;
 
-varying vec3 vVertex;
-varying vec4 vColor;
-varying vec3 vNormal;
-varying vec2 vTexCoordinate;
+out vec3 vVertex;
+out vec4 vColor;
+out vec3 vNormal;
+out vec2 vTexCoordinate;
 
 void main() {
     vVertex = vec3(uMVMatrix * aVertex);

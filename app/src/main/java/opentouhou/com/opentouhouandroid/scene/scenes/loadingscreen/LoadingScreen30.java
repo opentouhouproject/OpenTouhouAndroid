@@ -10,22 +10,23 @@ import opentouhou.com.opentouhouandroid.entity.sprite.meilin.MeilinSprite;
 import opentouhou.com.opentouhouandroid.entity.petals.PetalFall;
 import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.font.FontManager;
+import com.scarlet.graphics.opengl.Camera;
+import com.scarlet.graphics.opengl.GraphicsObject;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.Text;
+import com.scarlet.graphics.opengl.font.FontManager;
+import com.scarlet.scene.LoadingScreen;
+import com.scarlet.scene.Scene;
+import com.scarlet.scene.Stage;
+
 import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
-import opentouhou.com.opentouhouandroid.scene.Scene;
-import opentouhou.com.opentouhouandroid.scene.Stage;
-import opentouhou.com.opentouhouandroid.scene.State;
+import com.scarlet.scene.State;
 
 /*
  * Loading screen implemented with OpenGL ES 3.0 .
  */
-public class LoadingScreen30 extends Scene {
+public class LoadingScreen30 extends LoadingScreen {
     // Track game state.
-    public boolean finishedLoading = false;
     public boolean userContinue = false;
     private State<LoadingScreen30> state;
 
@@ -116,13 +117,6 @@ public class LoadingScreen30 extends Scene {
      * Implement the draw method.
      */
     public void draw() {
-        background.draw(this);
-        //background2.draw(this);
-        petalFall.draw(this);
-        title.draw(this);
-        loadingMessage.draw(this);
-        sprite.draw(this);
-
-        if (state == States.FINISHED_STATE) loadingFinishedMsg.draw(this);
+        state.draw(this);
     }
 }

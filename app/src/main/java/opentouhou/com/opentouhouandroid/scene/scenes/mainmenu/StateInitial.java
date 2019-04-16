@@ -2,12 +2,8 @@ package opentouhou.com.opentouhouandroid.scene.scenes.mainmenu;
 
 import android.view.MotionEvent;
 
-import com.scarlet.math.Vector3f;
-
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.scene.State;
-
-import static android.view.MotionEvent.ACTION_DOWN;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.scene.State;
 
 public class StateInitial implements State<MainMenuScreen30> {
     /*
@@ -26,13 +22,10 @@ public class StateInitial implements State<MainMenuScreen30> {
 
     @Override
     public State<MainMenuScreen30> handleInput(MainMenuScreen30 scene, MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
+        scene.menu.handleInput(event, scene.getRenderer());
 
-        switch(event.getAction()) {
-            case ACTION_DOWN:
-                Renderer renderer = scene.getRenderer();
-                Vector3f ndc = scene.getCamera().convertToNDC(x, y, renderer.getScreenWidth(), renderer.getScreenHeight());
+        if (scene.menu.getClickValue().equals("Start")) {
+            scene.selectedValue = "Start";
         }
 
         return null;
@@ -40,7 +33,18 @@ public class StateInitial implements State<MainMenuScreen30> {
 
     @Override
     public State<MainMenuScreen30> update(MainMenuScreen30 scene) {
+        scene.menu.update();
+
         return null;
+    }
+
+    @Override
+    public void draw(MainMenuScreen30 scene) {
+        Renderer renderer = scene.getRenderer();
+
+        scene.background.draw(renderer);
+        scene.menu.draw(renderer);
+        scene.title.draw(renderer);
     }
 
     @Override

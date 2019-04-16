@@ -1,9 +1,8 @@
 package opentouhou.com.opentouhouandroid.entity.petals;
 
 import opentouhou.com.opentouhouandroid.entity.GameEntity;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsOptions;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.scene.Scene;
+import com.scarlet.graphics.opengl.GraphicsOptions;
+import com.scarlet.graphics.opengl.Renderer;
 
 /*
  * Simulates falling petals.
@@ -52,11 +51,11 @@ public class PetalFall extends GameEntity {
     /*
      * Implement draw method.
      */
-    public void draw(Scene scene) {
+    public void draw(Renderer renderer) {
         for (Petal petal : petalList) {
             if (petal.isAnimated()) {
                 drawable.setModelMatrix(petal.getModel());
-                drawable.draw(scene, petal);
+                drawable.draw(renderer, petal);
             }
         }
     }

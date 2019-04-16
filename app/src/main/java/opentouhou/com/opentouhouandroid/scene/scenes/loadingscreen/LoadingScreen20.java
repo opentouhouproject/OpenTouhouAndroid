@@ -9,13 +9,14 @@ import java.io.InputStreamReader;
 import opentouhou.com.opentouhouandroid.entity.sprite.meilin.MeilinSprite;
 import opentouhou.com.opentouhouandroid.entity.petals.PetalFall;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Camera;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.GraphicsObject;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Renderer;
-import opentouhou.com.opentouhouandroid.graphics.opengl.common.Text;
+import com.scarlet.graphics.opengl.Camera;
+import com.scarlet.graphics.opengl.GraphicsObject;
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.Text;
+import com.scarlet.scene.Scene;
+import com.scarlet.scene.Stage;
+
 import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
-import opentouhou.com.opentouhouandroid.scene.Scene;
-import opentouhou.com.opentouhouandroid.scene.Stage;
 
 /*
  * Loading screen implemented with OpenGL ES 2.0 .
@@ -107,7 +108,7 @@ public class LoadingScreen20 extends Scene {
      * Draw the scene.
      */
     public void draw() {
-        background.draw(this);
+        background.draw(stage.getRenderer());
 
         //petalFall.draw(this);
 
