@@ -49,7 +49,7 @@ public class PetalDrawable30 extends GraphicsObject30 {
         setShader(program);
 
         // Set the model matrix.
-        setModelMatrix(Matrix4f.getIdentity());
+        setModelMatrix(Matrix4f.identityMatrix());
     }
 
     private float[] generateMesh() {

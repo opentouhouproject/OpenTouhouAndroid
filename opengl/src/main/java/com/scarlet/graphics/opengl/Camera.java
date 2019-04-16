@@ -1,7 +1,5 @@
 package com.scarlet.graphics.opengl;
 
-import android.util.Log;
-
 import com.scarlet.math.MathUtil;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
@@ -22,69 +20,71 @@ public class Camera {
     private Matrix4f invProjectionMatrix;
 
     // Vectors
-    private Vector4f cameraPosition;
-    private Vector4f lookAtPosition;
-    private Vector4f rightDirection;
+    private Vector3f cameraPosition;
+    private Vector3f lookAtPosition;
+    private Vector3f rightDirection;
 
     /*
      * Constructor(s).
      */
     public Camera(float pX, float pY, float pZ, float lX, float lY, float lZ) {
         // Set the camera position.
-        cameraPosition = new Vector4f(pX, pY, pZ, 0);
+        cameraPosition = new Vector3f(pX, pY, pZ);
 
         // Set the position we are looking at.
-        lookAtPosition = new Vector4f(lX, lY, lZ, 0);
+        lookAtPosition = new Vector3f(lX, lY, lZ);
 
         // Set the positive x axis direction.
-        rightDirection = new Vector4f(1.0f, 0.0f, 0.0f, 0.0f); // x coordinate is right
+        rightDirection = new Vector3f(1.0f, 0.0f, 0.0f); // x coordinate is right
 
         // Initialize the view matrix.
-        viewMatrix = Matrix4f.getIdentity();
-        invViewMatrix = Matrix4f.getIdentity();
+        viewMatrix = Matrix4f.identityMatrix();
+        invViewMatrix = Matrix4f.identityMatrix();
+
         // Compute the view matrix.
         updateViewMatrix(cameraPosition, lookAtPosition, rightDirection);
         updateInverseViewMatrix(cameraPosition, lookAtPosition, rightDirection);
 
         // Initialize the projection matrix.
-        projectionMatrix = Matrix4f.getIdentity();
-        invProjectionMatrix = Matrix4f.getIdentity();
+        projectionMatrix = Matrix4f.identityMatrix();
+        invProjectionMatrix = Matrix4f.identityMatrix();
     }
 
     public Camera(float pX, float pY, float pZ, float lX, float lY, float lZ, float rX, float rY, float rZ) {
         // Set the camera position.
-        cameraPosition = new Vector4f(pX, pY, pZ, 0);
+        cameraPosition = new Vector3f(pX, pY, pZ);
 
         // Set the position we are looking at.
-        lookAtPosition = new Vector4f(lX, lY, lZ, 0);
+        lookAtPosition = new Vector3f(lX, lY, lZ);
 
         // Set the positive x axis direction.
-        rightDirection = new Vector4f(rX, rY, rZ, 0);
+        rightDirection = new Vector3f(rX, rY, rZ);
 
         // Initialize the view matrix.
-        viewMatrix = Matrix4f.getIdentity();
-        invViewMatrix = Matrix4f.getIdentity();
+        viewMatrix = Matrix4f.identityMatrix();
+        invViewMatrix = Matrix4f.identityMatrix();
+
         // Compute the view matrix.
         updateViewMatrix(cameraPosition, lookAtPosition, rightDirection);
         updateInverseViewMatrix(cameraPosition, lookAtPosition, rightDirection);
 
         // Initialize the projection matrix.
-        projectionMatrix = Matrix4f.getIdentity();
-        invProjectionMatrix = Matrix4f.getIdentity();
+        projectionMatrix = Matrix4f.identityMatrix();
+        invProjectionMatrix = Matrix4f.identityMatrix();
     }
 
     /*
      * Getter(s).
      */
-    Vector4f getCameraPosition() {
+    Vector3f getCameraPosition() {
         return cameraPosition;
     }
 
-    Vector4f getLookAtPosition() {
+    Vector3f getLookAtPosition() {
         return lookAtPosition;
     }
 
-    Vector4f getRight() {
+    Vector3f getRight() {
         return rightDirection;
     }
 
@@ -97,7 +97,7 @@ public class Camera {
      */
     public void setCameraPosition(float x, float y, float z) {
         // Set the camera position.
-        cameraPosition.set(x, y, z, 0);
+        cameraPosition.set(x, y, z);
 
         // Flag the view matrix for an update.
         dirty = true;
@@ -105,7 +105,7 @@ public class Camera {
 
     public void setLookAtPosition(float x, float y, float z) {
         // Set the look at position.
-        lookAtPosition.set(x, y, z, 0);
+        lookAtPosition.set(x, y, z);
 
         // Flag the view matrix for an update.
         dirty = true;
@@ -113,7 +113,7 @@ public class Camera {
 
     public void setRightDirection(float x, float y, float z) {
         // Update the up vector.
-        rightDirection.set(x, y, z, 0);
+        rightDirection.set(x, y, z);
 
         // Flag the view matrix for an update.
         dirty = true;
@@ -133,16 +133,15 @@ public class Camera {
         return viewMatrix;
     }
 
-    private void updateViewMatrix(Vector4f position, Vector4f lookAtPoint, Vector4f rightVector) {
+    private void updateViewMatrix(Vector3f position, Vector3f lookAtPoint, Vector3f rightVector) {
         // Compute the forward vector.
-        Vector4f forward = lookAtPoint.subtract(position).selfNormalize();
+        Vector3f forward = lookAtPoint.subtract(position).selfNormalize();
 
         // Compute the up vector.
-        Vector4f up = new Vector4f(rightVector.cross3(forward), 0);
-        up.selfNormalize();
+        Vector3f up = rightVector.cross(forward).selfNormalize();
 
         // Compute the orthogonal right vector.
-        Vector4f right = new Vector4f(Vector4f.cross3(forward, up), 0);
+        Vector3f right = forward.cross(up);
 
         // column 0
         viewMatrix.setValue(right.x, 0, 0);
@@ -172,16 +171,15 @@ public class Camera {
     /*
      * Set inverse view matrix.
      */
-    private void updateInverseViewMatrix(Vector4f position, Vector4f lookAtPoint, Vector4f rightVector) {
+    private void updateInverseViewMatrix(Vector3f position, Vector3f lookAtPoint, Vector3f rightVector) {
         // Compute the forward vector.
-        Vector4f forward = lookAtPoint.subtract(position).selfNormalize();
+        Vector3f forward = lookAtPoint.subtract(position).selfNormalize();
 
         // Compute the up vector.
-        Vector4f up = new Vector4f(rightVector.cross3(forward), 0);
-        up.selfNormalize();
+        Vector3f up = rightVector.cross(forward).selfNormalize();
 
         // Compute the orthogonal right vector.
-        Vector4f right = new Vector4f(Vector4f.cross3(forward, up), 0);
+        Vector3f right = forward.cross(up);
 
         // column 0
         invViewMatrix.setValue(right.x, 0, 0);
@@ -328,17 +326,17 @@ public class Camera {
      * Compute intersection of ray and xy-plane.
      */
     public Vector3f unProject(Vector4f ndc) {
-        Vector4f viewSpaceCoord = Matrix4f.multiply(getInvProjectionMatrix(), ndc);
+        Vector4f viewSpaceCoord = getInvProjectionMatrix().multiply(ndc);
         //Log.d("unProject", "P: " + pCoord.x + " " + pCoord.y + " " + pCoord.z + " " + pCoord.w);
 
-        Vector4f worldSpaceCoord = Matrix4f.multiply(getInvViewMatrix(), viewSpaceCoord);
+        Vector4f worldSpaceCoord = getInvViewMatrix().multiply(viewSpaceCoord);
         //Log.d("unProject", "V: " + vCoord.x + " " + vCoord.y + " " + vCoord.z + " " + vCoord.w);
 
-        return new Vector3f(worldSpaceCoord.x, worldSpaceCoord.y, worldSpaceCoord.z);
+        return new Vector3f(worldSpaceCoord);
     }
 
     public Vector3f intersectionPoint(Vector3f planePoint, Vector3f normal, Vector3f touchPoint) {
-        Vector3f eye = new Vector3f(cameraPosition); // camera position
+        Vector3f eye = cameraPosition.copy(); // camera position
 
         // Compute intersection of the plane and ray.
         Vector3f ray = touchPoint.subtract(eye);

@@ -98,7 +98,7 @@ public class Sprite {
         int h = currentAnimation.currentFrame().getHeight();
         int w = currentAnimation.currentFrame().getWidth();
 
-        Matrix4f model = Matrix4f.getIdentity();
+        Matrix4f model = Matrix4f.identityMatrix();
         model.scale(1, ((float)h / (float)w), 1);
         model.translate(0, 0, 3.3f);
         drawable.setModelMatrix(model);

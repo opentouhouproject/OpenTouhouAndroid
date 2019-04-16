@@ -1,11 +1,9 @@
 package com.scarlet.math;
 
-/**
+/*
  * 4x4 matrix of floats.
  */
-
-public class Matrix4f
-{
+public class Matrix4f {
     private static final int m11 = 0;
     private static final int m21 = 1;
     private static final int m31 = 2;
@@ -28,13 +26,16 @@ public class Matrix4f
 
     private float[] values;
 
-    // Default Constructor
+    /*
+     * Constructor(s).
+     */
     public Matrix4f() {
-        values = new float[16]; // 4x4 matrix, column order, default value to 0.0
+        // 4x4 matrix, column order, default value to 0.0f
+        values = new float[16];
     }
 
-    // Pass in column values as vectors
     public Matrix4f(Vector4f v0, Vector4f v1, Vector4f v2, Vector4f v3) {
+        // Pass in column values as vectors
         values = new float[16];
 
         values[m11] = v0.x;
@@ -58,8 +59,8 @@ public class Matrix4f
         values[m44] = v3.w;
     }
 
-    // Copy Constructor
     public Matrix4f(Matrix4f matrix) {
+        // Copy Constructor
         values = new float[16];
 
         values[m11] = matrix.values[m11];
@@ -83,32 +84,35 @@ public class Matrix4f
         values[m44] = matrix.values[m44];
     }
 
-    // Setters
-    public void setColumn(Vector4f v, int column) {
-        values[4 * column] = v.x;
-        values[4 * column + 1] = v.y;
-        values[4 * column + 2] = v.z;
-        values[4 * column + 3] = v.w;
+    /*
+     * Setter(s)
+     */
+    public void setColumn(Vector4f vector, int column) {
+        values[4 * column] = vector.x;
+        values[4 * column + 1] = vector.y;
+        values[4 * column + 2] = vector.z;
+        values[4 * column + 3] = vector.w;
     }
 
     public void setValue(float value, int row, int column) {
         values[4 * column + row] = value;
     }
 
+    /*
+     * Getter(s)
+     */
     public float[] getArray() {
         return values.clone();
     }
 
-    // Static Methods
-
-    /**
-     * Matrix Creation Methods
-     * All methods return a new matrix
+    /*
+     * Matrix Creation Method(s).
      */
 
-    // Return a new identity matrix.
-    public static Matrix4f getIdentity()
-    {
+    /*
+     * Create a new Identity matrix.
+     */
+    public static Matrix4f identityMatrix() {
         Matrix4f matrix = new Matrix4f();
 
         matrix.values[m11] = 1;
@@ -119,9 +123,10 @@ public class Matrix4f
         return matrix;
     }
 
-    // Return a new multiply matrix.
-    public static Matrix4f scaleMatrix(float scaleX, float scaleY, float scaleZ)
-    {
+    /*
+     * Create a new 3D Scale matrix.
+     */
+    public static Matrix4f scaleMatrix(float scaleX, float scaleY, float scaleZ) {
         Matrix4f matrix = new Matrix4f();
 
         matrix.values[m11] = scaleX;
@@ -132,10 +137,25 @@ public class Matrix4f
         return matrix;
     }
 
-    // Return a new translation matrix.
-    public static Matrix4f translateMatrix(float x, float y, float z)
-    {
-        Matrix4f matrix = Matrix4f.getIdentity();
+    /*
+     * Create a new Scale matrix.
+     */
+    public static Matrix4f scaleMatrix(float scaleX, float scaleY, float scaleZ, float scaleW) {
+        Matrix4f matrix = new Matrix4f();
+
+        matrix.values[m11] = scaleX;
+        matrix.values[m22] = scaleY;
+        matrix.values[m33] = scaleZ;
+        matrix.values[m44] = scaleW;
+
+        return matrix;
+    }
+
+    /*
+     * Create a new 3D Translation matrix.
+     */
+    public static Matrix4f translationMatrix(float x, float y, float z) {
+        Matrix4f matrix = Matrix4f.identityMatrix();
 
         matrix.values[m14] = x;
         matrix.values[m24] = y;
@@ -156,7 +176,7 @@ public class Matrix4f
         float alpha = (float) Math.sin(angle);
         float beta = (float) Math.cos(angle);
 
-        Matrix4f matrix = Matrix4f.getIdentity();
+        Matrix4f matrix = Matrix4f.identityMatrix();
 
         matrix.values[m22] = beta;
         matrix.values[m32] = -alpha;
@@ -178,7 +198,7 @@ public class Matrix4f
         float alpha = (float) Math.sin(angle);
         float beta = (float) Math.cos(angle);
 
-        Matrix4f matrix = Matrix4f.getIdentity();
+        Matrix4f matrix = Matrix4f.identityMatrix();
 
         matrix.values[m11] = beta;
         matrix.values[m31] = alpha;
@@ -200,7 +220,7 @@ public class Matrix4f
         float alpha = (float) Math.sin(angle);
         float beta = (float) Math.cos(angle);
 
-        Matrix4f matrix = Matrix4f.getIdentity();
+        Matrix4f matrix = Matrix4f.identityMatrix();
 
         matrix.values[m11] = beta;
         matrix.values[m21] = -alpha;
@@ -247,7 +267,7 @@ public class Matrix4f
         float c = (float) Math.cos(angle);
         float r = (1 - c);
 
-        Matrix4f matrix = Matrix4f.getIdentity();
+        Matrix4f matrix = Matrix4f.identityMatrix();
 
         matrix.values[m11] = x * x * r + c;
         matrix.values[m21] = x * y * r + z * s;
@@ -284,20 +304,19 @@ public class Matrix4f
         return Matrix4f.rotateVector(u, angle, isDegrees);
     }
 
-
-    /**
+    /*
      * Matrix Operation Methods
      * All methods return a new matrix.
      */
 
-    // Return the transpose of the given matrix.
-    public static Matrix4f transpose(Matrix4f matrix)
-    {
+    /*
+     * Return the transpose of the given matrix.
+     */
+    public static Matrix4f transpose(Matrix4f matrix) {
         Matrix4f result = new Matrix4f();
 
-        for (int i = 0; i < 4; i++)
-        {
-            result.values[4 * i + 0] = matrix.values[0 + i];
+        for (int i = 0; i < 4; i++) {
+            result.values[4 * i] = matrix.values[i];
             result.values[4 * i + 1] = matrix.values[4 + i];
             result.values[4 * i + 2] = matrix.values[8 + i];
             result.values[4 * i + 3] = matrix.values[12 + i];
@@ -306,9 +325,10 @@ public class Matrix4f
         return result;
     }
 
-    // Multiply two matrices.
-    public static Matrix4f multiply(Matrix4f lhs, Matrix4f rhs)
-    {
+    /*
+     * Multiply two matrices.
+     */
+    public static Matrix4f multiply(Matrix4f lhs, Matrix4f rhs) {
         Matrix4f result = new Matrix4f();
 
         // Column 1
@@ -338,9 +358,10 @@ public class Matrix4f
         return result;
     }
 
-    // Multiply a vector by a matrix.
-    public static Vector4f multiply(Matrix4f matrix, Vector4f vector)
-    {
+    /*
+     * Multiply a vector by a matrix.
+     */
+    public static Vector4f multiply(Matrix4f matrix, Vector4f vector) {
         Vector4f result = new Vector4f();
 
         result.x = matrix.values[m11] * vector.x + matrix.values[m12] * vector.y + matrix.values[m13] * vector.z + matrix.values[m14] * vector.w;
@@ -351,8 +372,23 @@ public class Matrix4f
         return result;
     }
 
+    /*
+     * Multiply this matrix with another matrix.
+     * LHS: this, RHS: argument
+     */
+    public final Matrix4f multiply(Matrix4f matrix) {
+        return multiply(this, matrix);
+    }
 
-    /**
+    /*
+     * Multiply this matrix with a vector.
+     * LHS: this, RHS: argument
+     */
+    public final Vector4f multiply(Vector4f vector) {
+        return multiply(this, vector);
+    }
+
+    /*
      * Self Matrix Operations
      * All methods mutate this matrix.
      */
@@ -550,7 +586,7 @@ public class Matrix4f
         float c = (float) Math.cos(angle);
         float r = (1 - c);
 
-        Matrix4f matrix = Matrix4f.getIdentity();
+        Matrix4f matrix = Matrix4f.identityMatrix();
 
         matrix.values[m11] = x * x * r + c;
         matrix.values[m21] = x * y * r + z * s;
@@ -575,9 +611,10 @@ public class Matrix4f
         values = Matrix4f.multiply(matrix, this).getArray().clone(); // fix later
     }
 
-    // Sets the matrix to the identity matrix.
-    public Matrix4f setIdentity()
-    {
+    /*
+     * Sets the matrix to the identity matrix.
+     */
+    public final Matrix4f setIdentity() {
         reset(0);
 
         values[m11] = 1;
@@ -588,10 +625,23 @@ public class Matrix4f
         return this;
     }
 
-    // resets all the values of the matrix to "value"
-    public void reset(float value) {
-        for (int i = 0; i < 16; i++) {
+    /*
+     * Resets all the values of the matrix to "value".
+     */
+    public final void reset(float value) {
+        for (int i = 0; i < values.length; i++) {
             values[i] = value;
         }
+    }
+
+    @Override
+    public final String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < values.length; i++) {
+            builder.append(values[i]).append(" ");
+        }
+
+        return builder.toString();
     }
 }

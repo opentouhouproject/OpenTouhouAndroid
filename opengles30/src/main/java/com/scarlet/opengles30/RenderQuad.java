@@ -58,7 +58,7 @@ public class RenderQuad extends GraphicsObject30 {
         super.setShader(program);
 
         // Set the model.
-        setModelMatrix(Matrix4f.getIdentity());
+        setModelMatrix(Matrix4f.identityMatrix());
     }
 
     public void setTexture(Texture texture) { super.setTexture(texture); }

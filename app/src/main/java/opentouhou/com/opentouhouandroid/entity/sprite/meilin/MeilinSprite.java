@@ -74,7 +74,7 @@ public class MeilinSprite extends Sprite
         int h = currentAnimation.currentFrame().getHeight();
         int w = currentAnimation.currentFrame().getWidth();
 
-        Matrix4f model = Matrix4f.getIdentity();
+        Matrix4f model = Matrix4f.identityMatrix();
         model.scale(1.2f*currentAnimation.currentStretch() * 1, 1.2f*currentAnimation.currentStretch() * ((float)h / (float)w), 1);
         model.translate(-3.2f + positionX, -6.2f, 3.5f);
 

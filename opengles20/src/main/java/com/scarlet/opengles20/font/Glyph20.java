@@ -49,7 +49,7 @@ public class Glyph20 extends Glyph {
         drawable.setShader(program);
 
         // Set the model.
-        drawable.setModelMatrix(Matrix4f.getIdentity());
+        drawable.setModelMatrix(Matrix4f.identityMatrix());
     }
 
     // Draw the glyph on the screen.
