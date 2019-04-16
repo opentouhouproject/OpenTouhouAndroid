@@ -60,4 +60,20 @@ extern "C" {
 
         audioManager->setAssetManager(env, assetManager);
     }
+
+    JNIEXPORT void JNICALL Java_com_scarlet_audio_opensles_AudioPlayer_registerSound
+    (JNIEnv* env, jobject obj, jstring path) {
+        auto* audioManager = (AudioManager*) env->GetLongField(obj, getPtrFieldId(env, obj));
+
+        const char* filePath = env->GetStringUTFChars(path, NULL);
+        audioManager->registerSound(filePath);
+    }
+
+    JNIEXPORT void JNICALL Java_com_scarlet_audio_opensles_AudioPlayer_playSound
+    (JNIEnv* env, jobject obj, jstring path) {
+        auto* audioManager = (AudioManager*) env->GetLongField(obj, getPtrFieldId(env, obj));
+
+        const char* filePath = env->GetStringUTFChars(path, NULL);
+        audioManager->playSound(filePath);
+    }
 }

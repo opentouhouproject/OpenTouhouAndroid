@@ -64,6 +64,34 @@ public class AudioPlayer implements AutoCloseable {
         ThreadManager.queueJob(runnable);
     }
 
+    public void register(String file) {
+        /*
+        final String myfile = file;
+        Runnable runnable = new Runnable() {
+            String p = myfile;
+
+            public void run() { registerSound(p); }
+        };
+
+        ThreadManager.queueJob(runnable);
+        */
+        registerSound(file);
+    }
+
+    public void queue(String file) {
+        /*
+        final String myfile = file;
+        Runnable runnable = new Runnable() {
+            String p = myfile;
+
+            public void run() { playSound(p); }
+        };
+
+        ThreadManager.queueJob(runnable);
+        */
+        playSound(file);
+    }
+
     /*
      * Implement AutoCloseable.
      */
@@ -84,4 +112,8 @@ public class AudioPlayer implements AutoCloseable {
     private native void playBGM(String file);
 
     private native void stopBGM();
+
+    private native void registerSound(String file);
+
+    private native void playSound(String file);
 }

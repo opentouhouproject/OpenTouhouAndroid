@@ -78,6 +78,8 @@ public class LoadingScreen30 extends LoadingScreen {
         // Create sprite.
         sprite = new MeilinSprite("meilin", renderer);
 
+        getAudioPlayer().register("audio/music/bad_apple.wav");
+
         // Done loading.
         ready = true;
     }

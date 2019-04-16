@@ -21,6 +21,10 @@ JNIEXPORT void JNICALL Java_com_scarlet_audio_opensles_AudioPlayer_stopBGM(JNIEn
 
 JNIEXPORT void JNICALL Java_com_scarlet_audio_opensles_AudioPlayer_setAssetManager(JNIEnv* pEnv, jobject pThis, jobject assetManager);
 
+JNIEXPORT void JNICALL Java_com_scarlet_audio_opensles_AudioPlayer_registerSound(JNIEnv* pEnv, jobject pThis, jstring path);
+
+JNIEXPORT void JNICALL Java_com_scarlet_audio_opensles_AudioPlayer_playSound(JNIEnv* pEnv, jobject pThis, jstring path);
+
 #ifdef __cplusplus
 }
 #endif

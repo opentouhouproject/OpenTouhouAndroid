@@ -25,6 +25,8 @@ add_library(audio-engine-jni SHARED
         audioengine/src/AudioPlayer.cpp
         audioengine/src/Resource.cpp
         audioengine/src/JNIMapping.cpp
+        audioengine/src/AudioBuffer.cpp
+        audioengine/src/AudioQueue.cpp
         )
 
 

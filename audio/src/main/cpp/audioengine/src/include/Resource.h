@@ -2,8 +2,8 @@
  * Manages resources.
  */
 
-#ifndef SRC_RESOURCEMANAGER_H
-#define SRC_RESOURCEMANAGER_H
+#ifndef SRC_RESOURCE_H
+#define SRC_RESOURCE_H
 
 #include <pty.h>
 #include <android/log.h>
@@ -16,15 +16,27 @@ struct ResourceDescriptor {
     off_t length;
 };
 
-class ResourceManager {
+class Resource {
     public:
-        ResourceManager(AAssetManager* assetManager);
-        ~ResourceManager();
+        Resource(AAssetManager* assetManager, const char* filePath);
+        ~Resource();
 
-        ResourceDescriptor descript(const char* filePath);
+        void openAsset();
+        void closeAsset();
+
+        void read(u_int8_t* buffer, off_t length);
+
+        ResourceDescriptor getFileDescriptor();
+
+        const char* getPath();
+
+        off_t length();
 
     private:
-        AAssetManager* assetManager;
+        AAssetManager* manager;
+        AAsset* asset;
+        const char* path;
+        off_t size;
 };
 
 #endif //SRC_RESOURCE_H
