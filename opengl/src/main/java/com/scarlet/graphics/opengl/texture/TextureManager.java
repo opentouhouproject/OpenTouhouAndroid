@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import com.scarlet.graphics.BitmapEditor;
 import com.scarlet.io.FileManager;
 
-import java.util.Hashtable;
+import java.util.concurrent.ConcurrentHashMap;
 
 /*
  * Manages all textures.
@@ -18,15 +18,15 @@ public abstract class TextureManager {
     }
 
     // Hash table that maps resource ids to texture objects.
-    private Hashtable<Integer, Texture> bitmapTable;
+    private ConcurrentHashMap<Integer, Texture> bitmapTable;
 
     // Hash table that maps asset paths to texture objects.
-    private Hashtable<String, Texture> assetMap;
+    private ConcurrentHashMap<String, Texture> assetMap;
 
     // Constructor
-    public TextureManager() {
-        bitmapTable = new Hashtable<>();
-        assetMap = new Hashtable<>();
+    protected TextureManager() {
+        bitmapTable = new ConcurrentHashMap<>();
+        assetMap = new ConcurrentHashMap<>();
     }
 
     // Retrieve the texture object.
@@ -41,8 +41,25 @@ public abstract class TextureManager {
     }
 
     // Retrieve the texture handle.
-    public int getTextureHandle(int resourceId) { return bitmapTable.get(resourceId).getTextureHandle(); }
-    public int getTextureHandle(String path) { return assetMap.get(path).getTextureHandle(); }
+    public int getTextureHandle(int resourceId) {
+        Texture texture = bitmapTable.get(resourceId);
+
+        if (texture == null) {
+            return -1;
+        }
+
+        return texture.getTextureHandle();
+    }
+
+    public int getTextureHandle(String path) {
+        Texture texture = assetMap.get(path);
+
+        if (texture == null) {
+            return -1;
+        }
+
+        return texture.getTextureHandle();
+    }
 
     // Loads multiple resources.
     public void loadResourceBitmaps(int[] resourceIds, FileManager fileManager) {

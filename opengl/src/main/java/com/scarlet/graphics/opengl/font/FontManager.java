@@ -3,7 +3,7 @@ package com.scarlet.graphics.opengl.font;
 import com.scarlet.io.FileManager;
 
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.texture.TextureManager;
@@ -15,15 +15,15 @@ import com.scarlet.graphics.opengl.texture.TextureManager;
 public abstract class FontManager {
     private static int INITIAL_CAPACITY = 16;
 
-    protected HashMap<String, Font> fonts;
-    private HashMap<String, String> textures;
+    protected ConcurrentHashMap<String, Font> fonts;
+    private ConcurrentHashMap<String, String> textures;
 
     /*
      * Constructor(s).
      */
-    public FontManager() {
-        fonts = new HashMap<>(INITIAL_CAPACITY);
-        textures = new HashMap<>(INITIAL_CAPACITY);
+    protected FontManager() {
+        fonts = new ConcurrentHashMap<>(INITIAL_CAPACITY);
+        textures = new ConcurrentHashMap<>(INITIAL_CAPACITY);
     }
 
     /*
@@ -34,7 +34,13 @@ public abstract class FontManager {
     }
 
     public String getImageFile(String fontName) {
-        return fonts.get(fontName).getImageFile();
+        Font font = fonts.get(fontName);
+
+        if (font == null) {
+            return "";
+        }
+
+        return font.getImageFile();
     }
 
     /*
@@ -47,21 +53,7 @@ public abstract class FontManager {
     // Load fonts.
     public void loadFonts(String[] fontPaths, Renderer renderer, FileManager fileManager) {
         for (String fontPath : fontPaths) {
-            // Check if already loaded the font.
-            if (fonts.containsKey(fontPath)) {
-                continue;
-            }
-
-            // Create the font.
-            load(fontPath, fileManager.openRawAsset(fontPath));
-
-            // Create textures.
-            String assetPath = "fonts/images/" + getImageFile(fontPath);
-            renderer.getTextureManager().loadAssetBitmap(assetPath, TextureManager.Options.NONE, fileManager);
-            setTextureId(fontPath, assetPath);
-
-            // Generate
-            fonts.get(fontPath).generate(renderer);
+            loadFont(fontPath, renderer, fileManager);
         }
     }
 
@@ -80,7 +72,13 @@ public abstract class FontManager {
         setTextureId(fontPath, assetPath);
 
         // Generate
-        fonts.get(fontPath).generate(renderer);
+        Font font = fonts.get(fontPath);
+
+        if (font == null) {
+            throw new RuntimeException("Null Font returned when loading.");
+        }
+
+        font.generate(renderer);
     }
 
     // Load a font.

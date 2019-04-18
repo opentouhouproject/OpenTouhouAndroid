@@ -16,8 +16,8 @@ public final class StateLoading implements State<LoadingScreen30> {
      */
     @Override
     public void enter(LoadingScreen30 scene) {
-        //scene.getAudioPlayer().play("audio/music/loadingMusic.mp3");
-        scene.getAudioPlayer().queue("audio/music/bad_apple.wav");
+        scene.getAudioPlayer().play("audio/music/loadingMusic.mp3");
+        //scene.getAudioPlayer().queue("audio/music/bad_apple.wav");
     }
 
     @Override

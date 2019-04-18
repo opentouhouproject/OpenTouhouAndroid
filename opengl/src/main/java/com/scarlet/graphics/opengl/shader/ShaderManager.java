@@ -2,26 +2,25 @@ package com.scarlet.graphics.opengl.shader;
 
 import com.scarlet.io.FileManager;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /*
  * Manages all shaders.
  */
-
 public abstract class ShaderManager {
     private static int INITIAL_CAPACITY = 16;
 
-    protected HashMap<String, ShaderProgram> shaderPrograms;
-    protected HashMap<String, VertexShader> vertexShaders;
-    protected HashMap<String, FragmentShader> fragmentShaders;
+    protected ConcurrentHashMap<String, ShaderProgram> shaderPrograms;
+    protected ConcurrentHashMap<String, VertexShader> vertexShaders;
+    protected ConcurrentHashMap<String, FragmentShader> fragmentShaders;
 
     /*
      * Constructor(s).
      */
-    public ShaderManager() {
-        shaderPrograms = new HashMap<>(INITIAL_CAPACITY);
-        vertexShaders = new HashMap<>(INITIAL_CAPACITY);
-        fragmentShaders = new HashMap<>(INITIAL_CAPACITY);
+    protected ShaderManager() {
+        shaderPrograms = new ConcurrentHashMap<>(INITIAL_CAPACITY);
+        vertexShaders = new ConcurrentHashMap<>(INITIAL_CAPACITY);
+        fragmentShaders = new ConcurrentHashMap<>(INITIAL_CAPACITY);
     }
 
     /*
@@ -32,7 +31,13 @@ public abstract class ShaderManager {
     }
 
     public int getShaderProgramHandle(String programName) {
-        return shaderPrograms.get(programName).getHandle();
+        ShaderProgram program = shaderPrograms.get(programName);
+
+        if (program == null) {
+            return -1;
+        }
+
+        return program.getHandle();
     }
 
     // Reads the shader code from file.
