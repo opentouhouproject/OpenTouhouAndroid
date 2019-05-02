@@ -1,6 +1,5 @@
 package com.scarlet.graphics.opengl.font;
 
-import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 

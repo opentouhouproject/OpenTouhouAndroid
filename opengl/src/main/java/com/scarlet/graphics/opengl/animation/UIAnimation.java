@@ -1,7 +1,5 @@
 package com.scarlet.graphics.opengl.animation;
 
-import android.util.Log;
-
 import com.scarlet.math.Vector3f;
 
 public class UIAnimation extends InterpolatedAnimation {

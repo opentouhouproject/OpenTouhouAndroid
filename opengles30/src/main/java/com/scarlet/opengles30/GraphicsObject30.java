@@ -7,7 +7,6 @@ import com.scarlet.graphics.opengl.GraphicsObject;
 import com.scarlet.graphics.opengl.GraphicsOptions;
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.math.Matrix4f;
-import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 
 /*

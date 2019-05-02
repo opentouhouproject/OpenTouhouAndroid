@@ -16,7 +16,6 @@ import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.Text;
 import com.scarlet.graphics.opengl.font.FontManager;
 import com.scarlet.scene.LoadingScreen;
-import com.scarlet.scene.Scene;
 import com.scarlet.scene.Stage;
 
 import opentouhou.com.opentouhouandroid.io.xml.SceneParser;

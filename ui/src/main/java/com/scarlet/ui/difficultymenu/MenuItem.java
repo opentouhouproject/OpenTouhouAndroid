@@ -10,7 +10,6 @@ import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 import com.scarlet.ui.UIEntity;
-import com.scarlet.ui.button.ButtonDrawable30;
 import com.scarlet.ui.button.LeftRoundedButtonDrawable30;
 
 /*

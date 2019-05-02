@@ -8,7 +8,6 @@ import android.util.Log;
 import com.scarlet.graphics.opengl.Text;
 import com.scarlet.math.Vector3f;
 
-import com.scarlet.graphics.opengl.Camera;
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.opengles30.font.FontManager30;
 import com.scarlet.opengles30.postprocessing.PostProcessing;

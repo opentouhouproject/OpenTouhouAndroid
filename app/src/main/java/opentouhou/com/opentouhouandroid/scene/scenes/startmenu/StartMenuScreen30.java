@@ -13,7 +13,6 @@ import com.scarlet.scene.State;
 import com.scarlet.ui.button.PlayButton;
 import com.scarlet.ui.charactermenu.CharacterMenu;
 import com.scarlet.ui.difficultymenu.DifficultyMenu;
-import com.scarlet.ui.menu.Menu;
 import com.scarlet.ui.stagemenu.StageMenu;
 
 import java.io.InputStreamReader;

@@ -3,7 +3,6 @@ package com.scarlet.ui.button;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.scarlet.graphics.opengl.Camera;
 import com.scarlet.graphics.opengl.animation.UIAnimation;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;
