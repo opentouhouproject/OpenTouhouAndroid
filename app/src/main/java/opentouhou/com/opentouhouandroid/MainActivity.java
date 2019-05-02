@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        Button playButton = (Button) findViewById(R.id.Play_Button);
+        Button playButton = findViewById(R.id.Play_Button);
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button quitButton = (Button) findViewById(R.id.Quit_Button);
+        Button quitButton = findViewById(R.id.Quit_Button);
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -227,14 +227,9 @@ public class Petal {
 
         if ((startTime < currentTime) && (currentTime < endTime)) {
             state = State.ANIMATED;
-            return;
-        }
-
-        if (currentTime > endTime) {
+        } else if (currentTime > endTime) {
             state = State.DEAD;
             setup();
-
-            return;
         }
     }
 }
