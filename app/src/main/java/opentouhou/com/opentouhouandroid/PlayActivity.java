@@ -39,7 +39,7 @@ public class PlayActivity extends AppCompatActivity {
      * Create an array adapter with the menu items.
      */
     String[] mylist = {"OpenGL ES 2.0 Test", "OpenGL ES 3.0 Test"};
-    ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.textview_play_menu, mylist);
+    ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.textview_play_menu, mylist);
 
     /*
      * Create the list view and set the adapter.

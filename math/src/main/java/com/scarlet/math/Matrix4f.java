@@ -620,8 +620,8 @@ public class Matrix4f {
     public final String toString() {
         StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < values.length; i++) {
-            builder.append(values[i]).append(" ");
+        for (float value : values) {
+            builder.append(value).append(" ");
         }
 
         return builder.toString();
