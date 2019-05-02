@@ -164,13 +164,12 @@ public class Matrix4f {
         return matrix;
     }
 
-    /**
+    /*
      * Return a new pitch rotation matrix.
      * If isDegrees is true, then the angle is given in degrees.
      * Otherwise the angle is given in radians.
      */
-    public static Matrix4f getXAxisRotation(float angle, boolean isDegrees)
-    {
+    public static Matrix4f getXAxisRotation(float angle, boolean isDegrees) {
         if (isDegrees) angle = MathUtil.degreesToRadians(angle);
 
         float alpha = (float) Math.sin(angle);
@@ -186,13 +185,12 @@ public class Matrix4f {
         return matrix;
     }
 
-    /**
+    /*
      * Returns the yaw rotation matrix.
      * If isDegrees is true, then angle is given in degrees.
      * Otherwise the angle is given in radians.
      */
-    public static Matrix4f getYAxisRotation(float angle, boolean isDegrees)
-    {
+    public static Matrix4f getYAxisRotation(float angle, boolean isDegrees) {
         if (isDegrees) angle = MathUtil.degreesToRadians(angle);
 
         float alpha = (float) Math.sin(angle);
@@ -208,13 +206,12 @@ public class Matrix4f {
         return matrix;
     }
 
-    /**
+    /*
      * Returns the roll rotation matrix.
      * If isDegrees is true, then angle is given in degrees.
      * Otherwise the angle is given in radians.
      */
-    public static Matrix4f getZAxisRotation(float angle, boolean isDegrees)
-    {
+    public static Matrix4f getZAxisRotation(float angle, boolean isDegrees) {
         if (isDegrees) angle = MathUtil.degreesToRadians(angle);
 
         float alpha = (float) Math.sin(angle);
@@ -230,16 +227,14 @@ public class Matrix4f {
         return matrix;
     }
 
-    /**
+    /*
      * Set the matrix as a roll, pitch and yaw rotation matrix.
      * The resulting matrix is M = Mat(yaw) * mat(pitch) * mat(roll) .
      * If degree is true, then all angles are given in degrees.
      * Otherwise angle is given in radians.
      */
-    public static Matrix4f rotateRollPitchYaw(float angleRoll, float anglePitch, float angleYaw, boolean isDegrees)
-    {
-        if (isDegrees)
-        {
+    public static Matrix4f rotateRollPitchYaw(float angleRoll, float anglePitch, float angleYaw, boolean isDegrees) {
+        if (isDegrees) {
             angleRoll = MathUtil.degreesToRadians(angleRoll);
             anglePitch = MathUtil.degreesToRadians(anglePitch);
             angleYaw = MathUtil.degreesToRadians(angleYaw);
@@ -250,13 +245,12 @@ public class Matrix4f {
         return matrix;
     }
 
-    /**
+    /*
      * Returns the rotation matrix around a given vector.
      * If isDegrees is true, then angle is given in degrees.
      * Otherwise the angle is given in radians.
      */
-    public static Matrix4f rotateVector(Vector3f v, float angle, boolean isDegrees)
-    {
+    public static Matrix4f rotateVector(Vector3f v, float angle, boolean isDegrees) {
         if (isDegrees) angle = MathUtil.degreesToRadians(angle);
 
         v.selfNormalize();
@@ -292,13 +286,12 @@ public class Matrix4f {
         return matrix;
     }
 
-    /**
+    /*
      * Set the matrix as a rotation around a vector where only a rotation vector is given.
      * If isDegrees is true, then all angles are given in degrees.
      * Otherwise the angle is given in radians.
      */
-    public static Matrix4f rotateVector(Vector4f v, float angle, boolean isDegrees)
-    {
+    public static Matrix4f rotateVector(Vector4f v, float angle, boolean isDegrees) {
         Vector3f u = new Vector3f(v.x, v.y, v.z);
 
         return Matrix4f.rotateVector(u, angle, isDegrees);
@@ -326,7 +319,7 @@ public class Matrix4f {
     }
 
     /*
-     * Multiply two matrices.
+     * Multiply two 4x4 matrices.
      */
     public static Matrix4f multiply(Matrix4f lhs, Matrix4f rhs) {
         Matrix4f result = new Matrix4f();
@@ -376,9 +369,7 @@ public class Matrix4f {
      * Multiply this matrix with another matrix.
      * LHS: this, RHS: argument
      */
-    public final Matrix4f multiply(Matrix4f matrix) {
-        return multiply(this, matrix);
-    }
+    public final Matrix4f multiply(Matrix4f matrix) { return multiply(this, matrix); }
 
     /*
      * Multiply this matrix with a vector.
@@ -394,57 +385,51 @@ public class Matrix4f {
      */
 
     // Multiply this matrix by a translation matrix.
-    public void translate(float x, float y, float z)
-    {
+    public void translate(float x, float y, float z) {
         // Column 1
-        values[m11] = values[m11] + x * values[m41];
-        values[m21] = values[m21] + y * values[m41];
-        values[m31] = values[m31] + z * values[m41];
-        values[m41] = values[m41];
+        values[m11] += x * values[m41];
+        values[m21] += y * values[m41];
+        values[m31] += z * values[m41];
 
         // Column 2
-        values[m12] = values[m12] + x * values[m42];
-        values[m22] = values[m22] + y * values[m42];
-        values[m32] = values[m32] + z * values[m42];
-        values[m42] = values[m42];
+        values[m12] += x * values[m42];
+        values[m22] += y * values[m42];
+        values[m32] += z * values[m42];
 
         // Column 3
-        values[m13] = values[m13] + x * values[m43];
-        values[m23] = values[m23] + y * values[m43];
-        values[m33] = values[m33] + z * values[m43];
-        values[m43] = values[m43];
+        values[m13] += x * values[m43];
+        values[m23] += y * values[m43];
+        values[m33] += z * values[m43];
 
         // Column 4
-        values[m14] = values[m14] + x * values[m44];
-        values[m24] = values[m24] + y * values[m44];
-        values[m34] = values[m34] + z * values[m44];
-        values[m44] = values[m44];
+        values[m14] += x * values[m44];
+        values[m24] += y * values[m44];
+        values[m34] += z * values[m44];
     }
 
     /**
      * Multiply by the multiply matrix.
      */
-    public Matrix4f scale(float scaleX, float scaleY, float scaleZ)
-    {
+    public Matrix4f scale(float scaleX, float scaleY, float scaleZ) {
         // Column 1
-        values[m11] = values[m11] * scaleX;
-        values[m21] = values[m21] * scaleY;
-        values[m31] = values[m31] * scaleZ;
+        values[m11] *= scaleX;
+        values[m21] *= scaleY;
+        values[m31] *= scaleZ;
 
         // Column 2
-        values[m12] = values[m12] * scaleX;
-        values[m22] = values[m22] * scaleY;
-        values[m32] = values[m32] * scaleZ;
+        values[m12] *= scaleX;
+        values[m22] *= scaleY;
+        values[m32] *= scaleZ;
 
         // Column 3
-        values[m13] = values[m13] * scaleX;
-        values[m23] = values[m23] * scaleY;
-        values[m33] = values[m33] * scaleZ;
+        values[m13] *= scaleX;
+        values[m23] *= scaleY;
+        values[m33] *= scaleZ;
 
         // Column 4
-        values[m14] = values[m14] * scaleX;
-        values[m24] = values[m24] * scaleY;
-        values[m34] = values[m34] * scaleZ;
+        values[m14] *= scaleX;
+        values[m24] *= scaleY;
+        values[m34] *= scaleZ;
 
         return this;
     }
@@ -454,8 +439,7 @@ public class Matrix4f {
      * If isDegrees is true, then the angle is given in degrees.
      * Otherwise the angle is given in radians.
      */
-    public Matrix4f rotateX(float angle, boolean isDegrees)
-    {
+    public Matrix4f rotateX(float angle, boolean isDegrees) {
         if (isDegrees) angle = MathUtil.degreesToRadians(angle);
 
         float alpha = (float) Math.sin(angle);
@@ -495,8 +479,7 @@ public class Matrix4f {
      * If isDegrees is true, then angle is given in degrees.
      * Otherwise the angle is given in radians.
      */
-    public Matrix4f rotateY(float angle, boolean isDegrees)
-    {
+    public Matrix4f rotateY(float angle, boolean isDegrees) {
         if (isDegrees) angle = MathUtil.degreesToRadians(angle);
 
         float alpha = (float) Math.sin(angle);
@@ -536,8 +519,7 @@ public class Matrix4f {
      * If isDegrees is true, then angle is given in degrees.
      * Otherwise the angle is given in radians.
      */
-    public Matrix4f rotateZ(float angle, boolean isDegrees)
-    {
+    public Matrix4f rotateZ(float angle, boolean isDegrees) {
         if (isDegrees) angle = MathUtil.degreesToRadians(angle);
 
         float alpha = (float) Math.sin(angle);
