@@ -27,7 +27,7 @@ public class Button extends UIEntity {
     private float height;
 
     // Y-axis rotation.
-    private float angle = 0;
+    private float angle;
 
     // Drawables.
     private ButtonDrawable30 drawable;
@@ -135,9 +135,7 @@ public class Button extends UIEntity {
 
     public boolean checkCollision(float x, float y) {
         if ((x <= position.x + width / 2) && (x >= position.x - width / 2)) {
-            if ((y <= position.y + height / 2) && (y >= position.y - height / 2)) {
-                return true;
-            }
+          return (y <= position.y + height / 2) && (y >= position.y - height / 2);
         }
 
         return false;

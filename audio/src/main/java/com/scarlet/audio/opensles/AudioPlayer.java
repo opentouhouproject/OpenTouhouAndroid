@@ -45,7 +45,7 @@ public class AudioPlayer implements AutoCloseable {
 
             public void run() {
                 playBGM(p);
-            };
+            }
         };
 
         ThreadManager.queueJob(runnable);

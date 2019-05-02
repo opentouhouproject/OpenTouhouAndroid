@@ -36,4 +36,5 @@ dependencies {
     implementation project(":scene")
     implementation project(":math")
     implementation project(":io")
+    implementation 'org.jetbrains:annotations-java5:15.0'
 }

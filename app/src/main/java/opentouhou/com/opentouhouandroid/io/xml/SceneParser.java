@@ -2,6 +2,7 @@ package opentouhou.com.opentouhouandroid.io.xml;
 
 import android.util.Xml;
 
+import org.jetbrains.annotations.NotNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -171,7 +172,7 @@ public class SceneParser {
         scene.loadFont(path);
     }
 
-    @Override
+    @Override @NotNull
     public String toString() {
         return "Scene load file parser.";
     }

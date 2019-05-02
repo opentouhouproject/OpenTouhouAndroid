@@ -25,7 +25,7 @@ public class PlayButton extends UIEntity {
     private float height;
 
     // Y-axis rotation.
-    private float angle = 0;
+    private float angle;
 
     // Drawables.
     //private ButtonDrawable30 drawable;
@@ -169,11 +169,8 @@ public class PlayButton extends UIEntity {
         float yMin = position.y;
         float yMax = position.y + height;
 
-        if ((x <= xMax) && (x >= xMin) && (y <= yMax) && (y >= yMin)) {
-            return true;
-        }
+      return (x <= xMax) && (x >= xMin) && (y <= yMax) && (y >= yMin);
 
-        return false;
     }
 
     /*

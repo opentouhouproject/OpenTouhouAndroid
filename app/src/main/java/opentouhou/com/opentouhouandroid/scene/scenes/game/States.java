@@ -2,6 +2,8 @@ package opentouhou.com.opentouhouandroid.scene.scenes.game;
 
 import com.scarlet.scene.State;
 
+import org.jetbrains.annotations.NotNull;
+
 /*
  * Holds all possible states.
  */
@@ -10,7 +12,7 @@ class States {
 
   private States() { }
 
-  @Override
+  @Override @NotNull
   public String toString() {
     return "Game States.";
   }

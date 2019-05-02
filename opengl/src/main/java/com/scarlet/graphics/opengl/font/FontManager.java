@@ -11,76 +11,65 @@ import com.scarlet.graphics.opengl.texture.TextureManager;
 /*
  * Reads xml font files and loads the font.
  */
-
 public abstract class FontManager {
-    private static int INITIAL_CAPACITY = 16;
+  private static int INITIAL_CAPACITY = 16;
 
-    protected ConcurrentHashMap<String, Font> fonts;
-    private ConcurrentHashMap<String, String> textures;
+  protected ConcurrentHashMap<String, Font> fonts;
 
-    /*
-     * Constructor(s).
-     */
-    protected FontManager() {
-        fonts = new ConcurrentHashMap<>(INITIAL_CAPACITY);
-        textures = new ConcurrentHashMap<>(INITIAL_CAPACITY);
+  /*
+   * Constructor(s).
+   */
+  protected FontManager() {
+    fonts = new ConcurrentHashMap<>(INITIAL_CAPACITY);
+  }
+
+  /*
+   * Getter(s).
+   */
+  public Font getFont(String fontName) {
+    return fonts.get(fontName);
+  }
+
+  public String getImageFile(String fontName) {
+    Font font = fonts.get(fontName);
+
+    if (font == null) {
+      throw new RuntimeException("Font not found.");
     }
 
-    /*
-     * Getter(s).
-     */
-    public Font getFont(String fontName) {
-        return fonts.get(fontName);
+    return font.getImageFile();
+  }
+
+  // Load fonts.
+  public void loadFonts(String[] fontPaths, Renderer renderer, FileManager fileManager) {
+    for (String fontPath : fontPaths) {
+      loadFont(fontPath, renderer, fileManager);
+    }
+  }
+
+  public void loadFont(String fontPath, Renderer renderer, FileManager fileManager) {
+    // Check if already loaded the font.
+    if (fonts.containsKey(fontPath)) {
+      return;
     }
 
-    public String getImageFile(String fontName) {
-        Font font = fonts.get(fontName);
+    // Create the font.
+    load(fontPath, fileManager.openRawAsset(fontPath));
 
-        if (font == null) {
-            return "";
-        }
+    // Create textures.
+    String assetPath = "fonts/images/" + getImageFile(fontPath);
+    renderer.getTextureManager().loadAssetBitmap(assetPath, TextureManager.Options.NONE, fileManager);
 
-        return font.getImageFile();
+    // Generate
+    Font font = fonts.get(fontPath);
+
+    if (font == null) {
+      throw new RuntimeException("Null Font returned when loading.");
     }
 
-    /*
-     * Setter(s).
-     */
-    public void setTextureId(String fontName, String assetPath) {
-        textures.put(fontName, assetPath);
-    }
+    font.generate(renderer);
+  }
 
-    // Load fonts.
-    public void loadFonts(String[] fontPaths, Renderer renderer, FileManager fileManager) {
-        for (String fontPath : fontPaths) {
-            loadFont(fontPath, renderer, fileManager);
-        }
-    }
-
-    public void loadFont(String fontPath, Renderer renderer, FileManager fileManager) {
-        // Check if already loaded the font.
-        if (fonts.containsKey(fontPath)) {
-            return;
-        }
-
-        // Create the font.
-        load(fontPath, fileManager.openRawAsset(fontPath));
-
-        // Create textures.
-        String assetPath = "fonts/images/" + getImageFile(fontPath);
-        renderer.getTextureManager().loadAssetBitmap(assetPath, TextureManager.Options.NONE, fileManager);
-        setTextureId(fontPath, assetPath);
-
-        // Generate
-        Font font = fonts.get(fontPath);
-
-        if (font == null) {
-            throw new RuntimeException("Null Font returned when loading.");
-        }
-
-        font.generate(renderer);
-    }
-
-    // Load a font.
-    protected abstract void load(String fontPath, InputStreamReader reader);
+  // Load a font.
+  protected abstract void load(String fontPath, InputStreamReader reader);
 }

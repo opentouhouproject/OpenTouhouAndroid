@@ -27,9 +27,9 @@ public abstract class Mesh
 
     public VertexArrayObject getVAO() { return vao; }
 
-    public int getVertexCount() { return vertexCount; };
+    public int getVertexCount() { return vertexCount; }
 
-    // Create a buffer.
+  // Create a buffer.
     protected static FloatBuffer createBuffer(float[] data)
     {
         // Allocate a float buffer with the given capacity.

@@ -122,7 +122,7 @@ public class FrameBuffer30 extends FrameBuffer {
      * Implement AutoCloseable.
      */
     @Override
-    public void close() throws Exception {
+    public void close() {
         destroy();
     }
 }

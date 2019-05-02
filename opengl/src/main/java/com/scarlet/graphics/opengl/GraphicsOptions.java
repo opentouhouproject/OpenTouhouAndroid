@@ -2,8 +2,8 @@ package com.scarlet.graphics.opengl;
 
 // Options
 public class GraphicsOptions {
-    private boolean enableLighting = true;
-    private boolean enableTexture = true;
+    private boolean enableLighting;
+    private boolean enableTexture;
 
     public GraphicsOptions(boolean enableLighting, boolean enableTexture) {
         this.enableLighting = enableLighting;

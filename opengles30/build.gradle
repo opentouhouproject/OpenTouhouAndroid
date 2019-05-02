@@ -33,4 +33,5 @@ dependencies {
     implementation project(':opengl')
     implementation project(":scene")
     implementation project(":io")
+    implementation 'org.jetbrains:annotations-java5:15.0'
 }

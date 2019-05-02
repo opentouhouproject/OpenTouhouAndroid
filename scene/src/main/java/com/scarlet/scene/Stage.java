@@ -6,6 +6,8 @@ import com.scarlet.io.FileManager;
 import com.scarlet.io.event.MotionEventQueue;
 import com.scarlet.math.Vector4f;
 
+import org.jetbrains.annotations.NotNull;
+
 /*
  * Manages a set of scenes.
  * Manages objects and components that persist between scenes.
@@ -74,7 +76,7 @@ public abstract class Stage {
     public abstract void update();
     public abstract void draw();
 
-    @Override
+    @Override @NotNull
     public String toString() {
         return "Scene " + name;
     }

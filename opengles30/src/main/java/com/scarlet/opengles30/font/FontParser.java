@@ -5,6 +5,7 @@ import android.util.Xml;
 import com.scarlet.graphics.opengl.font.Font;
 import com.scarlet.graphics.opengl.font.Glyph;
 
+import org.jetbrains.annotations.NotNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -154,7 +155,7 @@ public class FontParser {
         font.putGlyph(key, value);
     }
 
-    @Override
+    @Override @NotNull
     public String toString() {
         return "Font xml file parser.";
     }

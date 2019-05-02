@@ -13,6 +13,8 @@ import com.scarlet.graphics.opengl.shader.ShaderProgram;
 import com.scarlet.opengles30.GraphicsObject30;
 import com.scarlet.opengles30.mesh.Mesh30;
 
+import org.jetbrains.annotations.NotNull;
+
 /*
  * Represents a sprite in a game.
  */
@@ -104,9 +106,8 @@ public class Sprite {
         drawable.setModelMatrix(model);
     }
 
-    @Override
-    public String toString()
-    {
+    @Override @NotNull
+    public String toString() {
         return "Sprite: " + name;
     }
 }

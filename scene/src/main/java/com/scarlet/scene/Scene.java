@@ -9,6 +9,8 @@ import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.texture.TextureManager;
 import com.scarlet.math.Vector4f;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Manages a logical set of game objects.
  */
@@ -80,9 +82,8 @@ public abstract class Scene
     abstract public void update();
     abstract public void draw();
 
-    @Override
-    public String toString()
-    {
+    @Override @NotNull
+    public String toString() {
         return "Scene: " + name;
     }
 }

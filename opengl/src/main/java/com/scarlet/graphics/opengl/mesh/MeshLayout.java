@@ -6,7 +6,7 @@ package com.scarlet.graphics.opengl.mesh;
 public class MeshLayout {
     // Layout formats.
     public enum Layout {
-        PCNT, PCN, P2T;
+        PCNT, PCN, P2T
     }
 
     // 3 floats cover the (x, y, z) coordinates of a vertex.

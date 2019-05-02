@@ -1,5 +1,7 @@
 package com.scarlet.io.event;
 
+import org.jetbrains.annotations.NotNull;
+
 public abstract class EventQueue<T> {
     // Queue size and capacity.
     protected static final int DEFAULT_CAPACITY = 256;
@@ -62,7 +64,7 @@ public abstract class EventQueue<T> {
         size++;
     }
 
-    @Override
+    @Override @NotNull
     public String toString() {
         return "Event Queue.";
     }

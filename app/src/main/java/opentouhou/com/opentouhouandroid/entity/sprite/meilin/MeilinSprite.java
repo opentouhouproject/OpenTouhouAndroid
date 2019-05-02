@@ -64,7 +64,7 @@ public class MeilinSprite extends Sprite
     public void update() {
         currentAnimation.update();
 
-        if (currentAnimation.getName() == "walkingForward") {
+        if (currentAnimation.getName().equals("walkingForward")) {
             positionX += 0.02f;
         }
     }

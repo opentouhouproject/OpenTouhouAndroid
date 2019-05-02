@@ -30,7 +30,7 @@ class MenuItem extends UIEntity {
     private float height;
 
     // Y-axis rotation.
-    private float angle = 0;
+    private float angle;
 
     // Drawables.
     private LeftRoundedButtonDrawable30 drawable;
@@ -157,11 +157,8 @@ class MenuItem extends UIEntity {
         float yMin = position.y;
         float yMax = position.y + height;
 
-        if ((x <= xMax) && (x >= xMin) && (y <= yMax) && (y >= yMin)) {
-            return true;
-        }
+      return (x <= xMax) && (x >= xMin) && (y <= yMax) && (y >= yMin);
 
-        return false;
     }
 
     /*
