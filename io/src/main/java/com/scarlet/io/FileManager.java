@@ -42,7 +42,7 @@ public class FileManager {
             reader = new BufferedReader(new InputStreamReader(context.getAssets().open(filePath)));
 
             while ((line = reader.readLine()) != null) {
-                stringBuffer.append(line + "\n");
+                stringBuffer.append(line).append("\n");
             }
         }
         catch (IOException e) {
