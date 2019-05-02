@@ -23,8 +23,6 @@ public abstract class Animation {
      */
     public String getName() { return name; }
 
-    abstract void update();
-
     @Override @NonNull
     public String toString() {
         return "Animation: " + name;

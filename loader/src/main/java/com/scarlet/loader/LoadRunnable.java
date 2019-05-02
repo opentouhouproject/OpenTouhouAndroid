@@ -87,7 +87,7 @@ public class LoadRunnable implements Runnable {
 
         boolean result = EGL14.eglInitialize(eglDisplay, eglMajorVersions, 0, eglMinorVersions, 0);
 
-        if (result == false) {
+        if (!result) {
             throw new RuntimeException("Failed to initialize display connection.");
         }
 
@@ -111,7 +111,7 @@ public class LoadRunnable implements Runnable {
                 configs, 0, 1,
                 numConfigs, 0);
 
-        if (configResult == false) {
+        if (!configResult) {
             throw new RuntimeException("Failed to find configurations.");
         }
 

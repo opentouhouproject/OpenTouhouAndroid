@@ -240,9 +240,7 @@ public class Matrix4f {
             angleYaw = MathUtil.degreesToRadians(angleYaw);
         }
 
-        Matrix4f matrix = multiply(getYAxisRotation(angleYaw, isDegrees), multiply(getXAxisRotation(anglePitch, isDegrees), getZAxisRotation(angleRoll, isDegrees)));
-
-        return matrix;
+        return getYAxisRotation(angleYaw, isDegrees).multiply(getXAxisRotation(anglePitch, isDegrees).multiply(getZAxisRotation(angleRoll, isDegrees)));
     }
 
     /*
