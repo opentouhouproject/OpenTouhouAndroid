@@ -6,6 +6,8 @@ import com.scarlet.loader.BatchLoadTask;
 import com.scarlet.scene.Scene;
 
 import com.scarlet.scene.State;
+
+import opentouhou.com.opentouhouandroid.scene.scenes.game.GameScene30;
 import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
 import opentouhou.com.opentouhouandroid.scene.scenes.mainmenu.MainMenuScreen30;
 import opentouhou.com.opentouhouandroid.scene.scenes.startmenu.StartMenuScreen30;
@@ -32,8 +34,9 @@ public class StateLoadScreen implements State<OpenGLES30Test> {
         // LOAD BABY LOAD
         stage.mainMenuScreen30 = new MainMenuScreen30("MM", stage);
         stage.startMenuScreen30 = new StartMenuScreen30("StartMenu", stage);
+        stage.gameDemo30 = new GameScene30("DEMO", stage);
 
-        Scene[] scenes = { stage.mainMenuScreen30, stage.startMenuScreen30 };
+        Scene[] scenes = { stage.mainMenuScreen30, stage.startMenuScreen30, stage.gameDemo30 };
         BatchLoadTask batchJob = new BatchLoadTask(scenes, stage.loadingScreen30);
         batchJob.startJob();
     }

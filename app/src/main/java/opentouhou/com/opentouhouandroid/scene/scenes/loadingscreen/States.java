@@ -10,9 +10,6 @@ class States {
     static final State<LoadingScreen30> LOADING_STATE = new StateLoading();
     static final State<LoadingScreen30> FINISHED_STATE = new StateFinished();
 
-    /*
-     * Constructor(s).
-     */
     private States() { }
 
     @Override

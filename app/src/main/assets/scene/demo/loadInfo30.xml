@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<load>
+    <!-- Shader Loading Section -->
+    <shaders>
+        <!-- Compile Vertex Shaders -->
+        <vertex name="TextureShader" path="shaders/opengles30/TextureShader.vert" />
+        <vertex name="Font" path="shaders/opengles30/Font.vert" />
+        <vertex name="Background" path="shaders/opengles30/Background.vert" />
+        <vertex name="RenderQuad" path="shaders/opengles30/postprocessing/RenderQuad.vert" />
+
+        <!-- Compile Fragment Shaders -->
+        <fragment name="TextureShader" path="shaders/opengles30/TextureShader.frag" />
+        <fragment name="Font" path="shaders/opengles30/Font.frag" />
+        <fragment name="Font2" path="shaders/opengles30/Font2.frag" />
+        <fragment name="Background" path="shaders/opengles30/Background.frag" />
+        <!-- Post processing -->
+        <fragment name="None" path="shaders/opengles30/postprocessing/None.frag" />
+        <fragment name="GaussianBlur" path="shaders/opengles30/postprocessing/GaussianBlur.frag" />
+        <fragment name="Combine" path="shaders/opengles30/postprocessing/Combine.frag" />
+
+        <!-- Link Shader Programs -->
+        <program name="TextureShader" vertex="TextureShader" fragment="TextureShader" />
+        <program name="Font" vertex="Font" fragment="Font" />
+        <program name="Font2" vertex="Font" fragment="Font2" />
+        <program name="Background" vertex="Background" fragment="Background" />
+
+        <!-- Post processing -->
+        <program name="RenderQuad" vertex="RenderQuad" fragment="None" />
+        <program name="GaussianBlur" vertex="RenderQuad" fragment="GaussianBlur" />
+        <program name="Combine" vertex="RenderQuad" fragment="Combine" />
+    </shaders>
+
+    <!-- Texture Loading Section -->
+    <textures>
+        <texture path="art/game_demo_bg.png" option="LIGHTGREYSCALE" />
+    </textures>
+
+    <!-- Font Loading Section -->
+    <fonts>
+        <font path="fonts/popstar/popstarpop128.xml" />
+        <font path="fonts/yozakura/yozakura256.xml" />
+    </fonts>
+</load>

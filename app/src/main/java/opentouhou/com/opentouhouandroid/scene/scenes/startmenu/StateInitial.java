@@ -24,6 +24,11 @@ public class StateInitial implements State<StartMenuScreen30> {
         scene.characterMenu.handleInput(event, scene.getRenderer());
         scene.difficultyMenu.handleInput(event, scene.getRenderer());
         scene.stageMenu.handleInput(event, scene.getRenderer());
+        scene.playButton.handleInput(event, scene.getRenderer());
+
+        if (scene.playButton.clicked) {
+          scene.startGame = true;
+        }
 
         return null;
     }

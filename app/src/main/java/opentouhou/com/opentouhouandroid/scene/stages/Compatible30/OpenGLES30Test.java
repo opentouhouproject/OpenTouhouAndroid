@@ -12,6 +12,7 @@ import com.scarlet.io.FileManager;
 import com.scarlet.scene.Stage;
 import com.scarlet.scene.State;
 
+import opentouhou.com.opentouhouandroid.scene.scenes.game.GameScene30;
 import opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen.LoadingScreen30;
 import opentouhou.com.opentouhouandroid.scene.scenes.mainmenu.MainMenuScreen30;
 import opentouhou.com.opentouhouandroid.scene.scenes.startmenu.StartMenuScreen30;
@@ -27,6 +28,7 @@ public class OpenGLES30Test extends Stage {
     LoadingScreen30 loadingScreen30;
     MainMenuScreen30 mainMenuScreen30;
     StartMenuScreen30 startMenuScreen30;
+    GameScene30 gameDemo30;
 
     /*
      * Constructor(s).

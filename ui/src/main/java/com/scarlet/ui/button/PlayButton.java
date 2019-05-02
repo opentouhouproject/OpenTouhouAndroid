@@ -32,6 +32,10 @@ public class PlayButton extends UIEntity {
     private LeftRoundedButtonDrawable30 drawable;
     private Text labelText;
 
+    public boolean clicked = false;
+
+    private boolean isSelected;
+
     /*
      * Constructor(s).
      */
@@ -177,7 +181,37 @@ public class PlayButton extends UIEntity {
      */
     @Override
     public void handleInput(MotionEvent event, Renderer renderer) {
-        // do nothing.
+        float x = event.getX();
+        float y = event.getY();
+
+        Vector3f intersection;
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                intersection = computeIntersectionPoint(x, y, renderer);
+
+                if (checkCollision(intersection.x, intersection.y)) {
+                    Log.d("Menu", "Play Button DOWN");
+                    isSelected = true;
+                }
+
+                break;
+
+            case MotionEvent.ACTION_UP:
+                intersection = computeIntersectionPoint(x, y, renderer);
+
+                if (isSelected && checkCollision(intersection.x, intersection.y)) {
+                    Log.d("Menu", "Play Button UP");
+                  clicked = true;
+
+                    //executeSynchronousListener();
+                    //menuItems[currentItem].executeAsynchronousListener();
+                }
+
+                isSelected = false;
+
+                break;
+        }
     }
 
     @Override
@@ -206,5 +240,12 @@ public class PlayButton extends UIEntity {
     public void draw(Renderer renderer) {
         drawable.draw(renderer);
         labelText.draw(renderer);
+    }
+
+    private Vector3f computeIntersectionPoint(float x, float y, Renderer renderer) {
+        Vector4f ndc = renderer.getCamera().convertToNDC(x, y, renderer.getScreenWidth(), renderer.getScreenHeight());
+        Vector3f position = renderer.getCamera().unProject(ndc);
+
+        return renderer.getCamera().intersectionPoint(new Vector3f(0, 0, 3), new Vector3f(0, 0, 1), position);
     }
 }

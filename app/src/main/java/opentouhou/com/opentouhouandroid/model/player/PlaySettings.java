@@ -1,4 +1,4 @@
-package opentouhou.com.opentouhouandroid.player;
+package opentouhou.com.opentouhouandroid.model.player;
 
 /*
  * Tracks the settings for a game.

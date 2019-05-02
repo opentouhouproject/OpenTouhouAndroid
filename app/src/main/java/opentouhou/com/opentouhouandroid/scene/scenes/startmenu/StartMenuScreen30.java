@@ -23,6 +23,7 @@ import opentouhou.com.opentouhouandroid.io.xml.SceneParser;
 
 public class StartMenuScreen30 extends Scene {
     // Game State
+    public boolean startGame = false;
     private State<StartMenuScreen30> state;
 
     // Game Objects
