@@ -53,7 +53,7 @@ public class BackgroundDrawable20 extends GraphicsObject20 {
 
     // Override the parent draw method.
     @Override
-    public void draw(Renderer renderer) {
+    public void render(Renderer renderer) {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();
         GLES20.glUseProgram(shaderHandle);

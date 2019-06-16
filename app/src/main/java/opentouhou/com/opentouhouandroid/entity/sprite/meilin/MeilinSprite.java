@@ -80,6 +80,6 @@ public class MeilinSprite extends Sprite
 
         drawable.setTexture(currentAnimation.currentFrame());
         drawable.setModelMatrix(model);
-        drawable.draw(renderer);
+        drawable.render(renderer);
     }
 }

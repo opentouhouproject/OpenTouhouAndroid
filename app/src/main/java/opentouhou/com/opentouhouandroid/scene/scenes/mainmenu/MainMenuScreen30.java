@@ -11,9 +11,9 @@ import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
 
 import com.scarlet.graphics.opengl.Camera;
-import com.scarlet.graphics.opengl.GraphicsObject;
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.Text;
+import com.scarlet.graphics.opengl.Version;
 import com.scarlet.graphics.opengl.font.FontManager;
 
 import com.scarlet.scene.Scene;
@@ -63,7 +63,7 @@ public class MainMenuScreen30 extends Scene {
         light = new Vector4f(0.0f, 0.0f, 2.0f, 0.0f);
 
         // Create background.
-        background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30, true);
+        background = new Background(renderer, Version.OPENGL_ES_30, true);
         background.setTexture(renderer.getTextureManager().getTexture("art/mm_bg1.png"));
 
         FontManager fontManager = renderer.getFontManager();

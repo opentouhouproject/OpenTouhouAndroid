@@ -96,7 +96,7 @@ public class LeftRoundedButtonDrawable30 extends GraphicsObject30 {
 
     // Override the parent draw method.
     @Override
-    public void draw(Renderer renderer) {
+    public void render(Renderer renderer) {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();
         GLES30.glUseProgram(shaderHandle);

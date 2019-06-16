@@ -18,8 +18,8 @@ import com.scarlet.scene.Stage;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-/*
- * Renderer implemented with OpenGL ES 3.0.
+/**
+ * Renderer implemented with OpenGL ES 3.0 .
  */
 public class Renderer30 extends Renderer {
     private Text fpsCounter;

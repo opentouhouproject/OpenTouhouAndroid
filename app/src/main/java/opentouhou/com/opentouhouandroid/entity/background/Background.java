@@ -1,5 +1,6 @@
 package opentouhou.com.opentouhouandroid.entity.background;
 
+import com.scarlet.graphics.opengl.Version;
 import opentouhou.com.opentouhouandroid.entity.GameEntity;
 import com.scarlet.graphics.opengl.GraphicsObject;
 import com.scarlet.graphics.opengl.Renderer;
@@ -11,7 +12,7 @@ public class Background extends GameEntity {
   /*
    * Constructor(s)
    */
-  public Background(Renderer renderer, GraphicsObject.Version version, boolean async) {
+  public Background(Renderer renderer, Version version, boolean async) {
     switch (version) {
       case OPENGL_ES_20:
         drawable = new BackgroundDrawable20(renderer);
@@ -39,6 +40,6 @@ public class Background extends GameEntity {
    * Implement draw method.
    */
   public void draw(Renderer renderer) {
-        drawable.draw(renderer);
+        drawable.render(renderer);
     }
 }

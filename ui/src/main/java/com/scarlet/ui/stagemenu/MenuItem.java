@@ -187,7 +187,7 @@ public class MenuItem extends UIEntity {
 
     @Override
     public void draw(Renderer renderer) {
-        drawable.draw(renderer);
+        drawable.render(renderer);
         labelText.draw(renderer);
     }
 }

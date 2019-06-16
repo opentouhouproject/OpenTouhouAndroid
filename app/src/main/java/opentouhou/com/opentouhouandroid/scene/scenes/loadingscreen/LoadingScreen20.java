@@ -10,9 +10,9 @@ import opentouhou.com.opentouhouandroid.entity.sprite.meilin.MeilinSprite;
 import opentouhou.com.opentouhouandroid.entity.petals.PetalFall;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
 import com.scarlet.graphics.opengl.Camera;
-import com.scarlet.graphics.opengl.GraphicsObject;
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.Text;
+import com.scarlet.graphics.opengl.Version;
 import com.scarlet.scene.Scene;
 import com.scarlet.scene.Stage;
 
@@ -52,7 +52,7 @@ public class LoadingScreen20 extends Scene {
         light = new Vector4f(0.0f, 0.0f, 2.0f, 0.0f);
 
         // Create background.
-        background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_20, false);
+        background = new Background(renderer, Version.OPENGL_ES_20, false);
 
         // Create text.
         /*

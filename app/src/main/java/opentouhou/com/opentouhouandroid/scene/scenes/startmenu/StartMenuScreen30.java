@@ -4,8 +4,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.scarlet.graphics.opengl.Camera;
-import com.scarlet.graphics.opengl.GraphicsObject;
 import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.Version;
 import com.scarlet.math.Vector4f;
 import com.scarlet.scene.Scene;
 import com.scarlet.scene.Stage;
@@ -59,7 +59,7 @@ public class StartMenuScreen30 extends Scene {
         light = new Vector4f(0.0f, 0.0f, 2.0f, 0.0f);
 
         // Create background.
-        background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30, true);
+        background = new Background(renderer, Version.OPENGL_ES_30, true);
         background.setTexture(renderer.getTextureManager().getTexture("art/startmenu_bg.png"));
 
         //menu = new Menu(renderer);

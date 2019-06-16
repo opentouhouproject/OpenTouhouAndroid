@@ -6,43 +6,34 @@ import com.scarlet.graphics.opengl.shader.ShaderProgram;
 import com.scarlet.graphics.opengl.texture.Texture;
 import com.scarlet.graphics.opengl.mesh.Mesh;
 
-public abstract class GraphicsObject {
-    // Options
-    public enum Version {
-        OPENGL_ES_20, OPENGL_ES_30
-    }
+/**
+ * Basic building block for a drawable object.
+ */
+public abstract class GraphicsObject implements Renderable {
+  protected GraphicsOptions option;
+  protected Version version;
 
-    protected GraphicsOptions option;
-    protected Version version;
+  protected Mesh mesh;
+  protected Texture texture;
+  protected ShaderProgram shaderProgram;
+  protected Matrix4f modelMatrix;
 
-    // Properties
-    protected Mesh mesh;
-    protected Texture texture;
-    protected ShaderProgram shaderProgram;
-    protected Matrix4f modelMatrix;
+  public GraphicsObject() {
+    option = new GraphicsOptions(true, true);
+    version = Version.UNKNOWN;
+  }
 
-    // Constructor(s)
-    public GraphicsObject() {
-        // Set the options.
-        option = new GraphicsOptions(true, true);
-        version = Version.OPENGL_ES_30;
-    }
+  public GraphicsObject(GraphicsOptions option, Version version) {
+    this.option = option;
+    this.version = version;
+  }
 
-    public GraphicsObject(GraphicsOptions option, Version version) {
-        // Set the options.
-        this.option = option;
-        this.version = version;
-    }
+  // Setter(s).
+  public void setMesh(Mesh mesh) { this.mesh = mesh; }
 
-    // Setter(s)
-    public void setMesh(Mesh mesh) { this.mesh = mesh; }
+  public void setTexture(Texture texture) { this.texture = texture; }
 
-    public void setTexture(Texture texture) { this.texture = texture; }
+  public void setShader(ShaderProgram program) { this.shaderProgram = program; }
 
-    public void setShader(ShaderProgram program) { this.shaderProgram = program; }
-
-    public void setModelMatrix(Matrix4f modelMatrix) { this.modelMatrix = modelMatrix; }
-
-    // Draw
-    abstract public void draw(Renderer renderer);
+  public void setModelMatrix(Matrix4f modelMatrix) { this.modelMatrix = modelMatrix; }
 }

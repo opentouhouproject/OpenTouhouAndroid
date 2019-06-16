@@ -15,8 +15,12 @@ public class GraphicsObject20 extends GraphicsObject
     // Constructor
     public GraphicsObject20() { }
 
-    // Draw
-    public void draw(Renderer renderer)
+    /**
+     * Implement Renderable interface.
+     *
+     * @param renderer
+     */
+    public void render(Renderer renderer)
     {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();

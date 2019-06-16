@@ -6,20 +6,26 @@ import com.scarlet.graphics.opengl.Camera;
 import com.scarlet.graphics.opengl.GraphicsObject;
 import com.scarlet.graphics.opengl.GraphicsOptions;
 import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.graphics.opengl.Version;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector4f;
 
-/*
- * GraphicsObject implemented in OpenGL ES 3.0
+/**
+ * GraphicsObject implemented in OpenGL ES 3.0 .
  */
 public class GraphicsObject30 extends GraphicsObject {
-    // Constructor(s)
     public GraphicsObject30() { }
 
-    public GraphicsObject30(GraphicsOptions option) { super(option, GraphicsObject.Version.OPENGL_ES_30); }
+    public GraphicsObject30(GraphicsOptions option) {
+        super(option, Version.OPENGL_ES_30);
+    }
 
-    // Draw method
-    public void draw(Renderer renderer) {
+    /**
+     * Implement Renderable interface.
+     *
+     * @param renderer The renderer to use.
+     */
+    public void render(Renderer renderer) {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();
         GLES30.glUseProgram(shaderHandle);
@@ -83,7 +89,7 @@ public class GraphicsObject30 extends GraphicsObject {
     }
 
     protected void setMesh() {
-        // Bind Vertex Array Object.
+        // Bind the Vertex Array Object.
         GLES30.glBindVertexArray(mesh.getVAO().getHandle());
     }
 }

@@ -1,9 +1,9 @@
 package com.scarlet.graphics.opengl.mesh;
 
-/*
+/**
  * Stores constants for the supported mesh layouts.
  */
-public class MeshLayout {
+public final class MeshLayout {
     // Layout formats.
     public enum Layout {
         PCNT, PCN, P2T

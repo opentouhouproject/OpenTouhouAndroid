@@ -2,6 +2,7 @@ package opentouhou.com.opentouhouandroid.scene.scenes.loadingscreen;
 
 import android.view.MotionEvent;
 
+import com.scarlet.graphics.opengl.Version;
 import com.scarlet.math.Vector4f;
 
 import java.io.InputStreamReader;
@@ -11,7 +12,6 @@ import opentouhou.com.opentouhouandroid.entity.petals.PetalFall;
 import opentouhou.com.opentouhouandroid.entity.TextEntityGenerator;
 import opentouhou.com.opentouhouandroid.entity.background.Background;
 import com.scarlet.graphics.opengl.Camera;
-import com.scarlet.graphics.opengl.GraphicsObject;
 import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.graphics.opengl.Text;
 import com.scarlet.graphics.opengl.font.FontManager;
@@ -63,7 +63,7 @@ public class LoadingScreen30 extends LoadingScreen {
         light = new Vector4f(0.0f, 0.0f, 2.0f, 0.0f);
 
         // Create background.
-        background = new Background(renderer, GraphicsObject.Version.OPENGL_ES_30, false);
+        background = new Background(renderer, Version.OPENGL_ES_30, false);
 
         // Create text.
         FontManager fontManager = renderer.getFontManager();
