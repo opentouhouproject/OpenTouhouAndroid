@@ -9,7 +9,7 @@ import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
 
 import com.scarlet.graphics.opengl.Renderer;
-import com.scarlet.graphics.opengl.Text;
+import com.scarlet.graphics.opengl.font.Text;
 import com.scarlet.ui.UIEntity;
 
 public class Button extends UIEntity {

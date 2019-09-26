@@ -5,7 +5,7 @@ import android.opengl.GLES30;
 import android.opengl.GLU;
 import android.util.Log;
 
-import com.scarlet.graphics.opengl.Text;
+import com.scarlet.graphics.opengl.font.Text;
 import com.scarlet.math.Vector3f;
 
 import com.scarlet.graphics.opengl.Renderer;

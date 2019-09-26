@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="opentouhou.com.opentouhouandroid.MainActivity"
+            android:name="opentouhou.com.opentouhouandroid.opentouhou.opentouhou.opentouhouandroid.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
@@ -22,19 +22,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="opentouhou.com.opentouhouandroid.PlayActivity"
+            android:name="opentouhou.com.opentouhouandroid.opentouhou.opentouhou.opentouhouandroid.PlayActivity"
             android:label="@string/title_activity_play"
-            android:parentActivityName="opentouhou.com.opentouhouandroid.MainActivity"
+            android:parentActivityName="opentouhou.com.opentouhouandroid.opentouhou.opentouhou.opentouhouandroid.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="opentouhou.com.opentouhouandroid.MainActivity" />
+                android:value="opentouhou.com.opentouhouandroid.opentouhou.opentouhou.opentouhouandroid.MainActivity" />
         </activity>
         <activity
-            android:name="opentouhou.com.opentouhouandroid.game.OpenGLESTest.OpenGLES20TestActivity"
+            android:name="opentouhou.com.opentouhouandroid.opentouhou.opentouhou.opentouhouandroid.game.OpenGLESTest.OpenGLES20TestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="opentouhou.com.opentouhouandroid.game.OpenGLESTest.OpenTouhou30Activity"
+            android:name="opentouhou.com.opentouhouandroid.opentouhou.opentouhou.opentouhouandroid.game.OpenGLESTest.OpenTouhou30Activity"
             android:screenOrientation="portrait" />
     </application>
 

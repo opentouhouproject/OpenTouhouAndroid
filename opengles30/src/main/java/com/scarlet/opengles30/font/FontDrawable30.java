@@ -6,27 +6,27 @@ import com.scarlet.graphics.opengl.Renderer;
 import com.scarlet.math.Vector4f;
 import com.scarlet.opengles30.GraphicsObject30;
 
-public class FontDrawable30 extends GraphicsObject30
-{
+/**
+ * Drawable that renders an individual glyph.
+ * Implemented with OpenGL ES 3.0.
+ */
+public class FontDrawable30 extends GraphicsObject30 {
     private Vector4f fontColor;
 
-    public FontDrawable30()
-    {
+    public FontDrawable30() {
         fontColor = new Vector4f(1.0f, 0.1412f, 0.0f, 1.0f);
     }
 
     // Setter(s)
-    public void setColor(Vector4f color)
-    {
+    public void setColor(Vector4f color) {
         fontColor.x = color.x;
         fontColor.y = color.y;
         fontColor.z = color.z;
         fontColor.w = color.w;
     }
 
-    // Draw
-    public void draw(Renderer renderer)
-    {
+    @Override
+    public void render(Renderer renderer) {
         // Set the shader program to use.
         int shaderHandle = shaderProgram.getHandle();
         GLES30.glUseProgram(shaderHandle);

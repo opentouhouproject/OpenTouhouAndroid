@@ -4,7 +4,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.scarlet.graphics.opengl.Renderer;
-import com.scarlet.graphics.opengl.Text;
+import com.scarlet.graphics.opengl.font.Text;
 import com.scarlet.graphics.opengl.animation.UIAnimation;
 import com.scarlet.math.Matrix4f;
 import com.scarlet.math.Vector3f;

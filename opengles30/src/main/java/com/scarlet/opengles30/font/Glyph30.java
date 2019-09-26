@@ -11,8 +11,8 @@ import com.scarlet.graphics.opengl.shader.ShaderProgram;
 import com.scarlet.opengles30.mesh.Mesh30;
 
 /**
- * Implements a glyph using OpenGLES 3.0.
- * Represents a single UNICODE character.
+ * Represents a single UNICODE character glyph.
+ * Implemented with OpenGL ES 3.0.
  */
 public class Glyph30 extends Glyph {
   private FontDrawable30 drawable;
@@ -71,7 +71,7 @@ public class Glyph30 extends Glyph {
     drawable.setShader(p);
 
     // Draw the glyph.
-    drawable.draw(renderer);
+    drawable.render(renderer);
   }
 
   public void draw(Vector3f position, float scale, float angle, Vector4f color, String shaderProgram, Renderer renderer) {
@@ -90,6 +90,6 @@ public class Glyph30 extends Glyph {
     drawable.setShader(p);
 
     // Draw the glyph.
-    drawable.draw(renderer);
+    drawable.render(renderer);
   }
 }
