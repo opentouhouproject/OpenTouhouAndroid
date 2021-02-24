@@ -10,21 +10,21 @@ import com.scarlet.graphics.opengl.mesh.Mesh;
  * Basic building block for a drawable object.
  */
 public abstract class GraphicsObject implements Renderable {
-  protected GraphicsOptions option;
+  protected GraphicsOptions options;
   protected Version version;
 
-  protected Mesh mesh;
-  protected Texture texture;
-  protected ShaderProgram shaderProgram;
-  protected Matrix4f modelMatrix;
+  protected Mesh mesh = null;
+  protected Texture texture = null;
+  protected ShaderProgram shaderProgram = null;
+  protected Matrix4f modelMatrix = null;
 
   public GraphicsObject() {
-    option = new GraphicsOptions(true, true);
+    options = new GraphicsOptions(true, true);
     version = Version.UNKNOWN;
   }
 
-  public GraphicsObject(GraphicsOptions option, Version version) {
-    this.option = option;
+  public GraphicsObject(GraphicsOptions options, Version version) {
+    this.options = options;
     this.version = version;
   }
 
@@ -33,7 +33,7 @@ public abstract class GraphicsObject implements Renderable {
 
   public void setTexture(Texture texture) { this.texture = texture; }
 
-  public void setShader(ShaderProgram program) { this.shaderProgram = program; }
+  public void setShader(ShaderProgram program) { shaderProgram = program; }
 
   public void setModelMatrix(Matrix4f modelMatrix) { this.modelMatrix = modelMatrix; }
 }

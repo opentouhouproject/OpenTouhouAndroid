@@ -253,10 +253,10 @@ public class PetalDrawable30 extends GraphicsObject30 {
         setTransformationMatrices(shaderHandle, renderer.getCamera());
 
         // Set the light source(s).
-        if (option.lightingSetting()) setLightPosition(shaderHandle, renderer.getCamera(), renderer.getLight());
+        if (options.lightingSetting()) setLightPosition(shaderHandle, renderer.getCamera(), renderer.getLight());
 
         // Set the texture.
-        if (option.textureSetting()) setTexture(shaderHandle);
+        if (options.textureSetting()) setTexture(shaderHandle);
 
         // Set the lifetime.
         int progressHandle = GLES30.glGetUniformLocation(shaderHandle, "uProgress");

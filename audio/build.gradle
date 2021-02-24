@@ -23,7 +23,7 @@ android {
             path file('src/main/cpp/CMakeLists.txt')
         }
     }
-
+    ndkVersion ndkVersion
 }
 
 dependencies {

@@ -1,48 +1,44 @@
 package com.scarlet.graphics.opengl.font;
 
+import com.scarlet.graphics.opengl.Renderer;
+import com.scarlet.math.Vector2f;
 import com.scarlet.math.Vector3f;
 import com.scarlet.math.Vector4f;
-
-import com.scarlet.graphics.opengl.Renderer;
 
 /**
  * Represents a single UNICODE character.
  */
 public abstract class Glyph {
-    // UNICODE number.
-    protected int id;
+  // UNICODE number.
+  protected int id;
 
-    // Top left coordinate.
-    protected int x, y;
+  // Top left coordinate of the texture rectangle.
+  protected Vector2f glyphCoordinates;
+  //protected int x, y;
 
-    // Dimensions.
-    protected int width, height;
+  // Dimensions of the texture rectangle.
+  protected Vector2f glyphDimensions;
+  //protected int width, height;
 
-    // Constructor(s)
-    public Glyph(int id, int x, int y, int width, int height) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-    }
+  // Constructor(s)
+  public Glyph(int id, int x, int y, int width, int height) {
+    this.id = id;
+    glyphCoordinates = new Vector2f(x, y);
+    glyphDimensions = new Vector2f(width, height);
+  }
 
-    // Getter(s)
-    public int getUnicodeId() { return id; }
+  // Getter(s)
+  public int getUnicodeId() { return id; }
 
-    public int getX() { return x; }
+  public float getWidth() { return glyphDimensions.x; }
 
-    public int getY() { return y; }
+  public float getHeight() { return glyphDimensions.y; }
 
-    public int getWidth() { return width; }
+  // Set the drawable.
+  public abstract void generate(int texWidth, int texHeight, String assetPath, Renderer renderer);
 
-    public int getHeight() { return height; }
+  // Draw the glyph on the screen.
+  public abstract void draw(Vector3f position, float scale, Vector4f color, String shaderProgram, Renderer renderer);
 
-    // Set the drawable.
-    public abstract void generate(int texWidth, int texHeight, String assetPath, Renderer renderer);
-
-    // Draw the glyph on the screen.
-    public abstract void draw(Vector3f position, float scale, Vector4f color, String shaderProgram, Renderer renderer);
-
-    public abstract void draw(Vector3f position, float scale, float angle, Vector4f color, String shaderProgram, Renderer renderer);
+  public abstract void draw(Vector3f position, float scale, float angle, Vector4f color, String shaderProgram, Renderer renderer);
 }

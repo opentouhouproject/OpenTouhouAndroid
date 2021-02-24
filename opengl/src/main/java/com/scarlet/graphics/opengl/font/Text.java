@@ -60,10 +60,6 @@ public class Text {
     public Text setPosition(Vector3f position) {
         this.position.set(position);
 
-        //this.position.x = position.x;
-        //this.position.y = position.y;
-        //this.position.z = position.z;
-
         return this;
     }
 
@@ -96,11 +92,6 @@ public class Text {
 
     public Text setColor(Vector4f color) {
         this.color.set(color);
-
-        //this.color.x = color.x;
-        //this.color.y = color.y;
-        //this.color.z = color.z;
-        //this.color.w = color.w;
 
         return this;
     }
@@ -158,7 +149,7 @@ public class Text {
             font.render(c, drawPosition, scaling, angle, color, shaderProgram, renderer);
 
             // Update the offset.
-            float factor = (float)font.getGlyph(c).getWidth() / scaling;
+            float factor = font.getGlyph(c).getWidth() / scaling;
 
             // Update the render position of a glyph by the offset.
             drawPosition.selfAdd(new Vector3f(drawOffset.multiply(factor)));

@@ -8,15 +8,20 @@ import com.scarlet.math.Vector4f;
 
 import java.io.InputStreamReader;
 
+/**
+ * Implements the Font class using OpenGL ES 3.0.
+ */
 public class Font30 extends Font {
-  /*
+  /**
    * Constructor(s).
    */
   public Font30(InputStreamReader reader) {
-        FontParser.parse(reader, this);
-    }
+    FontParser.parse(reader, this);
+  }
 
-  // Generates binding between glyphs and textures.
+  /**
+   * Generates binding between glyphs and textures.
+   */
   public void generate(Renderer renderer) {
     for (Glyph g : glyphs.values()) {
       String assetPath = "fonts/images/" + imageFile;
@@ -24,7 +29,9 @@ public class Font30 extends Font {
     }
   }
 
-  // Handles rendering of a single UNICODE character.
+  /**
+   * Handles rendering of a single UNICODE character.
+   */
   public void render(char c, Vector3f position, float scaling, float angle, Vector4f color, String shaderProgram, Renderer renderer) {
     Glyph glyph = glyphs.get(c);
 
