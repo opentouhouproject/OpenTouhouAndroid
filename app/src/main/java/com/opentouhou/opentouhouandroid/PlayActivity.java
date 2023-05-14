@@ -2,9 +2,9 @@ package com.opentouhou.opentouhouandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import com.opentouhou.opentouhouandroid.game.OpenGLESTest.OpenGLES20TestActivity;
 import com.opentouhou.opentouhouandroid.game.OpenGLESTest.OpenTouhou30Activity;
-import opentouhou.com.opentouhouandroid.R;
+import com.opentouhou.opentouhouandroid.game.OpenGLESTest.OpenTouhouVulkanActivity;
 
 public class PlayActivity extends AppCompatActivity {
   ListView gameSelection = null;
@@ -39,7 +39,7 @@ public class PlayActivity extends AppCompatActivity {
     /*
      * Create an array adapter with the menu items.
      */
-    String[] mylist = {"OpenGL ES 2.0 Test", "OpenGL ES 3.0 Test"};
+    String[] mylist = {"OpenGL ES 2.0 Test", "OpenGL ES 3.0 Test", "Vulkan Test"};
     ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.textview_play_menu, mylist);
 
     /*
@@ -70,9 +70,10 @@ public class PlayActivity extends AppCompatActivity {
 
     if (listItem == "OpenGL ES 2.0 Test") {
       startActivity(new Intent(PlayActivity.this, OpenGLES20TestActivity.class));
-
     } else if (listItem == "OpenGL ES 3.0 Test") {
       startActivity(new Intent(PlayActivity.this, OpenTouhou30Activity.class));
+    } else if (listItem == "Vulkan Test") {
+      startActivity(new Intent(PlayActivity.this, OpenTouhouVulkanActivity.class));
     }
   }
 }

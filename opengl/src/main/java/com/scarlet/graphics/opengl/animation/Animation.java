@@ -4,7 +4,7 @@ package com.scarlet.graphics.opengl.animation;
  * Represents a generic animation.
  */
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public abstract class Animation {
     private String name;

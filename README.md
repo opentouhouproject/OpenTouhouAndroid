@@ -38,7 +38,15 @@ For previous versions see the wiki: https://github.com/opentouhouproject/OpenTou
 
 Major Goal: Setup basic UI and game engine.
 
-### Active Branch: 0.1-a4
+### Branch: 0.1-a5
+
+Goals:
+
+- Get basic Vulkan engine running.
+
+### Branch: 0.1-a4
+
+- Features postponed.
 
 Goals:
 
