@@ -1,3 +1,2 @@
 include ':app', ':math', ':audio', ':opengl', ':io', ':graphics', ':scene',
-        ':opengles30', ':opengles20', ':ui', ':concurrent', ':loader', ':animation'
-include ':vulkan'
+        ':opengles30', ':opengles20', ':ui', ':concurrent', ':loader', ':animation', ':scarlet-vulkan'

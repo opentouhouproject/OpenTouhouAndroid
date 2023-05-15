@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.opentouhou.opentouhouandroid.game.OpenGLESTest.OpenGLES20TestActivity;
 import com.opentouhou.opentouhouandroid.game.OpenGLESTest.OpenTouhou30Activity;
 import com.opentouhou.opentouhouandroid.game.OpenGLESTest.OpenTouhouVulkanActivity;
+import com.scarlet.vulkan.NativeLib;
 
 public class PlayActivity extends AppCompatActivity {
   ListView gameSelection = null;
@@ -73,7 +74,7 @@ public class PlayActivity extends AppCompatActivity {
     } else if (listItem == "OpenGL ES 3.0 Test") {
       startActivity(new Intent(PlayActivity.this, OpenTouhou30Activity.class));
     } else if (listItem == "Vulkan Test") {
-      startActivity(new Intent(PlayActivity.this, OpenTouhouVulkanActivity.class));
+      startActivity(new Intent(PlayActivity.this, NativeLib.class));
     }
   }
 }

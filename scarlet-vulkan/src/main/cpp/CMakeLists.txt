@@ -7,7 +7,20 @@ cmake_minimum_required(VERSION 3.22.1)
 
 # Declares and names the project.
 
-project("vulkan")
+project("scarlet-vulkan")
+
+# Include the GameActivity static lib to the project.
+find_package(game-activity REQUIRED CONFIG)
+set(CMAKE_SHARED_LINKER_FLAGS
+        "${CMAKE_SHARED_LINKER_FLAGS} -u \
+    Java_com_google_androidgamesdk_GameActivity_initializeNativeCode")
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Now build app's shared lib
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall")
+
+add_definitions(-DVK_USE_PLATFORM_ANDROID_KHR=1)
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -15,13 +28,13 @@ project("vulkan")
 # Gradle automatically packages shared libraries with your APK.
 
 add_library( # Sets the name of the library.
-        vulkan
+        scarlet-vulkan
 
         # Sets the library as a shared library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        vulkan.cpp)
+        scarlet-vulkan.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -41,8 +54,16 @@ find_library( # Sets the name of the path variable.
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries( # Specifies the target library.
+        scarlet-vulkan PUBLIC
+
         vulkan
+
+        game-activity::game-activity_static
+
+        android
 
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})
+
+include_directories(src//main//cpp//includes)

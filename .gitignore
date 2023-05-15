@@ -36,4 +36,4 @@ src/.idea/workspace.xml
 .idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml
 *.ninja
 audio/.cxx/*
-vulkan/.cxx/*
+scarlet-vulkan/.cxx/*

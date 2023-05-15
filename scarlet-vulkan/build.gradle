@@ -4,6 +4,8 @@ plugins {
 }
 
 android {
+    buildFeatures.prefab true
+
     namespace 'com.scarlet.vulkan'
     compileSdkVersion 33
 
@@ -15,7 +17,8 @@ android {
         consumerProguardFiles "consumer-rules.pro"
         externalNativeBuild {
             cmake {
-                cppFlags ""
+                // Available arguments are inside ${SDK}/cmake/.../android.toolchain.cmake file
+                arguments "-DANDROID_STL=c++_shared"
             }
         }
     }
@@ -42,11 +45,13 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // To use the Games Activity library
+    implementation 'androidx.games:games-activity:2.0.1'
 }
