@@ -4,6 +4,9 @@ An open source Touhou fangame for Android.
 
 Written in Java and C++ using OpenGL ES and OpenSL ES.
 
+2023/05/15 - Trying out a graphics engine implementation using Vulkan.
+           - It's been a few years, but I've got a some new skills from work. :)
+
 It's pretty bare bones for now.
 
 ## Tools and Installation:
@@ -29,6 +32,14 @@ https://www.khronos.org/opengles/sdk/docs/manglsl/docbook4/
 OpenSL ES Reference:
 
 https://www.khronos.org/opensles/
+
+Vulkan:
+
+https://developer.android.com/ndk/guides/graphics/getting-started
+
+https://source.android.com/docs/core/graphics/arch-vulkan
+
+https://registry.khronos.org/vulkan/specs/1.3-extensions/html/index.html
 
 ## Roadmap
 
