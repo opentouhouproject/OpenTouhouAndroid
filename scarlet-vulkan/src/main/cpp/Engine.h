@@ -6,6 +6,8 @@
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
 #include <memory>
+#include "Constants.h"
+#include "DebugMessenger.h"
 #include "VulkanInstance.h"
 #define OPENTOUHOUANDROID_ENGINE_H
 
@@ -27,6 +29,7 @@ namespace scarlet_vulkan {
         std::unique_ptr<ANativeWindow, ANativeWindowDeleter> window;
         AAssetManager *assetManager;
         VulkanInstance vulkanInstance;
+        DebugMessenger debugMessenger;
     };
 }
 

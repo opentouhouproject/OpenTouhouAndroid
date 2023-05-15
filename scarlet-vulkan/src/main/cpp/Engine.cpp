@@ -8,6 +8,9 @@ namespace scarlet_vulkan {
         // Create the Vulkan instance.
         vulkanInstance.create();
 
+        // Create the debug messenger.
+        debugMessenger.create(vulkanInstance.getInstance());
+
         //createSurface();
         //pickPhysicalDevice();
         //createLogicalDeviceAndQueue();
@@ -120,6 +123,11 @@ namespace scarlet_vulkan {
         //    DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
         //}
         //vkDestroySurfaceKHR(instance, surface, nullptr);
+
+        // Cleanup the debug messenger.
+        if (enableValidationLayers) {
+            debugMessenger.cleanup(vulkanInstance.getInstance());
+        }
 
         // Cleanup the Vulkan instance.
         vulkanInstance.cleanup();

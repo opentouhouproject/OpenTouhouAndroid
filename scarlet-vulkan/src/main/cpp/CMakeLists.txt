@@ -35,6 +35,7 @@ add_library(
         SHARED
 
         # Provides a relative path to your source file(s).
+        DebugMessenger.cpp
         scarlet-vulkan.cpp
         Engine.cpp
         VulkanInstance.cpp)
