@@ -3,6 +3,7 @@
 #include <android/log.h>
 #include <game-activity/native_app_glue/android_native_app_glue.h>
 #include "scarlet-vulkan.h"
+#include "Engine.h"
 
 extern "C" JNIEXPORT jstring JNICALL
 Java_com_scarlet_vulkan_NativeLib_stringFromJNI(
@@ -28,7 +29,7 @@ Java_com_scarlet_vulkan_NativeLib_stringFromJNI(
  */
 struct VulkanEngine {
     struct android_app *app;
-    //vkt::HelloVK *app_backend;
+    scarlet_vulkan::Engine *app_backend;
     bool canRender = false;
 };
 
@@ -41,8 +42,8 @@ static void HandleCmd(struct android_app *app, int32_t cmd) {
     switch (cmd) {
         case APP_CMD_START:
             if (engine->app->window != nullptr) {
-                //engine->app_backend->reset(app->window, app->activity->assetManager);
-                //engine->app_backend->initVulkan();
+                engine->app_backend->reset(app->window, app->activity->assetManager);
+                engine->app_backend->initVulkan();
                 engine->canRender = true;
             }
         case APP_CMD_INIT_WINDOW:
@@ -50,11 +51,11 @@ static void HandleCmd(struct android_app *app, int32_t cmd) {
             LOGI("Called - APP_CMD_INIT_WINDOW");
             if (engine->app->window != nullptr) {
                 LOGI("Setting a new surface");
-                //engine->app_backend->reset(app->window, app->activity->assetManager);
-                //if (!engine->app_backend->initialized) {
-                //    LOGI("Starting application");
-                //    engine->app_backend->initVulkan();
-                //}
+                engine->app_backend->reset(app->window, app->activity->assetManager);
+                if (!engine->app_backend->initialized) {
+                    LOGI("Starting application");
+                    engine->app_backend->initVulkan();
+                }
                 engine->canRender = true;
             }
             break;
@@ -65,7 +66,7 @@ static void HandleCmd(struct android_app *app, int32_t cmd) {
         case APP_CMD_DESTROY:
             // The window is being hidden or closed, clean it up.
             LOGI("Destroying");
-            //engine->app_backend->cleanup();
+            engine->app_backend->cleanup();
         default:
             break;
     }
@@ -107,8 +108,10 @@ void android_main(struct android_app* app) {
     __android_log_print(ANDROID_LOG_ERROR, "TRACKERS", "%s", "Scarlet-Vulkan Initialized.");
 
     VulkanEngine engine{};
+    scarlet_vulkan::Engine vulkanBackend{};
 
     engine.app = app;
+    engine.app_backend = &vulkanBackend;
     app->userData = &engine;
     app->onAppCmd = HandleCmd;
 
@@ -127,5 +130,7 @@ void android_main(struct android_app* app) {
         }
 
         HandleInputEvents(app);
+
+        engine.app_backend->render();
     }
 }

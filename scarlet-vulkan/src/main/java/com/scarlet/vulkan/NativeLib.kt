@@ -9,6 +9,7 @@ import android.view.WindowManager
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.google.androidgamesdk.GameActivity
+import kotlin.system.exitProcess
 
 class NativeLib : GameActivity() {
     /**
@@ -59,9 +60,10 @@ class NativeLib : GameActivity() {
         return processed
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         System.gc()
-        System.exit(0)
+        exitProcess(0)
     }
 
     companion object {

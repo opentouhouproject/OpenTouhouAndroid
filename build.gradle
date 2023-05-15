@@ -20,7 +20,7 @@ plugins {
 }
 
 ext {
-    ndkVersion = '23.0.7123448 rc1'
+    ndkVersion = '25.1.8937393'
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 allprojects {
