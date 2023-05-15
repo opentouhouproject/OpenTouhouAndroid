@@ -1,6 +1,7 @@
 /**
  * Implementation of the VulkanInstance class.
  */
+#include "Constants.h"
 #include "VulkanInstance.h"
 
 namespace scarlet_vulkan {
@@ -11,10 +12,10 @@ namespace scarlet_vulkan {
         // Add application information.
         VkApplicationInfo appInfo{};
         appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-        appInfo.pApplicationName = "Open Touhou";
-        appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
-        appInfo.pEngineName = "Scarlet Vulkan";
-        appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
+        appInfo.pApplicationName = APPLICATION_NAME;
+        appInfo.applicationVersion = VK_MAKE_VERSION(MAJOR_VERSION, MINOR_VERSION, PATCH_VERSION);
+        appInfo.pEngineName = ENGINE_NAME;
+        appInfo.engineVersion = VK_MAKE_VERSION(MAJOR_VERSION, MINOR_VERSION, PATCH_VERSION);
         appInfo.apiVersion = VK_API_VERSION_1_0;
 
         // Add creation information.

@@ -27,7 +27,8 @@ add_definitions(-DVK_USE_PLATFORM_ANDROID_KHR=1)
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
-add_library( # Sets the name of the library.
+add_library(
+        # Sets the name of the library.
         scarlet-vulkan
 
         # Sets the library as a shared library.
