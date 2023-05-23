@@ -12,7 +12,7 @@
 namespace scarlet_vulkan {
     class LogicalDevice {
     public:
-        void create(PhysicalDevice physicalDevice);
+        void create(std::unique_ptr<PhysicalDevice> physicalDevice);
         void cleanup();
 
     private:

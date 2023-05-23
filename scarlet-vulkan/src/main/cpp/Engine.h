@@ -8,9 +8,10 @@
 #include <memory>
 #include "Constants.h"
 #include "DebugMessenger.h"
+#include "LogicalDevice.h"
+#include "PhysicalDevice.h"
 #include "VulkanInstance.h"
 #define OPENTOUHOUANDROID_ENGINE_H
-
 namespace scarlet_vulkan {
     struct ANativeWindowDeleter {
         void operator()(ANativeWindow *window) { ANativeWindow_release(window); }
@@ -30,7 +31,8 @@ namespace scarlet_vulkan {
         AAssetManager *assetManager;
         VulkanInstance vulkanInstance;
         DebugMessenger debugMessenger;
+        std::unique_ptr<PhysicalDevice> physicalDevice;
+        std::unique_ptr<LogicalDevice> logicalDevice;
     };
 }
-
-#endif //OPENTOUHOUANDROID_ENGINE_H
+#endif

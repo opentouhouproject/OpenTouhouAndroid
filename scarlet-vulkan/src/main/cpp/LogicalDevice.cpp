@@ -4,11 +4,11 @@
 #include "LogicalDevice.h"
 
 namespace scarlet_vulkan {
-    void LogicalDevice::create(PhysicalDevice physicalDevice) {
+    void LogicalDevice::create(std::unique_ptr<PhysicalDevice> physicalDevice) {
         // Set the queue creation information.
         VkDeviceQueueCreateInfo queueCreateInfo{};
         queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-        queueCreateInfo.queueFamilyIndex = physicalDevice.getGraphicsQueueIndex();
+        queueCreateInfo.queueFamilyIndex = physicalDevice->getGraphicsQueueIndex();
         queueCreateInfo.queueCount = 1;
 
         // Assign the queue priorities.
@@ -34,11 +34,11 @@ namespace scarlet_vulkan {
         }
 
         // Create the device.
-        if (vkCreateDevice(physicalDevice.getPhysicalDevice(), &createInfo, nullptr, &device) != VK_SUCCESS) {
+        if (vkCreateDevice(physicalDevice->getPhysicalDevice(), &createInfo, nullptr, &device) != VK_SUCCESS) {
             throw std::runtime_error("Failed to create logical device!");
         }
 
-        vkGetDeviceQueue(device, physicalDevice.getGraphicsQueueIndex(), 0, &graphicsQueue);
+        vkGetDeviceQueue(device, physicalDevice->getGraphicsQueueIndex(), 0, &graphicsQueue);
     }
 
     void LogicalDevice::cleanup() {

@@ -7,15 +7,23 @@ namespace scarlet_vulkan {
     void Engine::initVulkan() {
         // Create the Vulkan instance.
         vulkanInstance.create();
+        __android_log_print(ANDROID_LOG_ERROR, "TRACKERS", "%s", "Created Vulkan instance.");
 
         // Create the debug messenger.
         debugMessenger.create(vulkanInstance.getInstance());
+        __android_log_print(ANDROID_LOG_ERROR, "TRACKERS", "%s", "Created debug messenger.");
 
-        __android_log_print(ANDROID_LOG_ERROR, "TRACKERS", "%s", "Debug Messenger Created.");
+        // Pick a physical device.
+        physicalDevice = std::make_unique<PhysicalDevice>();
+        physicalDevice->pickPhysicalDevice(vulkanInstance.getInstance());
+        __android_log_print(ANDROID_LOG_ERROR, "TRACKERS", "%s", "Created physical device.");
+
+        // Create the logical device.
+        logicalDevice = std::make_unique<LogicalDevice>();
+        logicalDevice->create(std::move(physicalDevice));
+        __android_log_print(ANDROID_LOG_ERROR, "TRACKERS", "%s", "Created logical device.");
+
         //createSurface();
-        //pickPhysicalDevice();
-        //createLogicalDeviceAndQueue();
-        //setupDebugMessenger();
         //establishDisplaySizeIdentity();
         //createSwapChain();
         //createImageViews();
@@ -119,10 +127,10 @@ namespace scarlet_vulkan {
         //vkDestroyPipeline(device, graphicsPipeline, nullptr);
         //vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
         //vkDestroyRenderPass(device, renderPass, nullptr);
-        //vkDestroyDevice(device, nullptr);
-        //if (enableValidationLayers) {
-        //    DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
-        //}
+
+        // Cleanup the logical device.
+        logicalDevice->cleanup();
+
         //vkDestroySurfaceKHR(instance, surface, nullptr);
 
         // Cleanup the debug messenger.
@@ -134,6 +142,8 @@ namespace scarlet_vulkan {
         vulkanInstance.cleanup();
 
         initialized = false;
+
+        __android_log_print(ANDROID_LOG_ERROR, "TRACKERS", "%s", "End of cleanup.");
     }
 
     void Engine::reset(ANativeWindow *newWindow, AAssetManager *newManager) {
