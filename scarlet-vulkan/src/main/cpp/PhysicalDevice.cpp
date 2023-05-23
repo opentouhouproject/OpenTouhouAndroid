@@ -36,6 +36,22 @@ namespace scarlet_vulkan {
     }
 
     /**
+     * Returns the physical device handle.
+     * @return VkPhysicalDevice - The current physical device handle.
+     */
+    VkPhysicalDevice PhysicalDevice::getPhysicalDevice() {
+        return device;
+    }
+
+    /**
+     * Returns the graphics queue index.
+     * @return uint32_t - Index of the graphics queue.
+     */
+    uint32_t PhysicalDevice::getGraphicsQueueIndex() {
+        return queueFamilyIndices->getGraphicsQueueIndex();
+    }
+
+    /**
      * Checks if a given physical device is suitable.
      * @param device - The physical device to check.
      * @return Boolean - True if suitable, false otherwise.

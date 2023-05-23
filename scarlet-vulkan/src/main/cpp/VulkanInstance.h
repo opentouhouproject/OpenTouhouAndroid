@@ -9,10 +9,6 @@
 #include "DebugMessenger.h"
 #define OPENTOUHOUANDROID_VULKANINSTANCE_H
 namespace scarlet_vulkan {
-    static const std::vector<const char*> validationLayers = {
-            "VK_LAYER_KHRONOS_validation"
-    };
-
     class VulkanInstance {
     public:
         static const bool enableValidationLayers = true;

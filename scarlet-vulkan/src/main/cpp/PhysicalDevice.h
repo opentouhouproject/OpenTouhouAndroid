@@ -1,5 +1,8 @@
 /**
  * Encapsulates the physical device selection.
+ *
+ * Notes:
+ * (1) VkPhysicalDevice is implicitly destroyed when the VkInstance object they are retrieved from is destroyed.
  */
 #ifndef OPENTOUHOUANDROID_PHYSICALDEVICE_H
 #include <vulkan/vulkan.h>
@@ -11,6 +14,8 @@ namespace scarlet_vulkan {
     class PhysicalDevice {
     public:
         void pickPhysicalDevice(VkInstance instance);
+        VkPhysicalDevice getPhysicalDevice();
+        uint32_t getGraphicsQueueIndex();
 
     private:
         VkPhysicalDevice device = VK_NULL_HANDLE;

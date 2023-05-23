@@ -41,4 +41,12 @@ namespace scarlet_vulkan {
     bool QueueFamilyIndices::isComplete() {
         return graphicsFamily.has_value();
     }
+
+    /**
+     * Returns the index value for the graphics queue.
+     * @return uint32_t - The value of the graphics queue index.
+     */
+    uint32_t QueueFamilyIndices::getGraphicsQueueIndex() {
+        return graphicsFamily.value();
+    }
 }

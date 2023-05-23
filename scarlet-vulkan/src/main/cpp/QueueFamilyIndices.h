@@ -11,6 +11,7 @@ namespace scarlet_vulkan {
     public:
         void findQueueFamilies(VkPhysicalDevice device);
         bool isComplete();
+        uint32_t getGraphicsQueueIndex();
 
     private:
         std::optional<uint32_t> graphicsFamily;
