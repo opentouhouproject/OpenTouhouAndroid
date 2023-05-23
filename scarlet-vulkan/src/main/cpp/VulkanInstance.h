@@ -8,7 +8,6 @@
 #include "Constants.h"
 #include "DebugMessenger.h"
 #define OPENTOUHOUANDROID_VULKANINSTANCE_H
-
 namespace scarlet_vulkan {
     static const std::vector<const char*> validationLayers = {
             "VK_LAYER_KHRONOS_validation"
@@ -22,14 +21,10 @@ namespace scarlet_vulkan {
         VkInstance getInstance();
 
     private:
-        void setupDebugMessenger();
-
         std::vector<const char *> getRequiredExtensions();
         bool checkValidationLayerSupport();
 
         VkInstance instance;
-        VkDebugUtilsMessengerEXT debugMessenger;
     };
 }
-
-#endif //OPENTOUHOUANDROID_VULKANINSTANCE_H
+#endif

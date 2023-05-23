@@ -35,10 +35,12 @@ add_library(
         SHARED
 
         # Provides a relative path to your source file(s).
-        DebugMessenger.cpp
         scarlet-vulkan.cpp
         Engine.cpp
-        VulkanInstance.cpp)
+        VulkanInstance.cpp
+        DebugMessenger.cpp
+        PhysicalDevice.cpp
+        QueueFamilyIndices.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by

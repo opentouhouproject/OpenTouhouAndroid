@@ -11,6 +11,7 @@ namespace scarlet_vulkan {
         // Create the debug messenger.
         debugMessenger.create(vulkanInstance.getInstance());
 
+        __android_log_print(ANDROID_LOG_ERROR, "TRACKERS", "%s", "Debug Messenger Created.");
         //createSurface();
         //pickPhysicalDevice();
         //createLogicalDeviceAndQueue();

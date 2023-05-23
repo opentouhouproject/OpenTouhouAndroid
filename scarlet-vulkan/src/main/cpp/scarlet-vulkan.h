@@ -1,7 +1,6 @@
-//
-// Created by kenny on 2023-05-14.
-//
-
+/**
+ * Scarlet Vulkan main loop.
+ */
 #ifndef OPENTOUHOUANDROID_SCARLET_VULKAN_H
 #define OPENTOUHOUANDROID_SCARLET_VULKAN_H
 namespace scarlet_vulkan {
